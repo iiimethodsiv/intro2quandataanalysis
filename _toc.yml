@@ -1,0 +1,76 @@
+# Table of contents
+format: jb-book
+root: "docs/intro"
+defaults:  
+  titlesonly: False
+parts:
+    - caption: 環境準備とPythonの基礎
+      numbered: True
+      maxdepth: 2
+      chapters:
+      - file: "docs/sec01/index"
+        sections:
+        - file: "docs/sec01/01_build_python_environment"
+        - file: "docs/sec01/02_howtopip"
+        - file: "docs/sec01/03_basic_notebook"
+        - file: "docs/sec01/04_exercise"
+      - file: "docs/sec02/index"
+        sections:
+        - file: "docs/sec02/01_basic_python1"
+        - file: "docs/sec02/02_basic_python2"
+        - file: "docs/sec02/03_basic_python3"
+        - file: "docs/sec02/04_list_comprehension"
+        - file: "docs/sec02/05_string"
+        - file: "docs/sec02/06_exercise"
+      - file: "docs/sec03/index"
+        sections:
+        - file: "docs/sec03/numpy"
+        - file: "docs/sec03/pandas1"
+        - file: "docs/sec03/pandas2"
+        - file: "docs/sec03/read_write"
+        - file: "docs/sec03/pandas_datetime"
+        - file: "docs/sec03/matplotlib"
+        - file: "docs/sec03/option_text_viz"
+        - file: "docs/sec03/exercise"
+    - caption: データ分析の基礎
+      numbered: True
+      maxdepth: 2
+      chapters:
+      - file: "docs/sec04/index"
+        sections:
+        - file: "docs/sec04/01_basic_stats1"
+        - file: "docs/sec04/02_basic_stats2"
+        - file: "docs/sec04/03_basic_stats3"
+        - file: "docs/sec04/04_stats_test"
+        - file: "docs/sec04/05_exercise"
+      - file: "docs/sec05/index"
+        sections:
+        - file: "docs/sec05/correlation"
+        - file: "docs/sec05/regression"
+        - file: "docs/sec05/multiple_regression"
+        - file: "docs/sec05/regression_tips"
+      - file: "docs/sec06/index"
+        sections:
+        - file: "docs/sec06/logit_provit"
+        - file: "docs/sec06/ordered_loigt"
+        - file: "docs/sec06/multinomial_logit"
+      - file: "docs/sec07/index"
+        sections:
+        - file: "docs/sec07/paneldata"
+      - file: "docs/sec08/index"
+        sections:
+        - file: "docs/sec08/supervised_learning"
+        - file: "docs/sec08/unsupervised_learning"
+    - caption: 演習
+      numbered: True
+      maxdepth: 2
+      chapters:
+      - file: "docs/option/index"
+        sections:
+        - file: "docs/option/COVID19mobility"
+        - file: "docs/option/yfinance"
+        - file: "docs/option/exercise"
+        - file: "docs/option/gps_clean_data"
+        - file: "docs/option/gps_feature_extraction"
+        - file: "docs/option/gps_machine_learning"
+        - file: "docs/option/twitter"
