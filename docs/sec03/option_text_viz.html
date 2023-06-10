@@ -1,0 +1,1131 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>3.7. 参考：日本語の取り扱いと正規表現 &#8212; Intro to Data Analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/sec03/option_text_viz';</script>
+    <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/docs/sec03/option_text_viz.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.8. 課題" href="exercise.html" />
+    <link rel="prev" title="3.6. matplotlib" href="matplotlib.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Quantitative Data Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">環境準備とPythonの基礎</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec01/index.html">1. Python環境の準備</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/01_build_python_environment.html">1.1. Python環境の準備</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/02_howtopip.html">1.2. 必要なパッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/03_basic_notebook.html">1.3. Notebookの基本的な使い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/04_exercise.html">1.4. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec02/index.html">2. Pythonの基本的な使い方1</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/01_basic_python1.html">2.1. 変数・算術演算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/02_basic_python2.html">2.2. 複合データ型・for/while/if文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/03_basic_python3.html">2.3. 関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/04_list_comprehension.html">2.4. set型・リスト内包表記</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/05_string.html">2.5. 文字列を扱うときの注意点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/06_exercise.html">2.6. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">3. Pythonの基本的な使い方2</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="numpy.html">3.1. Pythonのライブラリ・パッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas1.html">3.2. pandas 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas2.html">3.3. pandas 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="read_write.html">3.4. ファイルの読み書き</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas_datetime.html">3.5. pandasを用いた日時データの扱い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matplotlib.html">3.6. matplotlib</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.7. 参考：日本語の取り扱いと正規表現</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercise.html">3.8. 課題</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">データ分析の基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec04/index.html">4. データ分析の基礎</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/01_basic_stats1.html">4.1. 平均値・中央値・最頻値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/02_basic_stats2.html">4.2. 頻度分布・偏差・分散</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/03_basic_stats3.html">4.3. 基本統計量の確認方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/04_stats_test.html">4.4. 仮説検定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/05_exercise.html">4.5. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec05/index.html">5. 相関・回帰・重回帰分析</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/correlation.html">5.1. 相関・散布図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/regression.html">5.2. 回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/multiple_regression.html">5.3. 重回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/regression_tips.html">5.4. 非線形・交差項・二乗項</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec06/index.html">6. 離散選択モデル</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/logit_provit.html">6.1. 離散選択モデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/ordered_loigt.html">6.2. 順序ロジットモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/multinomial_logit.html">6.3. 多項ロジットモデル</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec07/index.html">7. パネルデータ分析</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec07/paneldata.html">7.1. パネルデータ分析</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec08/index.html">8. 機械学習</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/supervised_learning.html">8.1. 機械学習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/unsupervised_learning.html">8.2. 教師なし学習</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">演習</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../option/index.html">9. 演習</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../option/COVID19mobility.html">9.1. COVID-19による人流の変化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/yfinance.html">9.2. Yahoo! FINANCEのデータを用いた可視化の演習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/exercise.html">9.3. 課題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_clean_data.html">9.4. 演習・交通手段分類（データ準備）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_feature_extraction.html">9.5. 演習・交通手段分類（データの特徴をつかむ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_machine_learning.html">9.6. 演習・交通手段分類（機械学習）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/twitter.html">9.7. 演習・Twitterのテキスト分類問題</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/iiimethodsiv/intro2quandataanalysis/blob/gh-pages/docs/sec03/option_text_viz.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis/issues/new?title=Issue%20on%20page%20%2Fdocs/sec03/option_text_viz.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/sec03/option_text_viz.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>参考：日本語の取り扱いと正規表現</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.7.1. 日本語を含むデータを可視化する方法</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.7.2. ファイル読み書きでのエンコーディングのエラーへの対応方法</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-expression">3.7.3. 正規表現（regular expression）</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">3.7. </span>参考：日本語の取り扱いと正規表現<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2><span class="section-number">3.7.1. </span>日本語を含むデータを可視化する方法<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>日本語をすぐに表示させたい場合は、便利な<a class="reference external" href="https://github.com/uehara1414/japanize-matplotlib">モジュール</a>が公開されているので、そちらを使うのが簡単です。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>を用いたパッケージ類のダウンロードが済んでいない場合は、次のcellの１行目のコメントアウトを外してモジュールをインストールしてから実行してください。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !pip install japanize-matplotlib #モジュールのインストール</span>
+<span class="kn">import</span> <span class="nn">japanize_matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1960</span><span class="p">,</span> <span class="mi">1970</span><span class="p">,</span> <span class="mi">1980</span><span class="p">,</span> <span class="mi">1990</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">2010</span><span class="p">,</span> <span class="mi">2020</span><span class="p">]</span>
+<span class="n">life_expectancy</span><span class="o">=</span> <span class="p">[</span><span class="mf">67.6</span><span class="p">,</span> <span class="mf">71.9</span><span class="p">,</span> <span class="mf">76.0</span><span class="p">,</span> <span class="mf">78.8</span><span class="p">,</span> <span class="mf">81.0</span><span class="p">,</span> <span class="mf">82.8</span><span class="p">,</span> <span class="mf">84.6</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">life_expectancy</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;solid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;平均寿命&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;歳&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3148586c46736ada0057170bab7ea20d12129605ae3ca1dac8c6ce67e87ac538.png" src="../../_images/3148586c46736ada0057170bab7ea20d12129605ae3ca1dac8c6ce67e87ac538.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">3.7.2. </span>ファイル読み書きでのエンコーディングのエラーへの対応方法<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>続いて日本語のテキストを含むファイルの読み書きについてのTipsを紹介します。</p>
+<p>日本語テキストのファイルの読み書きがうまく行かない場合があるかもしれません。</p>
+<p>例えば、以下のような<code class="docutils literal notranslate"><span class="pre">text_df</span></code>という日本語テキストを含むテーブルデータがあったとします。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;パイソン&#39;</span><span class="p">,</span><span class="s1">&#39;１&#39;</span><span class="p">,</span><span class="s1">&#39;分析&#39;</span><span class="p">,</span> <span class="s1">&#39;科学&#39;</span><span class="p">,</span> 
+        <span class="s1">&#39;統計&#39;</span><span class="p">,</span> <span class="s1">&#39;動的&#39;</span><span class="p">,</span><span class="s1">&#39;あーる&#39;</span><span class="p">,</span> <span class="s1">&#39;機械学習&#39;</span><span class="p">,</span> <span class="s1">&#39;深層学習&#39;</span><span class="p">,</span> <span class="s1">&#39;見識&#39;</span><span class="p">]</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">importance</span> <span class="o">=</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">90</span><span class="p">]</span>
+
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;text&#39;</span><span class="p">:</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="n">freq</span><span class="p">,</span> <span class="s1">&#39;importance&#39;</span><span class="p">:</span> <span class="n">importance</span><span class="p">})</span>
+<span class="n">text_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>text</th>
+      <th>freq</th>
+      <th>importance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>パイソン</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>１</td>
+      <td>40</td>
+      <td>180</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>分析</td>
+      <td>80</td>
+      <td>190</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>科学</td>
+      <td>21</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>統計</td>
+      <td>10</td>
+      <td>150</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>動的</td>
+      <td>3</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>あーる</td>
+      <td>45</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>機械学習</td>
+      <td>79</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>深層学習</td>
+      <td>81</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>見識</td>
+      <td>3</td>
+      <td>90</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>このデータを保存してみましょう。
+ここでは、テストのためencodingは<code class="docutils literal notranslate"><span class="pre">SHIFT-JIS</span></code>にしています。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;text_ja.csv&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;SHIFT-JIS&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>このようなテーブルをエクセル等で作成すると環境によってencodingが異なりPythonでひらけない場合があります。
+そのような場合は、エクセルデータ作成時に文字コードを指定したり、作成後に文字コードを変更したりすることで回避できます。
+まずは、読み込みたいデータの文字コードは何かを把握するようにしましょう。
+日本語ファイルで多く用いられている文字コードは<code class="docutils literal notranslate"><span class="pre">Shift-JIS</span></code>, <code class="docutils literal notranslate"><span class="pre">CP932</span></code>, <code class="docutils literal notranslate"><span class="pre">utf-8</span></code>などです。</p>
+<p>例えば、pandasの<code class="docutils literal notranslate"><span class="pre">read_csv</span></code>ではデフォルトでは<code class="docutils literal notranslate"><span class="pre">encoding=utf-8</span></code>でファイルを読もうとします。そこに<code class="docutils literal notranslate"><span class="pre">Shift-JIS</span></code>などエンコードされたファイルをそのまま読もうとするとエラーになるはずです。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df_r</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;text_ja.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">UnicodeDecodeError</span><span class="g g-Whitespace">                        </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">text_df_r</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;text_ja.csv&#39;</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/iiimethodsiv/lib/python3.8/site-packages/pandas/util/_decorators.py:211,</span> in <span class="ni">deprecate_kwarg.&lt;locals&gt;._deprecate_kwarg.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">209</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">210</span>         <span class="n">kwargs</span><span class="p">[</span><span class="n">new_arg_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_arg_value</span>
+<span class="ne">--&gt; </span><span class="mi">211</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/iiimethodsiv/lib/python3.8/site-packages/pandas/util/_decorators.py:331,</span> in <span class="ni">deprecate_nonkeyword_arguments.&lt;locals&gt;.decorate.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">325</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">num_allow_args</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">326</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">327</span>         <span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">arguments</span><span class="o">=</span><span class="n">_format_argument_list</span><span class="p">(</span><span class="n">allow_args</span><span class="p">)),</span>
+<span class="g g-Whitespace">    </span><span class="mi">328</span>         <span class="ne">FutureWarning</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">329</span>         <span class="n">stacklevel</span><span class="o">=</span><span class="n">find_stack_level</span><span class="p">(),</span>
+<span class="g g-Whitespace">    </span><span class="mi">330</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">331</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/iiimethodsiv/lib/python3.8/site-packages/pandas/io/parsers/readers.py:950,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">935</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">936</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">937</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">946</span>     <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;delimiter&quot;</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="p">},</span>
+<span class="g g-Whitespace">    </span><span class="mi">947</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">948</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">950</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/iiimethodsiv/lib/python3.8/site-packages/pandas/io/parsers/readers.py:605,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">602</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">604</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">605</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">607</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">608</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File ~/anaconda3/envs/iiimethodsiv/lib/python3.8/site-packages/pandas/io/parsers/readers.py:1442,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1439</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1441</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1442</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/iiimethodsiv/lib/python3.8/site-packages/pandas/io/parsers/readers.py:1753,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1750</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1752</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1753</span>     <span class="k">return</span> <span class="n">mapping</span><span class="p">[</span><span class="n">engine</span><span class="p">](</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1754</span> <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1755</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/envs/iiimethodsiv/lib/python3.8/site-packages/pandas/io/parsers/c_parser_wrapper.py:79,</span> in <span class="ni">CParserWrapper.__init__</span><span class="nt">(self, src, **kwds)</span>
+<span class="g g-Whitespace">     </span><span class="mi">76</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">78</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;dtype&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ensure_dtype_objs</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dtype&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="ne">---&gt; </span><span class="mi">79</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span> <span class="o">=</span> <span class="n">parsers</span><span class="o">.</span><span class="n">TextReader</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">81</span> <span class="bp">self</span><span class="o">.</span><span class="n">unnamed_cols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span><span class="o">.</span><span class="n">unnamed_cols</span>
+<span class="g g-Whitespace">     </span><span class="mi">83</span> <span class="c1"># error: Cannot determine type of &#39;names&#39;</span>
+
+<span class="nn">File ~/anaconda3/envs/iiimethodsiv/lib/python3.8/site-packages/pandas/_libs/parsers.pyx:547,</span> in <span class="ni">pandas._libs.parsers.TextReader.__cinit__</span><span class="nt">()</span>
+
+<span class="nn">File ~/anaconda3/envs/iiimethodsiv/lib/python3.8/site-packages/pandas/_libs/parsers.pyx:636,</span> in <span class="ni">pandas._libs.parsers.TextReader._get_header</span><span class="nt">()</span>
+
+<span class="nn">File ~/anaconda3/envs/iiimethodsiv/lib/python3.8/site-packages/pandas/_libs/parsers.pyx:852,</span> in <span class="ni">pandas._libs.parsers.TextReader._tokenize_rows</span><span class="nt">()</span>
+
+<span class="nn">File ~/anaconda3/envs/iiimethodsiv/lib/python3.8/site-packages/pandas/_libs/parsers.pyx:1965,</span> in <span class="ni">pandas._libs.parsers.raise_parser_error</span><span class="nt">()</span>
+
+<span class="ne">UnicodeDecodeError</span>: &#39;utf-8&#39; codec can&#39;t decode byte 0x83 in position 24: invalid start byte
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">UnicodeDecodeError</span></code>が確認されました。
+このような場合はencodingを指定して読み込んでみましょう。encodingが何かを確認してから指定しましょう。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df_r</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;text_ja.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;cp932&#39;</span><span class="p">)</span>
+<span class="n">text_df_r</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>text</th>
+      <th>freq</th>
+      <th>importance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>パイソン</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>１</td>
+      <td>40</td>
+      <td>180</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>分析</td>
+      <td>80</td>
+      <td>190</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>科学</td>
+      <td>21</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>統計</td>
+      <td>10</td>
+      <td>150</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>動的</td>
+      <td>3</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>あーる</td>
+      <td>45</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>機械学習</td>
+      <td>79</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>深層学習</td>
+      <td>81</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>見識</td>
+      <td>3</td>
+      <td>90</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>無事に読み込めていることが確認されました。</p>
+</section>
+<section id="regular-expression">
+<h2><span class="section-number">3.7.3. </span>正規表現（regular expression）<a class="headerlink" href="#regular-expression" title="Permalink to this heading">#</a></h2>
+<p>正規表現は文字列などを扱う上でとても便利です。ここでは、その基本的な使い方を紹介します。</p>
+<p>ここでは正規表現の初歩とPythonでの扱い方を紹介します。</p>
+<p>Pythonでの正規表現</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/ja/3/library/re.html">公式ドキュメント</a></p></li>
+</ul>
+<p>普通の文字は全て正規表現です。</p>
+<p>-　<code class="docutils literal notranslate"><span class="pre">a</span></code>という正規表現は<code class="docutils literal notranslate"><span class="pre">a</span></code>にマッチします。</p>
+<p>正規表現の初歩（の初歩）</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.</span></code>（ドット）は任意の一文字にマッチ</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[]</span></code>で囲むと<code class="docutils literal notranslate"><span class="pre">[]</span></code>の中の文字のいずれかにマッチ</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">[AB]C</span></code>は<code class="docutils literal notranslate"><span class="pre">AB</span></code>もしくは<code class="docutils literal notranslate"><span class="pre">AC</span></code>のいずれかにマッチ</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[123]0</span></code>は<code class="docutils literal notranslate"><span class="pre">10</span></code>,<code class="docutils literal notranslate"><span class="pre">20</span></code>,<code class="docutils literal notranslate"><span class="pre">30</span></code>のいずれかにマッチ</p></li>
+<li><p>全ての大文字アルファベットのいずれかにマッチは<code class="docutils literal notranslate"><span class="pre">[A-Z]</span></code></p></li>
+<li><p>全ての整数値のいずれかにマッチは<code class="docutils literal notranslate"><span class="pre">[0-9]</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*</span></code>は直前の文字の0回以上の繰り返し（0回 == なくても良い）</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">AKB[0-9]*</span></code>は<code class="docutils literal notranslate"><span class="pre">AKB49</span></code>にも<code class="docutils literal notranslate"><span class="pre">AKB</span></code>にも<code class="docutils literal notranslate"><span class="pre">AKB1</span></code>にもマッチ</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(|)</span></code>はor（または）という意味になる</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">(A|B)</span></code>は A or B（AまたはB）にマッチ</p></li>
+</ul>
+</li>
+<li><p>ソフトなどによって微妙に記法など異なる場合もある。</p></li>
+</ul>
+<p>正規表現は奥が深い…</p>
+<ul class="simple">
+<li><p>深く学びたい人は<a class="reference external" href="https://www.amazon.co.jp/%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE-%E7%AC%AC3%E7%89%88-Jeffrey-F-Friedl/dp/4873113598/ref=sr_1_1?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;keywords=%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE&amp;qid=1560402782&amp;s=gateway&amp;sr=8-1">「詳説 正規表現」by Jeffrey Fried </a>をどうぞ。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span> <span class="c1"># Pythonで正規表現を扱うモジュール</span>
+
+<span class="c1"># まずは、正規表現パターンを「正規表現オブジェクト」にコンパイルし、</span>
+<span class="c1"># match()やsearch()などのメソッドを使ってマッチングに使えるようにします。</span>
+
+<span class="n">pat1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">pat2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;[AB]&#39;</span><span class="p">)</span>
+<span class="n">pat3</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;[123]0&#39;</span><span class="p">)</span>
+<span class="n">pat4</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;AKB[0-9]*&#39;</span><span class="p">)</span>
+<span class="n">pat5</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;(A|B)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># match()は文字列の先頭で0個以上の文字が正規表現パターンにマッチすれば対応するマッチオブジェクトを返します。</span>
+<span class="c1"># 文字列がパターンにマッチしなければ None を返します</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pat1</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># マッチすればTrueを返す</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pat2</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pat3</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;20&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pat4</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;AKB49&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pat5</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+True
+True
+True
+True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># search()は文字列を走査し、正規表現パターンがマッチを生じさせる最初の場所を探して、対応するマッチオブジェクトを返します</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pat1</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pat2</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pat3</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;20&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pat4</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;AKB49&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pat5</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;re.Match object; span=(0, 1), match=&#39;a&#39;&gt;
+&lt;re.Match object; span=(0, 1), match=&#39;A&#39;&gt;
+&lt;re.Match object; span=(0, 2), match=&#39;20&#39;&gt;
+&lt;re.Match object; span=(0, 5), match=&#39;AKB49&#39;&gt;
+&lt;re.Match object; span=(0, 1), match=&#39;A&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 文字列の置き換えはre.sub</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>その他文字列の処理でよく使うもの</p>
+<ul class="simple">
+<li><p>split()　　　　特定の文字列で文字列を分割</p></li>
+<li><p>startswith()　特定の文字列で文字列が始まるかを確認</p></li>
+<li><p>endswith()　  特定の文字列で文字列が終わるかを確認</p></li>
+<li><p>strip() 　　　文字列の先頭や末尾の特定の文字列や空白文字（スペース、タブ、改行）を削除</p></li>
+<li><p>replace()    文字列の置き換え</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text1</span> <span class="o">=</span> <span class="s1">&#39;I am happy to hear it.&#39;</span>
+<span class="n">text1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span> <span class="p">)</span> <span class="c1"># spaceで文字列を区切る</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;I&#39;, &#39;am&#39;, &#39;happy&#39;, &#39;to&#39;, &#39;hear&#39;, &#39;it.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text2</span> <span class="o">=</span> <span class="s1">&#39;@hogehoge Count me in!&#39;</span>
+<span class="n">text2</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">)</span> <span class="c1"># ’@’で始まるか確認</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file1</span> <span class="o">=</span> <span class="s1">&#39;test_code.ipynb&#39;</span>
+<span class="n">file1</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.ipynb&#39;</span><span class="p">)</span> <span class="c1"># &#39;.ipynb&#39;で終わるか確認</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text3</span> <span class="o">=</span> <span class="s1">&#39;     We are able to attend a class.    &#39;</span>
+
+<span class="n">text3</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="c1"># 文字列と最初の最後の空白文字を削除</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;We are able to attend a class.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text4</span> <span class="o">=</span> <span class="s2">&quot;&lt; aaaaabbbbbbcccccc &gt;&quot;</span>
+<span class="n">text4</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;(&lt;|&gt;)&quot;</span><span class="p">)</span> <span class="c1"># 文字列と最初の最後の&lt;または&gt;を削除</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39; aaaaabbbbbbcccccc &#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text5</span> <span class="o">=</span> <span class="s1">&#39;Hi Max.&#39;</span>
+<span class="n">text5</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Max&#39;</span><span class="p">,</span> <span class="s1">&#39;Matrix&#39;</span><span class="p">)</span> <span class="c1"># Max を Matrixに置き換える</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Hi Matrix.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/sec03"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="matplotlib.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3.6. </span>matplotlib</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercise.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3.8. </span>課題</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.7.1. 日本語を含むデータを可視化する方法</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.7.2. ファイル読み書きでのエンコーディングのエラーへの対応方法</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-expression">3.7.3. 正規表現（regular expression）</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1603 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>9.5. 演習・交通手段分類（データの特徴をつかむ） &#8212; Intro to Data Analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/option/gps_feature_extraction';</script>
+    <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/docs/option/gps_feature_extraction.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.6. 演習・交通手段分類（機械学習）" href="gps_machine_learning.html" />
+    <link rel="prev" title="9.4. 演習・交通手段分類（データ準備）" href="gps_clean_data.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Quantitative Data Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">環境準備とPythonの基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec01/index.html">1. Python環境の準備</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/01_build_python_environment.html">1.1. Python環境の準備</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/02_howtopip.html">1.2. 必要なパッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/03_basic_notebook.html">1.3. Notebookの基本的な使い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/04_exercise.html">1.4. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec02/index.html">2. Pythonの基本的な使い方1</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/01_basic_python1.html">2.1. 変数・算術演算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/02_basic_python2.html">2.2. 複合データ型・for/while/if文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/03_basic_python3.html">2.3. 関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/04_list_comprehension.html">2.4. set型・リスト内包表記</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/05_string.html">2.5. 文字列を扱うときの注意点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/06_exercise.html">2.6. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec03/index.html">3. Pythonの基本的な使い方2</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/numpy.html">3.1. Pythonのライブラリ・パッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas1.html">3.2. pandas 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas2.html">3.3. pandas 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/read_write.html">3.4. ファイルの読み書き</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas_datetime.html">3.5. pandasを用いた日時データの扱い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/matplotlib.html">3.6. matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/option_text_viz.html">3.7. 参考：日本語の取り扱いと正規表現</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/exercise.html">3.8. 課題</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">データ分析の基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec04/index.html">4. データ分析の基礎</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/01_basic_stats1.html">4.1. 平均値・中央値・最頻値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/02_basic_stats2.html">4.2. 頻度分布・偏差・分散</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/03_basic_stats3.html">4.3. 基本統計量の確認方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/04_stats_test.html">4.4. 仮説検定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/05_exercise.html">4.5. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec05/index.html">5. 相関・回帰・重回帰分析</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/correlation.html">5.1. 相関・散布図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/regression.html">5.2. 回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/multiple_regression.html">5.3. 重回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/regression_tips.html">5.4. 非線形・交差項・二乗項</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec06/index.html">6. 離散選択モデル</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/logit_provit.html">6.1. 離散選択モデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/ordered_loigt.html">6.2. 順序ロジットモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/multinomial_logit.html">6.3. 多項ロジットモデル</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec07/index.html">7. パネルデータ分析</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec07/paneldata.html">7.1. パネルデータ分析</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec08/index.html">8. 機械学習</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/supervised_learning.html">8.1. 機械学習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/unsupervised_learning.html">8.2. 教師なし学習</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">演習</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">9. 演習</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="COVID19mobility.html">9.1. COVID-19による人流の変化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yfinance.html">9.2. Yahoo! FINANCEのデータを用いた可視化の演習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercise.html">9.3. 課題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gps_clean_data.html">9.4. 演習・交通手段分類（データ準備）</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">9.5. 演習・交通手段分類（データの特徴をつかむ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gps_machine_learning.html">9.6. 演習・交通手段分類（機械学習）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twitter.html">9.7. 演習・Twitterのテキスト分類問題</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/iiimethodsiv/intro2quandataanalysis/blob/gh-pages/docs/option/gps_feature_extraction.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis/issues/new?title=Issue%20on%20page%20%2Fdocs/option/gps_feature_extraction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/option/gps_feature_extraction.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>演習・交通手段分類（データの特徴をつかむ）</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.5.1. 一つ前の場所（ポイント）からの時間差を計算する</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.5.2. 前のポイントからの距離</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">9.5.3. 速度</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">9.5.4. 加速度</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-velocity">9.5.5. Angular velocity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">9.5.6. 特徴の可視化</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">9.5.6.1. トリップごとのAngular velocity とスピードの関係性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">9.5.6.2. 各交通手段ごとの加速度の箱ひげ図の確認</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">9.5.7. 次の分析のために作成した特徴量データを保存します。</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">9.5. </span>演習・交通手段分類（データの特徴をつかむ）<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>このNotebookでは、GPSデータの基本的な特徴をいくつか抽出します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geopy</span> <span class="kn">import</span> <span class="n">distance</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">radians</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">asin</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">atan2</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load the GPS data which we cleaned in 00_clean_GPS_data.ipynb</span>
+<span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;010&#39;</span>
+<span class="n">traj_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./traj_</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s1">_labeled.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># traj_df = pd.read_csv(f&#39;./traj_{user}_labeled.csv&#39;, index_col=0)</span>
+<span class="n">traj_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_18337/953823710.py:3: DtypeWarning: Columns (10) have mixed types. Specify dtype option on import or set low_memory=False.
+  traj_df = pd.read_csv(f&#39;./traj_{user}_labeled.csv&#39;, index_col=0)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>height</th>
+      <th>days_total</th>
+      <th>date</th>
+      <th>time</th>
+      <th>record_dt</th>
+      <th>user</th>
+      <th>trans_trip</th>
+      <th>trans_mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>39.138159</td>
+      <td>117.217108</td>
+      <td>-36</td>
+      <td>39805.961748</td>
+      <td>2008-12-23</td>
+      <td>23:04:55</td>
+      <td>2008-12-23 23:04:55</td>
+      <td>10</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>39.138196</td>
+      <td>117.217068</td>
+      <td>-72</td>
+      <td>39805.961759</td>
+      <td>2008-12-23</td>
+      <td>23:04:56</td>
+      <td>2008-12-23 23:04:56</td>
+      <td>10</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># exclude the rows containing no information about transportation mode</span>
+<span class="n">traj_df</span> <span class="o">=</span> <span class="n">traj_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;trans_mode&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Size of observations: </span><span class="si">{:,}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">traj_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">traj_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Size of observations: 534,140
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>height</th>
+      <th>days_total</th>
+      <th>date</th>
+      <th>time</th>
+      <th>record_dt</th>
+      <th>user</th>
+      <th>trans_trip</th>
+      <th>trans_mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>39.845966</td>
+      <td>116.473938</td>
+      <td>131</td>
+      <td>39713.992662</td>
+      <td>2008-09-22</td>
+      <td>23:49:26</td>
+      <td>2008-09-22 23:49:26</td>
+      <td>10</td>
+      <td>163.0</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>39.846383</td>
+      <td>116.473363</td>
+      <td>135</td>
+      <td>39713.992674</td>
+      <td>2008-09-22</td>
+      <td>23:49:27</td>
+      <td>2008-09-22 23:49:27</td>
+      <td>10</td>
+      <td>163.0</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>39.846803</td>
+      <td>116.472788</td>
+      <td>141</td>
+      <td>39713.992685</td>
+      <td>2008-09-22</td>
+      <td>23:49:28</td>
+      <td>2008-09-22 23:49:28</td>
+      <td>10</td>
+      <td>163.0</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>39.847218</td>
+      <td>116.472213</td>
+      <td>141</td>
+      <td>39713.992697</td>
+      <td>2008-09-22</td>
+      <td>23:49:29</td>
+      <td>2008-09-22 23:49:29</td>
+      <td>10</td>
+      <td>163.0</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>39.847631</td>
+      <td>116.471641</td>
+      <td>141</td>
+      <td>39713.992708</td>
+      <td>2008-09-22</td>
+      <td>23:49:30</td>
+      <td>2008-09-22 23:49:30</td>
+      <td>10</td>
+      <td>163.0</td>
+      <td>train</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="id2">
+<h2><span class="section-number">9.5.1. </span>一つ前の場所（ポイント）からの時間差を計算する<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<!-- ## calculate time differences from previous points per trip --><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># convert time values to timestamp</span>
+<span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="c1"># sort values by trip id (trans_trip) and timestamp</span>
+<span class="n">traj_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;trans_trip&#39;</span><span class="p">,</span><span class="s1">&#39;timestamp&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># create the start and end time for each trajectory</span>
+<span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;time_delta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">traj_df</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">-</span> <span class="n">traj_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;trans_trip&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">timestamp</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;dt_seconds&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;time_delta&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">seconds</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check the histogram of longest time between two points per trip.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the histogram of the maximum time differences between points per trip</span>
+<span class="n">trip_dt</span> <span class="o">=</span> <span class="n">traj_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;trans_trip&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">dt_seconds</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">trip_dt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># Let&#39;s also print out the percentiles of the maximum time differences between points per trip</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">trip_dt</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7b9df9ed02e40b653b9639ef2d2562ccd0452488d1a58db49f73f1d11fe18f74.png" src="../../_images/7b9df9ed02e40b653b9639ef2d2562ccd0452488d1a58db49f73f1d11fe18f74.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0       1.0
+0.1       2.0
+0.2       2.0
+0.3       4.0
+0.4      48.0
+0.5      61.0
+0.6      82.0
+0.7     120.0
+0.8     317.0
+0.9    1076.0
+Name: dt_seconds, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># summary info on time differences between points, grouped by trip id (trans_trip)</span>
+<span class="p">(</span><span class="n">traj_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;trans_mode&#39;</span><span class="p">,</span><span class="s1">&#39;trans_trip&#39;</span><span class="p">])</span>
+        <span class="o">.</span><span class="n">time_delta</span>
+        <span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">seconds</span>
+        <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="s1">&#39;median&#39;</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">,</span><span class="s1">&#39;min&#39;</span><span class="p">,</span><span class="s1">&#39;count&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>median</th>
+      <th>max</th>
+      <th>min</th>
+      <th>count</th>
+    </tr>
+    <tr>
+      <th>trans_mode</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>airplane</th>
+      <td>3699.000000</td>
+      <td>3699.0</td>
+      <td>7394.0</td>
+      <td>4.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>bus</th>
+      <td>2597.941176</td>
+      <td>67.5</td>
+      <td>85896.0</td>
+      <td>2.0</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>car</th>
+      <td>119.000000</td>
+      <td>119.0</td>
+      <td>119.0</td>
+      <td>119.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>subway</th>
+      <td>1916.595745</td>
+      <td>59.0</td>
+      <td>85903.0</td>
+      <td>2.0</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>taxi</th>
+      <td>7997.218750</td>
+      <td>68.5</td>
+      <td>85474.0</td>
+      <td>2.0</td>
+      <td>96</td>
+    </tr>
+    <tr>
+      <th>train</th>
+      <td>8911.393939</td>
+      <td>1061.0</td>
+      <td>84677.0</td>
+      <td>2.0</td>
+      <td>99</td>
+    </tr>
+    <tr>
+      <th>walk</th>
+      <td>602.006579</td>
+      <td>3.0</td>
+      <td>85263.0</td>
+      <td>1.0</td>
+      <td>152</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Since airplane and car trips are less, we remove these modes for further analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traj_df</span> <span class="o">=</span> <span class="n">traj_df</span><span class="p">[</span><span class="o">~</span><span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;trans_mode&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;airplane&#39;</span><span class="p">,</span><span class="s1">&#39;car&#39;</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">9.5.2. </span>前のポイントからの距離<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<!-- distances from previous points --><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># store previous points&#39; latitude and logitude by using `shift` function of pandas</span>
+<span class="n">traj_df</span><span class="p">[[</span><span class="s1">&#39;latitude_prev&#39;</span><span class="p">,</span><span class="s1">&#39;longitude_prev&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">traj_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;trans_trip&#39;</span><span class="p">)[[</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span><span class="s1">&#39;longitude&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_distance</span><span class="p">(</span><span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;function to calculate distances between two coordinates</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span> <span class="ow">or</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">lon1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">distance</span><span class="o">.</span><span class="n">great_circle</span><span class="p">((</span><span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">),</span> <span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">))</span><span class="o">.</span><span class="n">km</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># map the calculation function above to the dataframe</span>
+<span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">traj_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">calc_distance</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;latitude_prev&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;longitude_prev&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traj_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>height</th>
+      <th>days_total</th>
+      <th>date</th>
+      <th>time</th>
+      <th>record_dt</th>
+      <th>user</th>
+      <th>trans_trip</th>
+      <th>trans_mode</th>
+      <th>timestamp</th>
+      <th>time_delta</th>
+      <th>dt_seconds</th>
+      <th>latitude_prev</th>
+      <th>longitude_prev</th>
+      <th>distance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>39.894178</td>
+      <td>116.318200</td>
+      <td>-777</td>
+      <td>39535.621296</td>
+      <td>2008-03-28</td>
+      <td>14:54:40</td>
+      <td>2008-03-28 14:54:40</td>
+      <td>10</td>
+      <td>1.0</td>
+      <td>train</td>
+      <td>2023-06-11 14:54:40</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>39.894505</td>
+      <td>116.321132</td>
+      <td>-777</td>
+      <td>39535.621690</td>
+      <td>2008-03-28</td>
+      <td>14:55:14</td>
+      <td>2008-03-28 14:55:14</td>
+      <td>10</td>
+      <td>1.0</td>
+      <td>train</td>
+      <td>2023-06-11 14:55:14</td>
+      <td>0 days 00:00:34</td>
+      <td>34.0</td>
+      <td>39.894178</td>
+      <td>116.3182</td>
+      <td>0.252764</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id4">
+<h2><span class="section-number">9.5.3. </span>速度<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<!-- speed -->
+<p>次に速度：距離(km)/時を計算します</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(((</span><span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">())</span><span class="o">&amp;</span><span class="p">(</span><span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;dt_seconds&#39;</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">)),</span> <span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">/</span> 
+                     <span class="p">(</span><span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;dt_seconds&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s check the descriptions of speed per transportation mode</span>
+<span class="n">traj_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;trans_mode&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">speed</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="s1">&#39;min&#39;</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">,</span><span class="s1">&#39;std&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>min</th>
+      <th>max</th>
+      <th>std</th>
+    </tr>
+    <tr>
+      <th>trans_mode</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bus</th>
+      <td>40.731893</td>
+      <td>0.0</td>
+      <td>219.970336</td>
+      <td>29.834764</td>
+    </tr>
+    <tr>
+      <th>subway</th>
+      <td>52.369217</td>
+      <td>0.0</td>
+      <td>217.578404</td>
+      <td>25.219674</td>
+    </tr>
+    <tr>
+      <th>taxi</th>
+      <td>30.355116</td>
+      <td>0.0</td>
+      <td>156.129306</td>
+      <td>27.505678</td>
+    </tr>
+    <tr>
+      <th>train</th>
+      <td>87.305798</td>
+      <td>0.0</td>
+      <td>76412.488301</td>
+      <td>129.458882</td>
+    </tr>
+    <tr>
+      <th>walk</th>
+      <td>5.453786</td>
+      <td>0.0</td>
+      <td>77.700333</td>
+      <td>3.290184</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id5">
+<h2><span class="section-number">9.5.4. </span>加速度<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<!-- Accelation -->
+<p>2点間の速度の差/2点間の時間の差でAccelation（加速度）を計算します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># store previous points&#39; speed</span>
+<span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;speed_prev&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">traj_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;trans_trip&#39;</span><span class="p">)[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_accel</span><span class="p">(</span><span class="n">speed_1</span><span class="p">,</span> <span class="n">speed_2</span><span class="p">,</span> <span class="n">time_diff_sec</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;function to calculate acceleration between two points</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">speed_delta</span> <span class="o">=</span> <span class="n">speed_2</span> <span class="o">-</span> <span class="n">speed_1</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">time_diff_sec</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">speed_delta</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">speed_delta</span> <span class="o">/</span> <span class="n">time_diff_sec</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># map the above calculation fuction to the dataframe</span>
+<span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;accel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">traj_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">calc_accel</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;speed_prev&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;dt_seconds&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check basic statistics of acceleration per transportation mode</span>
+<span class="n">traj_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;trans_mode&#39;</span><span class="p">)[</span><span class="s1">&#39;accel&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>trans_mode</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bus</th>
+      <td>35156.0</td>
+      <td>-0.072119</td>
+      <td>5.457844</td>
+      <td>-166.371582</td>
+      <td>-1.161253</td>
+      <td>-3.753887e-06</td>
+      <td>1.108991</td>
+      <td>178.138813</td>
+    </tr>
+    <tr>
+      <th>subway</th>
+      <td>20338.0</td>
+      <td>-0.091452</td>
+      <td>6.851066</td>
+      <td>-136.151441</td>
+      <td>-1.233928</td>
+      <td>2.384665e-01</td>
+      <td>1.791577</td>
+      <td>126.904634</td>
+    </tr>
+    <tr>
+      <th>taxi</th>
+      <td>56731.0</td>
+      <td>-0.061755</td>
+      <td>4.192712</td>
+      <td>-97.929174</td>
+      <td>-1.272490</td>
+      <td>0.000000e+00</td>
+      <td>1.300822</td>
+      <td>96.055705</td>
+    </tr>
+    <tr>
+      <th>train</th>
+      <td>380835.0</td>
+      <td>-0.007112</td>
+      <td>4.349676</td>
+      <td>-1122.655229</td>
+      <td>-0.973044</td>
+      <td>4.474713e-09</td>
+      <td>0.987760</td>
+      <td>1293.744609</td>
+    </tr>
+    <tr>
+      <th>walk</th>
+      <td>36954.0</td>
+      <td>-0.051443</td>
+      <td>3.310213</td>
+      <td>-64.769768</td>
+      <td>-1.191070</td>
+      <td>2.163060e-03</td>
+      <td>1.201445</td>
+      <td>59.242515</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="angular-velocity">
+<h2><span class="section-number">9.5.5. </span>Angular velocity<a class="headerlink" href="#angular-velocity" title="Permalink to this heading">#</a></h2>
+<!-- 角速度 -->
+<p>ここでは、2点間の角度の差／2点間の時間の差でAngular velocityを計算します。</p>
+<p>そのためにまず、2点間の角度の差を計算します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_angle</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lon2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;function to calculate angle differences between two coordinates</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">lat2</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">lon2</span><span class="o">-</span><span class="n">lon1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">lat2</span><span class="p">)</span> <span class="o">-</span> <span class="n">sin</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">lat2</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">lon2</span><span class="o">-</span><span class="n">lon1</span><span class="p">)</span>
+    <span class="n">brng</span> <span class="o">=</span> <span class="n">atan2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">brng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">brng</span><span class="p">)</span>
+    <span class="n">brng</span> <span class="o">=</span> <span class="n">brng</span> <span class="o">+</span> <span class="mi">360</span> <span class="k">if</span> <span class="n">brng</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">brng</span>
+    <span class="k">return</span> <span class="n">brng</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># apply the calculation function abvoe to the dataframe</span>
+<span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;angle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">traj_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">calc_angle</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;latitude_prev&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;longitude_prev&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print out the description of angle differences between two points per transportation mode</span>
+<span class="n">traj_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;trans_mode&#39;</span><span class="p">])[</span><span class="s1">&#39;angle&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>trans_mode</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bus</th>
+      <td>35156.0</td>
+      <td>159.299021</td>
+      <td>111.391769</td>
+      <td>-0.0</td>
+      <td>68.399355</td>
+      <td>172.127466</td>
+      <td>255.799236</td>
+      <td>359.999455</td>
+    </tr>
+    <tr>
+      <th>subway</th>
+      <td>20338.0</td>
+      <td>137.644859</td>
+      <td>104.230577</td>
+      <td>0.0</td>
+      <td>19.438924</td>
+      <td>173.706695</td>
+      <td>196.554703</td>
+      <td>359.827198</td>
+    </tr>
+    <tr>
+      <th>taxi</th>
+      <td>56731.0</td>
+      <td>158.724686</td>
+      <td>116.988570</td>
+      <td>-0.0</td>
+      <td>29.485250</td>
+      <td>178.534543</td>
+      <td>226.851081</td>
+      <td>359.929870</td>
+    </tr>
+    <tr>
+      <th>train</th>
+      <td>380835.0</td>
+      <td>179.733586</td>
+      <td>103.023225</td>
+      <td>0.0</td>
+      <td>98.886739</td>
+      <td>179.800484</td>
+      <td>269.325408</td>
+      <td>359.999506</td>
+    </tr>
+    <tr>
+      <th>walk</th>
+      <td>36954.0</td>
+      <td>181.486218</td>
+      <td>104.497955</td>
+      <td>0.0</td>
+      <td>97.345459</td>
+      <td>181.463673</td>
+      <td>269.999640</td>
+      <td>359.812308</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Angular velocityを求めます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_angular_velocity</span><span class="p">(</span><span class="n">angle1</span><span class="p">,</span> <span class="n">angle2</span><span class="p">,</span> <span class="n">time_diff_sec</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;function to calculate angular velocity</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bear_delta</span> <span class="o">=</span> <span class="n">angle2</span> <span class="o">-</span> <span class="n">angle1</span>
+    <span class="k">if</span> <span class="n">time_diff_sec</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">bear_delta</span> <span class="o">/</span> <span class="n">time_diff_sec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a new column holding the previous points&#39; angle difference</span>
+<span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;angle_prev&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">traj_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;trans_trip&#39;</span><span class="p">)[</span><span class="s1">&#39;angle&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># apply the calculation function to the dataframe</span>
+<span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;angular_velocity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">traj_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">calc_angular_velocity</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;angle&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;angle_prev&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;dt_seconds&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;angular_velocity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    529586.000000
+mean         10.510742
+std          45.292572
+min           0.000000
+25%           0.272122
+50%           0.870065
+75%           2.537062
+max         359.997255
+Name: angular_velocity, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h2><span class="section-number">9.5.6. </span>特徴の可視化<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>上で作ったいくつかの特徴を可視化してそれぞれがどのように交通手段と関連があるか確認します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a color list for visualizations</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#0C5DA5&#39;</span><span class="p">,</span> <span class="s1">&#39;#00B945&#39;</span><span class="p">,</span> <span class="s1">&#39;#FF9500&#39;</span><span class="p">,</span> <span class="s1">&#39;#FF2C00&#39;</span><span class="p">,</span> <span class="s1">&#39;#845B97&#39;</span><span class="p">,</span> <span class="s1">&#39;#474747&#39;</span><span class="p">,</span> <span class="s1">&#39;#9e9e9e&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<!-- #### Relation between angular velocity and speed per trip -->
+<section id="id7">
+<h3><span class="section-number">9.5.6.1. </span>トリップごとのAngular velocity とスピードの関係性<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">markers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">]</span>
+<span class="c1"># iterate over transportation modes</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mode</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;trans_mode&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()):</span>
+    <span class="c1"># create sub-dataframe holding the rows with the mode</span>
+    <span class="n">chunk</span> <span class="o">=</span> <span class="n">traj_df</span><span class="p">[</span><span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;trans_mode&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">mode</span><span class="p">]</span>
+    <span class="c1"># create mean scores of speed and angular_velocity per trip</span>
+    <span class="n">trip_df</span> <span class="o">=</span> <span class="n">chunk</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;trans_trip&#39;</span><span class="p">)[[</span><span class="s1">&#39;speed&#39;</span><span class="p">,</span> <span class="s1">&#39;angular_velocity&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="c1"># create scatter plots of speed and angular_velocity per trip</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">trip_df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">],</span> <span class="n">trip_df</span><span class="p">[</span><span class="s1">&#39;angular_velocity&#39;</span><span class="p">],</span> <span class="n">facecolor</span> <span class="o">=</span> <span class="s1">&#39;None&#39;</span><span class="p">,</span> 
+               <span class="n">marker</span> <span class="o">=</span> <span class="n">markers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;speed (km/h)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;angular velocity (deg/sec)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/259e50520d1ff922241444d5c12199354d49e2f8e654140a5802bca0a3c27af1.png" src="../../_images/259e50520d1ff922241444d5c12199354d49e2f8e654140a5802bca0a3c27af1.png" />
+</div>
+</div>
+<!-- #### Plot box plots of acceleration scores per trip per transportation mode -->
+</section>
+<section id="id8">
+<h3><span class="section-number">9.5.6.2. </span>各交通手段ごとの加速度の箱ひげ図の確認<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">markers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">]</span>
+<span class="n">accel_df</span> <span class="o">=</span> <span class="n">traj_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;trans_mode&#39;</span><span class="p">,</span> <span class="s1">&#39;trans_trip&#39;</span><span class="p">])[[</span><span class="s1">&#39;accel&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">accel_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;trans_mode&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;accel&quot;</span><span class="p">,</span> 
+            <span class="c1"># showfliers=True, </span>
+            <span class="n">notch</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">showcaps</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">showmeans</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">meanprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;markerfacecolor&#39;</span><span class="p">:</span><span class="s1">&#39;none&#39;</span><span class="p">,</span><span class="s1">&#39;markeredgecolor&#39;</span><span class="p">:</span><span class="s1">&#39;green&#39;</span><span class="p">},</span>
+            <span class="n">flierprops</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;marker&quot;</span><span class="p">:</span> <span class="s2">&quot;x&quot;</span><span class="p">},</span>
+            <span class="n">boxprops</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;facecolor&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">.4</span><span class="p">,</span> <span class="mf">.6</span><span class="p">,</span> <span class="mf">.8</span><span class="p">,</span> <span class="mf">.2</span><span class="p">)},</span>
+            <span class="n">medianprops</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;coral&quot;</span><span class="p">},</span> 
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;transportation mode&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6e948ad14dc3a10ff7a39a7987a9a38e51a6151bb5a0d4251ebae48bfb2a7c5d.png" src="../../_images/6e948ad14dc3a10ff7a39a7987a9a38e51a6151bb5a0d4251ebae48bfb2a7c5d.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="id9">
+<h2><span class="section-number">9.5.7. </span>次の分析のために作成した特徴量データを保存します。<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># drop the rows without dt_seconds values</span>
+<span class="n">traj_df</span> <span class="o">=</span> <span class="n">traj_df</span><span class="p">[</span><span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;dt_seconds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span>
+<span class="c1"># drop the rows which has 0 seconds gaps from previous points</span>
+<span class="n">traj_df</span> <span class="o">=</span> <span class="n">traj_df</span><span class="p">[</span><span class="o">~</span><span class="p">(</span><span class="n">traj_df</span><span class="p">[</span><span class="s1">&#39;dt_seconds&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># PLEASE REPLACE THE BELOW PATH WITH YOUR PATH</span>
+<span class="n">path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;traj_</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s1">_labeled_with_features.csv&#39;</span>
+<span class="n">traj_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/option"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="gps_clean_data.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">9.4. </span>演習・交通手段分類（データ準備）</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="gps_machine_learning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9.6. </span>演習・交通手段分類（機械学習）</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.5.1. 一つ前の場所（ポイント）からの時間差を計算する</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.5.2. 前のポイントからの距離</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">9.5.3. 速度</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">9.5.4. 加速度</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-velocity">9.5.5. Angular velocity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">9.5.6. 特徴の可視化</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">9.5.6.1. トリップごとのAngular velocity とスピードの関係性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">9.5.6.2. 各交通手段ごとの加速度の箱ひげ図の確認</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">9.5.7. 次の分析のために作成した特徴量データを保存します。</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

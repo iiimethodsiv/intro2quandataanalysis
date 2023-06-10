@@ -1,0 +1,1014 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>3.8. 課題 &#8212; Intro to Data Analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/sec03/exercise';</script>
+    <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/docs/sec03/exercise.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4. データ分析の基礎" href="../sec04/index.html" />
+    <link rel="prev" title="3.7. 参考：日本語の取り扱いと正規表現" href="option_text_viz.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Quantitative Data Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">環境準備とPythonの基礎</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec01/index.html">1. Python環境の準備</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/01_build_python_environment.html">1.1. Python環境の準備</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/02_howtopip.html">1.2. 必要なパッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/03_basic_notebook.html">1.3. Notebookの基本的な使い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/04_exercise.html">1.4. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec02/index.html">2. Pythonの基本的な使い方1</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/01_basic_python1.html">2.1. 変数・算術演算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/02_basic_python2.html">2.2. 複合データ型・for/while/if文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/03_basic_python3.html">2.3. 関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/04_list_comprehension.html">2.4. set型・リスト内包表記</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/05_string.html">2.5. 文字列を扱うときの注意点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/06_exercise.html">2.6. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">3. Pythonの基本的な使い方2</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="numpy.html">3.1. Pythonのライブラリ・パッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas1.html">3.2. pandas 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas2.html">3.3. pandas 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="read_write.html">3.4. ファイルの読み書き</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas_datetime.html">3.5. pandasを用いた日時データの扱い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matplotlib.html">3.6. matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="option_text_viz.html">3.7. 参考：日本語の取り扱いと正規表現</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.8. 課題</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">データ分析の基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec04/index.html">4. データ分析の基礎</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/01_basic_stats1.html">4.1. 平均値・中央値・最頻値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/02_basic_stats2.html">4.2. 頻度分布・偏差・分散</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/03_basic_stats3.html">4.3. 基本統計量の確認方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/04_stats_test.html">4.4. 仮説検定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/05_exercise.html">4.5. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec05/index.html">5. 相関・回帰・重回帰分析</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/correlation.html">5.1. 相関・散布図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/regression.html">5.2. 回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/multiple_regression.html">5.3. 重回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/regression_tips.html">5.4. 非線形・交差項・二乗項</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec06/index.html">6. 離散選択モデル</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/logit_provit.html">6.1. 離散選択モデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/ordered_loigt.html">6.2. 順序ロジットモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/multinomial_logit.html">6.3. 多項ロジットモデル</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec07/index.html">7. パネルデータ分析</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec07/paneldata.html">7.1. パネルデータ分析</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec08/index.html">8. 機械学習</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/supervised_learning.html">8.1. 機械学習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/unsupervised_learning.html">8.2. 教師なし学習</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">演習</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../option/index.html">9. 演習</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../option/COVID19mobility.html">9.1. COVID-19による人流の変化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/yfinance.html">9.2. Yahoo! FINANCEのデータを用いた可視化の演習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/exercise.html">9.3. 課題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_clean_data.html">9.4. 演習・交通手段分類（データ準備）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_feature_extraction.html">9.5. 演習・交通手段分類（データの特徴をつかむ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_machine_learning.html">9.6. 演習・交通手段分類（機械学習）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/twitter.html">9.7. 演習・Twitterのテキスト分類問題</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/iiimethodsiv/intro2quandataanalysis/blob/gh-pages/docs/sec03/exercise.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis/issues/new?title=Issue%20on%20page%20%2Fdocs/sec03/exercise.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/sec03/exercise.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>課題</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.8.1. 課題1.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.8.2. 課題2.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.8.2.1. 課題2.0（回答例）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.8.2.2. 課題2.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">3.8.2.3. 課題2.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">3.8.2.4. 課題2.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.8.2.5. 課題2.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.8.2.6. 課題2.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3.8.2.7. 課題2.6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">3.8.2.8. 課題2.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">3.8.2.9. 課題2.8</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">3.8.2.10. 課題2.9</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">3.8.2.11. 課題2.10</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">3.8. </span>課題<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2><span class="section-number">3.8.1. </span>課題1.<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>Section3の内容のうち習得に自信がない部分について、自分でこのNotebookでコードを書いて実行してください。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">3.8.2. </span>課題2.<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>次のDataFrame <code class="docutils literal notranslate"><span class="pre">df</span></code> はある電化製品店のパソコンコーナーの受注情報の一部です。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>column</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>id</p></td>
+<td><p>顧客番号</p></td>
+</tr>
+<tr class="row-odd"><td><p>name</p></td>
+<td><p>顧客名</p></td>
+</tr>
+<tr class="row-even"><td><p>date</p></td>
+<td><p>来店日</p></td>
+</tr>
+<tr class="row-odd"><td><p>laptop</p></td>
+<td><p>購入または修理に持ち込んだパソコンの種類</p></td>
+</tr>
+<tr class="row-even"><td><p>fix</p></td>
+<td><p>修理受注であればTrue、購入であればFalse</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="k">def</span> <span class="nf">make_df</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">105</span><span class="p">],</span>
+                      <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Max&#39;</span><span class="p">,</span> <span class="s1">&#39;Max&#39;</span><span class="p">,</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Chris&#39;</span><span class="p">,</span><span class="s1">&#39;Emma&#39;</span><span class="p">,</span> <span class="s1">&#39;William&#39;</span><span class="p">,</span><span class="s1">&#39;Jacob&#39;</span><span class="p">],</span>
+                       <span class="s1">&#39;gender&#39;</span><span class="p">:[</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">],</span>
+                       <span class="s1">&#39;date&#39;</span><span class="p">:[</span><span class="s1">&#39;2019/3/4&#39;</span><span class="p">,</span><span class="s1">&#39;2019/2/5&#39;</span><span class="p">,</span><span class="s1">&#39;2018/10/3&#39;</span><span class="p">,</span><span class="s1">&#39;2017/12/6&#39;</span><span class="p">,</span><span class="s1">&#39;2016/9/3&#39;</span><span class="p">,</span><span class="s1">&#39;2019/7/4&#39;</span><span class="p">,</span><span class="s1">&#39;2017/1/1&#39;</span><span class="p">,</span><span class="s1">&#39;2019/5/3&#39;</span><span class="p">,</span><span class="s1">&#39;2018/2/18&#39;</span><span class="p">,</span> <span class="s1">&#39;2015/12/30&#39;</span><span class="p">],</span>
+                      <span class="s1">&#39;laptop&#39;</span><span class="p">:[</span><span class="s1">&#39;mac&#39;</span><span class="p">,</span><span class="s1">&#39;mac&#39;</span><span class="p">,</span><span class="s1">&#39;windows&#39;</span><span class="p">,</span><span class="s1">&#39;windows&#39;</span><span class="p">,</span><span class="s1">&#39;mac&#39;</span><span class="p">,</span> <span class="s1">&#39;mac&#39;</span><span class="p">,</span> <span class="s1">&#39;windows&#39;</span><span class="p">,</span> <span class="s1">&#39;windows&#39;</span><span class="p">,</span> <span class="s1">&#39;mac&#39;</span><span class="p">,</span> <span class="s1">&#39;others&#39;</span><span class="p">],</span>
+                      <span class="s1">&#39;fix&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+                      <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">230000</span><span class="p">,</span> <span class="mi">5400</span><span class="p">,</span> <span class="mi">15000</span><span class="p">,</span> <span class="mi">300000</span><span class="p">,</span> <span class="mi">240000</span><span class="p">,</span> <span class="mi">180000</span><span class="p">,</span> <span class="mi">150000</span><span class="p">,</span> <span class="mi">100000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">]})</span>
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">make_df</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code>に関して以下の問いに答えてください。</p>
+<section id="id4">
+<h3><span class="section-number">3.8.2.1. </span>課題2.0（回答例）<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>このDataFrame(df)に格納されている一番最初の顧客の名前は何ですか？</p>
+<p>回答は一つのstr値を返します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 課題の回答は関数（引数無し）の中に全て書いてください。</span>
+<span class="k">def</span> <span class="nf">answer_zero</span><span class="p">():</span>
+    <span class="c1">#　どのようなフォーマットで回答すべきか問題文に従ってください。</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">make_df</span><span class="p">()</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">ans</span>
+
+<span class="c1"># 回答を確認するためには、次のような１行で回答を記入した関数を呼び出すことで確認できます。</span>
+<span class="n">answer_zero</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>次のcellを実行して回答を確認してください。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">answer_zero</span><span class="p">()</span><span class="o">==</span><span class="s1">&#39;Max&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3><span class="section-number">3.8.2.2. </span>課題2.1<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>DataFrame(df)の<code class="docutils literal notranslate"><span class="pre">date</span></code>列をdatetime型に変換し、日付の新しい順（descending）にソートしてください。</p>
+<p>回答は1つのSeriesを返します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">answer_one</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">make_df</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ans</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>次のセルを実行して回答を確認してください</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer_one</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer_one</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer_one</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3><span class="section-number">3.8.2.3. </span>課題2.2<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code>のなかで最も受注回数が多い顧客は誰ですか？</p>
+<p>回答は1つのstr型の値を返します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">answer_two</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">make_df</span><span class="p">()</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="s2">&quot;YOUR ANSWER&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>次のセルを実行して回答を確認してください</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">answer_two</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Bob&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h3><span class="section-number">3.8.2.4. </span>課題2.3<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code>のなかで顧客ごとの受注支払額総額を総額が高い順に示してください。</p>
+<p>回答は1つのSeriesを返します。返すSeriesのindexは顧客の名前(<code class="docutils literal notranslate"><span class="pre">name</span></code>)としてください。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">answer_three</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">make_df</span><span class="p">()</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="s2">&quot;YOUR ANSWER&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">answer_three</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>次のセルを実行して回答を確認してください</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">answer_three</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">320400</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer_three</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Bob&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer_three</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer_three</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Jacob&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h3><span class="section-number">3.8.2.5. </span>課題2.4<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code>のうち修理の受注のみを示すDataFrameを<code class="docutils literal notranslate"><span class="pre">df_fix</span></code>として作ってください。<code class="docutils literal notranslate"><span class="pre">df_fix</span></code>は受注の日付の古い順(昇順、ascending)に並び替えてください。</p>
+<p>回答は1つのDataFrame(5行、7列)を返します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">answer_four</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">make_df</span><span class="p">()</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="n">df_fix</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">answer_four</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>次のセルを実行して回答を確認してください</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer_four</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer_four</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer_four</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer_four</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;William&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id9">
+<h3><span class="section-number">3.8.2.6. </span>課題2.5<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code>のうち修理の受注のみを示すDataFrameをdf_fixを用いて、性別での受注件数を示す棒グラフを作成してください。</p>
+<p>回答は1つの棒グラフを表示します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="o">%</span> <span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="k">def</span> <span class="nf">answer_five</span><span class="p">():</span>
+    <span class="n">df_fix</span> <span class="o">=</span> <span class="n">answer_four</span><span class="p">()</span>
+    
+    <span class="o">...</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>次のcellを実行して回答を表示させてください</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">answer_five</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id10">
+<h3><span class="section-number">3.8.2.7. </span>課題2.6<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code>に新しいcolumnとして<code class="docutils literal notranslate"><span class="pre">year</span></code>を追加してください。<code class="docutils literal notranslate"><span class="pre">year</span></code>は受注が何年にあったかを示します。例えば<code class="docutils literal notranslate"><span class="pre">date</span></code>（受注日付）が<code class="docutils literal notranslate"><span class="pre">2015-12-1</span></code>の場合の<code class="docutils literal notranslate"><span class="pre">year</span></code>は<code class="docutils literal notranslate"><span class="pre">2015</span></code>となります。</p>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code>は<code class="docutils literal notranslate"><span class="pre">id</span></code>の降順(descending)に並び替え、columnは<code class="docutils literal notranslate"><span class="pre">[['id',</span> <span class="pre">'name','gender','date','year','laptop','fix','price']]</span></code>の順に表示されるようにしてください。</p>
+<p>回答は1つのDataFrame(10行、8列)を返します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">answer_six</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">make_df</span><span class="p">()</span>
+    
+    <span class="o">...</span>
+    
+    <span class="k">return</span> <span class="s2">&quot;YOUR ANSWER&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>次のcellを実行して回答を表示させてください</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">answer_six</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id11">
+<h3><span class="section-number">3.8.2.8. </span>課題2.7<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code>に新しいcolumnとして<code class="docutils literal notranslate"><span class="pre">year</span></code>を追加してください。<code class="docutils literal notranslate"><span class="pre">year</span></code>は受注が何年にあったかを示します。例えば<code class="docutils literal notranslate"><span class="pre">date</span></code>（受注日付）が<code class="docutils literal notranslate"><span class="pre">2015-12-1</span></code>の場合の<code class="docutils literal notranslate"><span class="pre">year</span></code>は<code class="docutils literal notranslate"><span class="pre">2015</span></code>となります。</p>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code>は<code class="docutils literal notranslate"><span class="pre">id</span></code>の降順(descending)に並び替え、columnは<code class="docutils literal notranslate"><span class="pre">[['id',</span> <span class="pre">'name','gender','date','year','laptop','fix','price']]</span></code>の順に表示されるようにしてください。</p>
+<p>回答は1つのDataFrame(10行、8列)を返します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">answer_seven</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">make_df</span><span class="p">()</span>
+    
+    <span class="o">...</span>
+    
+    <span class="k">return</span> <span class="s2">&quot;YOUR ANSWER&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>次のcellを実行して回答を表示させてください</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">answer_seven</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id12">
+<h3><span class="section-number">3.8.2.9. </span>課題2.8<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
+<p>年別の受注総額を示すSeriesを作り、年の昇順（ascending）で並び替えてください。</p>
+<p>回答は1つのSeriesを返します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">answer_eight</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">answer_six</span><span class="p">()</span>
+    
+    <span class="o">...</span>
+    
+    <span class="k">return</span> <span class="s2">&quot;YOUR ANSWER&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>次のcellを実行して回答を表示させてください</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">answer_eight</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id13">
+<h3><span class="section-number">3.8.2.10. </span>課題2.9<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
+<p>matplotlibを用いて年別の受注総額を示す棒グラフを作成し表示させてください。
+回答は一つの棒グラフを表示させます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span> <span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="k">def</span> <span class="nf">answer_nine</span><span class="p">():</span>
+    
+    <span class="o">...</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<p>次のcellを実行して回答を表示させてください</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">answer_nine</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id14">
+<h3><span class="section-number">3.8.2.11. </span>課題2.10<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<p>ユーザーに入力してもらった単語を示したDataFrame <code class="docutils literal notranslate"><span class="pre">TEXT</span></code>を考えます。
+<code class="docutils literal notranslate"><span class="pre">TEXT</span></code>のcolumn<code class="docutils literal notranslate"><span class="pre">word</span></code>のクリーニングを行って返してください。具体的には、文字列の前後の空白の消去、句読点の記号（#&#64;?!）の消去、全て単語を大文字から始まり残りは小文字になるようにしてください。なお、単語を大文字から始まり残りを小文字にするためには<code class="docutils literal notranslate"><span class="pre">title()</span></code>を使うことが出来ます。</p>
+<p>回答は一つのSeriesを返します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_TEXT</span><span class="p">():</span>
+    <span class="n">TEXT</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">),</span>
+                         <span class="s1">&#39;text&#39;</span><span class="p">:[</span><span class="s1">&#39;  America   &#39;</span><span class="p">,</span> <span class="s1">&#39;japan&#39;</span><span class="p">,</span> <span class="s1">&#39;kOrea&#39;</span><span class="p">,</span> <span class="s1">&#39;England?&#39;</span><span class="p">,</span> <span class="s1">&#39;@China&#39;</span><span class="p">,</span> <span class="s1">&#39;FrancE&#39;</span><span class="p">,</span> 
+                                 <span class="s1">&#39;germany??&#39;</span><span class="p">,</span> <span class="s1">&#39;iNdia&#39;</span><span class="p">,</span> <span class="s1">&#39;   Philipines##&#39;</span><span class="p">,</span> <span class="s1">&#39;new zealand&#39;</span><span class="p">]})</span>
+    <span class="k">return</span> <span class="n">TEXT</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ans_ten</span><span class="p">():</span>
+    
+    <span class="n">TEXT</span> <span class="o">=</span> <span class="n">make_TEXT</span><span class="p">()</span>
+    
+    <span class="o">...</span>
+    
+    <span class="k">return</span> <span class="s2">&quot;YOUR ANSWER&quot;</span>              
+</pre></div>
+</div>
+</div>
+</div>
+<p>次のcellを実行して回答を表示させてください</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans_ten</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/sec03"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="option_text_viz.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3.7. </span>参考：日本語の取り扱いと正規表現</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../sec04/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>データ分析の基礎</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.8.1. 課題1.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.8.2. 課題2.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.8.2.1. 課題2.0（回答例）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.8.2.2. 課題2.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">3.8.2.3. 課題2.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">3.8.2.4. 課題2.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.8.2.5. 課題2.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.8.2.6. 課題2.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3.8.2.7. 課題2.6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">3.8.2.8. 課題2.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">3.8.2.9. 課題2.8</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">3.8.2.10. 課題2.9</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">3.8.2.11. 課題2.10</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

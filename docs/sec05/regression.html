@@ -1,0 +1,817 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>5.2. 回帰分析 &#8212; Intro to Data Analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/sec05/regression';</script>
+    <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/docs/sec05/regression.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5.3. 重回帰分析" href="multiple_regression.html" />
+    <link rel="prev" title="5.1. 相関・散布図" href="correlation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Quantitative Data Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">環境準備とPythonの基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec01/index.html">1. Python環境の準備</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/01_build_python_environment.html">1.1. Python環境の準備</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/02_howtopip.html">1.2. 必要なパッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/03_basic_notebook.html">1.3. Notebookの基本的な使い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/04_exercise.html">1.4. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec02/index.html">2. Pythonの基本的な使い方1</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/01_basic_python1.html">2.1. 変数・算術演算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/02_basic_python2.html">2.2. 複合データ型・for/while/if文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/03_basic_python3.html">2.3. 関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/04_list_comprehension.html">2.4. set型・リスト内包表記</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/05_string.html">2.5. 文字列を扱うときの注意点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/06_exercise.html">2.6. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec03/index.html">3. Pythonの基本的な使い方2</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/numpy.html">3.1. Pythonのライブラリ・パッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas1.html">3.2. pandas 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas2.html">3.3. pandas 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/read_write.html">3.4. ファイルの読み書き</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas_datetime.html">3.5. pandasを用いた日時データの扱い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/matplotlib.html">3.6. matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/option_text_viz.html">3.7. 参考：日本語の取り扱いと正規表現</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/exercise.html">3.8. 課題</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">データ分析の基礎</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec04/index.html">4. データ分析の基礎</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/01_basic_stats1.html">4.1. 平均値・中央値・最頻値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/02_basic_stats2.html">4.2. 頻度分布・偏差・分散</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/03_basic_stats3.html">4.3. 基本統計量の確認方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/04_stats_test.html">4.4. 仮説検定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/05_exercise.html">4.5. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">5. 相関・回帰・重回帰分析</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="correlation.html">5.1. 相関・散布図</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">5.2. 回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiple_regression.html">5.3. 重回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="regression_tips.html">5.4. 非線形・交差項・二乗項</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec06/index.html">6. 離散選択モデル</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/logit_provit.html">6.1. 離散選択モデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/ordered_loigt.html">6.2. 順序ロジットモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/multinomial_logit.html">6.3. 多項ロジットモデル</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec07/index.html">7. パネルデータ分析</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec07/paneldata.html">7.1. パネルデータ分析</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec08/index.html">8. 機械学習</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/supervised_learning.html">8.1. 機械学習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/unsupervised_learning.html">8.2. 教師なし学習</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">演習</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../option/index.html">9. 演習</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../option/COVID19mobility.html">9.1. COVID-19による人流の変化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/yfinance.html">9.2. Yahoo! FINANCEのデータを用いた可視化の演習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/exercise.html">9.3. 課題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_clean_data.html">9.4. 演習・交通手段分類（データ準備）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_feature_extraction.html">9.5. 演習・交通手段分類（データの特徴をつかむ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_machine_learning.html">9.6. 演習・交通手段分類（機械学習）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/twitter.html">9.7. 演習・Twitterのテキスト分類問題</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/iiimethodsiv/intro2quandataanalysis/blob/gh-pages/docs/sec05/regression.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis/issues/new?title=Issue%20on%20page%20%2Fdocs/sec05/regression.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/sec05/regression.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>回帰分析</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">5.2.1. 単回帰分析</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">5.2. </span>回帰分析<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2><span class="section-number">5.2.1. </span>単回帰分析<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>ここではまず、説明変数が１つの単回帰（Simple Regression）を考えます。</p>
+<p><span class="math notranslate nohighlight">\(y_i = \beta_0+\beta_1x_i+\epsilon_i\)</span></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y_i\)</span>： 被説明変数（explained variable）, 従属変数（dependent variable）,アウトカム（outcome variable）など</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>： 説明変数（explanatory variable）, 独立変数（independent variable）など</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon_i\)</span>： 誤差項（erros, error terms) 平均はゼロと仮定</p></li>
+<li><p><span class="math notranslate nohighlight">\(i\)</span>： 観測値のインデックス</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_0\)</span>：定数項、切片パラメター</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_1\)</span>：係数パラメター、傾きパラメター</p></li>
+</ul>
+<p>最小二乗法推定法（Ordinary Least Squares; OLS）やモーメント法、最尤法などで推定できます。</p>
+<p>最小二乗法の場合は、</p>
+<p><span class="math notranslate nohighlight">\(\sum_{i=1}^{n}(y_i-\beta_0-\beta_1x_i)^2\)</span> を最小化する<span class="math notranslate nohighlight">\(\beta_0\)</span>, <span class="math notranslate nohighlight">\(\beta_1\)</span>を求めます</p>
+<p>推定した係数<span class="math notranslate nohighlight">\(\beta_1\)</span>は被説明変数<span class="math notranslate nohighlight">\(y_i\)</span>に対する説明変数<span class="math notranslate nohighlight">\(x_i\)</span>の影響度合いを表す<strong>限界効果</strong>、あるいは説明変数が１単位変化した場合の被説明変数の変化（<span class="math notranslate nohighlight">\(\frac{\delta y_i}{\delta x_i}\)</span>）と解釈することができます。</p>
+<p>ここでは<code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> を用いて単回帰分析を行います。</p>
+<p><code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>は線形回帰、一般化線形モデル、制限付き従属変数モデル、ARIMA、VARモデルなどをカバーするパッケージです。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>回帰分析で用いるデータを読み込みます。</p>
+<p>ここでは、<code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>に付属する<code class="docutils literal notranslate"><span class="pre">statecrime</span></code>というデータセットの1つで、1996年<code class="docutils literal notranslate"><span class="pre">American</span> <span class="pre">National</span> <span class="pre">Elections</span> <span class="pre">Study</span></code>のデータを用いて回帰分析を行います。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">statecrime</span><span class="o">.</span><span class="n">load_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dataの最初の2行を表示</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>violent</th>
+      <th>murder</th>
+      <th>hs_grad</th>
+      <th>poverty</th>
+      <th>single</th>
+      <th>white</th>
+      <th>urban</th>
+    </tr>
+    <tr>
+      <th>state</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Alabama</th>
+      <td>459.9</td>
+      <td>7.1</td>
+      <td>82.1</td>
+      <td>17.5</td>
+      <td>29.0</td>
+      <td>70.0</td>
+      <td>48.65</td>
+    </tr>
+    <tr>
+      <th>Alaska</th>
+      <td>632.6</td>
+      <td>3.2</td>
+      <td>91.4</td>
+      <td>9.0</td>
+      <td>25.5</td>
+      <td>68.3</td>
+      <td>44.46</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>このデータは以下のデータを格納しています</p>
+<ul class="simple">
+<li><p>state: 州の名前</p></li>
+<li><p>violent: 暴力犯罪発生率／人口10万人。殺人を含む</p></li>
+<li><p>murder: 殺人事件の発生率／人口10万人</p></li>
+<li><p>hs_grad: 高等学校以上を卒業した人口の割合</p></li>
+<li><p>poverty: 貧困線以下の人口の割合</p></li>
+<li><p>white: 白人のみの人口の割合</p></li>
+<li><p>single: 片親のいる家族世帯の割合</p></li>
+<li><p>urban: 市街化区域に住む人口の割合</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">murder</span></code> 殺人事件の発生率を被説明変数(<span class="math notranslate nohighlight">\(y_i\)</span>)、<code class="docutils literal notranslate"><span class="pre">poverty</span></code>貧困人口の割合を説明変数(<span class="math notranslate nohighlight">\(x_i\)</span>)とした単回帰分析を行います。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mod</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s1">&#39;murder ~ poverty&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                 murder   R-squared:                       0.294
+Model:                            OLS   Adj. R-squared:                  0.279
+Method:                 Least Squares   F-statistic:                     20.36
+Date:                Sun, 11 Jun 2023   Prob (F-statistic):           4.03e-05
+Time:                        07:35:54   Log-Likelihood:                -128.98
+No. Observations:                  51   AIC:                             262.0
+Df Residuals:                      49   BIC:                             265.8
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     -3.8989      1.998     -1.952      0.057      -7.913       0.115
+poverty        0.6351      0.141      4.512      0.000       0.352       0.918
+==============================================================================
+Omnibus:                       63.810   Durbin-Watson:                   2.087
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              533.355
+Skew:                           3.237   Prob(JB):                    1.53e-116
+Kurtosis:                      17.459   Cond. No.                         65.7
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>** その他の結果の表の読み方は<a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.html">このページ</a>を参照してください。</p>
+<p><span class="math notranslate nohighlight">\(\beta_0\)</span>の推計値は<code class="docutils literal notranslate"><span class="pre">intercept</span></code>行、<code class="docutils literal notranslate"><span class="pre">coef</span></code>列の値<code class="docutils literal notranslate"><span class="pre">-3.8989</span></code>です。
+<span class="math notranslate nohighlight">\(\beta_1\)</span>の推計値は<code class="docutils literal notranslate"><span class="pre">poverty</span></code>行、<code class="docutils literal notranslate"><span class="pre">coef</span></code>列の値<code class="docutils literal notranslate"><span class="pre">0.6351</span></code>です。
+すなわち、<span class="math notranslate nohighlight">\(\beta_1\)</span>は貧困人口の割合が1ポイント高い場合、殺人事件発生率は何ポイント変化するかを示しています。
+今回の単回帰分析推定結果からは貧困人口の割合が1ポイント高い場合、殺人事件発生率は約0.6ポイント高いことを示しています。</p>
+<p>また、回帰モデルの当てはまりの良さは自由度調整済決定係数<code class="docutils literal notranslate"><span class="pre">Adj.</span> <span class="pre">R-squared</span></code>で確認できます。
+0から1までの間の値で、値が大きいほど回帰直線がデータをうまく説明できている（フィットしている）ことになります。</p>
+<p>回帰分析の結果を図で確認します。</p>
+<p><span class="math notranslate nohighlight">\(\hat{y}\)</span>予測値を取得し、その上で回帰直線を示します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;murder&#39;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;poverty&#39;</span><span class="p">]</span>
+<span class="n">y_hat</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">fittedvalues</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span> <span class="mf">.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Poverty&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Murder&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/07ad75d29cbe7a4bbbdf1fd3f619bb49da9be69f9f040cd358b3941144c8e287.png" src="../../_images/07ad75d29cbe7a4bbbdf1fd3f619bb49da9be69f9f040cd358b3941144c8e287.png" />
+</div>
+</div>
+<p>最小二乗法のイメージを図で掴んでみます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
+    <span class="n">dot_fitted_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+    <span class="n">dot_org_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y_hat</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dot_fitted_values</span><span class="p">,</span> <span class="n">dot_org_values</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> 
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span> <span class="mf">.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Poverty&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Murder&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\hat Y = </span><span class="si">{:.2f}</span><span class="s1">+</span><span class="si">{:.2f}</span><span class="s1">X$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a2fe7de6bc6e195e829dbf06d062bfd8414f6527e9b509b3882fe01d5b5d6c4d.png" src="../../_images/a2fe7de6bc6e195e829dbf06d062bfd8414f6527e9b509b3882fe01d5b5d6c4d.png" />
+</div>
+</div>
+<p>上の図で灰色のプロットは観測値で、赤い実線は推定した回帰線です。</p>
+<p>灰色の波線は<span class="math notranslate nohighlight">\(y_i\)</span>と<span class="math notranslate nohighlight">\(\hat{y_i}\)</span>の差、残差(residual)<span class="math notranslate nohighlight">\(\epsilon_i\)</span>を示します。</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_i = Y_i - \hat{Y-i} = Y_i - \hat{\beta_1} - \hat{\beta_2}X_i\]</div>
+<p>最小二乗法ではRSS(residual sum of squares)<span class="math notranslate nohighlight">\(RSS=\sum_{i=1}^n\epsilon_i^2\)</span>を最小化する<span class="math notranslate nohighlight">\(\beta_1\)</span>と<span class="math notranslate nohighlight">\(\beta_2\)</span>を推定します。</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/sec05"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="correlation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5.1. </span>相関・散布図</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="multiple_regression.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5.3. </span>重回帰分析</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">5.2.1. 単回帰分析</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1519 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>9.1. COVID-19による人流の変化 &#8212; Intro to Data Analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/option/COVID19mobility';</script>
+    <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/docs/option/COVID19mobility.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.2. Yahoo! FINANCEのデータを用いた可視化の演習" href="yfinance.html" />
+    <link rel="prev" title="9. 演習" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Quantitative Data Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">環境準備とPythonの基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec01/index.html">1. Python環境の準備</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/01_build_python_environment.html">1.1. Python環境の準備</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/02_howtopip.html">1.2. 必要なパッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/03_basic_notebook.html">1.3. Notebookの基本的な使い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/04_exercise.html">1.4. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec02/index.html">2. Pythonの基本的な使い方1</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/01_basic_python1.html">2.1. 変数・算術演算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/02_basic_python2.html">2.2. 複合データ型・for/while/if文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/03_basic_python3.html">2.3. 関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/04_list_comprehension.html">2.4. set型・リスト内包表記</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/05_string.html">2.5. 文字列を扱うときの注意点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/06_exercise.html">2.6. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec03/index.html">3. Pythonの基本的な使い方2</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/numpy.html">3.1. Pythonのライブラリ・パッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas1.html">3.2. pandas 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas2.html">3.3. pandas 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/read_write.html">3.4. ファイルの読み書き</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas_datetime.html">3.5. pandasを用いた日時データの扱い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/matplotlib.html">3.6. matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/option_text_viz.html">3.7. 参考：日本語の取り扱いと正規表現</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/exercise.html">3.8. 課題</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">データ分析の基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec04/index.html">4. データ分析の基礎</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/01_basic_stats1.html">4.1. 平均値・中央値・最頻値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/02_basic_stats2.html">4.2. 頻度分布・偏差・分散</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/03_basic_stats3.html">4.3. 基本統計量の確認方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/04_stats_test.html">4.4. 仮説検定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/05_exercise.html">4.5. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec05/index.html">5. 相関・回帰・重回帰分析</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/correlation.html">5.1. 相関・散布図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/regression.html">5.2. 回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/multiple_regression.html">5.3. 重回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/regression_tips.html">5.4. 非線形・交差項・二乗項</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec06/index.html">6. 離散選択モデル</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/logit_provit.html">6.1. 離散選択モデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/ordered_loigt.html">6.2. 順序ロジットモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/multinomial_logit.html">6.3. 多項ロジットモデル</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec07/index.html">7. パネルデータ分析</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec07/paneldata.html">7.1. パネルデータ分析</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec08/index.html">8. 機械学習</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/supervised_learning.html">8.1. 機械学習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/unsupervised_learning.html">8.2. 教師なし学習</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">演習</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">9. 演習</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">9.1. COVID-19による人流の変化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yfinance.html">9.2. Yahoo! FINANCEのデータを用いた可視化の演習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercise.html">9.3. 課題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gps_clean_data.html">9.4. 演習・交通手段分類（データ準備）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gps_feature_extraction.html">9.5. 演習・交通手段分類（データの特徴をつかむ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gps_machine_learning.html">9.6. 演習・交通手段分類（機械学習）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twitter.html">9.7. 演習・Twitterのテキスト分類問題</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/iiimethodsiv/intro2quandataanalysis/blob/gh-pages/docs/option/COVID19mobility.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis/issues/new?title=Issue%20on%20page%20%2Fdocs/option/COVID19mobility.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/option/COVID19mobility.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>COVID-19による人流の変化</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">9.1.1. 2020年日本国内のモビリティトレンドの把握</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.1.1.1. 全国のモビリティの経時変化をプロットしてみましょう</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.1.2. 地図上に落とし込んでみましょう</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">9.1.2.1. 都道府県レベルでの1ヶ月の平均値モビリティトレンドをプロット</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">9.1.2.2. 境界データのダウンロードと作成</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">9.1.3. 東京都の日次モビリティトレンドのプロット</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mobility">9.1.4. 2020年6月の世界のMobilityの変化率</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="covid-19">
+<h1><span class="section-number">9.1. </span>COVID-19による人流の変化<a class="headerlink" href="#covid-19" title="Permalink to this heading">#</a></h1>
+<p>Googleが公開しているコミュニティモビリティレポートのデータを用いてテーブルデータの基本的な統計情報を可視化してみましょう。</p>
+<p>Google LLC “Google COVID-19 Community Mobility Reports”.
+<a class="reference external" href="https://www.google.com/covid19/mobility/">https://www.google.com/covid19/mobility/</a> Accessed: July-19, 2020.</p>
+<p>このデータは、さまざまな場所における訪問数と滞在時間が、基準値と比較してどのように変化しているかを示しています。
+カテゴリは、次の6つに分かれています。</p>
+<ol class="arabic simple">
+<li><p>食料品店、薬局（食料品店、食品問屋、青果市場、高級食料品店、ドラッグストア、薬局など）</p></li>
+<li><p>公園（地域の公園、国立公園、公共のビーチ、マリーナ、ドッグパーク、広場、庭園など）</p></li>
+<li><p>乗換駅（公共交通機関の拠点（例: 地下鉄、バス、電車の駅）など）</p></li>
+<li><p>小売、娯楽（レストラン、カフェ、ショッピング センター、テーマパーク、博物館、図書館、映画館など）</p></li>
+<li><p>住宅</p></li>
+<li><p>職場</p></li>
+</ol>
+<p>基準値は、2020 年 1 月 3 日～2 月 6 日の 5 週間における該当曜日の中央値になります。</p>
+<p>データの詳細は、<a class="reference external" href="https://www.google.com/covid19/mobility/data_documentation.html">https://www.google.com/covid19/mobility/data_documentation.html</a> からご確認ください</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="kn">import</span> <span class="n">make_axes_locatable</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pycountry</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_18058/3738925007.py:1: DtypeWarning: Columns (3,4,5) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(&#39;https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;country_region_code&#39;, &#39;country_region&#39;, &#39;sub_region_1&#39;, &#39;sub_region_2&#39;,
+       &#39;metro_area&#39;, &#39;iso_3166_2_code&#39;, &#39;census_fips_code&#39;, &#39;place_id&#39;, &#39;date&#39;,
+       &#39;retail_and_recreation_percent_change_from_baseline&#39;,
+       &#39;grocery_and_pharmacy_percent_change_from_baseline&#39;,
+       &#39;parks_percent_change_from_baseline&#39;,
+       &#39;transit_stations_percent_change_from_baseline&#39;,
+       &#39;workplaces_percent_change_from_baseline&#39;,
+       &#39;residential_percent_change_from_baseline&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>まずは、<code class="docutils literal notranslate"><span class="pre">date</span></code>列をpandasの<code class="docutils literal notranslate"><span class="pre">datetime</span></code>型に変換します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_18058/4147283073.py:1: DeprecationWarning: In a future version, `df.iloc[:, i] = newvals` will attempt to set the values inplace instead of always setting a new array. To retain the old behavior, use either `df[df.columns[i]] = newvals` or, if columns are non-unique, `df.isetitem(i, newvals)`
+  df.loc[:, &#39;date&#39;] = pd.to_datetime(df[&#39;date&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_18058/801468514.py:1: FutureWarning: Treating datetime data as categorical rather than numeric in `.describe` is deprecated and will be removed in a future version of pandas. Specify `datetime_is_numeric=True` to silence this warning and adopt the future behavior now.
+  df[&#39;date&#39;].describe()
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count                11730025
+unique                    974
+top       2020-11-25 00:00:00
+freq                    13144
+first     2020-02-15 00:00:00
+last      2022-10-15 00:00:00
+Name: date, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id1">
+<h2><span class="section-number">9.1.1. </span>2020年日本国内のモビリティトレンドの把握<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>国内のデータのみを抽出して、新たなdataframe<code class="docutils literal notranslate"><span class="pre">JP</span></code>に格納します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">JP</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;country_region_code&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;JP&#39;</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># `sub_region_1`という列に都道府県名が入っています。</span>
+<span class="n">JP</span><span class="p">[</span><span class="s1">&#39;sub_region_1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([nan, &#39;Aichi&#39;, &#39;Akita&#39;, &#39;Aomori&#39;, &#39;Chiba&#39;, &#39;Ehime&#39;, &#39;Fukui&#39;,
+       &#39;Fukuoka&#39;, &#39;Fukushima&#39;, &#39;Gifu&#39;, &#39;Gunma&#39;, &#39;Hiroshima&#39;, &#39;Hokkaido&#39;,
+       &#39;Hyogo&#39;, &#39;Ibaraki&#39;, &#39;Ishikawa&#39;, &#39;Iwate&#39;, &#39;Kagawa&#39;, &#39;Kagoshima&#39;,
+       &#39;Kanagawa&#39;, &#39;Kochi&#39;, &#39;Kumamoto&#39;, &#39;Kyoto&#39;, &#39;Mie&#39;, &#39;Miyagi&#39;,
+       &#39;Miyazaki&#39;, &#39;Nagano&#39;, &#39;Nagasaki&#39;, &#39;Nara&#39;, &#39;Niigata&#39;, &#39;Oita&#39;,
+       &#39;Okayama&#39;, &#39;Okinawa&#39;, &#39;Osaka&#39;, &#39;Saga&#39;, &#39;Saitama&#39;, &#39;Shiga&#39;,
+       &#39;Shimane&#39;, &#39;Shizuoka&#39;, &#39;Tochigi&#39;, &#39;Tokushima&#39;, &#39;Tokyo&#39;, &#39;Tottori&#39;,
+       &#39;Toyama&#39;, &#39;Wakayama&#39;, &#39;Yamagata&#39;, &#39;Yamaguchi&#39;, &#39;Yamanashi&#39;],
+      dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 都道府県ごとに何日分のデータが入っているか確認してみましょう。</span>
+
+<span class="n">JP</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;sub_region_1&#39;</span><span class="p">])[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sub_region_1
+Aichi        974
+Akita        974
+Aomori       974
+Chiba        974
+Ehime        974
+Fukui        974
+Fukuoka      974
+Fukushima    974
+Gifu         974
+Gunma        974
+Hiroshima    974
+Hokkaido     974
+Hyogo        974
+Ibaraki      974
+Ishikawa     974
+Iwate        974
+Kagawa       974
+Kagoshima    974
+Kanagawa     974
+Kochi        974
+Kumamoto     974
+Kyoto        974
+Mie          974
+Miyagi       974
+Miyazaki     974
+Nagano       974
+Nagasaki     974
+Nara         974
+Niigata      974
+Oita         974
+Okayama      974
+Okinawa      974
+Osaka        974
+Saga         974
+Saitama      974
+Shiga        974
+Shimane      974
+Shizuoka     974
+Tochigi      974
+Tokushima    974
+Tokyo        974
+Tottori      974
+Toyama       974
+Wakayama     974
+Yamagata     974
+Yamaguchi    974
+Yamanashi    974
+Name: date, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># その他の基本統計量を確認します。</span>
+<span class="n">JP</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>census_fips_code</th>
+      <th>retail_and_recreation_percent_change_from_baseline</th>
+      <th>grocery_and_pharmacy_percent_change_from_baseline</th>
+      <th>parks_percent_change_from_baseline</th>
+      <th>transit_stations_percent_change_from_baseline</th>
+      <th>workplaces_percent_change_from_baseline</th>
+      <th>residential_percent_change_from_baseline</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>0.0</td>
+      <td>46752.000000</td>
+      <td>46752.000000</td>
+      <td>46383.000000</td>
+      <td>46737.000000</td>
+      <td>46752.000000</td>
+      <td>46752.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>NaN</td>
+      <td>-7.530437</td>
+      <td>3.120679</td>
+      <td>0.873251</td>
+      <td>-18.002182</td>
+      <td>-10.894379</td>
+      <td>5.626519</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>NaN</td>
+      <td>11.098131</td>
+      <td>7.146974</td>
+      <td>28.214259</td>
+      <td>15.936060</td>
+      <td>13.672080</td>
+      <td>4.282314</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>NaN</td>
+      <td>-89.000000</td>
+      <td>-82.000000</td>
+      <td>-84.000000</td>
+      <td>-92.000000</td>
+      <td>-88.000000</td>
+      <td>-4.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>NaN</td>
+      <td>-13.000000</td>
+      <td>-1.000000</td>
+      <td>-16.000000</td>
+      <td>-27.000000</td>
+      <td>-11.000000</td>
+      <td>3.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>NaN</td>
+      <td>-7.000000</td>
+      <td>3.000000</td>
+      <td>-2.000000</td>
+      <td>-18.000000</td>
+      <td>-7.000000</td>
+      <td>4.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>NaN</td>
+      <td>-2.000000</td>
+      <td>7.000000</td>
+      <td>14.000000</td>
+      <td>-10.000000</td>
+      <td>-4.000000</td>
+      <td>7.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>NaN</td>
+      <td>66.000000</td>
+      <td>60.000000</td>
+      <td>303.000000</td>
+      <td>128.000000</td>
+      <td>17.000000</td>
+      <td>37.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ヒストグラムで図示するデータの列名をリストに格納します。</span>
+<span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;retail_and_recreation_percent_change_from_baseline&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;grocery_and_pharmacy_percent_change_from_baseline&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;parks_percent_change_from_baseline&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;transit_stations_percent_change_from_baseline&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;workplaces_percent_change_from_baseline&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;residential_percent_change_from_baseline&#39;</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">axs</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">target_columns</span><span class="p">):</span>
+    <span class="n">df_fig</span> <span class="o">=</span> <span class="n">JP</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">df_fig</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.3</span><span class="p">)</span>
+    <span class="c1"># 0（基準値）を明示するために、垂直方向の直線を`vlines`を使って引きます</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="mi">30000</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">column</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">))</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;percent change from baseline&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/71f0bc6ab3d455c2e764a979fa0d154c8c880562e25d24cc43a6725a75d5f3e0.png" src="../../_images/71f0bc6ab3d455c2e764a979fa0d154c8c880562e25d24cc43a6725a75d5f3e0.png" />
+</div>
+</div>
+<section id="id2">
+<h3><span class="section-number">9.1.1.1. </span>全国のモビリティの経時変化をプロットしてみましょう<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_all_japan_mobility</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">JP</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+    <span class="c1"># plot only data from 2020-2-15 to 2021</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="s1">&#39;2021-01-01&#39;</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="n">x</span><span class="p">]),</span> <span class="n">column</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()]</span>
+    <span class="c1"># plt.hlines(0, xmin=-1, xmax=df[&#39;date&#39;].nunique(), color = &#39;red&#39;)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> 
+                <span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">unique</span><span class="p">()),</span>
+                <span class="n">showmeans</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">column</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;BoxPlot of </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">title</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;pct change&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">locs</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">()</span>
+    <span class="c1"># only show weekly xtick labels</span>
+    <span class="n">xtick_labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels</span><span class="p">)]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">ticks</span><span class="o">=</span><span class="n">locs</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">xtick_labels</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span> 
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;fig_</span><span class="si">{}</span><span class="s1">.jpg&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">column</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">target_columns</span><span class="p">:</span>
+    <span class="n">plot_all_japan_mobility</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/09bdc457b0d3c55a31d73cd0812dd73027031e6aa9f22d48c135d08860d0e81b.png" src="../../_images/09bdc457b0d3c55a31d73cd0812dd73027031e6aa9f22d48c135d08860d0e81b.png" />
+<img alt="../../_images/26d8337e7ec94e34854a41f1eb9151f56c7bec3c53417f84f88114d5b398718f.png" src="../../_images/26d8337e7ec94e34854a41f1eb9151f56c7bec3c53417f84f88114d5b398718f.png" />
+<img alt="../../_images/4ec6854e417582652b9e1c078c98e4cb71aeebc6c5006068b29d35e4b0774698.png" src="../../_images/4ec6854e417582652b9e1c078c98e4cb71aeebc6c5006068b29d35e4b0774698.png" />
+<img alt="../../_images/b90db2ce09ab68679359f071f5b7a14dda5139032323e9cb1f11d617611a83b7.png" src="../../_images/b90db2ce09ab68679359f071f5b7a14dda5139032323e9cb1f11d617611a83b7.png" />
+<img alt="../../_images/cdc91f759dd824a0a8927e20bba7897c14389b53048964d5eda2d46db59ff5b3.png" src="../../_images/cdc91f759dd824a0a8927e20bba7897c14389b53048964d5eda2d46db59ff5b3.png" />
+<img alt="../../_images/95a0460e656ecfafb2e35d9720295942c3697a9ea89efde1092e10283141c793.png" src="../../_images/95a0460e656ecfafb2e35d9720295942c3697a9ea89efde1092e10283141c793.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="id3">
+<h2><span class="section-number">9.1.2. </span>地図上に落とし込んでみましょう<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<section id="id4">
+<h3><span class="section-number">9.1.2.1. </span>都道府県レベルでの1ヶ月の平均値モビリティトレンドをプロット<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>日本国内の都道府県レベルでのモビリティトレンドを地図上に表示します。
+ここでは、2020年月6月のデータを用いて地図を作成します。
+まずは、2020年6月の日本のデータを抽出します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">JPjune</span> <span class="o">=</span> <span class="n">JP</span><span class="p">[(</span><span class="n">JP</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">&gt;=</span><span class="s1">&#39;2020-06-01&#39;</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">JP</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="s1">&#39;2020-06-30&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 都道府県ごとの１ヶ月のモビリティトレンドの平均値を抽出します。</span>
+<span class="n">JPjune_mobility_mean</span> <span class="o">=</span> <span class="n">JPjune</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;sub_region_1&#39;</span><span class="p">)[</span><span class="n">target_columns</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">JPjune_mobility_mean</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>retail_and_recreation_percent_change_from_baseline</th>
+      <th>grocery_and_pharmacy_percent_change_from_baseline</th>
+      <th>parks_percent_change_from_baseline</th>
+      <th>transit_stations_percent_change_from_baseline</th>
+      <th>workplaces_percent_change_from_baseline</th>
+      <th>residential_percent_change_from_baseline</th>
+    </tr>
+    <tr>
+      <th>sub_region_1</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Gifu</th>
+      <td>-8.366667</td>
+      <td>1.100000</td>
+      <td>-14.633333</td>
+      <td>-19.600000</td>
+      <td>-10.466667</td>
+      <td>6.033333</td>
+    </tr>
+    <tr>
+      <th>Niigata</th>
+      <td>-2.833333</td>
+      <td>4.033333</td>
+      <td>22.633333</td>
+      <td>-21.433333</td>
+      <td>-7.733333</td>
+      <td>3.866667</td>
+    </tr>
+    <tr>
+      <th>Nara</th>
+      <td>-8.866667</td>
+      <td>2.133333</td>
+      <td>-10.166667</td>
+      <td>-19.233333</td>
+      <td>-10.633333</td>
+      <td>5.466667</td>
+    </tr>
+    <tr>
+      <th>Ehime</th>
+      <td>-7.533333</td>
+      <td>0.600000</td>
+      <td>0.533333</td>
+      <td>-23.333333</td>
+      <td>-6.666667</td>
+      <td>4.600000</td>
+    </tr>
+    <tr>
+      <th>Tochigi</th>
+      <td>-7.800000</td>
+      <td>-0.700000</td>
+      <td>-1.400000</td>
+      <td>-23.200000</td>
+      <td>-9.400000</td>
+      <td>5.966667</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id5">
+<h3><span class="section-number">9.1.2.2. </span>境界データのダウンロードと作成<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>続いて、地図として表示するための準備として、都道府県の境界データをダウンロードします。</p>
+<p><strong>国土数値情報行政区域データ（全国, 世界測地系）を任意の場所へダウンロードして、解凍してください。</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 次の1行のパスは、国土数値情報行政区域データをダウンロードした任意の場所に書き換えてください</span>
+<span class="c1"># path_to_boundary_data = &#39;../assets/data/N03-20220101_GML/N03-22_220101.shp&#39;</span>
+<span class="n">path_to_boundary_data</span> <span class="o">=</span> <span class="s1">&#39;~/Downloads/N03-20220101_GML/N03-22_220101.shp&#39;</span>
+<span class="n">jpn_shp</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">path_to_boundary_data</span><span class="p">)</span>
+<span class="c1"># 行政区域データは都道府県レベルの境界以外も含まれているため、今回は都道府県レベルの境界データのみを抽出します</span>
+<span class="n">prf_shp</span> <span class="o">=</span> <span class="n">jpn_shp</span><span class="p">[(</span><span class="n">jpn_shp</span><span class="p">[</span><span class="s1">&#39;N03_001&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">())</span><span class="o">&amp;</span>
+                  <span class="p">(</span><span class="n">jpn_shp</span><span class="p">[</span><span class="s1">&#39;N03_002&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span><span class="o">&amp;</span>
+                  <span class="p">(</span><span class="n">jpn_shp</span><span class="p">[</span><span class="s1">&#39;N03_003&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span><span class="o">&amp;</span>
+                  <span class="p">(</span><span class="n">jpn_shp</span><span class="p">[</span><span class="s1">&#39;N03_004&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span><span class="o">&amp;</span>
+                  <span class="p">(</span><span class="n">jpn_shp</span><span class="p">[</span><span class="s1">&#39;N03_007&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">())]</span>
+
+<span class="n">prf_shp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>N03_001</th>
+      <th>N03_002</th>
+      <th>N03_003</th>
+      <th>N03_004</th>
+      <th>N03_007</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>北海道</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>MULTIPOLYGON (((139.79936 41.35187, 139.79940 ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>青森県</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>MULTIPOLYGON (((139.93600 40.42836, 139.93587 ...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># `prf_shp`の`N03_001`にある都道府県名を英語名に変換し`pref_en`というあたらしい列に入れます</span>
+<span class="n">prf_ja2en</span> <span class="o">=</span><span class="p">{</span>
+    <span class="s1">&#39;北海道&#39;</span><span class="p">:</span> <span class="s1">&#39;Hokkaido&#39;</span><span class="p">,</span> <span class="s1">&#39;青森県&#39;</span><span class="p">:</span> <span class="s1">&#39;Aomori&#39;</span><span class="p">,</span> <span class="s1">&#39;岩手県&#39;</span><span class="p">:</span> <span class="s1">&#39;Iwate&#39;</span><span class="p">,</span> <span class="s1">&#39;宮城県&#39;</span><span class="p">:</span> <span class="s1">&#39;Miyagi&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;秋田県&#39;</span><span class="p">:</span> <span class="s1">&#39;Akita&#39;</span><span class="p">,</span> <span class="s1">&#39;山形県&#39;</span><span class="p">:</span> <span class="s1">&#39;Yamagata&#39;</span><span class="p">,</span> <span class="s1">&#39;福島県&#39;</span><span class="p">:</span> <span class="s1">&#39;Fukushima&#39;</span><span class="p">,</span> <span class="s1">&#39;茨城県&#39;</span><span class="p">:</span> <span class="s1">&#39;Ibaraki&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;栃木県&#39;</span><span class="p">:</span> <span class="s1">&#39;Tochigi&#39;</span><span class="p">,</span> <span class="s1">&#39;群馬県&#39;</span><span class="p">:</span> <span class="s1">&#39;Gunma&#39;</span><span class="p">,</span> <span class="s1">&#39;埼玉県&#39;</span><span class="p">:</span> <span class="s1">&#39;Saitama&#39;</span><span class="p">,</span> <span class="s1">&#39;千葉県&#39;</span><span class="p">:</span> <span class="s1">&#39;Chiba&#39;</span><span class="p">,</span><span class="s1">&#39;東京都&#39;</span><span class="p">:</span> <span class="s1">&#39;Tokyo&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;神奈川県&#39;</span><span class="p">:</span> <span class="s1">&#39;Kanagawa&#39;</span><span class="p">,</span> <span class="s1">&#39;新潟県&#39;</span><span class="p">:</span> <span class="s1">&#39;Niigata&#39;</span><span class="p">,</span> <span class="s1">&#39;富山県&#39;</span><span class="p">:</span> <span class="s1">&#39;Toyama&#39;</span><span class="p">,</span> <span class="s1">&#39;石川県&#39;</span><span class="p">:</span> <span class="s1">&#39;Ishikawa&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;福井県&#39;</span><span class="p">:</span> <span class="s1">&#39;Fukui&#39;</span><span class="p">,</span> <span class="s1">&#39;山梨県&#39;</span><span class="p">:</span> <span class="s1">&#39;Yamanashi&#39;</span><span class="p">,</span> <span class="s1">&#39;長野県&#39;</span><span class="p">:</span> <span class="s1">&#39;Nagano&#39;</span><span class="p">,</span> <span class="s1">&#39;岐阜県&#39;</span><span class="p">:</span> <span class="s1">&#39;Gifu&#39;</span><span class="p">,</span> <span class="s1">&#39;静岡県&#39;</span><span class="p">:</span> <span class="s1">&#39;Shizuoka&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;愛知県&#39;</span><span class="p">:</span> <span class="s1">&#39;Aichi&#39;</span><span class="p">,</span> <span class="s1">&#39;三重県&#39;</span><span class="p">:</span> <span class="s1">&#39;Mie&#39;</span><span class="p">,</span> <span class="s1">&#39;滋賀県&#39;</span><span class="p">:</span> <span class="s1">&#39;Shiga&#39;</span><span class="p">,</span> <span class="s1">&#39;京都府&#39;</span><span class="p">:</span> <span class="s1">&#39;Kyoto&#39;</span><span class="p">,</span> <span class="s1">&#39;大阪府&#39;</span><span class="p">:</span> <span class="s1">&#39;Osaka&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;兵庫県&#39;</span><span class="p">:</span> <span class="s1">&#39;Hyogo&#39;</span><span class="p">,</span> <span class="s1">&#39;奈良県&#39;</span><span class="p">:</span> <span class="s1">&#39;Nara&#39;</span><span class="p">,</span> <span class="s1">&#39;和歌山県&#39;</span><span class="p">:</span> <span class="s1">&#39;Wakayama&#39;</span><span class="p">,</span> <span class="s1">&#39;鳥取県&#39;</span><span class="p">:</span> <span class="s1">&#39;Tottori&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;島根県&#39;</span><span class="p">:</span> <span class="s1">&#39;Shimane&#39;</span><span class="p">,</span> <span class="s1">&#39;岡山県&#39;</span><span class="p">:</span> <span class="s1">&#39;Okayama&#39;</span><span class="p">,</span> <span class="s1">&#39;広島県&#39;</span><span class="p">:</span> <span class="s1">&#39;Hiroshima&#39;</span><span class="p">,</span> <span class="s1">&#39;山口県&#39;</span><span class="p">:</span> <span class="s1">&#39;Yamaguchi&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;徳島県&#39;</span><span class="p">:</span> <span class="s1">&#39;Tokushima&#39;</span><span class="p">,</span> <span class="s1">&#39;香川県&#39;</span><span class="p">:</span> <span class="s1">&#39;Kagawa&#39;</span><span class="p">,</span> <span class="s1">&#39;愛媛県&#39;</span><span class="p">:</span> <span class="s1">&#39;Ehime&#39;</span><span class="p">,</span> <span class="s1">&#39;高知県&#39;</span><span class="p">:</span> <span class="s1">&#39;Kochi&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;福岡県&#39;</span><span class="p">:</span> <span class="s1">&#39;Fukuoka&#39;</span><span class="p">,</span> <span class="s1">&#39;佐賀県&#39;</span><span class="p">:</span> <span class="s1">&#39;Saga&#39;</span><span class="p">,</span> <span class="s1">&#39;長崎県&#39;</span><span class="p">:</span> <span class="s1">&#39;Nagasaki&#39;</span><span class="p">,</span> <span class="s1">&#39;熊本県&#39;</span><span class="p">:</span> <span class="s1">&#39;Kumamoto&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;大分県&#39;</span><span class="p">:</span> <span class="s1">&#39;Oita&#39;</span><span class="p">,</span> <span class="s1">&#39;宮崎県&#39;</span><span class="p">:</span> <span class="s1">&#39;Miyazaki&#39;</span><span class="p">,</span> <span class="s1">&#39;鹿児島県&#39;</span><span class="p">:</span> <span class="s1">&#39;Kagoshima&#39;</span><span class="p">,</span> <span class="s1">&#39;沖縄県&#39;</span><span class="p">:</span> <span class="s1">&#39;Okinawa&#39;</span><span class="p">}</span>
+<span class="n">prf_shp</span><span class="p">[</span><span class="s1">&#39;pref_en&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prf_shp</span><span class="p">[</span><span class="s1">&#39;N03_001&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">prf_ja2en</span><span class="p">)</span>
+<span class="n">prf_shp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/yuyashibu/anaconda3/envs/iiimethodsiv/lib/python3.8/site-packages/geopandas/geodataframe.py:1443: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  super().__setitem__(key, value)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>N03_001</th>
+      <th>N03_002</th>
+      <th>N03_003</th>
+      <th>N03_004</th>
+      <th>N03_007</th>
+      <th>geometry</th>
+      <th>pref_en</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>北海道</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>MULTIPOLYGON (((139.79936 41.35187, 139.79940 ...</td>
+      <td>Hokkaido</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>青森県</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>MULTIPOLYGON (((139.93600 40.42836, 139.93587 ...</td>
+      <td>Aomori</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 都道府県別の2020年6月のモビリティトレンドの平均値を格納した`JPjune_mobility_mean`に境界データをマージします</span>
+<span class="n">JPjune_mobility_mean_geo</span> <span class="o">=</span> <span class="n">JPjune_mobility_mean</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+                            <span class="n">prf_shp</span><span class="p">,</span> <span class="n">left_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">right_on</span> <span class="o">=</span> <span class="s1">&#39;pref_en&#39;</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id6">
+<h2><span class="section-number">9.1.3. </span>東京都の日次モビリティトレンドのプロット<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 東京都の2020年のデータのみを抽出してDataFrameに格納</span>
+<span class="n">tokyo</span> <span class="o">=</span> <span class="n">JP</span><span class="p">[(</span><span class="n">JP</span><span class="p">[</span><span class="s1">&#39;sub_region_1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">]))</span><span class="o">&amp;</span>
+          <span class="p">(</span><span class="n">JP</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="s1">&#39;2021-01-01&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokyo</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">target_columns</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tokyo</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span><span class="n">tokyo</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="n">column</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Mobility Percent Changes from Baseline in Tokyo&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/aede872c3100081e7873fa0ae18e27062f7f1c13178a697a5a1d8de7afee8c38.png" src="../../_images/aede872c3100081e7873fa0ae18e27062f7f1c13178a697a5a1d8de7afee8c38.png" />
+</div>
+</div>
+</section>
+<section id="mobility">
+<h2><span class="section-number">9.1.4. </span>2020年6月の世界のMobilityの変化率<a class="headerlink" href="#mobility" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of countries in df: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;country_region&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of countries in df: 135
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 6月のデータのみを抽出して新しいDataFrameに格納</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+<span class="n">June</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">6</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># geopandasから世界地図のGeoDataFrameをダウンロード</span>
+<span class="n">world</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span>
+    <span class="n">gpd</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_lowres&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">world</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pop_est</th>
+      <th>continent</th>
+      <th>name</th>
+      <th>iso_a3</th>
+      <th>gdp_md_est</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>889953.0</td>
+      <td>Oceania</td>
+      <td>Fiji</td>
+      <td>FJI</td>
+      <td>5496</td>
+      <td>MULTIPOLYGON (((180.00000 -16.06713, 180.00000...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>58005463.0</td>
+      <td>Africa</td>
+      <td>Tanzania</td>
+      <td>TZA</td>
+      <td>63177</td>
+      <td>POLYGON ((33.90371 -0.95000, 34.07262 -1.05982...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">world</span></code>の<code class="docutils literal notranslate"><span class="pre">geometry</span></code>列にポリゴンが入っています。
+国名<code class="docutils literal notranslate"><span class="pre">name</span></code>で6月のDataFrame<code class="docutils literal notranslate"><span class="pre">June</span></code>とマージしたいが、表記ゆれが多いため簡単にマージできません。
+そこで、DataFrame<code class="docutils literal notranslate"><span class="pre">June</span></code>の国名<code class="docutils literal notranslate"><span class="pre">country_region</span></code>を<code class="docutils literal notranslate"><span class="pre">world</span></code>で用いられている<code class="docutils literal notranslate"><span class="pre">iso_a3</span></code>コードに変換して、コードを基準にマージします。
+DataFrame<code class="docutils literal notranslate"><span class="pre">June</span></code>の国名をisoのコードに変換するために、今回は<code class="docutils literal notranslate"><span class="pre">pycountry</span></code>というパッケージを用います。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">name2code</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span> 
+        <span class="n">country_object</span> <span class="o">=</span> <span class="n">pycountry</span><span class="o">.</span><span class="n">countries</span><span class="o">.</span><span class="n">search_fuzzy</span><span class="p">(</span><span class="n">name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">code</span> <span class="o">=</span> <span class="n">country_object</span><span class="o">.</span><span class="n">alpha_3</span>
+        <span class="k">return</span> <span class="n">code</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_code_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">June</span><span class="p">[</span><span class="s1">&#39;country_region&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="n">country_code_dict</span><span class="p">[</span><span class="n">country</span><span class="p">]</span> <span class="o">=</span> <span class="n">name2code</span><span class="p">(</span><span class="n">country</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># パッケージ`pycountry`で変換できなかった国名を確認します。</span>
+<span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">country_code_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Cape Verde&#39;, &#39;Laos&#39;, &#39;Myanmar (Burma)&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># これらの国については、手動でコードを入力します。</span>
+<span class="n">country_code_dict</span><span class="p">[</span><span class="s1">&#39;South Korea&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;KOR&#39;</span>
+<span class="n">country_code_dict</span><span class="p">[</span><span class="s1">&#39;Cape Verde&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;CPV&#39;</span>
+<span class="n">country_code_dict</span><span class="p">[</span><span class="s1">&#39;Laos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;LAO&#39;</span>
+<span class="n">country_code_dict</span><span class="p">[</span><span class="s1">&#39;Myanmar (Burma)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;MMR&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">map</span></code>を用いて、データフレーム<code class="docutils literal notranslate"><span class="pre">June</span></code>の<code class="docutils literal notranslate"><span class="pre">country_region</span></code>に上で作成した国名とコードが対応する辞書<code class="docutils literal notranslate"><span class="pre">country_code_dict</span></code>を適用させて、isoコードを格納する列<code class="docutils literal notranslate"><span class="pre">iso_a3</span></code>を作成します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">June</span> <span class="o">=</span> <span class="n">June</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;country_region&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">June</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;iso_a3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">June</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;country_region&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">country_code_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_18058/2681535062.py:1: FutureWarning: The default value of numeric_only in DataFrameGroupBy.median is deprecated. In a future version, numeric_only will default to False. Either specify numeric_only or select only columns which should be valid for the function.
+  June = June.groupby([&#39;country_region&#39;]).median().reset_index()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2020年6月のMobilityデータと各国の境界のデータをマージします。</span>
+<span class="n">June_geo</span> <span class="o">=</span> <span class="n">June</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">world</span><span class="p">,</span> <span class="n">left_on</span> <span class="o">=</span> <span class="s1">&#39;iso_a3&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;iso_a3&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 可視化のためGeoDataFrameに変換します。</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">June_geo</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">June_geo</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[(</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;pop_est&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">gdf</span><span class="o">.</span><span class="n">name</span><span class="o">!=</span><span class="s2">&quot;Antarctica&quot;</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;retail_and_recreation_percent_change_from_baseline&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;grocery_and_pharmacy_percent_change_from_baseline&#39;</span><span class="p">,</span><span class="s1">&#39;parks_percent_change_from_baseline&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;transit_stations_percent_change_from_baseline&#39;</span><span class="p">,</span><span class="s1">&#39;workplaces_percent_change_from_baseline&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;residential_percent_change_from_baseline&#39;</span><span class="p">]:</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">18</span><span class="p">))</span>
+    <span class="n">divider</span> <span class="o">=</span> <span class="n">make_axes_locatable</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">cax</span> <span class="o">=</span> <span class="n">divider</span><span class="o">.</span><span class="n">append_axes</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s2">&quot;2%&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> 
+             <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Spectral&#39;</span><span class="p">,</span> 
+             <span class="n">alpha</span><span class="o">=</span><span class="mf">.7</span><span class="p">,</span> <span class="n">cax</span> <span class="o">=</span> <span class="n">cax</span><span class="p">,</span> 
+             <span class="n">missing_kwds</span><span class="o">=</span><span class="p">{</span>
+                 <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;lightgrey&quot;</span><span class="p">,</span> 
+                 <span class="s2">&quot;edgecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;pink&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;hatch&quot;</span><span class="p">:</span> <span class="s2">&quot;///&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Missing values&quot;</span><span class="p">})</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;2020 June Median value of </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">column</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3a95d47056014b5b535072975539a6168b09b2b6fd011c03732e87f4f877d4ec.png" src="../../_images/3a95d47056014b5b535072975539a6168b09b2b6fd011c03732e87f4f877d4ec.png" />
+<img alt="../../_images/d4defbcd95b5c1ab603f59c383667c7743ebc002482c141a2e136d20a61a530c.png" src="../../_images/d4defbcd95b5c1ab603f59c383667c7743ebc002482c141a2e136d20a61a530c.png" />
+<img alt="../../_images/43937a9ed282fcaad78382d37b6fc46f4bec688e17aab306b12e7803f1551878.png" src="../../_images/43937a9ed282fcaad78382d37b6fc46f4bec688e17aab306b12e7803f1551878.png" />
+<img alt="../../_images/90e1728e347d7d60dfc2b4ecc22186394d69d16a1e516c4a8c83648c37139755.png" src="../../_images/90e1728e347d7d60dfc2b4ecc22186394d69d16a1e516c4a8c83648c37139755.png" />
+<img alt="../../_images/feec4d7dc74eba24e04a3831473cfab7b28527b0271b92dbf9f27c46da6e99d3.png" src="../../_images/feec4d7dc74eba24e04a3831473cfab7b28527b0271b92dbf9f27c46da6e99d3.png" />
+<img alt="../../_images/ddd45ac0295080743c800aa15a59c233858696ca4628833b93b047c99be9663d.png" src="../../_images/ddd45ac0295080743c800aa15a59c233858696ca4628833b93b047c99be9663d.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/option"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>演習</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="yfinance.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9.2. </span>Yahoo! FINANCEのデータを用いた可視化の演習</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">9.1.1. 2020年日本国内のモビリティトレンドの把握</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.1.1.1. 全国のモビリティの経時変化をプロットしてみましょう</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.1.2. 地図上に落とし込んでみましょう</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">9.1.2.1. 都道府県レベルでの1ヶ月の平均値モビリティトレンドをプロット</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">9.1.2.2. 境界データのダウンロードと作成</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">9.1.3. 東京都の日次モビリティトレンドのプロット</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mobility">9.1.4. 2020年6月の世界のMobilityの変化率</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

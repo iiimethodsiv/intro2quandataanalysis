@@ -1,0 +1,1300 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>6.1. 離散選択モデル &#8212; Intro to Data Analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/sec06/logit_provit';</script>
+    <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/docs/sec06/logit_provit.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6.2. 順序ロジットモデル" href="ordered_loigt.html" />
+    <link rel="prev" title="6. 離散選択モデル" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Quantitative Data Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">環境準備とPythonの基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec01/index.html">1. Python環境の準備</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/01_build_python_environment.html">1.1. Python環境の準備</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/02_howtopip.html">1.2. 必要なパッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/03_basic_notebook.html">1.3. Notebookの基本的な使い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/04_exercise.html">1.4. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec02/index.html">2. Pythonの基本的な使い方1</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/01_basic_python1.html">2.1. 変数・算術演算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/02_basic_python2.html">2.2. 複合データ型・for/while/if文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/03_basic_python3.html">2.3. 関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/04_list_comprehension.html">2.4. set型・リスト内包表記</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/05_string.html">2.5. 文字列を扱うときの注意点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/06_exercise.html">2.6. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec03/index.html">3. Pythonの基本的な使い方2</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/numpy.html">3.1. Pythonのライブラリ・パッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas1.html">3.2. pandas 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas2.html">3.3. pandas 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/read_write.html">3.4. ファイルの読み書き</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas_datetime.html">3.5. pandasを用いた日時データの扱い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/matplotlib.html">3.6. matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/option_text_viz.html">3.7. 参考：日本語の取り扱いと正規表現</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/exercise.html">3.8. 課題</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">データ分析の基礎</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec04/index.html">4. データ分析の基礎</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/01_basic_stats1.html">4.1. 平均値・中央値・最頻値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/02_basic_stats2.html">4.2. 頻度分布・偏差・分散</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/03_basic_stats3.html">4.3. 基本統計量の確認方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/04_stats_test.html">4.4. 仮説検定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/05_exercise.html">4.5. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec05/index.html">5. 相関・回帰・重回帰分析</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/correlation.html">5.1. 相関・散布図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/regression.html">5.2. 回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/multiple_regression.html">5.3. 重回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/regression_tips.html">5.4. 非線形・交差項・二乗項</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">6. 離散選択モデル</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">6.1. 離散選択モデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ordered_loigt.html">6.2. 順序ロジットモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multinomial_logit.html">6.3. 多項ロジットモデル</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec07/index.html">7. パネルデータ分析</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec07/paneldata.html">7.1. パネルデータ分析</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec08/index.html">8. 機械学習</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/supervised_learning.html">8.1. 機械学習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/unsupervised_learning.html">8.2. 教師なし学習</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">演習</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../option/index.html">9. 演習</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../option/COVID19mobility.html">9.1. COVID-19による人流の変化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/yfinance.html">9.2. Yahoo! FINANCEのデータを用いた可視化の演習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/exercise.html">9.3. 課題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_clean_data.html">9.4. 演習・交通手段分類（データ準備）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_feature_extraction.html">9.5. 演習・交通手段分類（データの特徴をつかむ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_machine_learning.html">9.6. 演習・交通手段分類（機械学習）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/twitter.html">9.7. 演習・Twitterのテキスト分類問題</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/iiimethodsiv/intro2quandataanalysis/blob/gh-pages/docs/sec06/logit_provit.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis/issues/new?title=Issue%20on%20page%20%2Fdocs/sec06/logit_provit.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/sec06/logit_provit.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>離散選択モデル</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.1.1. 限界効果の推定</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#odds-ratio">6.1.2. ロジットモデルにおけるオッズ比（Odds ratio）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logit">6.1.3. Logitモデル</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#average-partial-effects">6.1.3.1. 平均限界効果（Average Partial Effects）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">6.1.3.2. オッズ比（Odds Ratio）</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probit-model">6.1.4. プロビットモデル（Probit model）</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">6.1. </span>離散選択モデル<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>ここまでの推定モデルでは連続変数が被説明変数になっていました。
+しかし、データの種類でみたように、離散変数や質的変数を被説明変数としたい場合もあると思います。
+例えば次のような例です。</p>
+<ul class="simple">
+<li><p>候補者を採用するかどうか</p></li>
+<li><p>労働市場に参入するかどうか</p></li>
+<li><p>顧客は商品を購入するか</p></li>
+</ul>
+<p>これらは、意思決定や選択、保有するかしないか、適用するかしないか、当てはまるか当てはまらないかのの2つの値しか取りません。
+0か1しかとらないと表現することができます。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}y=\begin{cases}0, &amp; \text{if} &amp; \text{no}\\
+                    1, &amp; \text{if} &amp; \text{yes} \\
+                    \end{cases}\end{split}\]</div>
+<p>被説明変数<span class="math notranslate nohighlight">\(y\)</span>が2値の場合推定したいのは<span class="math notranslate nohighlight">\(y=1\)</span>となる確率です。</p>
+<div class="math notranslate nohighlight">
+\[p=pr[y=1|x]=F(x'\beta)\]</div>
+<p><span class="math notranslate nohighlight">\(F(x'\beta)\)</span>は線形回帰、ロジット、プロビットのいずれかの関数の形をとります。
+ただし、2値しかとらない被説明変数の推定式を線型確率モデルで最小二乗法で推定すると、予測値が0より小さいあるいは1より大きな推定値を取ることがあり確率として解釈できないなどの問題があります。</p>
+<p>この問題に対処するためには線型モデルではなくて、非線形モデルであるプロビットモデル（Probit Model）とロジットモデル(probit Model)がよく用いられます。これは分布関数をもとに被説明変数と説明変数の非線形な関係を捉え、予測値が0から1の間の値をとり、よって被説明変数が１となる確率を予測することできるようになります。</p>
+<p>プロビットモデルは正規分布関数を用いていて、ロジットモデルはロジスティック分布関数を用いていますが、いずれの関数の形状も似ているため推定結果も近似することが多いです。</p>
+<p>プロビットモデルやロジットモデルの推定には最尤法（Maximum Likelihood: ML）が用いられます。
+最小二乗法では誤差の二乗和を最小化していましたが、最尤法は尤度（likelihood）を最大化します。
+尤度関数Lは、</p>
+<div class="math notranslate nohighlight">
+\[L=Pr(Y_1)\times Pr(Y_2) \times Pr(Y_3) \times ...\]</div>
+<p>ただし、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}Pr(Y_i) = \begin{cases} Pr(Y_i=1)=F(a+bX_i) &amp; , &amp; \text{if} &amp; Y_i =1 \\
+            Pr(Y_i=0)=1-Pr(Y_i=1)=1-F(a+bX_i) &amp; , &amp; \text{if} &amp; Y_i =0 \end{cases}\end{split}\]</div>
+<p>推定した係数の解釈は注意が必要です。</p>
+<ul class="simple">
+<li><p>xの増加は、y=1の可能性を増加／減少させる（その結果の可能性を高くする／低くする）。言い換えれば、x の増加は 1 の結果をより可能性の高いものにしたり、低いものにしたりする。</p></li>
+<li><p>ただし係数の符号は解釈できますが、大きさは解釈できません。モデルによって係数の尺度が異なるため、係数を用いて大きさを解釈することはできません。</p></li>
+</ul>
+<p>このため、プロビット・ロジットモデルによる推定に当たっては<b>限界効果（marginal effects）</b>も確認することがほとんどです。</p>
+<p>限界効用は説明変数<span class="math notranslate nohighlight">\(X\)</span>を１単位変化させた時の<span class="math notranslate nohighlight">\(y=1\)</span>の確率の変化を表します。
+プロビット・ロジットモデルの限界効果は、</p>
+<!-- $\frac{\delta p}{\delta x_j}=F'(x'\beta)\beta_j$ -->
+<p>ロジットモデルの限界効果は、
+<span class="math notranslate nohighlight">\(\frac{\delta p}{\delta x_j}= \Lambda(x'\beta)[1-\Lambda(x'\beta)]\beta=\frac{e^{x'\beta}}{(1+e^{x'\beta})^2}\beta_j\)</span>
+プロビットモデルの限界効果は、<span class="math notranslate nohighlight">\(\frac{\delta p}{\delta x_j} = \phi(x'\beta)\beta_j\)</span>
+となります。
+限界効果は<span class="math notranslate nohighlight">\(x\)</span>に依存するので、特定の<span class="math notranslate nohighlight">\(x\)</span>の値（一般的には平均値）での限界効果を推定します。
+係数と限界効果は同じ符号となります。</p>
+<section id="id2">
+<h2><span class="section-number">6.1.1. </span>限界効果の推定<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>平均値における限界効果(Marginal effects at the mean)</p>
+<ul>
+<li><p>標本内の平均的な観測値（e.g., 平均的な人）の限界効果<span class="math notranslate nohighlight">\(\frac{\delta p}{\delta x_j}=F'(\bar{x}'\beta)\beta_j\)</span>を求めます。</p></li>
+</ul>
+</li>
+<li><p>限界効果の平均値(Average marginal effects)</p>
+<ul>
+<li><p>個々の限界効果の平均：　<span class="math notranslate nohighlight">\(\frac{\delta p}{\delta x_j}=\frac{\sum{F'(x'\beta)}}{n}\beta_j\)</span></p></li>
+<li><p>こちらの方が上の限界効果よりは良い</p></li>
+</ul>
+</li>
+</ul>
+<p>限界効果の解釈：</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span>が増加すると、<span class="math notranslate nohighlight">\(y=1\)</span> となる確率が増加（減少）することを、パーセントで表した限界効果です。</p></li>
+<li><p>ダミー変数の場合、限界効果は基準(ベース)（<span class="math notranslate nohighlight">\(x=0\)</span>）との比較で表します</p></li>
+<li><p>連続変数の場合、限界効果は<span class="math notranslate nohighlight">\(x\)</span>の1単位の変化で表します。</p></li>
+<li><p>限界効果の符号と大きさの両方を解釈します。</p></li>
+<li><p>プロビットモデルとロジットモデルでは、ほとんど同じ限界効果が得られます。</p></li>
+</ul>
+</section>
+<section id="odds-ratio">
+<h2><span class="section-number">6.1.2. </span>ロジットモデルにおけるオッズ比（Odds ratio）<a class="headerlink" href="#odds-ratio" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>オッズ比（odds ratio/relative risk）は、<span class="math notranslate nohighlight">\(p/(1-p)\)</span>で<span class="math notranslate nohighlight">\(y=0\)</span>となる確率に対する<span class="math notranslate nohighlight">\(y=1\)</span>となる確率を測定します</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p=\frac{exp(x'\beta)}{1+exp(x'\beta)}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{p}{1-p}=exp(x'\beta)\]</div>
+<div class="math notranslate nohighlight">
+\[ln\frac{p}{1-p}=x'\beta\]</div>
+<ul class="simple">
+<li><p>オッズ比が2であれば<span class="math notranslate nohighlight">\(y=1\)</span>である確率は<span class="math notranslate nohighlight">\(y=0\)</span>である確率の2倍と解釈できます。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">logistic</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">chi2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="logit">
+<h2><span class="section-number">6.1.3. </span>Logitモデル<a class="headerlink" href="#logit" title="Permalink to this heading">#</a></h2>
+<p>Logit modelはシグモイド関数</p>
+<div class="math notranslate nohighlight">
+\[P_i=\frac{1}{1+e^{-(\beta_1+\beta_2 X_i)}}\]</div>
+<p>を仮定します。どんな形の関数か見てみましょう。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta1</span><span class="p">,</span> <span class="n">beta2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">P</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">beta1</span><span class="o">-</span><span class="n">beta2</span><span class="o">*</span><span class="n">X</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">xmin</span><span class="o">=-</span><span class="mi">3</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">xmin</span><span class="o">=-</span><span class="mi">3</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$P = 1 / (1 + e^{-Z})$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/df8b020a5ab1ccb52f1cd28ae23333b273f3034aa7fe1c1f698dc7850a86e36d.png" src="../../_images/df8b020a5ab1ccb52f1cd28ae23333b273f3034aa7fe1c1f698dc7850a86e36d.png" />
+</div>
+</div>
+<p>上の図で確認できるように<span class="math notranslate nohighlight">\(P_i\)</span>の値は0から1となり確率を扱いたい場合に便利です。</p>
+<p>以下、例として、ポルトガルの銀行が行った電話によるダイレクトマーケティングに関して、顧客がマーケティングの結果定期預金に申し込むかどうかを被説明変数とします。</p>
+<p><em><strong>データを次のリンクからダウンロードして、ZIPを解凍した後、<code class="docutils literal notranslate"><span class="pre">bank.csv</span></code>をこのJupyterNotebookと同じフォルダに移動させてください。</strong></em>
+<a class="reference external" href="https://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank.zip">https://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank.zip</a>から</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bank</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./bank.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="n">bank</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>job</th>
+      <th>marital</th>
+      <th>education</th>
+      <th>default</th>
+      <th>balance</th>
+      <th>housing</th>
+      <th>loan</th>
+      <th>contact</th>
+      <th>day</th>
+      <th>month</th>
+      <th>duration</th>
+      <th>campaign</th>
+      <th>pdays</th>
+      <th>previous</th>
+      <th>poutcome</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>30</td>
+      <td>unemployed</td>
+      <td>married</td>
+      <td>primary</td>
+      <td>no</td>
+      <td>1787</td>
+      <td>no</td>
+      <td>no</td>
+      <td>cellular</td>
+      <td>19</td>
+      <td>oct</td>
+      <td>79</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>33</td>
+      <td>services</td>
+      <td>married</td>
+      <td>secondary</td>
+      <td>no</td>
+      <td>4789</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>cellular</td>
+      <td>11</td>
+      <td>may</td>
+      <td>220</td>
+      <td>1</td>
+      <td>339</td>
+      <td>4</td>
+      <td>failure</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>35</td>
+      <td>management</td>
+      <td>single</td>
+      <td>tertiary</td>
+      <td>no</td>
+      <td>1350</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>cellular</td>
+      <td>16</td>
+      <td>apr</td>
+      <td>185</td>
+      <td>1</td>
+      <td>330</td>
+      <td>1</td>
+      <td>failure</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>30</td>
+      <td>management</td>
+      <td>married</td>
+      <td>tertiary</td>
+      <td>no</td>
+      <td>1476</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>unknown</td>
+      <td>3</td>
+      <td>jun</td>
+      <td>199</td>
+      <td>4</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>59</td>
+      <td>blue-collar</td>
+      <td>married</td>
+      <td>secondary</td>
+      <td>no</td>
+      <td>0</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>226</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>no</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># `y`列のデータを`yes`であれば1、その他は0を持つダミー変数に変換します。</span>
+<span class="n">y_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;no&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;yes&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+<span class="n">bank</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">bank</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">y_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 数値データの変数間の相関を確認</span>
+<span class="n">bank</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>balance</th>
+      <th>day</th>
+      <th>duration</th>
+      <th>campaign</th>
+      <th>pdays</th>
+      <th>previous</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>age</th>
+      <td>1.000000</td>
+      <td>0.083820</td>
+      <td>-0.017853</td>
+      <td>-0.002367</td>
+      <td>-0.005148</td>
+      <td>-0.008894</td>
+      <td>-0.003511</td>
+      <td>0.045092</td>
+    </tr>
+    <tr>
+      <th>balance</th>
+      <td>0.083820</td>
+      <td>1.000000</td>
+      <td>-0.008677</td>
+      <td>-0.015950</td>
+      <td>-0.009976</td>
+      <td>0.009437</td>
+      <td>0.026196</td>
+      <td>0.017905</td>
+    </tr>
+    <tr>
+      <th>day</th>
+      <td>-0.017853</td>
+      <td>-0.008677</td>
+      <td>1.000000</td>
+      <td>-0.024629</td>
+      <td>0.160706</td>
+      <td>-0.094352</td>
+      <td>-0.059114</td>
+      <td>-0.011244</td>
+    </tr>
+    <tr>
+      <th>duration</th>
+      <td>-0.002367</td>
+      <td>-0.015950</td>
+      <td>-0.024629</td>
+      <td>1.000000</td>
+      <td>-0.068382</td>
+      <td>0.010380</td>
+      <td>0.018080</td>
+      <td>0.401118</td>
+    </tr>
+    <tr>
+      <th>campaign</th>
+      <td>-0.005148</td>
+      <td>-0.009976</td>
+      <td>0.160706</td>
+      <td>-0.068382</td>
+      <td>1.000000</td>
+      <td>-0.093137</td>
+      <td>-0.067833</td>
+      <td>-0.061147</td>
+    </tr>
+    <tr>
+      <th>pdays</th>
+      <td>-0.008894</td>
+      <td>0.009437</td>
+      <td>-0.094352</td>
+      <td>0.010380</td>
+      <td>-0.093137</td>
+      <td>1.000000</td>
+      <td>0.577562</td>
+      <td>0.104087</td>
+    </tr>
+    <tr>
+      <th>previous</th>
+      <td>-0.003511</td>
+      <td>0.026196</td>
+      <td>-0.059114</td>
+      <td>0.018080</td>
+      <td>-0.067833</td>
+      <td>0.577562</td>
+      <td>1.000000</td>
+      <td>0.116714</td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td>0.045092</td>
+      <td>0.017905</td>
+      <td>-0.011244</td>
+      <td>0.401118</td>
+      <td>-0.061147</td>
+      <td>0.104087</td>
+      <td>0.116714</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>各行に顧客ごとの属性などのデータが格納されていて、
+列<code class="docutils literal notranslate"><span class="pre">y</span></code>に顧客が定期預金に申し込んだかどうか（被説明変数）があります。</p>
+<p>その他の列のデータの詳細は<a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/bank+marketing#">こちら</a>をみてください。</p>
+<p>定期預金に申し込んだかどうかが、キャンペーン中の顧客へのコンタクト回数<code class="docutils literal notranslate"><span class="pre">campaign</span></code>や、キャンペーン前の顧客へのコンタクト数<code class="docutils literal notranslate"><span class="pre">previous</span></code>、顧客との最終コンタクトからの経過日<code class="docutils literal notranslate"><span class="pre">pdays</span></code>などでどれだけ説明できるかをみてみます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bank</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>management       969
+blue-collar      946
+technician       768
+admin.           478
+services         417
+retired          230
+self-employed    183
+entrepreneur     168
+unemployed       128
+housemaid        112
+student           84
+unknown           38
+Name: job, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>では<code class="docutils literal notranslate"><span class="pre">C()</span></code>でダミー変数を自動生成するので、<code class="docutils literal notranslate"><span class="pre">var</span></code>を<code class="docutils literal notranslate"><span class="pre">C(var)</span></code>とします。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula</span> <span class="o">=</span> <span class="s1">&#39;y ~ 1 + age + duration + campaign + pdays + C(job)&#39;</span>
+<span class="n">logit_mod</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">GLM</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">bank</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="n">sm</span><span class="o">.</span><span class="n">families</span><span class="o">.</span><span class="n">Binomial</span><span class="p">())</span>
+<span class="n">logit_res</span> <span class="o">=</span> <span class="n">logit_mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">logit_res</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                 Generalized Linear Model Regression Results                  
+==============================================================================
+Dep. Variable:                      y   No. Observations:                 4521
+Model:                            GLM   Df Residuals:                     4505
+Model Family:                Binomial   Df Model:                           15
+Link Function:                  Logit   Scale:                          1.0000
+Method:                          IRLS   Log-Likelihood:                -1278.6
+Date:                Sun, 11 Jun 2023   Deviance:                       2557.2
+Time:                        07:36:01   Pearson chi2:                 5.97e+03
+No. Iterations:                     6   Pseudo R-squ. (CS):             0.1385
+Covariance Type:            nonrobust                                         
+===========================================================================================
+                              coef    std err          z      P&gt;|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------------
+Intercept                  -3.2976      0.291    -11.316      0.000      -3.869      -2.726
+C(job)[T.blue-collar]      -0.8797      0.211     -4.161      0.000      -1.294      -0.465
+C(job)[T.entrepreneur]     -0.6181      0.345     -1.792      0.073      -1.294       0.058
+C(job)[T.housemaid]        -0.2348      0.363     -0.647      0.518      -0.946       0.477
+C(job)[T.management]        0.0720      0.188      0.382      0.702      -0.297       0.441
+C(job)[T.retired]           0.6651      0.267      2.491      0.013       0.142       1.189
+C(job)[T.self-employed]    -0.2304      0.313     -0.736      0.462      -0.844       0.383
+C(job)[T.services]         -0.4789      0.246     -1.945      0.052      -0.961       0.004
+C(job)[T.student]           0.9324      0.331      2.814      0.005       0.283       1.582
+C(job)[T.technician]       -0.1628      0.202     -0.805      0.421      -0.559       0.234
+C(job)[T.unemployed]       -0.5331      0.372     -1.435      0.151      -1.261       0.195
+C(job)[T.unknown]           0.6354      0.496      1.281      0.200      -0.337       1.607
+age                         0.0048      0.006      0.831      0.406      -0.006       0.016
+duration                    0.0038      0.000     20.827      0.000       0.003       0.004
+campaign                   -0.0874      0.026     -3.359      0.001      -0.138      -0.036
+pdays                       0.0029      0.000      6.631      0.000       0.002       0.004
+===========================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<p>結果を確認すると<code class="docutils literal notranslate"><span class="pre">C(job)</span></code>のうち、<code class="docutils literal notranslate"><span class="pre">admin.</span></code>が自動的にベースとして、式から外れていることがわかります。</p>
+<section id="average-partial-effects">
+<h3><span class="section-number">6.1.3.1. </span>平均限界効果（Average Partial Effects）<a class="headerlink" href="#average-partial-effects" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>では<code class="docutils literal notranslate"><span class="pre">get_margeff()</span></code>を使うことで平均限界効果求めることができます</p>
+<p>引数として<code class="docutils literal notranslate"><span class="pre">at='overall'</span></code>(default)を指定すると平均限界効果が、<code class="docutils literal notranslate"><span class="pre">at='mean'</span></code>を指定すると平均での限界効果を算出できます。
+デフォルトが<code class="docutils literal notranslate"><span class="pre">at='overall'</span></code>なので何も指定しないと平均限界効果になります。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula</span> <span class="o">=</span> <span class="s1">&#39;y ~ 1 + age + duration + campaign + pdays + C(job)&#39;</span>
+<span class="n">logit_mod</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span> <span class="n">bank</span><span class="p">)</span>
+<span class="n">logit_res</span> <span class="o">=</span> <span class="n">logit_mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">logit_res</span><span class="o">.</span><span class="n">get_margeff</span><span class="p">(</span><span class="n">at</span><span class="o">=</span><span class="s1">&#39;overall&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.282812
+         Iterations 7
+        Logit Marginal Effects       
+=====================================
+Dep. Variable:                      y
+Method:                          dydx
+At:                           overall
+===========================================================================================
+                             dy/dx    std err          z      P&gt;|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------------
+C(job)[T.blue-collar]      -0.0708      0.017     -4.159      0.000      -0.104      -0.037
+C(job)[T.entrepreneur]     -0.0497      0.028     -1.792      0.073      -0.104       0.005
+C(job)[T.housemaid]        -0.0189      0.029     -0.647      0.518      -0.076       0.038
+C(job)[T.management]        0.0058      0.015      0.382      0.702      -0.024       0.035
+C(job)[T.retired]           0.0535      0.021      2.491      0.013       0.011       0.096
+C(job)[T.self-employed]    -0.0185      0.025     -0.736      0.462      -0.068       0.031
+C(job)[T.services]         -0.0385      0.020     -1.945      0.052      -0.077       0.000
+C(job)[T.student]           0.0750      0.027      2.815      0.005       0.023       0.127
+C(job)[T.technician]       -0.0131      0.016     -0.805      0.421      -0.045       0.019
+C(job)[T.unemployed]       -0.0429      0.030     -1.435      0.151      -0.101       0.016
+C(job)[T.unknown]           0.0511      0.040      1.281      0.200      -0.027       0.129
+age                         0.0004      0.000      0.831      0.406      -0.001       0.001
+duration                    0.0003   1.35e-05     22.407      0.000       0.000       0.000
+campaign                   -0.0070      0.002     -3.352      0.001      -0.011      -0.003
+pdays                       0.0002   3.46e-05      6.649      0.000       0.000       0.000
+===========================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h3><span class="section-number">6.1.3.2. </span>オッズ比（Odds Ratio）<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>続いてオッズ比も求めましょう。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">logit_res</span><span class="o">.</span><span class="n">params</span>
+<span class="n">conf</span> <span class="o">=</span> <span class="n">logit_res</span><span class="o">.</span><span class="n">conf_int</span><span class="p">()</span>
+<span class="n">conf</span><span class="p">[</span><span class="s1">&#39;Odds Ratio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span>
+<span class="n">conf</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2.5%&#39;</span><span class="p">,</span> <span class="s1">&#39;97.5%&#39;</span><span class="p">,</span> <span class="s1">&#39;Odds Ratio&#39;</span><span class="p">]</span>
+<span class="n">conf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+<span class="c1"># interceptを除外します</span>
+<span class="n">conf</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Intercept&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                             2.5%     97.5%  Odds Ratio
+C(job)[T.blue-collar]    0.274134  0.627926    0.414892
+C(job)[T.entrepreneur]   0.274153  1.059587    0.538970
+C(job)[T.housemaid]      0.388218  1.610664    0.790752
+C(job)[T.management]     0.743142  1.553980    1.074629
+C(job)[T.retired]        1.152212  3.282224    1.944690
+C(job)[T.self-employed]  0.430151  1.466488    0.794236
+C(job)[T.services]       0.382347  1.003625    0.619462
+C(job)[T.student]        1.326953  4.864616    2.540692
+C(job)[T.technician]     0.571728  1.263080    0.849787
+C(job)[T.unemployed]     0.283287  1.215402    0.586777
+C(job)[T.unknown]        0.714213  4.989650    1.887769
+age                      0.993554  1.016117    1.004772
+duration                 1.003421  1.004133    1.003777
+campaign                 0.870762  0.964264    0.916321
+pdays                    1.002018  1.003715    1.002866
+</pre></div>
+</div>
+</div>
+</div>
+<p>わかりやすさのためオッズ比を可視化します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">conf</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;2.5%&#39;</span><span class="p">],</span> <span class="n">xmax</span><span class="o">=</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;97.5%&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;Odds Ratio&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">conf</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1"># 1以上か以下をわかりやすくするため1のラインを引きます</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">conf</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Odds Ratio&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/961828cd358372615c62ec06462347d090f0a73b50e747cfaf719f0b564eb4f9.png" src="../../_images/961828cd358372615c62ec06462347d090f0a73b50e747cfaf719f0b564eb4f9.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="probit-model">
+<h2><span class="section-number">6.1.4. </span>プロビットモデル（Probit model）<a class="headerlink" href="#probit-model" title="Permalink to this heading">#</a></h2>
+<p>プロビットモデルはロジットモデルとよく似ています。Pythonではロジットモデルと同様に<code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>などで求めることができます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula</span> <span class="o">=</span> <span class="s1">&#39;y ~ age + duration + campaign + pdays + C(job)&#39;</span>
+<span class="n">probit_mod</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">Probit</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="n">formula</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">bank</span><span class="p">)</span>
+<span class="n">probit_res</span> <span class="o">=</span> <span class="n">probit_mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">probit_res</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.281002
+         Iterations 7
+                          Probit Regression Results                           
+==============================================================================
+Dep. Variable:                      y   No. Observations:                 4521
+Model:                         Probit   Df Residuals:                     4505
+Method:                           MLE   Df Model:                           15
+Date:                Sun, 11 Jun 2023   Pseudo R-squ.:                  0.2136
+Time:                        07:36:04   Log-Likelihood:                -1270.4
+converged:                       True   LL-Null:                       -1615.5
+Covariance Type:            nonrobust   LLR p-value:                2.300e-137
+===========================================================================================
+                              coef    std err          z      P&gt;|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------------
+Intercept                  -1.8505      0.152    -12.200      0.000      -2.148      -1.553
+C(job)[T.blue-collar]      -0.4520      0.108     -4.168      0.000      -0.665      -0.239
+C(job)[T.entrepreneur]     -0.3155      0.177     -1.784      0.074      -0.662       0.031
+C(job)[T.housemaid]        -0.1008      0.188     -0.536      0.592      -0.469       0.268
+C(job)[T.management]        0.0425      0.099      0.430      0.668      -0.151       0.236
+C(job)[T.retired]           0.3769      0.145      2.597      0.009       0.092       0.661
+C(job)[T.self-employed]    -0.1255      0.163     -0.767      0.443      -0.446       0.195
+C(job)[T.services]         -0.2488      0.128     -1.947      0.052      -0.499       0.002
+C(job)[T.student]           0.5205      0.182      2.857      0.004       0.163       0.878
+C(job)[T.technician]       -0.0940      0.106     -0.889      0.374      -0.301       0.113
+C(job)[T.unemployed]       -0.3458      0.194     -1.786      0.074      -0.725       0.034
+C(job)[T.unknown]           0.3430      0.274      1.250      0.211      -0.195       0.881
+age                         0.0021      0.003      0.716      0.474      -0.004       0.008
+duration                    0.0020   9.02e-05     22.570      0.000       0.002       0.002
+campaign                   -0.0481      0.014     -3.529      0.000      -0.075      -0.021
+pdays                       0.0016      0.000      6.611      0.000       0.001       0.002
+===========================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<p>得られた結果をロジットモデルと比べてみましょう。</p>
+<p>限界効果を推定します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">probit_margeff</span> <span class="o">=</span> <span class="n">probit_res</span><span class="o">.</span><span class="n">get_margeff</span><span class="p">(</span><span class="s1">&#39;overall&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">probit_margeff</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       Probit Marginal Effects       
+=====================================
+Dep. Variable:                      y
+Method:                          dydx
+At:                           overall
+===========================================================================================
+                             dy/dx    std err          z      P&gt;|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------------
+C(job)[T.blue-collar]      -0.0682      0.016     -4.165      0.000      -0.100      -0.036
+C(job)[T.entrepreneur]     -0.0476      0.027     -1.784      0.074      -0.100       0.005
+C(job)[T.housemaid]        -0.0152      0.028     -0.536      0.592      -0.071       0.040
+C(job)[T.management]        0.0064      0.015      0.430      0.668      -0.023       0.036
+C(job)[T.retired]           0.0568      0.022      2.598      0.009       0.014       0.100
+C(job)[T.self-employed]    -0.0189      0.025     -0.767      0.443      -0.067       0.029
+C(job)[T.services]         -0.0375      0.019     -1.947      0.052      -0.075       0.000
+C(job)[T.student]           0.0785      0.027      2.859      0.004       0.025       0.132
+C(job)[T.technician]       -0.0142      0.016     -0.889      0.374      -0.045       0.017
+C(job)[T.unemployed]       -0.0522      0.029     -1.787      0.074      -0.109       0.005
+C(job)[T.unknown]           0.0517      0.041      1.250      0.211      -0.029       0.133
+age                         0.0003      0.000      0.716      0.474      -0.001       0.001
+duration                    0.0003    1.3e-05     23.615      0.000       0.000       0.000
+campaign                   -0.0072      0.002     -3.529      0.000      -0.011      -0.003
+pdays                       0.0002   3.58e-05      6.627      0.000       0.000       0.000
+===========================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/sec06"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>離散選択モデル</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ordered_loigt.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.2. </span>順序ロジットモデル</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.1.1. 限界効果の推定</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#odds-ratio">6.1.2. ロジットモデルにおけるオッズ比（Odds ratio）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logit">6.1.3. Logitモデル</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#average-partial-effects">6.1.3.1. 平均限界効果（Average Partial Effects）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">6.1.3.2. オッズ比（Odds Ratio）</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probit-model">6.1.4. プロビットモデル（Probit model）</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

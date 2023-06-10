@@ -1,0 +1,1294 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>6.3. 多項ロジットモデル &#8212; Intro to Data Analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/sec06/multinomial_logit';</script>
+    <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/docs/sec06/multinomial_logit.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7. パネルデータ分析" href="../sec07/index.html" />
+    <link rel="prev" title="6.2. 順序ロジットモデル" href="ordered_loigt.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Quantitative Data Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">環境準備とPythonの基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec01/index.html">1. Python環境の準備</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/01_build_python_environment.html">1.1. Python環境の準備</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/02_howtopip.html">1.2. 必要なパッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/03_basic_notebook.html">1.3. Notebookの基本的な使い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/04_exercise.html">1.4. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec02/index.html">2. Pythonの基本的な使い方1</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/01_basic_python1.html">2.1. 変数・算術演算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/02_basic_python2.html">2.2. 複合データ型・for/while/if文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/03_basic_python3.html">2.3. 関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/04_list_comprehension.html">2.4. set型・リスト内包表記</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/05_string.html">2.5. 文字列を扱うときの注意点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/06_exercise.html">2.6. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec03/index.html">3. Pythonの基本的な使い方2</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/numpy.html">3.1. Pythonのライブラリ・パッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas1.html">3.2. pandas 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas2.html">3.3. pandas 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/read_write.html">3.4. ファイルの読み書き</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas_datetime.html">3.5. pandasを用いた日時データの扱い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/matplotlib.html">3.6. matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/option_text_viz.html">3.7. 参考：日本語の取り扱いと正規表現</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/exercise.html">3.8. 課題</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">データ分析の基礎</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec04/index.html">4. データ分析の基礎</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/01_basic_stats1.html">4.1. 平均値・中央値・最頻値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/02_basic_stats2.html">4.2. 頻度分布・偏差・分散</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/03_basic_stats3.html">4.3. 基本統計量の確認方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/04_stats_test.html">4.4. 仮説検定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/05_exercise.html">4.5. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec05/index.html">5. 相関・回帰・重回帰分析</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/correlation.html">5.1. 相関・散布図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/regression.html">5.2. 回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/multiple_regression.html">5.3. 重回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/regression_tips.html">5.4. 非線形・交差項・二乗項</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">6. 離散選択モデル</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="logit_provit.html">6.1. 離散選択モデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ordered_loigt.html">6.2. 順序ロジットモデル</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">6.3. 多項ロジットモデル</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec07/index.html">7. パネルデータ分析</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec07/paneldata.html">7.1. パネルデータ分析</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec08/index.html">8. 機械学習</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/supervised_learning.html">8.1. 機械学習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/unsupervised_learning.html">8.2. 教師なし学習</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">演習</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../option/index.html">9. 演習</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../option/COVID19mobility.html">9.1. COVID-19による人流の変化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/yfinance.html">9.2. Yahoo! FINANCEのデータを用いた可視化の演習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/exercise.html">9.3. 課題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_clean_data.html">9.4. 演習・交通手段分類（データ準備）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_feature_extraction.html">9.5. 演習・交通手段分類（データの特徴をつかむ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_machine_learning.html">9.6. 演習・交通手段分類（機械学習）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/twitter.html">9.7. 演習・Twitterのテキスト分類問題</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/iiimethodsiv/intro2quandataanalysis/blob/gh-pages/docs/sec06/multinomial_logit.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis/issues/new?title=Issue%20on%20page%20%2Fdocs/sec06/multinomial_logit.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/sec06/multinomial_logit.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>多項ロジットモデル</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">6.3. </span>多項ロジットモデル<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p><strong>多項ロジットモデル（multinomial logt model）</strong>
+多項ロジットモデルは、被説明変数が取りうる値が3つ以上で、それらに順序がない場合に適用します。</p>
+<p>例えば、移動手段（バス・自動車・電車・徒歩・自転車・その他）を選択肢から選ぶ場合や、消費者が購入する商品を、ブランドA、ブランドB、ブランドCから選択する場合などに適用することができます。</p>
+<p><code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>を用いて推定します。</p>
+<p>ここではスマートフォンを用いて収集されたセンサーデータから、スマートフォンユーザーの移動手段を推定する例を考えます。</p>
+<p>このデータは、13人のボランティア（男性10名、女性3名）のスマートフォンから収集したデータで、徒歩、車、静止状態、電車、バスの5クラスで構成されています。</p>
+<p>データ出典: <a class="reference external" href="http://cs.unibo.it/projects/us-tm2017/index.html">http://cs.unibo.it/projects/us-tm2017/index.html</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<p>まずはデータをダウンロードします。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://cs.unibo.it/projects/us-tm2017/static/dataset/extension/5second/csv/dataset_5secondWindow.tar.gz&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s1">&#39;gzip&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="n">on_bad_lines</span><span class="o">=</span><span class="s1">&#39;warn&#39;</span><span class="p">)</span>
+<span class="c1">#最初の数行を表示させます</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c1"># すべての列がNotebook上で表示されるように、オプション設定を変更します。</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dataset_5secondWindow.csv</th>
+      <th>id</th>
+      <th>time</th>
+      <th>activityrecognition#0</th>
+      <th>activityrecognition#1</th>
+      <th>android.sensor.accelerometer#mean</th>
+      <th>android.sensor.accelerometer#min</th>
+      <th>android.sensor.accelerometer#max</th>
+      <th>android.sensor.accelerometer#std</th>
+      <th>android.sensor.game_rotation_vector#mean</th>
+      <th>android.sensor.game_rotation_vector#min</th>
+      <th>android.sensor.game_rotation_vector#max</th>
+      <th>android.sensor.game_rotation_vector#std</th>
+      <th>android.sensor.gravity#mean</th>
+      <th>android.sensor.gravity#min</th>
+      <th>android.sensor.gravity#max</th>
+      <th>android.sensor.gravity#std</th>
+      <th>android.sensor.gyroscope#mean</th>
+      <th>android.sensor.gyroscope#min</th>
+      <th>android.sensor.gyroscope#max</th>
+      <th>android.sensor.gyroscope#std</th>
+      <th>android.sensor.gyroscope_uncalibrated#mean</th>
+      <th>android.sensor.gyroscope_uncalibrated#min</th>
+      <th>android.sensor.gyroscope_uncalibrated#max</th>
+      <th>android.sensor.gyroscope_uncalibrated#std</th>
+      <th>android.sensor.light#mean</th>
+      <th>android.sensor.light#min</th>
+      <th>android.sensor.light#max</th>
+      <th>android.sensor.light#std</th>
+      <th>android.sensor.linear_acceleration#mean</th>
+      <th>android.sensor.linear_acceleration#min</th>
+      <th>android.sensor.linear_acceleration#max</th>
+      <th>android.sensor.linear_acceleration#std</th>
+      <th>android.sensor.magnetic_field#mean</th>
+      <th>android.sensor.magnetic_field#min</th>
+      <th>android.sensor.magnetic_field#max</th>
+      <th>android.sensor.magnetic_field#std</th>
+      <th>android.sensor.magnetic_field_uncalibrated#mean</th>
+      <th>android.sensor.magnetic_field_uncalibrated#min</th>
+      <th>android.sensor.magnetic_field_uncalibrated#max</th>
+      <th>android.sensor.magnetic_field_uncalibrated#std</th>
+      <th>android.sensor.orientation#mean</th>
+      <th>android.sensor.orientation#min</th>
+      <th>android.sensor.orientation#max</th>
+      <th>android.sensor.orientation#std</th>
+      <th>android.sensor.pressure#mean</th>
+      <th>android.sensor.pressure#min</th>
+      <th>android.sensor.pressure#max</th>
+      <th>android.sensor.pressure#std</th>
+      <th>android.sensor.proximity#mean</th>
+      <th>android.sensor.proximity#min</th>
+      <th>android.sensor.proximity#max</th>
+      <th>android.sensor.proximity#std</th>
+      <th>android.sensor.rotation_vector#mean</th>
+      <th>android.sensor.rotation_vector#min</th>
+      <th>android.sensor.rotation_vector#max</th>
+      <th>android.sensor.rotation_vector#std</th>
+      <th>android.sensor.step_counter#mean</th>
+      <th>android.sensor.step_counter#min</th>
+      <th>android.sensor.step_counter#max</th>
+      <th>android.sensor.step_counter#std</th>
+      <th>sound#mean</th>
+      <th>sound#min</th>
+      <th>sound#max</th>
+      <th>sound#std</th>
+      <th>speed#mean</th>
+      <th>speed#min</th>
+      <th>speed#max</th>
+      <th>speed#std</th>
+      <th>target</th>
+      <th>user</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>16170.0</td>
+      <td>78.0</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>9.811476</td>
+      <td>9.758895</td>
+      <td>9.849411</td>
+      <td>0.014626</td>
+      <td>0.029340</td>
+      <td>0.029014</td>
+      <td>0.029526</td>
+      <td>0.000119</td>
+      <td>9.806650</td>
+      <td>9.806649</td>
+      <td>9.806651</td>
+      <td>4.780692e-07</td>
+      <td>0.001651</td>
+      <td>0.000000</td>
+      <td>0.003533</td>
+      <td>0.000737</td>
+      <td>0.016221</td>
+      <td>0.014172</td>
+      <td>0.018695</td>
+      <td>0.000982</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.020978</td>
+      <td>0.002495</td>
+      <td>0.05241</td>
+      <td>0.011045</td>
+      <td>57.099638</td>
+      <td>56.690387</td>
+      <td>57.575950</td>
+      <td>0.177549</td>
+      <td>51.363566</td>
+      <td>51.199707</td>
+      <td>51.539208</td>
+      <td>0.080899</td>
+      <td>354.286933</td>
+      <td>353.598335</td>
+      <td>354.942707</td>
+      <td>0.245676</td>
+      <td>1004.090261</td>
+      <td>1004.05540</td>
+      <td>1004.12790</td>
+      <td>0.017416</td>
+      <td>8.0</td>
+      <td>8.0</td>
+      <td>8.0</td>
+      <td>NaN</td>
+      <td>0.050413</td>
+      <td>0.044777</td>
+      <td>0.056351</td>
+      <td>0.002109</td>
+      <td>28966.0</td>
+      <td>28966.0</td>
+      <td>28966.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>Still</td>
+      <td>U12</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>15871.0</td>
+      <td>145.0</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>9.939207</td>
+      <td>7.707437</td>
+      <td>17.146631</td>
+      <td>1.775944</td>
+      <td>0.999925</td>
+      <td>0.999903</td>
+      <td>0.999946</td>
+      <td>0.000030</td>
+      <td>9.806624</td>
+      <td>9.806624</td>
+      <td>9.806624</td>
+      <td>6.474977e-07</td>
+      <td>0.036326</td>
+      <td>0.011669</td>
+      <td>0.059388</td>
+      <td>0.020290</td>
+      <td>0.039023</td>
+      <td>0.014132</td>
+      <td>0.085494</td>
+      <td>0.018629</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>0.879220</td>
+      <td>0.641117</td>
+      <td>1.18581</td>
+      <td>0.278730</td>
+      <td>29.351288</td>
+      <td>28.172505</td>
+      <td>30.386017</td>
+      <td>0.921547</td>
+      <td>82.767760</td>
+      <td>82.409890</td>
+      <td>83.125630</td>
+      <td>0.506105</td>
+      <td>332.695577</td>
+      <td>330.461054</td>
+      <td>339.108607</td>
+      <td>1.705816</td>
+      <td>1008.274660</td>
+      <td>1008.27466</td>
+      <td>1008.27466</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.999981</td>
+      <td>0.999963</td>
+      <td>0.999999</td>
+      <td>0.000026</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>89.20021</td>
+      <td>89.065143</td>
+      <td>89.335277</td>
+      <td>0.191013</td>
+      <td>16.539349</td>
+      <td>16.539349</td>
+      <td>16.539349</td>
+      <td>0.628595</td>
+      <td>Car</td>
+      <td>U12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># カラム名をわかりやすさのため変更します</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;android.sensor.&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">,</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_18558/2509734072.py:2: FutureWarning: The default value of regex will change from True to False in a future version.
+  df.columns = df.columns.str.replace(&#39;android.sensor.&#39;,&#39;&#39;).str.replace(&#39;#&#39;,&#39;_&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>ここでは、移動手段（Car, Still, Train, Bus, Walking）を次の変数を用いて推定するモデルを考えます。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">accelerometer_mean</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">game_rotation_vector_mean</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gyroscope_mean</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linear_acceleration_mean</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">orientation_mean</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pressure_mean</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rotation_vector_mean</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sound_mean</span></code></p></li>
+</ul>
+<p>上の変数の欠損している行を分析から除外します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span>
+    <span class="s1">&#39;target&#39;</span><span class="p">,</span><span class="s1">&#39;accelerometer_mean&#39;</span><span class="p">,</span><span class="s1">&#39;game_rotation_vector_mean&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;gyroscope_mean&#39;</span><span class="p">,</span><span class="s1">&#39;linear_acceleration_mean&#39;</span><span class="p">,</span><span class="s1">&#39;orientation_mean&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;pressure_mean&#39;</span><span class="p">,</span><span class="s1">&#39;rotation_vector_mean&#39;</span><span class="p">,</span><span class="s1">&#39;sound_mean&#39;</span>
+<span class="p">]]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>accelerometer_mean</th>
+      <th>game_rotation_vector_mean</th>
+      <th>gyroscope_mean</th>
+      <th>linear_acceleration_mean</th>
+      <th>orientation_mean</th>
+      <th>pressure_mean</th>
+      <th>rotation_vector_mean</th>
+      <th>sound_mean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1255.000000</td>
+      <td>1255.000000</td>
+      <td>1255.000000</td>
+      <td>1255.000000</td>
+      <td>1255.000000</td>
+      <td>1255.000000</td>
+      <td>1255.000000</td>
+      <td>1255.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>9.996223</td>
+      <td>0.732083</td>
+      <td>0.325744</td>
+      <td>1.507555</td>
+      <td>208.533199</td>
+      <td>1020.577142</td>
+      <td>0.768484</td>
+      <td>75.202876</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.720097</td>
+      <td>0.246679</td>
+      <td>0.496171</td>
+      <td>1.890074</td>
+      <td>92.273671</td>
+      <td>15.173493</td>
+      <td>0.224416</td>
+      <td>12.239499</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>7.369055</td>
+      <td>0.042684</td>
+      <td>0.001164</td>
+      <td>0.009447</td>
+      <td>17.135360</td>
+      <td>946.339840</td>
+      <td>0.120813</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>9.738144</td>
+      <td>0.570153</td>
+      <td>0.027239</td>
+      <td>0.272564</td>
+      <td>135.326907</td>
+      <td>1011.055625</td>
+      <td>0.668633</td>
+      <td>71.869349</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>9.830731</td>
+      <td>0.763646</td>
+      <td>0.083699</td>
+      <td>0.707634</td>
+      <td>206.208459</td>
+      <td>1020.669000</td>
+      <td>0.813465</td>
+      <td>77.707224</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>10.049428</td>
+      <td>0.969717</td>
+      <td>0.512946</td>
+      <td>2.083757</td>
+      <td>291.281798</td>
+      <td>1029.123300</td>
+      <td>0.959668</td>
+      <td>82.794433</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>14.661139</td>
+      <td>0.999999</td>
+      <td>3.268860</td>
+      <td>18.141770</td>
+      <td>396.133498</td>
+      <td>1058.609900</td>
+      <td>1.000000</td>
+      <td>90.308734</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>accelerometer_mean</th>
+      <th>game_rotation_vector_mean</th>
+      <th>gyroscope_mean</th>
+      <th>linear_acceleration_mean</th>
+      <th>orientation_mean</th>
+      <th>pressure_mean</th>
+      <th>rotation_vector_mean</th>
+      <th>sound_mean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>accelerometer_mean</th>
+      <td>1.000000</td>
+      <td>0.129695</td>
+      <td>0.500263</td>
+      <td>0.441453</td>
+      <td>0.043532</td>
+      <td>-0.045848</td>
+      <td>0.081403</td>
+      <td>0.138451</td>
+    </tr>
+    <tr>
+      <th>game_rotation_vector_mean</th>
+      <td>0.129695</td>
+      <td>1.000000</td>
+      <td>0.297029</td>
+      <td>0.395925</td>
+      <td>0.215494</td>
+      <td>-0.144826</td>
+      <td>0.488242</td>
+      <td>0.179971</td>
+    </tr>
+    <tr>
+      <th>gyroscope_mean</th>
+      <td>0.500263</td>
+      <td>0.297029</td>
+      <td>1.000000</td>
+      <td>0.732075</td>
+      <td>0.050534</td>
+      <td>-0.032837</td>
+      <td>0.169035</td>
+      <td>0.017961</td>
+    </tr>
+    <tr>
+      <th>linear_acceleration_mean</th>
+      <td>0.441453</td>
+      <td>0.395925</td>
+      <td>0.732075</td>
+      <td>1.000000</td>
+      <td>0.096761</td>
+      <td>-0.099997</td>
+      <td>0.226298</td>
+      <td>0.072577</td>
+    </tr>
+    <tr>
+      <th>orientation_mean</th>
+      <td>0.043532</td>
+      <td>0.215494</td>
+      <td>0.050534</td>
+      <td>0.096761</td>
+      <td>1.000000</td>
+      <td>0.007241</td>
+      <td>-0.007124</td>
+      <td>0.016743</td>
+    </tr>
+    <tr>
+      <th>pressure_mean</th>
+      <td>-0.045848</td>
+      <td>-0.144826</td>
+      <td>-0.032837</td>
+      <td>-0.099997</td>
+      <td>0.007241</td>
+      <td>1.000000</td>
+      <td>-0.288926</td>
+      <td>0.054731</td>
+    </tr>
+    <tr>
+      <th>rotation_vector_mean</th>
+      <td>0.081403</td>
+      <td>0.488242</td>
+      <td>0.169035</td>
+      <td>0.226298</td>
+      <td>-0.007124</td>
+      <td>-0.288926</td>
+      <td>1.000000</td>
+      <td>-0.010011</td>
+    </tr>
+    <tr>
+      <th>sound_mean</th>
+      <td>0.138451</td>
+      <td>0.179971</td>
+      <td>0.017961</td>
+      <td>0.072577</td>
+      <td>0.016743</td>
+      <td>0.054731</td>
+      <td>-0.010011</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Walking</th>
+      <td>346</td>
+    </tr>
+    <tr>
+      <th>Train</th>
+      <td>311</td>
+    </tr>
+    <tr>
+      <th>Car</th>
+      <td>310</td>
+    </tr>
+    <tr>
+      <th>Bus</th>
+      <td>220</td>
+    </tr>
+    <tr>
+      <th>Still</th>
+      <td>68</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prepend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">mnlogit_mod</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">MNLogit</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span>
+                         <span class="c1"># method=&quot;bfgs&quot;, </span>
+                         <span class="c1"># maxiter=250</span>
+                        <span class="p">)</span>
+<span class="n">mnlogit_fit</span> <span class="o">=</span> <span class="n">mnlogit_mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">mnlogit_fit</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.488472
+         Iterations 11
+                          MNLogit Regression Results                          
+==============================================================================
+Dep. Variable:                 target   No. Observations:                 1255
+Model:                        MNLogit   Df Residuals:                     1219
+Method:                           MLE   Df Model:                           32
+Date:                Sun, 11 Jun 2023   Pseudo R-squ.:                  0.6764
+Time:                        07:36:12   Log-Likelihood:                -613.03
+converged:                       True   LL-Null:                       -1894.5
+Covariance Type:            nonrobust   LLR p-value:                     0.000
+=============================================================================================
+               target=Car       coef    std err          z      P&gt;|z|      [0.025      0.975]
+---------------------------------------------------------------------------------------------
+accelerometer_mean           -1.3405      0.326     -4.117      0.000      -1.979      -0.702
+game_rotation_vector_mean    -2.8793      0.932     -3.088      0.002      -4.707      -1.052
+gyroscope_mean               -1.2694      0.827     -1.535      0.125      -2.890       0.351
+linear_acceleration_mean     -0.3871      0.224     -1.730      0.084      -0.826       0.052
+orientation_mean             -0.0100      0.002     -4.722      0.000      -0.014      -0.006
+pressure_mean                -0.2423      0.022    -11.012      0.000      -0.285      -0.199
+rotation_vector_mean         -6.5886      1.024     -6.433      0.000      -8.596      -4.581
+sound_mean                    0.1831      0.023      8.124      0.000       0.139       0.227
+const                       255.7548     23.220     11.014      0.000     210.244     301.266
+---------------------------------------------------------------------------------------------
+             target=Still       coef    std err          z      P&gt;|z|      [0.025      0.975]
+---------------------------------------------------------------------------------------------
+accelerometer_mean           -2.3018      1.406     -1.638      0.101      -5.057       0.453
+game_rotation_vector_mean    -1.4923      1.166     -1.280      0.201      -3.778       0.793
+gyroscope_mean                2.0263      1.769      1.145      0.252      -1.441       5.494
+linear_acceleration_mean     -6.1539      1.390     -4.427      0.000      -8.879      -3.429
+orientation_mean             -0.0112      0.003     -3.412      0.001      -0.018      -0.005
+pressure_mean                -0.1061      0.031     -3.456      0.001      -0.166      -0.046
+rotation_vector_mean         -3.7290      1.312     -2.843      0.004      -6.300      -1.158
+sound_mean                   -0.1043      0.025     -4.151      0.000      -0.154      -0.055
+const                       144.7582     35.347      4.095      0.000      75.479     214.037
+---------------------------------------------------------------------------------------------
+             target=Train       coef    std err          z      P&gt;|z|      [0.025      0.975]
+---------------------------------------------------------------------------------------------
+accelerometer_mean           -0.4580      0.518     -0.883      0.377      -1.474       0.558
+game_rotation_vector_mean     0.9464      0.830      1.140      0.254      -0.681       2.574
+gyroscope_mean                0.0587      0.632      0.093      0.926      -1.180       1.298
+linear_acceleration_mean     -1.7283      0.255     -6.766      0.000      -2.229      -1.228
+orientation_mean             -0.0237      0.002    -11.086      0.000      -0.028      -0.019
+pressure_mean                 0.0276      0.011      2.432      0.015       0.005       0.050
+rotation_vector_mean         -8.2604      0.901     -9.171      0.000     -10.026      -6.495
+sound_mean                    0.1133      0.020      5.724      0.000       0.075       0.152
+const                       -20.3954     13.175     -1.548      0.122     -46.217       5.426
+---------------------------------------------------------------------------------------------
+           target=Walking       coef    std err          z      P&gt;|z|      [0.025      0.975]
+---------------------------------------------------------------------------------------------
+accelerometer_mean            0.1972      0.211      0.934      0.350      -0.216       0.611
+game_rotation_vector_mean     8.2232      1.216      6.762      0.000       5.840      10.607
+gyroscope_mean                3.3952      0.576      5.897      0.000       2.267       4.524
+linear_acceleration_mean      0.8137      0.132      6.149      0.000       0.554       1.073
+orientation_mean             -0.0108      0.002     -4.662      0.000      -0.015      -0.006
+pressure_mean                 0.0122      0.015      0.817      0.414      -0.017       0.042
+rotation_vector_mean         -6.9962      1.184     -5.908      0.000      -9.317      -4.675
+sound_mean                   -0.0786      0.016     -4.811      0.000      -0.111      -0.047
+const                        -9.8708     15.770     -0.626      0.531     -40.779      21.037
+=============================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<p>多項ロジットモデルでは、選択肢の数をkとするとk-1個のモデルを推定します。
+上の出力を見ると、5つの選択肢のうちBusがベース（参照グループ）として設定されているため、出力された結果を見る際には、パラメーターの推定値は、参照グループであるバスに対する相対的なものとなります。</p>
+<p>多項ロジットモデルでの一般的な解釈は、説明変数の単位変化に対して、参照グループに対して、モデル内の他の変数が一定である場合、パラメーター推定値の分だけ変化すると期待されることになります。</p>
+<p>上の結果で<code class="docutils literal notranslate"><span class="pre">target=Car</span></code>の出力結果では、バスと車の相対比較を示しています。</p>
+<p><code class="docutils literal notranslate"><span class="pre">accelerometer_mean</span></code>の推定された係数は<code class="docutils literal notranslate"><span class="pre">-1.340</span></code>で、モデル内の他の変数が一定である場合、バスに対する車の<code class="docutils literal notranslate"><span class="pre">accelerometer_mean</span></code>の値が1単位増えると、バスより車である可能性は1.340減少すると解釈できます。</p>
+<p>同様に、<code class="docutils literal notranslate"><span class="pre">game_rotation_vector_mean</span></code>が1単位増えると、モデル内の他の変数が一定である場合、ユーザーの移動手段はバスであるよりも車である可能性が2.8793減少する可能性があると解釈できます。</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/sec06"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ordered_loigt.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6.2. </span>順序ロジットモデル</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../sec07/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>パネルデータ分析</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

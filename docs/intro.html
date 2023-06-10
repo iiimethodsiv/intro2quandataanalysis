@@ -1,0 +1,794 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction to Quantitative Data Analysis with Python &#8212; Intro to Data Analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/intro';</script>
+    <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/docs/intro.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Python環境の準備" href="sec01/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Introduction to Quantitative Data Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">環境準備とPythonの基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="sec01/index.html">1. Python環境の準備</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="sec01/01_build_python_environment.html">1.1. Python環境の準備</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec01/02_howtopip.html">1.2. 必要なパッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec01/03_basic_notebook.html">1.3. Notebookの基本的な使い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec01/04_exercise.html">1.4. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sec02/index.html">2. Pythonの基本的な使い方1</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="sec02/01_basic_python1.html">2.1. 変数・算術演算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec02/02_basic_python2.html">2.2. 複合データ型・for/while/if文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec02/03_basic_python3.html">2.3. 関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec02/04_list_comprehension.html">2.4. set型・リスト内包表記</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec02/05_string.html">2.5. 文字列を扱うときの注意点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec02/06_exercise.html">2.6. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sec03/index.html">3. Pythonの基本的な使い方2</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="sec03/numpy.html">3.1. Pythonのライブラリ・パッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec03/pandas1.html">3.2. pandas 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec03/pandas2.html">3.3. pandas 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec03/read_write.html">3.4. ファイルの読み書き</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec03/pandas_datetime.html">3.5. pandasを用いた日時データの扱い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec03/matplotlib.html">3.6. matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec03/option_text_viz.html">3.7. 参考：日本語の取り扱いと正規表現</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec03/exercise.html">3.8. 課題</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">データ分析の基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="sec04/index.html">4. データ分析の基礎</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="sec04/01_basic_stats1.html">4.1. 平均値・中央値・最頻値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec04/02_basic_stats2.html">4.2. 頻度分布・偏差・分散</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec04/03_basic_stats3.html">4.3. 基本統計量の確認方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec04/04_stats_test.html">4.4. 仮説検定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec04/05_exercise.html">4.5. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sec05/index.html">5. 相関・回帰・重回帰分析</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="sec05/correlation.html">5.1. 相関・散布図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec05/regression.html">5.2. 回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec05/multiple_regression.html">5.3. 重回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec05/regression_tips.html">5.4. 非線形・交差項・二乗項</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sec06/index.html">6. 離散選択モデル</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="sec06/logit_provit.html">6.1. 離散選択モデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec06/ordered_loigt.html">6.2. 順序ロジットモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec06/multinomial_logit.html">6.3. 多項ロジットモデル</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sec07/index.html">7. パネルデータ分析</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="sec07/paneldata.html">7.1. パネルデータ分析</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sec08/index.html">8. 機械学習</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="sec08/supervised_learning.html">8.1. 機械学習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec08/unsupervised_learning.html">8.2. 教師なし学習</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">演習</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="option/index.html">9. 演習</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="option/COVID19mobility.html">9.1. COVID-19による人流の変化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="option/yfinance.html">9.2. Yahoo! FINANCEのデータを用いた可視化の演習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="option/exercise.html">9.3. 課題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="option/gps_clean_data.html">9.4. 演習・交通手段分類（データ準備）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="option/gps_feature_extraction.html">9.5. 演習・交通手段分類（データの特徴をつかむ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="option/gps_machine_learning.html">9.6. 演習・交通手段分類（機械学習）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="option/twitter.html">9.7. 演習・Twitterのテキスト分類問題</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis/issues/new?title=Issue%20on%20page%20%2Fdocs/intro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Quantitative Data Analysis with Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-quantitative-data-analysis-with-python">
+<h1>Introduction to Quantitative Data Analysis with Python<a class="headerlink" href="#introduction-to-quantitative-data-analysis-with-python" title="Permalink to this heading">#</a></h1>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-column sd-col-12 sd-col-xs-12 sd-col-sm-12 sd-col-md-12 sd-col-lg-12 sd-fs-7 docutils">
+<p>このWebサイトは2023年度Sセメスター社会情報学研究法IVで用いる補助教材です。</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-12 sd-col-xs-12 sd-col-sm-12 sd-col-md-12 sd-col-lg-12 sd-fs-7 docutils">
+<p>This site is supplementary material for the 2023 class 社会情報学研究法IV at UTokyo (for the English version, please contact <a href="https://www.yuyashibuya.com">yuyashibuya</a>).</p>
+</div>
+</div>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-column sd-col-10 sd-col-xs-10 sd-col-sm-10 sd-col-md-10 sd-col-lg-10 sd-fs-5 docutils">
+<p>スコープ</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-12 sd-col-xs-12 sd-col-sm-12 sd-col-md-12 sd-col-lg-12 sd-fs-7 docutils">
+<p>このWeb補助教材はPythonプログラミング言語や統計・データ分析等にそれほど慣れていない人が使うことを前提にしています。Pythonやデータ分析を学ぶことに興味がある人にとって使いやすいようになることを目指しています。ただし、この教材はあくまで補助教材であり、授業内でのスライドや説明などがないまま自習することは想定していません。授業で用いるスライドや他の教材についてはITC-LMSで確認してください。</p>
+</div>
+</div>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-column sd-col-12 sd-col-xs-12 sd-col-sm-12 sd-col-md-12 sd-col-lg-12 sd-fs-5 docutils">
+<p>コンテンツ</p>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 text-left docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header bg-light docutils">
+<p class="sd-card-text"><a href="sec01/index.html"><strong>Section 1</strong>: Python環境の準備</a></p>
+</div>
+<div class="sd-card-body docutils">
+<ol class="arabic simple">
+<li><p class="sd-card-text"><a class="reference internal" href="sec01/01_build_python_environment.html"><span class="doc">Python環境の準備</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec01/02_howtopip.html"><span class="doc">必要なパッケージ</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec01/03_basic_notebook.html"><span class="doc">Notebookの基本的な使い方</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec01/04_exercise.html"><span class="doc">課題</span></a></p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header bg-light docutils">
+<p class="sd-card-text"><a href="sec02/index.html"><strong>Section 2</strong>: Pythonの基本的な使い方1</a></p>
+</div>
+<div class="sd-card-body docutils">
+<ol class="arabic simple">
+<li><p class="sd-card-text"><a class="reference internal" href="sec02/01_basic_python1.html"><span class="doc">変数・算術演算</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec02/02_basic_python2.html"><span class="doc">複合データ型・for/while/if文</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec02/03_basic_python3.html"><span class="doc">関数</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec02/04_list_comprehension.html"><span class="doc">set型・リスト内包表記</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec02/05_string.html"><span class="doc">文字列を扱うときの注意点</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec02/06_exercise.html"><span class="doc">課題</span></a></p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header bg-light docutils">
+<p class="sd-card-text"><a href="sec03/index.html"><strong>Section 3</strong>: Pythonの基本的な使い方2</a></p>
+</div>
+<div class="sd-card-body docutils">
+<ol class="arabic simple">
+<li><p class="sd-card-text"><a class="reference internal" href="sec03/numpy.html"><span class="doc">Pythonのライブラリ・パッケージ</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec03/pandas1.html"><span class="doc">pandas 1</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec03/pandas2.html"><span class="doc">pandas 2</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec03/read_write.html"><span class="doc">ファイルの読み書き</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec03/matplotlib.html"><span class="doc">matplotlib</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec03/pandas_datetime.html"><span class="doc">pandasを用いた日時データの扱い方</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec03/option_text_viz.html"><span class="doc">参考：日本語の取り扱いと正規表現</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec03/exercise.html"><span class="doc">課題</span></a></p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header bg-light docutils">
+<p class="sd-card-text"><a href="sec04/index.html"><strong>Section 4</strong>: データ分析の基礎</a></p>
+</div>
+<div class="sd-card-body docutils">
+<ol class="arabic simple">
+<li><p class="sd-card-text"><a class="reference internal" href="sec04/01_basic_stats1.html"><span class="doc">平均値・中央値・最頻値</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec04/02_basic_stats2.html"><span class="doc">頻度分布・偏差・分散</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec04/03_basic_stats3.html"><span class="doc">基本統計量の確認方法</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec04/04_stats_test.html"><span class="doc">仮説検定</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec04/05_exercise.html"><span class="doc">課題</span></a></p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header bg-light docutils">
+<p class="sd-card-text"><a href="sec05/index.html"><strong>Section 5</strong>: 相関・回帰分析</a></p>
+</div>
+<div class="sd-card-body docutils">
+<ol class="arabic simple">
+<li><p class="sd-card-text"><a class="reference internal" href="sec05/correlation.html"><span class="doc">相関・散布図</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec05/regression.html"><span class="doc">回帰分析</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec05/multiple_regression.html"><span class="doc">重回帰分析</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec05/regression_tips.html"><span class="doc">非線形・交差項・二乗項</span></a></p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header bg-light docutils">
+<p class="sd-card-text"><a href="sec06/index.html"><strong>Section 6</strong>: 離散選択モデル</a></p>
+</div>
+<div class="sd-card-body docutils">
+<ol class="arabic simple">
+<li><p class="sd-card-text"><a class="reference internal" href="sec06/logit_provit.html"><span class="doc">離散選択モデル</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec06/ordered_loigt.html"><span class="doc">順序ロジットモデル</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec06/multinomial_logit.html"><span class="doc">多項ロジットモデル</span></a></p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header bg-light docutils">
+<p class="sd-card-text"><a href="sec07/index.html"><strong>Section 7</strong>: パネルデータ分析</a></p>
+</div>
+<div class="sd-card-body docutils">
+<ol class="arabic simple">
+<li><p class="sd-card-text"><a class="reference internal" href="sec07/paneldata.html"><span class="doc">パネルデータ分析</span></a></p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header bg-light docutils">
+<p class="sd-card-text"><a href="sec01/index.html"><strong>Section 8</strong>: 機械学習</a></p>
+</div>
+<div class="sd-card-body docutils">
+<ol class="arabic simple">
+<li><p class="sd-card-text"><a class="reference internal" href="sec08/supervised_learning.html"><span class="doc">機械学習</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="sec08/unsupervised_learning.html"><span class="doc">教師なし学習</span></a></p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header bg-light docutils">
+<p class="sd-card-text"><a href="option/index.html"><strong>演習</strong></a></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">可視化</p>
+<ul class="simple">
+<li><p class="sd-card-text"><a class="reference internal" href="option/COVID19mobility.html"><span class="doc">COVID-19による人流の変化</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="option/yfinance.html"><span class="doc">Yahoo! FINANCEのデータを用いた可視化の演習</span></a></p></li>
+</ul>
+<p class="sd-card-text">人流データ（GPS軌跡データ）</p>
+<ul class="simple">
+<li><p class="sd-card-text"><a class="reference internal" href="option/gps_clean_data.html"><span class="doc">演習・交通手段分類（データ準備）</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="option/gps_feature_extraction.html"><span class="doc">演習・交通手段分類（データの特徴をつかむ）</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="option/gps_machine_learning.html"><span class="doc">演習・交通手段分類（機械学習）</span></a></p></li>
+</ul>
+<p class="sd-card-text">Twitter日本語テキスト</p>
+<ul class="simple">
+<li><p class="sd-card-text"><a class="reference internal" href="option/twitter.html"><span class="doc">演習・Twitterのテキスト分類問題</span></a></p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-column sd-col-12 sd-col-xs-12 sd-col-sm-12 sd-col-md-12 sd-col-lg-12 sd-fs-5 docutils">
+<p>スケジュール</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-10 sd-col-xs-10 sd-col-sm-10 sd-col-md-10 sd-col-lg-10 sd-fs-12 docutils">
+<p>日時：2023年度Sセメスター　木曜日2限</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><div style="width:50px">日時</div></p></th>
+<th class="head"><p><div style="width:120px">テーマ</div></p></th>
+<th class="head"><p><div style="width:100px">対応ページ</div></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>第1回</p></td>
+<td><p>イントロダクション</p></td>
+<td><p><a class="reference internal" href="sec01/index.html"><span class="doc">Python環境の準備</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>第2回</p></td>
+<td><p>Python入門＋データ分析基礎（1）</p></td>
+<td><p><a class="reference internal" href="sec02/index.html"><span class="doc">Pythonの基本的な使い方1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>第3回</p></td>
+<td><p>データ分析基礎（1）</p></td>
+<td><p><a class="reference internal" href="sec03/index.html"><span class="doc">Pythonの基本的な使い方2</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>第4回</p></td>
+<td><p>データ分析基礎（2）</p></td>
+<td><p><a class="reference internal" href="sec04/index.html"><span class="doc">データ分析の基礎</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>第5回</p></td>
+<td><p>分析手法の基礎（1）</p></td>
+<td><p><a class="reference internal" href="sec05/index.html"><span class="doc">相関・回帰・重回帰分析</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>第6回</p></td>
+<td><p>分析手法の基礎（2）</p></td>
+<td><p><a class="reference internal" href="sec05/index.html"><span class="doc">相関・回帰・重回帰分析</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>第7回</p></td>
+<td><p>分析手法の基礎（3）</p></td>
+<td><p><a class="reference internal" href="sec06/index.html"><span class="doc">離散選択モデル</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>第8回</p></td>
+<td><p>分析手法の基礎（4）</p></td>
+<td><p><a class="reference internal" href="sec07/index.html"><span class="doc">パネルデータ分析</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>第9回</p></td>
+<td><p>機械学習入門（2）</p></td>
+<td><p><a class="reference internal" href="sec08/index.html"><span class="doc">機械学習</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>第10回</p></td>
+<td><p>機械学習入門（3）</p></td>
+<td><p><a class="reference internal" href="option/index.html"><span class="doc">演習</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>第11回</p></td>
+<td><p>リサーチプラン発表</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>第12回</p></td>
+<td><p>発表</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>第13回</p></td>
+<td><p>発表</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="right-next"
+       href="sec01/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Python環境の準備</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

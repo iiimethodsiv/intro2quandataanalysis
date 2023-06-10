@@ -1,0 +1,1079 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>5.4. 非線形・交差項・二乗項 &#8212; Intro to Data Analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/sec05/regression_tips';</script>
+    <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/docs/sec05/regression_tips.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6. 離散選択モデル" href="../sec06/index.html" />
+    <link rel="prev" title="5.3. 重回帰分析" href="multiple_regression.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Quantitative Data Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">環境準備とPythonの基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec01/index.html">1. Python環境の準備</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/01_build_python_environment.html">1.1. Python環境の準備</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/02_howtopip.html">1.2. 必要なパッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/03_basic_notebook.html">1.3. Notebookの基本的な使い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/04_exercise.html">1.4. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec02/index.html">2. Pythonの基本的な使い方1</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/01_basic_python1.html">2.1. 変数・算術演算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/02_basic_python2.html">2.2. 複合データ型・for/while/if文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/03_basic_python3.html">2.3. 関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/04_list_comprehension.html">2.4. set型・リスト内包表記</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/05_string.html">2.5. 文字列を扱うときの注意点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/06_exercise.html">2.6. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec03/index.html">3. Pythonの基本的な使い方2</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/numpy.html">3.1. Pythonのライブラリ・パッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas1.html">3.2. pandas 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas2.html">3.3. pandas 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/read_write.html">3.4. ファイルの読み書き</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas_datetime.html">3.5. pandasを用いた日時データの扱い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/matplotlib.html">3.6. matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/option_text_viz.html">3.7. 参考：日本語の取り扱いと正規表現</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/exercise.html">3.8. 課題</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">データ分析の基礎</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec04/index.html">4. データ分析の基礎</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/01_basic_stats1.html">4.1. 平均値・中央値・最頻値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/02_basic_stats2.html">4.2. 頻度分布・偏差・分散</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/03_basic_stats3.html">4.3. 基本統計量の確認方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/04_stats_test.html">4.4. 仮説検定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/05_exercise.html">4.5. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">5. 相関・回帰・重回帰分析</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="correlation.html">5.1. 相関・散布図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="regression.html">5.2. 回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiple_regression.html">5.3. 重回帰分析</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">5.4. 非線形・交差項・二乗項</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec06/index.html">6. 離散選択モデル</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/logit_provit.html">6.1. 離散選択モデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/ordered_loigt.html">6.2. 順序ロジットモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/multinomial_logit.html">6.3. 多項ロジットモデル</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec07/index.html">7. パネルデータ分析</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec07/paneldata.html">7.1. パネルデータ分析</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec08/index.html">8. 機械学習</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/supervised_learning.html">8.1. 機械学習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/unsupervised_learning.html">8.2. 教師なし学習</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">演習</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../option/index.html">9. 演習</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../option/COVID19mobility.html">9.1. COVID-19による人流の変化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/yfinance.html">9.2. Yahoo! FINANCEのデータを用いた可視化の演習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/exercise.html">9.3. 課題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_clean_data.html">9.4. 演習・交通手段分類（データ準備）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_feature_extraction.html">9.5. 演習・交通手段分類（データの特徴をつかむ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/gps_machine_learning.html">9.6. 演習・交通手段分類（機械学習）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../option/twitter.html">9.7. 演習・Twitterのテキスト分類問題</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/iiimethodsiv/intro2quandataanalysis/blob/gh-pages/docs/sec05/regression_tips.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis/issues/new?title=Issue%20on%20page%20%2Fdocs/sec05/regression_tips.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/sec05/regression_tips.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>非線形・交差項・二乗項</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">5.4.1. 自然対数を用いた非線形モデルの推定</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dummy-variable">5.4.2. ダミー変数（Dummy variable）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statsmodels">5.4.2.1. statsmodelsを用いたダミー変数の生成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas">5.4.2.2. pandasを用いたダミー変数の生成</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-term">5.4.3. 交差項（Interaction term）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratic-term">5.4.4. 二乗項（Quadratic term）</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">5.4. </span>非線形・交差項・二乗項<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>線型モデルは制約的に感じられるかもしれませんが，二乗や自然対数<code class="docutils literal notranslate"><span class="pre">ln(x)</span></code>の変換を行うことで， xの非線形の効果を捉えることも可能です</p>
+<section id="id2">
+<h2><span class="section-number">5.4.1. </span>自然対数を用いた非線形モデルの推定<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>変数の自然対数をとって推定に用いることもよく行われます。</p>
+<p>例えば、コブダグラス型の生産関数は通常、労働<span class="math notranslate nohighlight">\(L\)</span>と資本<span class="math notranslate nohighlight">\(K\)</span>を用いてアウトプット<span class="math notranslate nohighlight">\(Y\)</span>が算出されるテクノロジーとして<span class="math notranslate nohighlight">\(Y=L^aK^b\)</span>と、定式化されます。この場合、このまま生産関数を推定しようとすると非線形モデルとなりますが、両辺とも自然対数をとって<span class="math notranslate nohighlight">\(LnY=alnL+blnK\)</span>と変換することで線型モデルとして扱うことができます。</p>
+<p>また、自然対数をとると被説明変数や説明変数の単位（円、千円、時間、分など ）によらず単位の異なるデータを用いた推定結果の比較や弾性値（弾力性）の推定が容易になります。両辺が自然対数をとった<span class="math notranslate nohighlight">\(lnY=\beta_0+\beta_1 ln X+ u\)</span>という式ではパラメータ<span class="math notranslate nohighlight">\(\beta_1\)</span>は説明変数Xが1％変化した時に被説明変数yが何％変化すると解釈することができます。</p>
+<p>傾きパラメータの解釈</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>被説明変数</p></th>
+<th class="head"><p>説明変数</p></th>
+<th class="head text-left"><p>解釈</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(Y\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(X\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X\)</span>が１単位増えた時<span class="math notranslate nohighlight">\(Y\)</span>が<span class="math notranslate nohighlight">\(\beta_1\)</span>単位増える</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(lnY\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(X\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X\)</span>が１単位増えた時<span class="math notranslate nohighlight">\(Y\)</span>が<span class="math notranslate nohighlight">\(100 \times \beta_1\)</span>%増える</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(Y\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(lnX\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X\)</span>が1%増えた時<span class="math notranslate nohighlight">\(Y\)</span>が<span class="math notranslate nohighlight">\(\beta_1 / 100\)</span> 単位増える</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(lnY\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(lnX\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X\)</span>が1%増えた時<span class="math notranslate nohighlight">\(Y\)</span>が<span class="math notranslate nohighlight">\(\beta_1\)</span>%増える</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dummy-variable">
+<h2><span class="section-number">5.4.2. </span>ダミー変数（Dummy variable）<a class="headerlink" href="#dummy-variable" title="Permalink to this heading">#</a></h2>
+<p>性別や年齢層、職業カテゴリなどの連続値以外の質的データやカテゴリデータを用いて、その差が被説明変数に与える影響を調べたい際には、0または1の値を取る<strong>ダミー変数</strong>を用います。</p>
+<p>例えば、高校卒業をしているかしていないかが賃金水準に与える影響を調べたい際には、高校を卒業していれば<code class="docutils literal notranslate"><span class="pre">1</span></code>それ以外は<code class="docutils literal notranslate"><span class="pre">0</span></code>を持つダミー変数を用います。ダミー変数はこれまでに扱った連続値と同様にモデルの中に入れて推定を行うことができます。</p>
+<p>ダミー変数を用いる際には基準カテゴリが必要となります。例えば、卒業高校に関するカテゴリ変数で、公立高校卒業、私立高校卒業、高等専門学校卒業、それ以外（高校卒業未満を含む）という4つのカテゴリを持つ変数をモデルに入れる場合、公立高校卒業者だけ1をとるダミー、私立高校卒業者だけ1をとるダミー、高等専門学校卒業者だけ1をとるダミー、それ以外（高校卒業未満を含む）だけ1をとるダミーの4つのダミーを作ることが可能ですが、実際には1つの分類を<strong>基準カテゴリ（ベース）</strong>と設定して、そのベースを除いたダミー変数のみをモデルに入れます。つまり、カテゴリの数-1このダミー変数をモデルに入れます。これは多重共線性の問題を避けるためです。</p>
+<p>例として、賃金に勤務年数が与える影響を考えます。
+IT企業での賃金の関するデータを用いて、学歴（E）が賃金(S)に与える影響を見ていきます。
+学歴(E)は 1=学部卒, 2=修士卒, 3=博士卒の値を格納していますが、ここでは、簡単のため、学歴（E）を学部卒なら0、修士卒以上なら1とする2値の新しいダミー変数をつくって進めます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="n">ols</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>本項の説明は、次のページのデータを用いています。一部説明も参考にしています。<a class="reference external" href="https://web.stanford.edu/class/stats191/">https://web.stanford.edu/class/stats191/</a></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://stats191.stanford.edu/data/salary.table&#39;</span>
+<span class="n">fh</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">salary_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;S&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">})</span>
+<span class="n">salary_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>S</th>
+      <th>X</th>
+      <th>E</th>
+      <th>M</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>13876</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11608</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 学部卒なら0、修士卒以上なら1を持つダミー変数EHを作る</span>
+<span class="n">salary_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;EH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">salary_df</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+<span class="c1"># 基本統計量を確認</span>
+<span class="n">salary_df</span><span class="p">[</span><span class="s1">&#39;EH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    46.000000
+mean      0.695652
+std       0.465215
+min       0.000000
+25%       0.000000
+50%       1.000000
+75%       1.000000
+max       1.000000
+Name: EH, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>以下の単回帰式を求めます。</p>
+<div class="math notranslate nohighlight">
+\[S_i=\beta_0+\beta_1EH_{i1}+\epsilon_i\]</div>
+<section id="statsmodels">
+<h3><span class="section-number">5.4.2.1. </span>statsmodelsを用いたダミー変数の生成<a class="headerlink" href="#statsmodels" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>では、<code class="docutils literal notranslate"><span class="pre">C()</span></code>でカテゴリー変数から自動的にダミー変数に割り当てます。また、<code class="docutils literal notranslate"><span class="pre">Treatment()</span></code>を指定することで基準カテゴリ（ベース）を指定することができます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple_formula</span> <span class="o">=</span> <span class="s1">&#39;S ~ C(EH, Treatment(0))&#39;</span>
+<span class="c1"># Treatmentはデフォルトでは最も若い値が基準カテゴリとなるため、</span>
+<span class="c1"># ここでは、以下の式でも同じ結果が得られます。</span>
+<span class="c1"># simple_formula = &#39;S ~ C(EH)&#39;としても同じ結果になります。</span>
+<span class="n">simple_res</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="n">simple_formula</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">salary_df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">simple_res</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      S   R-squared:                       0.109
+Model:                            OLS   Adj. R-squared:                  0.089
+Method:                 Least Squares   F-statistic:                     5.384
+Date:                Sun, 11 Jun 2023   Prob (F-statistic):             0.0250
+Time:                        07:35:58   Log-Likelihood:                -451.22
+No. Observations:                  46   AIC:                             906.4
+Df Residuals:                      44   BIC:                             910.1
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+============================================================================================
+                               coef    std err          t      P&gt;|t|      [0.025      0.975]
+--------------------------------------------------------------------------------------------
+Intercept                 1.494e+04   1203.326     12.417      0.000    1.25e+04    1.74e+04
+C(EH, Treatment(0))[T.1]  3347.5000   1442.737      2.320      0.025     439.855    6255.145
+==============================================================================
+Omnibus:                        3.100   Durbin-Watson:                   1.406
+Prob(Omnibus):                  0.212   Jarque-Bera (JB):                1.664
+Skew:                           0.144   Prob(JB):                        0.435
+Kurtosis:                       2.114   Cond. No.                         3.39
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>上で得られた結果の中で、<code class="docutils literal notranslate"><span class="pre">C(EH,</span> <span class="pre">Treatment(0))[T.1]</span></code>の<code class="docutils literal notranslate"><span class="pre">coef</span></code>を確認します。
+<code class="docutils literal notranslate"><span class="pre">EH=1</span></code>（修士卒以上）の従業員は基準カテゴリである学部卒の従業員に比べて、賃金は$3347.5000平均で高いことがわかります（ただし、この分析では他の要因を考慮していないので留意が必要です）。</p>
+</section>
+<section id="pandas">
+<h3><span class="section-number">5.4.2.2. </span>pandasを用いたダミー変数の生成<a class="headerlink" href="#pandas" title="Permalink to this heading">#</a></h3>
+<p>次に参考までに、<code class="docutils literal notranslate"><span class="pre">C()</span></code>を用いないで、ダミー変数を先に<code class="docutils literal notranslate"><span class="pre">pandas</span></code>などで生成してから式に入れる方法でも実行してみましょう。</p>
+<p>ここでは、<code class="docutils literal notranslate"><span class="pre">pandas</span></code>の<code class="docutils literal notranslate"><span class="pre">pd.get_dummies()</span></code>を用いてダミー変数をテーブルデータに新たな変数として追加してから式に渡す方法を紹介します。
+3つの値（1=学部卒, 2=修士卒, 3=博士卒）を持つ<code class="docutils literal notranslate"><span class="pre">E</span></code>からダミー変数を作ります。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">salary_df</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">],</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="n">prefix_sep</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">salary_df</span> <span class="o">=</span> <span class="n">salary_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dummies</span><span class="p">)</span>
+<span class="c1"># 最初の２行を表示</span>
+<span class="n">salary_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>S</th>
+      <th>X</th>
+      <th>E</th>
+      <th>M</th>
+      <th>EH</th>
+      <th>E1</th>
+      <th>E2</th>
+      <th>E3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>13876</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11608</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ダミー変数はカテゴリーの数-1の変数を式に入れ、入れなかった変数を基準カテゴリとします</span>
+<span class="n">simple_formula</span> <span class="o">=</span> <span class="s1">&#39;S ~ E2 + E3&#39;</span>
+<span class="n">simple_res</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="n">simple_formula</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">salary_df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">simple_res</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      S   R-squared:                       0.109
+Model:                            OLS   Adj. R-squared:                  0.068
+Method:                 Least Squares   F-statistic:                     2.631
+Date:                Sun, 11 Jun 2023   Prob (F-statistic):             0.0836
+Time:                        07:35:58   Log-Likelihood:                -451.22
+No. Observations:                  46   AIC:                             908.4
+Df Residuals:                      43   BIC:                             913.9
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept   1.494e+04   1217.237     12.275      0.000    1.25e+04    1.74e+04
+E2          3344.8684   1604.188      2.085      0.043     109.715    6580.022
+E3          3351.3462   1754.225      1.910      0.063    -186.386    6889.079
+==============================================================================
+Omnibus:                        3.092   Durbin-Watson:                   1.406
+Prob(Omnibus):                  0.213   Jarque-Bera (JB):                1.662
+Skew:                           0.144   Prob(JB):                        0.436
+Kurtosis:                       2.114   Cond. No.                         3.92
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="interaction-term">
+<h2><span class="section-number">5.4.3. </span>交差項（Interaction term）<a class="headerlink" href="#interaction-term" title="Permalink to this heading">#</a></h2>
+<p>ある変数が別の変数の値によって異なる影響を与えることを確認する際等に交差項を使います。</p>
+<p>例えば、上の分析の例では、学歴が修士卒以上の従業員と学部卒の従業員の間で、マネージャーであることが賃金に与える影響の違いを捉えることができます。</p>
+<p>上の例と同じ賃金に関するデータを用いて、交差項を見ていきます
+賃金(S)と、学歴(EH, 0=学部卒, 1=修士/博士卒)、マネージャーかどうか（M, 1=management, 0= not management）の関係性を見ていきます。</p>
+<p>まず、交差項を用いた分析をする前に、交差項を用いない以下の通常の重回帰分析を考えます。</p>
+<div class="math notranslate nohighlight">
+\[S_i=\beta_0+\beta_1EH_{i1}+\beta_2M_{i1}+\epsilon_i\]</div>
+<p>上の式で、<span class="math notranslate nohighlight">\(EH_i1\)</span>は修士・博士卒（EH＝1）であれば1それ以外であれば0を取るダミー変数です。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula</span> <span class="o">=</span> <span class="s1">&#39;S ~ C(M, Treatment(0)) + C(EH, Treatment(0))&#39;</span>
+<span class="c1"># formula = &#39;S ~ C(M) + C(EH)&#39; と書いてもここでは同じ結果が得られます。</span>
+<span class="n">lm</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">salary_df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      S   R-squared:                       0.598
+Model:                            OLS   Adj. R-squared:                  0.579
+Method:                 Least Squares   F-statistic:                     31.95
+Date:                Sun, 11 Jun 2023   Prob (F-statistic):           3.14e-09
+Time:                        07:35:58   Log-Likelihood:                -432.93
+No. Observations:                  46   AIC:                             871.9
+Df Residuals:                      43   BIC:                             877.3
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+============================================================================================
+                               coef    std err          t      P&gt;|t|      [0.025      0.975]
+--------------------------------------------------------------------------------------------
+Intercept                 1.258e+04    880.779     14.282      0.000    1.08e+04    1.44e+04
+C(M, Treatment(0))[T.1]   6614.3489    915.128      7.228      0.000    4768.817    8459.881
+C(EH, Treatment(0))[T.1]  2609.2914    985.927      2.647      0.011     620.981    4597.602
+==============================================================================
+Omnibus:                        3.213   Durbin-Watson:                   0.284
+Prob(Omnibus):                  0.201   Jarque-Bera (JB):                2.369
+Skew:                           0.396   Prob(JB):                        0.306
+Kurtosis:                       2.220   Cond. No.                         3.67
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>上の例のように交差項がない場合は、変数（マネージャーであること）のカテゴリー間の平均値の差は、他の変数（上の例の場合学歴）に関係なく同じであると仮定しています。</p>
+<p>交差項を用いる場合は、変数カテゴリー（上の例ではマネージャであること）の平均値の差がが他の変数（上の例の場合は学部卒か修士・博士卒か）によって異なることを確認することができます。</p>
+<p>交差項の係数の解釈では、交差項に入れた２つの変数に当てはまらい場合の平均値に比べて、追加で平均値に差をで与えると考えることができます。</p>
+<p>次に、学歴(<span class="math notranslate nohighlight">\(EH\)</span>)とマネージャーかどうかのダミー変数(<span class="math notranslate nohighlight">\(M\)</span>)の交差項を考えます。</p>
+<div class="math notranslate nohighlight">
+\[S_i=\beta_0+\beta_1EH_{i1}+\beta_2{M_i1}+\beta_3EH_{i1}M_{i1}+\epsilon_i\]</div>
+<p>ここでは、2つのサブモデルを考えることができます。</p>
+<ul class="simple">
+<li><p>マネージャーでない場合(<span class="math notranslate nohighlight">\(M=0\)</span>): <span class="math notranslate nohighlight">\(S_i=\beta_0+\beta_1{EH_{i1}}+\epsilon_i\)</span></p></li>
+<li><p>マネージャーである場合(<span class="math notranslate nohighlight">\(M=1\)</span>): <span class="math notranslate nohighlight">\(S_i=(\beta_0+\beta_2)+(\beta_1+\beta_3){EH_{i1}}+\epsilon_i\)</span></p></li>
+</ul>
+<p>パラメーターや係数の解釈例としては、以下のようになります。</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta_0\)</span>：学部卒（<span class="math notranslate nohighlight">\(EH=0\)</span>）でマネージャではない場合（<span class="math notranslate nohighlight">\(M=0\)</span>）の平均賃金</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_1\)</span>：マネージャでない場合に（<span class="math notranslate nohighlight">\(M=0\)</span>）、修士・博士卒（<span class="math notranslate nohighlight">\(EH=1\)</span>）が賃金に与える効果</p></li>
+<li><p><span class="math notranslate nohighlight">\((\beta_0+\beta_2)\)</span>：学部卒の場合（<span class="math notranslate nohighlight">\(EH=0\)</span>）の場合のマネージャーであること際の（<span class="math notranslate nohighlight">\(M=1\)</span>）平均賃金</p></li>
+<li><p><span class="math notranslate nohighlight">\((\beta_1+\beta_3)\)</span>：マネージャーである場合（<span class="math notranslate nohighlight">\(M=1\)</span>）で修士・博士卒である場合（<span class="math notranslate nohighlight">\(EH=1\)</span>）の平均賃金</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>では<code class="docutils literal notranslate"><span class="pre">:</span></code>を用いて交差項を表現できます。<code class="docutils literal notranslate"><span class="pre">C(M):C(EH)</span></code>で<span class="math notranslate nohighlight">\(\beta_3EH_{i1}M_{i1}\)</span>をつくります。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">interaction_formula</span> <span class="o">=</span> <span class="s2">&quot;S ~ C(EH) + C(M) + C(EH):C(M)&quot;</span>
+<span class="n">interaction_ols</span><span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="n">interaction_formula</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">salary_df</span><span class="p">)</span>
+<span class="n">interaction_res</span> <span class="o">=</span> <span class="n">interaction_ols</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">interaction_res</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      S   R-squared:                       0.720
+Model:                            OLS   Adj. R-squared:                  0.700
+Method:                 Least Squares   F-statistic:                     36.07
+Date:                Sun, 11 Jun 2023   Prob (F-statistic):           1.08e-11
+Time:                        07:35:58   Log-Likelihood:                -424.56
+No. Observations:                  46   AIC:                             857.1
+Df Residuals:                      42   BIC:                             864.4
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+========================================================================================
+                           coef    std err          t      P&gt;|t|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+Intercept             1.444e+04    860.547     16.783      0.000    1.27e+04    1.62e+04
+C(EH)[T.1]            -240.4967   1064.233     -0.226      0.822   -2388.206    1907.213
+C(M)[T.1]             1397.0444   1439.970      0.970      0.338   -1508.933    4303.022
+C(EH)[T.1]:C(M)[T.1]  7321.7634   1705.840      4.292      0.000    3879.239    1.08e+04
+==============================================================================
+Omnibus:                        3.125   Durbin-Watson:                   0.250
+Prob(Omnibus):                  0.210   Jarque-Bera (JB):                2.581
+Skew:                           0.461   Prob(JB):                        0.275
+Kurtosis:                       2.295   Cond. No.                         8.55
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>得られた結果のうち交差項<code class="docutils literal notranslate"><span class="pre">C(M)[T.1]:C(EH)[T.1]</span></code>の係数<code class="docutils literal notranslate"><span class="pre">coef</span></code>と、そのt値・p値を確認します。
+<code class="docutils literal notranslate"><span class="pre">coef</span></code>は7321.7634で、t値が十分に大きい（p値も十分に小さい）値であることから、マネージャーであることが賃金に与える影響は学歴（修士号・博士号の有無）によって効果が異なることが確認できます。</p>
+<p>解釈としては、学部卒・非マネージャー職より、修士・博士号取得者は、マネージャになると平均で$7322高い賃金を得ている。</p>
+</section>
+<section id="quadratic-term">
+<h2><span class="section-number">5.4.4. </span>二乗項（Quadratic term）<a class="headerlink" href="#quadratic-term" title="Permalink to this heading">#</a></h2>
+<p>賃金の上昇は若い時は経験年数が1年伸びると大きいものの、歳をとるにつれて伸びが緩やかになっていく場合もあるかもしれません。こうした変化を考慮するための１つの方法として、高次項を含む重回帰分析モデルを考えることができます。</p>
+<div class="math notranslate nohighlight">
+\[S_i=\beta_0+\beta_1X+\beta_2X^2+\beta_3EH_{1i}+\beta_5EH_{1i}M_{i}+\beta_6M_{i}+\epsilon_i\]</div>
+<p>statsmodels.from_formulaで二乗を回帰式に入れる場合は<code class="docutils literal notranslate"><span class="pre">I()</span></code>を直接fomula内に書くことができます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quadr_formula</span> <span class="o">=</span> <span class="s2">&quot;S ~ X + I(X**2) + C(EH) + C(M) + C(EH):C(M)&quot;</span>
+<span class="n">quadr_ols</span><span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="n">quadr_formula</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">salary_df</span><span class="p">)</span>
+<span class="n">quadr_res</span> <span class="o">=</span> <span class="n">quadr_ols</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">quadr_res</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      S   R-squared:                       0.990
+Model:                            OLS   Adj. R-squared:                  0.989
+Method:                 Least Squares   F-statistic:                     805.7
+Date:                Sun, 11 Jun 2023   Prob (F-statistic):           5.17e-39
+Time:                        07:35:58   Log-Likelihood:                -347.56
+No. Observations:                  46   AIC:                             707.1
+Df Residuals:                      40   BIC:                             718.1
+Df Model:                           5                                         
+Covariance Type:            nonrobust                                         
+========================================================================================
+                           coef    std err          t      P&gt;|t|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+Intercept             9512.2242    263.850     36.052      0.000    8978.964       1e+04
+C(EH)[T.1]            1484.2844    211.107      7.031      0.000    1057.622    1910.947
+C(M)[T.1]             3990.9708    288.286     13.844      0.000    3408.323    4573.619
+C(EH)[T.1]:C(M)[T.1]  4005.4495    342.817     11.684      0.000    3312.591    4698.308
+X                      481.0447     53.731      8.953      0.000     372.450     589.640
+I(X ** 2)                0.9253      2.898      0.319      0.751      -4.932       6.783
+==============================================================================
+Omnibus:                        2.996   Durbin-Watson:                   2.311
+Prob(Omnibus):                  0.224   Jarque-Bera (JB):                2.176
+Skew:                           0.522   Prob(JB):                        0.337
+Kurtosis:                       3.215   Cond. No.                         829.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>得られた結果のうち<code class="docutils literal notranslate"><span class="pre">I(X</span> <span class="pre">**</span> <span class="pre">2)</span></code>が経験年数の二乗項の係数です。t値が小さくp値も大きいので、経験年数が二条項としての効果があるとは言えない（経験年数が増えるほど経験年数が浅い人に比べて、経験年数1年増加に対する効果は小さくなるとは言えない）と解釈できます。</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/sec05"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="multiple_regression.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5.3. </span>重回帰分析</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../sec06/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>離散選択モデル</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">5.4.1. 自然対数を用いた非線形モデルの推定</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dummy-variable">5.4.2. ダミー変数（Dummy variable）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statsmodels">5.4.2.1. statsmodelsを用いたダミー変数の生成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas">5.4.2.2. pandasを用いたダミー変数の生成</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-term">5.4.3. 交差項（Interaction term）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratic-term">5.4.4. 二乗項（Quadratic term）</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

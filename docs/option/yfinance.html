@@ -1,0 +1,2075 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>9.2. Yahoo! FINANCEのデータを用いた可視化の演習 &#8212; Intro to Data Analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/option/yfinance';</script>
+    <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/docs/option/yfinance.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.3. 課題" href="exercise.html" />
+    <link rel="prev" title="9.1. COVID-19による人流の変化" href="COVID19mobility.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Quantitative Data Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">環境準備とPythonの基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec01/index.html">1. Python環境の準備</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/01_build_python_environment.html">1.1. Python環境の準備</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/02_howtopip.html">1.2. 必要なパッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/03_basic_notebook.html">1.3. Notebookの基本的な使い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec01/04_exercise.html">1.4. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec02/index.html">2. Pythonの基本的な使い方1</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/01_basic_python1.html">2.1. 変数・算術演算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/02_basic_python2.html">2.2. 複合データ型・for/while/if文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/03_basic_python3.html">2.3. 関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/04_list_comprehension.html">2.4. set型・リスト内包表記</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/05_string.html">2.5. 文字列を扱うときの注意点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec02/06_exercise.html">2.6. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec03/index.html">3. Pythonの基本的な使い方2</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/numpy.html">3.1. Pythonのライブラリ・パッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas1.html">3.2. pandas 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas2.html">3.3. pandas 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/read_write.html">3.4. ファイルの読み書き</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/pandas_datetime.html">3.5. pandasを用いた日時データの扱い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/matplotlib.html">3.6. matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/option_text_viz.html">3.7. 参考：日本語の取り扱いと正規表現</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec03/exercise.html">3.8. 課題</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">データ分析の基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec04/index.html">4. データ分析の基礎</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/01_basic_stats1.html">4.1. 平均値・中央値・最頻値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/02_basic_stats2.html">4.2. 頻度分布・偏差・分散</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/03_basic_stats3.html">4.3. 基本統計量の確認方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/04_stats_test.html">4.4. 仮説検定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec04/05_exercise.html">4.5. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec05/index.html">5. 相関・回帰・重回帰分析</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/correlation.html">5.1. 相関・散布図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/regression.html">5.2. 回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/multiple_regression.html">5.3. 重回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec05/regression_tips.html">5.4. 非線形・交差項・二乗項</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec06/index.html">6. 離散選択モデル</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/logit_provit.html">6.1. 離散選択モデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/ordered_loigt.html">6.2. 順序ロジットモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec06/multinomial_logit.html">6.3. 多項ロジットモデル</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec07/index.html">7. パネルデータ分析</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec07/paneldata.html">7.1. パネルデータ分析</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sec08/index.html">8. 機械学習</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/supervised_learning.html">8.1. 機械学習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sec08/unsupervised_learning.html">8.2. 教師なし学習</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">演習</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">9. 演習</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="COVID19mobility.html">9.1. COVID-19による人流の変化</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">9.2. Yahoo! FINANCEのデータを用いた可視化の演習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercise.html">9.3. 課題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gps_clean_data.html">9.4. 演習・交通手段分類（データ準備）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gps_feature_extraction.html">9.5. 演習・交通手段分類（データの特徴をつかむ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gps_machine_learning.html">9.6. 演習・交通手段分類（機械学習）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twitter.html">9.7. 演習・Twitterのテキスト分類問題</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/iiimethodsiv/intro2quandataanalysis/blob/gh-pages/docs/option/yfinance.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis/issues/new?title=Issue%20on%20page%20%2Fdocs/option/yfinance.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/option/yfinance.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Yahoo! FINANCEのデータを用いた可視化の演習</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-average">9.2.1. 移動平均（Moving Average）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">9.2.2. 参考: 株価の前日からのパーセント変化を求めます</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#googleapple">9.2.2.1. GoogleとApple</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.2.2.2. ヒストグラムと散布図を１つの図中に示す方法</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.2.2.2.1. 参考</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">9.2.2.3. 参考: ヒートマップで相関関係を示す</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">9.2.2.4. 参考：ロウソクチャートを描く</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="yahoo-finance">
+<h1><span class="section-number">9.2. </span>Yahoo! FINANCEのデータを用いた可視化の演習<a class="headerlink" href="#yahoo-finance" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>ここからは米国の<a class="reference external" href="https://finance.yahoo.com/">Yahoo! FINANCE</a>の株価データを用いて相関関係の可視化を行います。</p></li>
+<li><p>今日現在までの直近1年間のtech_stockおよび日系企業の株価データを用います。</p></li>
+<li><p>Pythonで<code class="docutils literal notranslate"><span class="pre">Yahoo!</span> <span class="pre">FINANCE</span></code>のデータを集めるパッケージ<code class="docutils literal notranslate"><span class="pre">yfinance</span></code>を用います。</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>ここで用いるパッケージ<a class="reference external" href="https://github.com/ranaroussi/yfinance">yfinance</a>はYahooが公開しているAPIを利用したオープンソースのツールであり、研究・教育目的での利用を想定しています。
+ダウンロードした実際のデータを使用する権利の詳細については、ヤフーの利用規約を参照する必要があります（<a class="reference external" href="https://legal.yahoo.com/us/en/yahoo/terms/product-atos/apiforydn/index.html">Yahoo Developer API Terms of Use</a>; <a class="reference external" href="https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html">Yahoo Terms of Service</a>; <a class="reference external" href="https://policies.yahoo.com/us/en/yahoo/terms/index.htm">Yahoo Terms</a>）。</p>
+</div>
+<ul class="simple">
+<li><p>ここで紹介する企業以外を試す場合は、<a class="reference external" href="https://finance.yahoo.com/">Yahoo! FINANCE</a>のページで企業の銘柄コードを確認して置き換えてください。</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>必要なパッケージをインストールします。すでに、<code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>を用いてパッケージ類をインストールしている場合は、そのまま次のセルに進んでください。</p>
+<p>まだの場合は、<a href="/docs/sec01/02_howtopip.html">こちらのページ</a>を用いてパッケージ類をインストールしてください。もしくは、以下の方法をお試しください。</p>
+<ol class="arabic simple">
+<li><p>WinodwsのかたはWindowsのメニューから<code class="docutils literal notranslate"><span class="pre">Anaconda</span> <span class="pre">Propmt</span></code>を、Macの方は<code class="docutils literal notranslate"><span class="pre">Terminal</span></code>を起動させ、</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">git</span></code> を入力してエンターを押してください。しばらくすると<code class="docutils literal notranslate"><span class="pre">Proceed</span> <span class="pre">([y]/n)?</span> </code>と表示されるので<code class="docutils literal notranslate"><span class="pre">y</span></code>を入力してエンターを押して続行してください。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">git+https://github.com/pydata/pandas-datareader</span></code>を入力しエンターを押して、<code class="docutils literal notranslate"><span class="pre">pandas-datareader</span></code>のインストールを実行します。</p></li>
+<li><p>Terminal上で、<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">yfinance</span> <span class="pre">--upgrade</span> <span class="pre">--no-cache-dir</span></code> を入力しエンターを押して<code class="docutils literal notranslate"><span class="pre">yfinance</span></code>のインストールを実行します。</p></li>
+</ol>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">pandas_datareader</span> <span class="kn">import</span> <span class="n">data</span> <span class="k">as</span> <span class="n">pdr</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">start</span> <span class="o">=</span>  <span class="n">datetime</span><span class="p">(</span><span class="n">end</span><span class="o">.</span><span class="n">year</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">end</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+
+<span class="n">yf</span><span class="o">.</span><span class="n">pdr_override</span><span class="p">()</span>
+
+<span class="n">tech_stock</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GOOG&#39;</span><span class="p">,</span> <span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;META&#39;</span><span class="p">,</span> <span class="s1">&#39;AMZN&#39;</span><span class="p">,</span> <span class="s1">&#39;NFLX&#39;</span><span class="p">,</span> <span class="s1">&#39;TSLA&#39;</span><span class="p">]</span> 
+
+<span class="k">for</span> <span class="n">company</span> <span class="ow">in</span> <span class="n">tech_stock</span><span class="p">:</span>
+    <span class="nb">globals</span><span class="p">()[</span><span class="n">company</span><span class="p">]</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_yahoo</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="n">company</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Open：始値<br>
+High：高値<br>
+Low：安値<br>
+Close：終値<br>
+Volume：出来高（1日に取引が成立した株の数）<br>
+Adj Close：<a class="reference external" href="https://help.yahoo.com/kb/SLN28256.html?guccounter=1&amp;guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&amp;guce_referrer_sig=AQAAABm20bVaadJmuWaLtnp6QzQCwpE_bTPY1hTdDmAaCgQpJZbpvmWaMHqlWYEgnwyh3FfOHJwtu91jk5ZEOSLevJYuUan19QpMb53UoUn5gZQ845yQPdjRWlMdlhsKSZKhCHWJd_hKiDjztsd_0rJdtzmiGUb3XIbM17AScHCeUs8B">調整後終値</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">GOOG</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Volume</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>250.000000</td>
+      <td>250.000000</td>
+      <td>250.000000</td>
+      <td>250.000000</td>
+      <td>250.000000</td>
+      <td>2.500000e+02</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>104.000788</td>
+      <td>105.572413</td>
+      <td>102.788024</td>
+      <td>104.208816</td>
+      <td>104.208816</td>
+      <td>2.784763e+07</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>10.334196</td>
+      <td>10.497675</td>
+      <td>10.344346</td>
+      <td>10.463401</td>
+      <td>10.463401</td>
+      <td>1.087804e+07</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>85.510002</td>
+      <td>86.550003</td>
+      <td>83.449997</td>
+      <td>83.489998</td>
+      <td>83.489998</td>
+      <td>8.567800e+06</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>95.749998</td>
+      <td>97.344997</td>
+      <td>94.440002</td>
+      <td>95.835001</td>
+      <td>95.835001</td>
+      <td>2.130725e+07</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>102.799999</td>
+      <td>104.205002</td>
+      <td>101.857502</td>
+      <td>103.549999</td>
+      <td>103.549999</td>
+      <td>2.513990e+07</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>111.295748</td>
+      <td>113.192377</td>
+      <td>109.319126</td>
+      <td>111.847502</td>
+      <td>111.847502</td>
+      <td>3.148348e+07</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>127.574997</td>
+      <td>129.550003</td>
+      <td>125.970001</td>
+      <td>127.910004</td>
+      <td>127.910004</td>
+      <td>9.779860e+07</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">GOOG</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+DatetimeIndex: 250 entries, 2022-06-13 to 2023-06-09
+Data columns (total 6 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   Open       250 non-null    float64
+ 1   High       250 non-null    float64
+ 2   Low        250 non-null    float64
+ 3   Close      250 non-null    float64
+ 4   Adj Close  250 non-null    float64
+ 5   Volume     250 non-null    int64  
+dtypes: float64(5), int64(1)
+memory usage: 13.7 KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Google の調整済終値のプロット</span>
+<span class="n">GOOG</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Google Adjusted Closing Price&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;price (USD)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c547b557162dc8491a852af2d143857611f16081e3ae1d5e768b2e82153dbceb.png" src="../../_images/c547b557162dc8491a852af2d143857611f16081e3ae1d5e768b2e82153dbceb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 長い時系列の場合、ある年やある年月を指定して、簡単にデータの一部分を選択することができます。</span>
+<span class="n">GOOG</span><span class="p">[</span><span class="s1">&#39;2023-2&#39;</span><span class="p">]</span> <span class="c1">#2023年2月のみを抽出</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_18384/3804317712.py:2: FutureWarning: Indexing a DataFrame with a datetimelike index using a single string to slice the rows, like `frame[string]`, is deprecated and will be removed in a future version. Use `frame.loc[string]` instead.
+  GOOG[&#39;2023-2&#39;] #2023年2月のみを抽出
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Volume</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2023-02-01</th>
+      <td>99.739998</td>
+      <td>102.190002</td>
+      <td>98.419998</td>
+      <td>101.430000</td>
+      <td>101.430000</td>
+      <td>26392600</td>
+    </tr>
+    <tr>
+      <th>2023-02-02</th>
+      <td>106.790001</td>
+      <td>108.820000</td>
+      <td>106.540001</td>
+      <td>108.800003</td>
+      <td>108.800003</td>
+      <td>46622600</td>
+    </tr>
+    <tr>
+      <th>2023-02-03</th>
+      <td>103.510002</td>
+      <td>108.019997</td>
+      <td>103.300003</td>
+      <td>105.220001</td>
+      <td>105.220001</td>
+      <td>36823400</td>
+    </tr>
+    <tr>
+      <th>2023-02-06</th>
+      <td>102.684998</td>
+      <td>104.699997</td>
+      <td>102.209999</td>
+      <td>103.470001</td>
+      <td>103.470001</td>
+      <td>25573000</td>
+    </tr>
+    <tr>
+      <th>2023-02-07</th>
+      <td>103.629997</td>
+      <td>108.669998</td>
+      <td>103.547997</td>
+      <td>108.040001</td>
+      <td>108.040001</td>
+      <td>33738800</td>
+    </tr>
+    <tr>
+      <th>2023-02-08</th>
+      <td>102.690002</td>
+      <td>103.580002</td>
+      <td>98.455002</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>73546000</td>
+    </tr>
+    <tr>
+      <th>2023-02-09</th>
+      <td>100.540001</td>
+      <td>100.610001</td>
+      <td>93.860001</td>
+      <td>95.459999</td>
+      <td>95.459999</td>
+      <td>97798600</td>
+    </tr>
+    <tr>
+      <th>2023-02-10</th>
+      <td>95.739998</td>
+      <td>97.019997</td>
+      <td>94.529999</td>
+      <td>94.860001</td>
+      <td>94.860001</td>
+      <td>49325300</td>
+    </tr>
+    <tr>
+      <th>2023-02-13</th>
+      <td>95.010002</td>
+      <td>95.349998</td>
+      <td>94.050003</td>
+      <td>95.000000</td>
+      <td>95.000000</td>
+      <td>43116600</td>
+    </tr>
+    <tr>
+      <th>2023-02-14</th>
+      <td>94.660004</td>
+      <td>95.175003</td>
+      <td>92.650002</td>
+      <td>94.949997</td>
+      <td>94.949997</td>
+      <td>42513100</td>
+    </tr>
+    <tr>
+      <th>2023-02-15</th>
+      <td>94.739998</td>
+      <td>97.339996</td>
+      <td>94.360001</td>
+      <td>97.099998</td>
+      <td>97.099998</td>
+      <td>36964500</td>
+    </tr>
+    <tr>
+      <th>2023-02-16</th>
+      <td>95.540001</td>
+      <td>97.879997</td>
+      <td>94.970001</td>
+      <td>95.779999</td>
+      <td>95.779999</td>
+      <td>35642100</td>
+    </tr>
+    <tr>
+      <th>2023-02-17</th>
+      <td>95.070000</td>
+      <td>95.750000</td>
+      <td>93.449997</td>
+      <td>94.589996</td>
+      <td>94.589996</td>
+      <td>31095100</td>
+    </tr>
+    <tr>
+      <th>2023-02-21</th>
+      <td>93.239998</td>
+      <td>93.415001</td>
+      <td>92.000000</td>
+      <td>92.050003</td>
+      <td>92.050003</td>
+      <td>28367200</td>
+    </tr>
+    <tr>
+      <th>2023-02-22</th>
+      <td>91.933998</td>
+      <td>92.360001</td>
+      <td>90.870003</td>
+      <td>91.800003</td>
+      <td>91.800003</td>
+      <td>29891100</td>
+    </tr>
+    <tr>
+      <th>2023-02-23</th>
+      <td>92.129997</td>
+      <td>92.129997</td>
+      <td>90.010002</td>
+      <td>91.070000</td>
+      <td>91.070000</td>
+      <td>32423700</td>
+    </tr>
+    <tr>
+      <th>2023-02-24</th>
+      <td>89.629997</td>
+      <td>90.129997</td>
+      <td>88.860001</td>
+      <td>89.349998</td>
+      <td>89.349998</td>
+      <td>31295600</td>
+    </tr>
+    <tr>
+      <th>2023-02-27</th>
+      <td>90.089996</td>
+      <td>90.449997</td>
+      <td>89.610001</td>
+      <td>90.099998</td>
+      <td>90.099998</td>
+      <td>22724300</td>
+    </tr>
+    <tr>
+      <th>2023-02-28</th>
+      <td>89.540001</td>
+      <td>91.449997</td>
+      <td>89.519997</td>
+      <td>90.300003</td>
+      <td>90.300003</td>
+      <td>30546900</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="moving-average">
+<h2><span class="section-number">9.2.1. </span>移動平均（Moving Average）<a class="headerlink" href="#moving-average" title="Permalink to this heading">#</a></h2>
+<p>時系列データで一定区間ごとの平均値を区間をずらしながら求めたもの</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ma_day</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span> <span class="c1"># 10日、20日、50日の移動平均の値を持つ新しいcolumn(MA_10, MA_20, MA_50)を作ります</span>
+<span class="k">for</span> <span class="n">ma</span> <span class="ow">in</span> <span class="n">ma_day</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">company</span> <span class="ow">in</span> <span class="p">[</span><span class="n">GOOG</span><span class="p">,</span> <span class="n">AAPL</span><span class="p">,</span> <span class="n">META</span><span class="p">,</span> <span class="n">NFLX</span><span class="p">,</span> <span class="n">AMZN</span><span class="p">]:</span>
+        <span class="n">company</span><span class="p">[</span><span class="s1">&#39;MA_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ma</span><span class="p">)]</span> <span class="o">=</span> <span class="n">company</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">ma</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="c1">#rolling(日数).mean()で日数の移動平均を求めます</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">AAPL</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Volume</th>
+      <th>MA_10</th>
+      <th>MA_20</th>
+      <th>MA_30</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2022-06-13</th>
+      <td>132.869995</td>
+      <td>135.199997</td>
+      <td>131.440002</td>
+      <td>131.880005</td>
+      <td>131.097183</td>
+      <td>122207100</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2022-06-14</th>
+      <td>133.130005</td>
+      <td>133.889999</td>
+      <td>131.479996</td>
+      <td>132.759995</td>
+      <td>131.971970</td>
+      <td>84784300</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2022-06-15</th>
+      <td>134.289993</td>
+      <td>137.339996</td>
+      <td>132.160004</td>
+      <td>135.429993</td>
+      <td>134.626114</td>
+      <td>91533000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">AAPL</span><span class="p">[[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">,</span><span class="s1">&#39;MA_10&#39;</span><span class="p">,</span> <span class="s1">&#39;MA_20&#39;</span><span class="p">,</span><span class="s1">&#39;MA_30&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Moving Average (10 days, 20 days, 30 days windows)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;price (USD)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/781691aeed94bb4485793dc4da186ed2b56c4fe08b03d55f198a2e4f5c77c5ca.png" src="../../_images/781691aeed94bb4485793dc4da186ed2b56c4fe08b03d55f198a2e4f5c77c5ca.png" />
+</div>
+</div>
+</section>
+<section id="id1">
+<h2><span class="section-number">9.2.2. </span>参考: 株価の前日からのパーセント変化を求めます<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">company</span> <span class="ow">in</span> <span class="p">[</span><span class="n">GOOG</span><span class="p">,</span> <span class="n">AAPL</span><span class="p">,</span> <span class="n">META</span><span class="p">,</span> <span class="n">AMZN</span><span class="p">,</span> <span class="n">NFLX</span><span class="p">,</span><span class="n">TSLA</span><span class="p">]:</span>
+    <span class="n">company</span><span class="p">[</span><span class="s1">&#39;returns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">company</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">]</span>
+<span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">company</span> <span class="ow">in</span> <span class="p">[</span><span class="n">GOOG</span><span class="p">,</span> <span class="n">AAPL</span><span class="p">,</span> <span class="n">META</span><span class="p">,</span> <span class="n">AMZN</span><span class="p">,</span> <span class="n">NFLX</span><span class="p">,</span> <span class="n">TSLA</span><span class="p">]:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">company</span><span class="p">[</span><span class="s1">&#39;returns&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span><span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">tech_stock</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Percentage change&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9b46a009ee5664466b68fc9671fc47eb0e674081c66c29e62c80a3a5ae9739e8.png" src="../../_images/9b46a009ee5664466b68fc9671fc47eb0e674081c66c29e62c80a3a5ae9739e8.png" />
+</div>
+</div>
+<p>ヒストグラムで6社の変化率を上のように示すと、6社とも多くの日で前日からの変化率は??％以内。</p>
+<p>6社の終値を格納したDataFrameを作成します</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tech_stock_close</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;GOOG&#39;</span><span class="p">:</span><span class="n">GOOG</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">],</span>
+                           <span class="s1">&#39;AAPL&#39;</span><span class="p">:</span><span class="n">AAPL</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">],</span>
+                           <span class="s1">&#39;META&#39;</span><span class="p">:</span> <span class="n">META</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">],</span>
+                           <span class="s1">&#39;AMZN&#39;</span><span class="p">:</span> <span class="n">AMZN</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">],</span>
+                           <span class="s1">&#39;NFLX&#39;</span><span class="p">:</span> <span class="n">NFLX</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">],</span>
+                           <span class="s1">&#39;TSLA&#39;</span><span class="p">:</span> <span class="n">TSLA</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]})</span>
+<span class="n">tech_stock_close</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GOOG</th>
+      <th>AAPL</th>
+      <th>META</th>
+      <th>AMZN</th>
+      <th>NFLX</th>
+      <th>TSLA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>250.000000</td>
+      <td>250.000000</td>
+      <td>250.000000</td>
+      <td>250.000000</td>
+      <td>250.000000</td>
+      <td>250.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>104.208816</td>
+      <td>152.156112</td>
+      <td>167.242040</td>
+      <td>108.010160</td>
+      <td>286.144721</td>
+      <td>209.581933</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>10.463401</td>
+      <td>13.339585</td>
+      <td>43.463765</td>
+      <td>15.081507</td>
+      <td>59.716846</td>
+      <td>50.901699</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>83.489998</td>
+      <td>124.656975</td>
+      <td>88.910004</td>
+      <td>81.820000</td>
+      <td>167.539993</td>
+      <td>108.099998</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>95.835001</td>
+      <td>142.517475</td>
+      <td>133.284996</td>
+      <td>96.229998</td>
+      <td>233.510006</td>
+      <td>178.187496</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>103.549999</td>
+      <td>150.750771</td>
+      <td>163.610001</td>
+      <td>104.640003</td>
+      <td>295.119995</td>
+      <td>197.474998</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>111.847502</td>
+      <td>163.369026</td>
+      <td>190.907497</td>
+      <td>117.835001</td>
+      <td>330.080002</td>
+      <td>239.628334</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>127.910004</td>
+      <td>180.960007</td>
+      <td>272.609985</td>
+      <td>144.779999</td>
+      <td>420.019989</td>
+      <td>309.320007</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tech_stock_close</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+DatetimeIndex: 250 entries, 2022-06-13 to 2023-06-09
+Data columns (total 6 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   GOOG    250 non-null    float64
+ 1   AAPL    250 non-null    float64
+ 2   META    250 non-null    float64
+ 3   AMZN    250 non-null    float64
+ 4   NFLX    250 non-null    float64
+ 5   TSLA    250 non-null    float64
+dtypes: float64(6)
+memory usage: 13.7 KB
+</pre></div>
+</div>
+</div>
+</div>
+<section id="googleapple">
+<h3><span class="section-number">9.2.2.1. </span>GoogleとApple<a class="headerlink" href="#googleapple" title="Permalink to this heading">#</a></h3>
+<p>GoogleとApple の直近1年間の株価終値の相関係数を求めます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tech_stock_close</span><span class="p">[</span><span class="s1">&#39;GOOG&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">tech_stock_close</span><span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7090826577281499
+</pre></div>
+</div>
+</div>
+</div>
+<p>GoogleとApple の直近1年間の株価終値の相関行列を示します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tech_stock_close</span><span class="p">[[</span><span class="s1">&#39;GOOG&#39;</span><span class="p">,</span><span class="s1">&#39;AAPL&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GOOG</th>
+      <th>AAPL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>GOOG</th>
+      <td>1.000000</td>
+      <td>0.709083</td>
+    </tr>
+    <tr>
+      <th>AAPL</th>
+      <td>0.709083</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>GoogleとApple の直近1年間の株価終値の散布図を示します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tech_stock_close</span><span class="p">[</span><span class="s1">&#39;GOOG&#39;</span><span class="p">],</span><span class="n">tech_stock_close</span><span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">],</span><span class="n">color</span> <span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Google&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Apple&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Closing prices of Google and Apple&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d020d113615f7057f20a405a0bf64157356126b772a051349d5e6c13de078aba.png" src="../../_images/d020d113615f7057f20a405a0bf64157356126b772a051349d5e6c13de078aba.png" />
+</div>
+</div>
+</section>
+<section id="id2">
+<h3><span class="section-number">9.2.2.2. </span>ヒストグラムと散布図を１つの図中に示す方法<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tech_stock_close</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;GOOG&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;TSLA&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/162e1ce907e9b2a3f5a11ffeb0a90f5364a651506588bab225e8a29b11303bbe.png" src="../../_images/162e1ce907e9b2a3f5a11ffeb0a90f5364a651506588bab225e8a29b11303bbe.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">tech_stock_close</span><span class="p">,</span> <span class="n">plot_kws</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/df84f944399e650b960050640fc348396624ce729a991456437174e332ac3f8c.png" src="../../_images/df84f944399e650b960050640fc348396624ce729a991456437174e332ac3f8c.png" />
+</div>
+</div>
+<p>6社の相関行列を示します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tech_stock_close</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GOOG</th>
+      <th>AAPL</th>
+      <th>META</th>
+      <th>AMZN</th>
+      <th>NFLX</th>
+      <th>TSLA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>GOOG</th>
+      <td>1.000000</td>
+      <td>0.709083</td>
+      <td>0.663001</td>
+      <td>0.780760</td>
+      <td>-0.115479</td>
+      <td>0.508464</td>
+    </tr>
+    <tr>
+      <th>AAPL</th>
+      <td>0.709083</td>
+      <td>1.000000</td>
+      <td>0.788081</td>
+      <td>0.558101</td>
+      <td>0.364242</td>
+      <td>0.313687</td>
+    </tr>
+    <tr>
+      <th>META</th>
+      <td>0.663001</td>
+      <td>0.788081</td>
+      <td>1.000000</td>
+      <td>0.302588</td>
+      <td>0.429025</td>
+      <td>0.003959</td>
+    </tr>
+    <tr>
+      <th>AMZN</th>
+      <td>0.780760</td>
+      <td>0.558101</td>
+      <td>0.302588</td>
+      <td>1.000000</td>
+      <td>-0.376531</td>
+      <td>0.841432</td>
+    </tr>
+    <tr>
+      <th>NFLX</th>
+      <td>-0.115479</td>
+      <td>0.364242</td>
+      <td>0.429025</td>
+      <td>-0.376531</td>
+      <td>1.000000</td>
+      <td>-0.597477</td>
+    </tr>
+    <tr>
+      <th>TSLA</th>
+      <td>0.508464</td>
+      <td>0.313687</td>
+      <td>0.003959</td>
+      <td>0.841432</td>
+      <td>-0.597477</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="id3">
+<h4><span class="section-number">9.2.2.2.1. </span>参考<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
+<p>続いて日本の自動車メーカーのToyota Motor CorporationとHonda Motor Co., Ltd.の直近1年の株価も収集します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">start</span> <span class="o">=</span>  <span class="n">datetime</span><span class="p">(</span><span class="n">end</span><span class="o">.</span><span class="n">year</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">end</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+
+<span class="n">yf</span><span class="o">.</span><span class="n">pdr_override</span><span class="p">()</span>
+
+<span class="n">vehicles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TM&#39;</span><span class="p">,</span> <span class="s1">&#39;HMC&#39;</span><span class="p">]</span> <span class="c1"># TM : Toyota Motor Corporation, HMC: Honda Motor Co., Ltd.</span>
+<span class="k">for</span> <span class="n">company</span> <span class="ow">in</span> <span class="n">vehicles</span><span class="p">:</span>
+    <span class="nb">globals</span><span class="p">()[</span><span class="n">company</span><span class="p">]</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_yahoo</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="n">company</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">TM</span><span class="o">.</span><span class="n">info</span><span class="p">(),</span> <span class="n">HMC</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+DatetimeIndex: 250 entries, 2022-06-13 to 2023-06-09
+Data columns (total 6 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   Open       250 non-null    float64
+ 1   High       250 non-null    float64
+ 2   Low        250 non-null    float64
+ 3   Close      250 non-null    float64
+ 4   Adj Close  250 non-null    float64
+ 5   Volume     250 non-null    int64  
+dtypes: float64(5), int64(1)
+memory usage: 13.7 KB
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+DatetimeIndex: 250 entries, 2022-06-13 to 2023-06-09
+Data columns (total 6 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   Open       250 non-null    float64
+ 1   High       250 non-null    float64
+ 2   Low        250 non-null    float64
+ 3   Close      250 non-null    float64
+ 4   Adj Close  250 non-null    float64
+ 5   Volume     250 non-null    int64  
+dtypes: float64(5), int64(1)
+memory usage: 13.7 KB
+None None
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tm_hmc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;TM&#39;</span><span class="p">:</span><span class="n">TM</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">],</span><span class="s1">&#39;HMC&#39;</span><span class="p">:</span><span class="n">HMC</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]})</span>
+<span class="n">tech_stock_th</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tech_stock_close</span><span class="p">,</span> <span class="n">tm_hmc</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tech_stock_th</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GOOG</th>
+      <th>AAPL</th>
+      <th>META</th>
+      <th>AMZN</th>
+      <th>NFLX</th>
+      <th>TSLA</th>
+      <th>TM</th>
+      <th>HMC</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2023-01-26</th>
+      <td>99.160004</td>
+      <td>143.541992</td>
+      <td>147.300003</td>
+      <td>99.220001</td>
+      <td>364.869995</td>
+      <td>160.270004</td>
+      <td>145.470001</td>
+      <td>24.270000</td>
+    </tr>
+    <tr>
+      <th>2023-02-24</th>
+      <td>89.349998</td>
+      <td>146.507355</td>
+      <td>170.389999</td>
+      <td>93.500000</td>
+      <td>317.149994</td>
+      <td>196.880005</td>
+      <td>136.050003</td>
+      <td>25.750000</td>
+    </tr>
+    <tr>
+      <th>2023-01-23</th>
+      <td>101.209999</td>
+      <td>140.700272</td>
+      <td>143.270004</td>
+      <td>97.519997</td>
+      <td>357.420013</td>
+      <td>143.750000</td>
+      <td>146.029999</td>
+      <td>24.160000</td>
+    </tr>
+    <tr>
+      <th>2022-08-04</th>
+      <td>118.870003</td>
+      <td>164.825790</td>
+      <td>170.570007</td>
+      <td>142.570007</td>
+      <td>229.910004</td>
+      <td>308.633331</td>
+      <td>156.660004</td>
+      <td>25.015797</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># データを保存</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">tech_stock_close</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;./data/tech_stock_close.csv&#39;</span><span class="p">)</span>
+<span class="n">tech_stock_close</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;./data/tech_stock_close.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>tech_stock４社と自動車メーカー２社の相関行列を示します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tech_stock_th</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GOOG</th>
+      <th>AAPL</th>
+      <th>META</th>
+      <th>AMZN</th>
+      <th>NFLX</th>
+      <th>TSLA</th>
+      <th>TM</th>
+      <th>HMC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>GOOG</th>
+      <td>1.000000</td>
+      <td>0.709083</td>
+      <td>0.663001</td>
+      <td>0.780760</td>
+      <td>-0.115479</td>
+      <td>0.508464</td>
+      <td>0.560240</td>
+      <td>0.623239</td>
+    </tr>
+    <tr>
+      <th>AAPL</th>
+      <td>0.709083</td>
+      <td>1.000000</td>
+      <td>0.788081</td>
+      <td>0.558101</td>
+      <td>0.364242</td>
+      <td>0.313687</td>
+      <td>0.087506</td>
+      <td>0.822188</td>
+    </tr>
+    <tr>
+      <th>META</th>
+      <td>0.663001</td>
+      <td>0.788081</td>
+      <td>1.000000</td>
+      <td>0.302588</td>
+      <td>0.429025</td>
+      <td>0.003959</td>
+      <td>0.005265</td>
+      <td>0.860276</td>
+    </tr>
+    <tr>
+      <th>AMZN</th>
+      <td>0.780760</td>
+      <td>0.558101</td>
+      <td>0.302588</td>
+      <td>1.000000</td>
+      <td>-0.376531</td>
+      <td>0.841432</td>
+      <td>0.530481</td>
+      <td>0.310547</td>
+    </tr>
+    <tr>
+      <th>NFLX</th>
+      <td>-0.115479</td>
+      <td>0.364242</td>
+      <td>0.429025</td>
+      <td>-0.376531</td>
+      <td>1.000000</td>
+      <td>-0.597477</td>
+      <td>-0.495302</td>
+      <td>0.478649</td>
+    </tr>
+    <tr>
+      <th>TSLA</th>
+      <td>0.508464</td>
+      <td>0.313687</td>
+      <td>0.003959</td>
+      <td>0.841432</td>
+      <td>-0.597477</td>
+      <td>1.000000</td>
+      <td>0.527795</td>
+      <td>0.066171</td>
+    </tr>
+    <tr>
+      <th>TM</th>
+      <td>0.560240</td>
+      <td>0.087506</td>
+      <td>0.005265</td>
+      <td>0.530481</td>
+      <td>-0.495302</td>
+      <td>0.527795</td>
+      <td>1.000000</td>
+      <td>0.162215</td>
+    </tr>
+    <tr>
+      <th>HMC</th>
+      <td>0.623239</td>
+      <td>0.822188</td>
+      <td>0.860276</td>
+      <td>0.310547</td>
+      <td>0.478649</td>
+      <td>0.066171</td>
+      <td>0.162215</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="id4">
+<h3><span class="section-number">9.2.2.3. </span>参考: ヒートマップで相関関係を示す<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>変数が多い場合視覚的にわかりやすい</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CorrMtx</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">dropDuplicates</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">dropDuplicates</span><span class="p">:</span>    
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+        <span class="n">mask</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">triu_indices_from</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="n">style</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">diverging_palette</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">dropDuplicates</span><span class="p">:</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+
+
+<span class="n">CorrMtx</span><span class="p">(</span><span class="n">tech_stock_th</span><span class="o">.</span><span class="n">corr</span><span class="p">(),</span> <span class="n">dropDuplicates</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_18384/1290747193.py:4: DeprecationWarning: `np.bool` is a deprecated alias for the builtin `bool`. To silence this warning, use `bool` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.bool_` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  mask = np.zeros_like(df, dtype=np.bool)
+</pre></div>
+</div>
+<img alt="../../_images/27462368925e0fb932c1adb7e5221e1b53b1aced3e4a4cd6214d03cf3ba60749.png" src="../../_images/27462368925e0fb932c1adb7e5221e1b53b1aced3e4a4cd6214d03cf3ba60749.png" />
+</div>
+</div>
+<p>AppleとToyotaの散布図を示します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;TM&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tech_stock_th</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;purple&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/28cd4bda41295b0dbc745dfae7b5b7035210d5ce41aa785ae0909cd252121bc0.png" src="../../_images/28cd4bda41295b0dbc745dfae7b5b7035210d5ce41aa785ae0909cd252121bc0.png" />
+</div>
+</div>
+<p>HondaとToyotaの散布図を示します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;HMC&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;TM&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tech_stock_th</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/cd40e3d7302fa0348335dec0b55072ec1dcc8d3a10cefa83e5211ad30b424272.png" src="../../_images/cd40e3d7302fa0348335dec0b55072ec1dcc8d3a10cefa83e5211ad30b424272.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">tech_stock_th</span><span class="p">,</span> <span class="n">plot_kws</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a7425aa6bf80e3c9949f4394ed8ba40e68497e49fe34b631c1181ce3d90192ad.png" src="../../_images/a7425aa6bf80e3c9949f4394ed8ba40e68497e49fe34b631c1181ce3d90192ad.png" />
+</div>
+</div>
+</section>
+<section id="id5">
+<h3><span class="section-number">9.2.2.4. </span>参考：ロウソクチャートを描く<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>以下<code class="docutils literal notranslate"><span class="pre">cufflinks</span></code>というパッケージを用いて可視化を行います。
+<code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>を用いて必要なパッケージをすでにインストールしている場合は、次のセルに進んでください。インストール方法はこちら<a class="reference internal" href="../sec01/02_howtopip.html"><span class="doc">必要なパッケージ</span></a>をご確認ください。</p>
+<p>まだの場合などは、<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">cufflinks</span></code>をターミナルで実行しcufflinksをインストールてから次のセルを実行してください。</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cufflinks</span> <span class="k">as</span> <span class="nn">cf</span>
+<span class="n">cf</span><span class="o">.</span><span class="n">set_config_file</span><span class="p">(</span><span class="n">offline</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">qf</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">QuantFig</span><span class="p">(</span><span class="n">AAPL</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Apple Candle Chart&#39;</span><span class="p">)</span>
+<span class="n">qf</span><span class="o">.</span><span class="n">iplot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">        <script type="text/javascript">
+        window.PlotlyConfig = {MathJaxConfig: 'local'};
+        if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+        if (typeof require !== 'undefined') {
+        require.undef("plotly");
+        requirejs.config({
+            paths: {
+                'plotly': ['https://cdn.plot.ly/plotly-2.20.0.min']
+            }
+        });
+        require(['plotly'], function(Plotly) {
+            window._Plotly = Plotly;
+        });
+        }
+        </script>
+        </div><div class="output text_html">        <script type="text/javascript">
+        window.PlotlyConfig = {MathJaxConfig: 'local'};
+        if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+        if (typeof require !== 'undefined') {
+        require.undef("plotly");
+        requirejs.config({
+            paths: {
+                'plotly': ['https://cdn.plot.ly/plotly-2.20.0.min']
+            }
+        });
+        require(['plotly'], function(Plotly) {
+            window._Plotly = Plotly;
+        });
+        }
+        </script>
+        </div><div class="output text_html"><div>                            <div id="a5dddcc7-d3d9-4356-811d-bb77cfd9ca46" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};
+                    window.PLOTLYENV.BASE_URL='https://plot.ly';                                    if (document.getElementById("a5dddcc7-d3d9-4356-811d-bb77cfd9ca46")) {                    Plotly.newPlot(                        "a5dddcc7-d3d9-4356-811d-bb77cfd9ca46",                        [{"close":[131.8800048828125,132.75999450683594,135.42999267578125,130.05999755859375,131.55999755859375,135.8699951171875,135.35000610351562,138.27000427246094,141.66000366210938,141.66000366210938,137.44000244140625,139.22999572753906,136.72000122070312,138.92999267578125,141.55999755859375,142.9199981689453,146.35000610351562,147.0399932861328,144.8699951171875,145.86000061035156,145.49000549316406,148.47000122070312,150.1699981689453,147.07000732421875,151.0,153.0399932861328,155.35000610351562,154.08999633789062,152.9499969482422,151.60000610351562,156.7899932861328,157.35000610351562,162.50999450683594,161.50999450683594,160.00999450683594,166.1300048828125,165.80999755859375,165.35000610351562,164.8699951171875,164.9199981689453,169.24000549316406,168.49000549316406,172.10000610351562,173.19000244140625,173.02999877929688,174.5500030517578,174.14999389648438,171.52000427246094,167.57000732421875,167.22999572753906,167.52999877929688,170.02999877929688,163.6199951171875,161.3800048828125,158.91000366210938,157.22000122070312,157.9600067138672,155.80999755859375,154.52999877929688,155.9600067138672,154.4600067138672,157.3699951171875,163.42999267578125,153.83999633789062,155.30999755859375,152.3699951171875,150.6999969482422,154.47999572753906,156.89999389648438,153.72000122070312,152.74000549316406,150.42999267578125,150.77000427246094,151.75999450683594,149.83999633789062,142.47999572753906,138.1999969482422,142.4499969482422,146.10000610351562,146.39999389648438,145.42999267578125,140.08999633789062,140.4199981689453,138.97999572753906,138.33999633789062,142.99000549316406,138.3800048828125,142.41000366210938,143.75,143.86000061035156,143.38999938964844,147.27000427246094,149.4499969482422,152.33999633789062,149.35000610351562,144.8000030517578,155.74000549316406,153.33999633789062,150.64999389648438,145.02999877929688,138.8800048828125,138.3800048828125,138.9199981689453,139.5,134.8699951171875,146.8699951171875,149.6999969482422,148.27999877929688,150.0399932861328,148.7899932861328,150.72000122070312,151.2899932861328,148.00999450683594,150.17999267578125,151.07000732421875,148.11000061035156,144.22000122070312,141.1699981689453,148.02999877929688,148.30999755859375,147.80999755859375,146.6300048828125,142.91000366210938,140.94000244140625,142.64999389648438,142.16000366210938,144.49000549316406,145.47000122070312,143.2100067138672,136.5,134.50999450683594,132.3699951171875,132.3000030517578,135.4499969482422,132.22999572753906,131.86000061035156,130.02999877929688,126.04000091552734,129.61000061035156,129.92999267578125,125.06999969482422,126.36000061035156,125.0199966430664,129.6199951171875,130.14999389648438,130.72999572753906,133.49000549316406,133.41000366210938,134.75999450683594,135.94000244140625,135.2100067138672,135.27000427246094,137.8699951171875,141.11000061035156,142.52999877929688,141.86000061035156,143.9600067138672,145.92999267578125,143.0,144.2899932861328,145.42999267578125,150.82000732421875,154.5,151.72999572753906,154.64999389648438,151.9199981689453,150.8699951171875,151.00999450683594,153.85000610351562,153.1999969482422,155.3300018310547,153.7100067138672,152.5500030517578,148.47999572753906,148.91000366210938,149.39999389648438,146.7100067138672,147.9199981689453,147.41000366210938,145.30999755859375,145.91000366210938,151.02999877929688,153.8300018310547,151.60000610351562,152.8699951171875,150.58999633789062,148.5,150.47000122070312,152.58999633789062,152.99000549316406,155.85000610351562,155.0,157.39999389648438,159.27999877929688,157.8300018310547,158.92999267578125,160.25,158.27999877929688,157.64999389648438,160.77000427246094,162.36000061035156,164.89999389648438,166.1699981689453,165.6300048828125,163.75999450683594,164.66000366210938,162.02999877929688,160.8000030517578,160.10000610351562,165.55999755859375,165.2100067138672,165.22999572753906,166.47000122070312,167.6300048828125,166.64999389648438,165.02000427246094,165.3300018310547,163.77000427246094,163.75999450683594,168.41000366210938,169.67999267578125,169.58999633789062,168.5399932861328,167.4499969482422,165.7899932861328,173.57000732421875,173.5,171.77000427246094,173.55999755859375,173.75,172.57000732421875,172.07000732421875,172.07000732421875,172.69000244140625,175.0500030517578,175.16000366210938,174.1999969482422,171.55999755859375,171.83999633789062,172.99000549316406,175.42999267578125,177.3000030517578,177.25,180.08999633789062,180.9499969482422,179.5800018310547,179.2100067138672,177.82000732421875,180.57000732421875,180.9600067138672],"decreasing":{"line":{"color":"#808080"}},"high":[135.1999969482422,133.88999938964844,137.33999633789062,132.38999938964844,133.0800018310547,137.05999755859375,137.75999450683594,138.58999633789062,141.91000366210938,143.49000549316406,143.4199981689453,140.6699981689453,138.3699951171875,139.0399932861328,141.61000061035156,144.1199951171875,146.5500030517578,147.5500030517578,146.63999938964844,148.4499969482422,146.4499969482422,148.9499969482422,150.86000061035156,151.57000732421875,151.22999572753906,153.72000122070312,155.57000732421875,156.27999877929688,155.0399932861328,153.08999633789062,157.3300018310547,157.63999938964844,163.6300048828125,163.58999633789062,162.41000366210938,166.58999633789062,167.19000244140625,165.85000610351562,167.80999755859375,165.82000732421875,169.33999633789062,170.99000549316406,172.1699981689453,173.38999938964844,173.7100067138672,176.14999389648438,174.89999389648438,173.74000549316406,169.86000061035156,168.7100067138672,168.11000061035156,170.13999938964844,171.0500030517578,162.89999389648438,162.55999755859375,160.5800018310547,158.4199981689453,160.36000061035156,157.08999633789062,156.6699981689453,156.36000061035156,157.82000732421875,164.25999450683594,160.5399932861328,157.10000610351562,155.24000549316406,151.35000610351562,154.55999755859375,158.0800018310547,158.74000549316406,154.47000122070312,151.47000122070312,153.77000427246094,154.72000122070312,150.63999938964844,146.72000122070312,143.10000610351562,143.07000732421875,146.22000122070312,147.3800048828125,147.5399932861328,143.10000610351562,141.88999938964844,141.35000610351562,140.36000061035156,143.58999633789062,144.52000427246094,142.89999389648438,146.6999969482422,144.9499969482422,145.88999938964844,147.85000610351562,150.22999572753906,152.49000549316406,151.99000549316406,149.0500030517578,157.5,154.24000549316406,155.4499969482422,152.1699981689453,142.8000030517578,142.6699981689453,139.14999389648438,141.42999267578125,138.5500030517578,146.8699951171875,150.00999450683594,150.27999877929688,153.58999633789062,149.8699951171875,151.47999572753906,152.6999969482422,150.3699951171875,150.4199981689453,151.8300018310547,148.8800048828125,146.63999938964844,144.80999755859375,148.72000122070312,149.1300048828125,148.0,150.9199981689453,147.3000030517578,143.3699951171875,143.52000427246094,145.57000732421875,144.5,149.97000122070312,146.66000366210938,141.8000030517578,137.64999389648438,135.1999969482422,133.25,136.80999755859375,134.55999755859375,132.4199981689453,131.41000366210938,131.02999877929688,130.47999572753906,129.9499969482422,130.89999389648438,128.66000366210938,127.7699966430664,130.2899932861328,133.41000366210938,131.25999450683594,133.50999450683594,134.25999450683594,134.9199981689453,137.2899932861328,138.61000061035156,136.25,138.02000427246094,143.32000732421875,143.16000366210938,142.42999267578125,144.25,147.22999572753906,145.5500030517578,144.33999633789062,146.61000061035156,151.17999267578125,157.3800048828125,153.10000610351562,155.22999572753906,154.5800018310547,154.3300018310547,151.33999633789062,154.25999450683594,153.77000427246094,155.5,156.3300018310547,153.0,151.3000030517578,149.9499969482422,150.33999633789062,147.19000244140625,149.1699981689453,149.0800018310547,147.22999572753906,146.7100067138672,151.11000061035156,156.3000030517578,154.02999877929688,153.47000122070312,154.5399932861328,150.94000244140625,153.13999938964844,153.39999389648438,153.25,156.4600067138672,156.74000549316406,157.82000732421875,159.39999389648438,162.13999938964844,161.5500030517578,160.33999633789062,160.77000427246094,158.49000549316406,161.0500030517578,162.47000122070312,165.0,166.2899932861328,166.83999633789062,165.0500030517578,164.9600067138672,162.02999877929688,162.36000061035156,162.05999755859375,165.8000030517578,166.32000732421875,165.38999938964844,167.41000366210938,168.16000366210938,167.8699951171875,166.4499969482422,165.60000610351562,166.30999755859375,165.27999877929688,168.55999755859375,169.85000610351562,170.4499969482422,170.35000610351562,170.9199981689453,167.0399932861328,174.3000030517578,173.85000610351562,173.5399932861328,174.02999877929688,174.58999633789062,174.05999755859375,173.2100067138672,173.13999938964844,172.92999267578125,175.24000549316406,176.38999938964844,174.7100067138672,173.3800048828125,172.4199981689453,173.89999389648438,175.77000427246094,178.99000549316406,179.35000610351562,180.1199951171875,181.77999877929688,184.9499969482422,180.1199951171875,181.2100067138672,180.83999633789062,182.22999572753906],"increasing":{"line":{"color":"#17BECF"}},"low":[131.44000244140625,131.47999572753906,132.16000366210938,129.0399932861328,129.80999755859375,133.32000732421875,133.91000366210938,135.6300048828125,139.77000427246094,140.97000122070312,137.32000732421875,136.6699981689453,133.77000427246094,135.66000366210938,136.92999267578125,141.0800018310547,143.27999877929688,145.0,143.77999877929688,145.0500030517578,142.1199951171875,143.25,148.1999969482422,146.6999969482422,146.91000366210938,150.3699951171875,151.94000244140625,153.41000366210938,152.27999877929688,150.8000030517578,152.16000366210938,154.41000366210938,159.5,160.88999938964844,159.6300048828125,160.75,164.42999267578125,163.0,164.1999969482422,163.25,166.89999389648438,168.19000244140625,169.39999389648438,171.35000610351562,171.66000366210938,172.57000732421875,173.1199951171875,171.30999755859375,167.13999938964844,166.64999389648438,166.25,168.35000610351562,163.55999755859375,159.82000732421875,157.72000122070312,157.13999938964844,154.6699981689453,154.97000122070312,153.69000244140625,153.61000061035156,152.67999267578125,154.75,159.3000030517578,153.3699951171875,153.61000061035156,151.3800048828125,148.3699951171875,149.10000610351562,153.0800018310547,153.60000610351562,150.91000366210938,148.55999755859375,149.63999938964844,149.9499969482422,144.83999633789062,140.67999267578125,138.0,137.69000244140625,144.25999450683594,143.00999450683594,145.22000122070312,139.4499969482422,138.57000732421875,138.22000122070312,138.16000366210938,134.3699951171875,138.19000244140625,140.27000427246094,140.61000061035156,141.5,142.64999389648438,142.64999389648438,146.0,149.36000061035156,148.0399932861328,144.1300048828125,147.82000732421875,151.9199981689453,149.1300048828125,145.0,138.75,134.3800048828125,135.6699981689453,137.49000549316406,134.58999633789062,139.5,144.3699951171875,147.42999267578125,148.55999755859375,147.2899932861328,146.14999389648438,149.97000122070312,147.72000122070312,146.92999267578125,149.33999633789062,147.1199951171875,143.3800048828125,140.35000610351562,140.5500030517578,146.61000061035156,145.64999389648438,145.77000427246094,141.9199981689453,140.0,141.10000610351562,140.89999389648438,141.05999755859375,144.24000549316406,141.16000366210938,136.02999877929688,133.72999572753906,131.32000732421875,129.88999938964844,132.75,130.3000030517578,129.63999938964844,128.72000122070312,125.87000274658203,127.7300033569336,127.43000030517578,124.16999816894531,125.08000183105469,124.76000213623047,124.88999938964844,129.88999938964844,128.1199951171875,130.4600067138672,131.44000244140625,131.66000366210938,134.1300048828125,135.02999877929688,133.77000427246094,134.22000122070312,137.89999389648438,140.3000030517578,138.80999755859375,141.89999389648438,143.0800018310547,142.85000610351562,142.27999877929688,141.32000732421875,148.1699981689453,147.8300018310547,150.77999877929688,150.63999938964844,151.1699981689453,150.4199981689453,149.22000122070312,150.9199981689453,150.86000061035156,152.8800048828125,153.35000610351562,150.85000610351562,148.41000366210938,147.16000366210938,147.24000549316406,145.72000122070312,147.4499969482422,146.8300018310547,145.00999450683594,143.89999389648438,147.3300018310547,153.4600067138672,151.1300048828125,151.8300018310547,150.22999572753906,147.61000061035156,147.6999969482422,150.10000610351562,149.9199981689453,151.63999938964844,154.27999877929688,154.14999389648438,156.5399932861328,157.80999755859375,157.67999267578125,157.85000610351562,157.8699951171875,155.97999572753906,159.35000610351562,161.27000427246094,161.91000366210938,164.22000122070312,165.11000061035156,161.8000030517578,162.0,160.0800018310547,160.50999450683594,159.77999877929688,161.4199981689453,163.82000732421875,164.02999877929688,165.64999389648438,165.5399932861328,165.55999755859375,164.49000549316406,163.88999938964844,163.72999572753906,162.8000030517578,165.19000244140625,167.8800048828125,168.63999938964844,167.5399932861328,167.16000366210938,164.30999755859375,170.75999450683594,172.11000061035156,171.60000610351562,171.89999389648438,172.1699981689453,171.0,171.47000122070312,171.8000030517578,170.4199981689453,172.5800018310547,174.94000244140625,173.4499969482422,171.27999877929688,170.52000427246094,171.69000244140625,173.11000061035156,176.57000732421875,176.75999450683594,176.92999267578125,179.25999450683594,178.0399932861328,177.42999267578125,177.32000732421875,177.4600067138672,180.6300048828125],"name":"Trace 1","open":[132.8699951171875,133.1300048828125,134.2899932861328,132.0800018310547,130.07000732421875,133.4199981689453,134.7899932861328,136.82000732421875,139.89999389648438,142.6999969482422,142.1300048828125,137.4600067138672,137.25,136.0399932861328,137.77000427246094,141.35000610351562,143.2899932861328,145.25999450683594,145.6699981689453,145.75999450683594,142.99000549316406,144.0800018310547,149.77999877929688,150.74000549316406,147.9199981689453,151.1199951171875,154.5,155.38999938964844,154.00999450683594,152.25999450683594,152.5800018310547,156.97999572753906,161.24000549316406,161.00999450683594,160.10000610351562,160.83999633789062,166.00999450683594,163.2100067138672,166.3699951171875,164.02000427246094,167.67999267578125,170.05999755859375,169.82000732421875,171.52000427246094,172.77999877929688,172.77000427246094,173.75,173.02999877929688,169.69000244140625,167.0800018310547,167.32000732421875,168.77999877929688,170.57000732421875,161.14999389648438,162.1300048828125,160.30999755859375,156.63999938964844,159.75,156.47000122070312,154.82000732421875,154.63999938964844,155.47000122070312,159.58999633789062,159.89999389648438,154.7899932861328,154.64999389648438,151.2100067138672,149.30999755859375,153.39999389648438,157.33999633789062,152.3800048828125,151.19000244140625,149.66000366210938,152.74000549316406,147.63999938964844,146.10000610351562,141.27999877929688,138.2100067138672,145.02999877929688,144.07000732421875,145.80999755859375,142.5399932861328,140.4199981689453,139.89999389648438,139.1300048828125,134.99000549316406,144.30999755859375,141.07000732421875,145.49000549316406,141.69000244140625,143.02000427246094,142.8699951171875,147.19000244140625,150.08999633789062,150.9600067138672,148.07000732421875,148.1999969482422,153.16000366210938,155.0800018310547,148.9499969482422,142.05999755859375,142.08999633789062,137.11000061035156,140.41000366210938,138.5,141.24000549316406,145.82000732421875,148.97000122070312,152.22000122070312,149.1300048828125,146.42999267578125,152.30999755859375,150.16000366210938,148.1300048828125,149.4499969482422,148.30999755859375,145.13999938964844,144.2899932861328,141.39999389648438,148.2100067138672,145.9600067138672,147.77000427246094,147.07000732421875,142.19000244140625,142.36000061035156,142.33999633789062,142.6999969482422,149.5,145.35000610351562,141.11000061035156,136.69000244140625,135.11000061035156,131.38999938964844,132.97999572753906,134.35000610351562,130.9199981689453,131.3800048828125,129.6699981689453,127.98999786376953,128.41000366210938,130.27999877929688,126.88999938964844,127.12999725341797,126.01000213623047,130.47000122070312,130.25999450683594,131.25,133.8800048828125,132.02999877929688,134.8300018310547,136.82000732421875,134.0800018310547,135.27999877929688,138.1199951171875,140.30999755859375,140.88999938964844,143.1699981689453,143.16000366210938,144.9600067138672,142.6999969482422,143.97000122070312,148.89999389648438,148.02999877929688,152.57000732421875,150.63999938964844,153.8800048828125,153.77999877929688,149.4600067138672,150.9499969482422,152.1199951171875,153.11000061035156,153.50999450683594,152.35000610351562,150.1999969482422,148.8699951171875,150.08999633789062,147.11000061035156,147.7100067138672,147.0500030517578,146.8300018310547,144.3800048828125,148.0399932861328,153.7899932861328,153.6999969482422,152.80999755859375,153.55999755859375,150.2100067138672,147.80999755859375,151.27999877929688,151.19000244140625,152.16000366210938,156.0800018310547,155.07000732421875,157.32000732421875,159.3000030517578,158.8300018310547,158.86000061035156,159.94000244140625,157.97000122070312,159.3699951171875,161.52999877929688,162.44000244140625,164.27000427246094,166.60000610351562,164.74000549316406,162.42999267578125,161.4199981689453,162.35000610351562,161.22000122070312,161.6300048828125,164.58999633789062,165.08999633789062,166.10000610351562,165.8000030517578,166.08999633789062,165.0500030517578,165.0,165.19000244140625,163.05999755859375,165.19000244140625,168.49000549316406,169.27999877929688,170.08999633789062,169.5,164.88999938964844,170.97999572753906,172.47999572753906,173.0500030517578,173.02000427246094,173.85000610351562,173.6199951171875,173.16000366210938,171.99000549316406,171.7100067138672,173.0,176.38999938964844,173.97999572753906,173.1300048828125,171.08999633789062,172.41000366210938,173.32000732421875,176.9600067138672,177.3300018310547,177.6999969482422,181.02999877929688,182.6300048828125,179.97000122070312,178.44000244140625,177.89999389648438,181.5],"showlegend":true,"x":["2022-06-13","2022-06-14","2022-06-15","2022-06-16","2022-06-17","2022-06-21","2022-06-22","2022-06-23","2022-06-24","2022-06-27","2022-06-28","2022-06-29","2022-06-30","2022-07-01","2022-07-05","2022-07-06","2022-07-07","2022-07-08","2022-07-11","2022-07-12","2022-07-13","2022-07-14","2022-07-15","2022-07-18","2022-07-19","2022-07-20","2022-07-21","2022-07-22","2022-07-25","2022-07-26","2022-07-27","2022-07-28","2022-07-29","2022-08-01","2022-08-02","2022-08-03","2022-08-04","2022-08-05","2022-08-08","2022-08-09","2022-08-10","2022-08-11","2022-08-12","2022-08-15","2022-08-16","2022-08-17","2022-08-18","2022-08-19","2022-08-22","2022-08-23","2022-08-24","2022-08-25","2022-08-26","2022-08-29","2022-08-30","2022-08-31","2022-09-01","2022-09-02","2022-09-06","2022-09-07","2022-09-08","2022-09-09","2022-09-12","2022-09-13","2022-09-14","2022-09-15","2022-09-16","2022-09-19","2022-09-20","2022-09-21","2022-09-22","2022-09-23","2022-09-26","2022-09-27","2022-09-28","2022-09-29","2022-09-30","2022-10-03","2022-10-04","2022-10-05","2022-10-06","2022-10-07","2022-10-10","2022-10-11","2022-10-12","2022-10-13","2022-10-14","2022-10-17","2022-10-18","2022-10-19","2022-10-20","2022-10-21","2022-10-24","2022-10-25","2022-10-26","2022-10-27","2022-10-28","2022-10-31","2022-11-01","2022-11-02","2022-11-03","2022-11-04","2022-11-07","2022-11-08","2022-11-09","2022-11-10","2022-11-11","2022-11-14","2022-11-15","2022-11-16","2022-11-17","2022-11-18","2022-11-21","2022-11-22","2022-11-23","2022-11-25","2022-11-28","2022-11-29","2022-11-30","2022-12-01","2022-12-02","2022-12-05","2022-12-06","2022-12-07","2022-12-08","2022-12-09","2022-12-12","2022-12-13","2022-12-14","2022-12-15","2022-12-16","2022-12-19","2022-12-20","2022-12-21","2022-12-22","2022-12-23","2022-12-27","2022-12-28","2022-12-29","2022-12-30","2023-01-03","2023-01-04","2023-01-05","2023-01-06","2023-01-09","2023-01-10","2023-01-11","2023-01-12","2023-01-13","2023-01-17","2023-01-18","2023-01-19","2023-01-20","2023-01-23","2023-01-24","2023-01-25","2023-01-26","2023-01-27","2023-01-30","2023-01-31","2023-02-01","2023-02-02","2023-02-03","2023-02-06","2023-02-07","2023-02-08","2023-02-09","2023-02-10","2023-02-13","2023-02-14","2023-02-15","2023-02-16","2023-02-17","2023-02-21","2023-02-22","2023-02-23","2023-02-24","2023-02-27","2023-02-28","2023-03-01","2023-03-02","2023-03-03","2023-03-06","2023-03-07","2023-03-08","2023-03-09","2023-03-10","2023-03-13","2023-03-14","2023-03-15","2023-03-16","2023-03-17","2023-03-20","2023-03-21","2023-03-22","2023-03-23","2023-03-24","2023-03-27","2023-03-28","2023-03-29","2023-03-30","2023-03-31","2023-04-03","2023-04-04","2023-04-05","2023-04-06","2023-04-10","2023-04-11","2023-04-12","2023-04-13","2023-04-14","2023-04-17","2023-04-18","2023-04-19","2023-04-20","2023-04-21","2023-04-24","2023-04-25","2023-04-26","2023-04-27","2023-04-28","2023-05-01","2023-05-02","2023-05-03","2023-05-04","2023-05-05","2023-05-08","2023-05-09","2023-05-10","2023-05-11","2023-05-12","2023-05-15","2023-05-16","2023-05-17","2023-05-18","2023-05-19","2023-05-22","2023-05-23","2023-05-24","2023-05-25","2023-05-26","2023-05-30","2023-05-31","2023-06-01","2023-06-02","2023-06-05","2023-06-06","2023-06-07","2023-06-08","2023-06-09"],"yaxis":"y2","type":"candlestick"}],                        {"legend":{"bgcolor":"#F5F6F9","font":{"color":"#4D5663"},"orientation":"h","x":0.3,"y":0.95,"yanchor":"bottom"},"margin":{"b":30,"l":30,"r":30,"t":30},"paper_bgcolor":"#F5F6F9","plot_bgcolor":"#F5F6F9","showlegend":true,"template":{"data":{"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"title":{"font":{"color":"#4D5663"},"text":"Apple Candle Chart"},"xaxis":{"anchor":"y2","gridcolor":"#E1E5ED","rangeselector":{"bgcolor":"rgba(150, 200, 250, 1)","buttons":[{"count":1,"label":"1m","step":"month","stepmode":"backward"},{"count":1,"label":"1y","step":"year","stepmode":"backward"}],"font":{"size":13},"visible":false,"x":0,"y":0.9},"rangeslider":{"visible":false},"showgrid":true,"tickfont":{"color":"#4D5663"},"title":{"font":{"color":"#4D5663"},"text":""},"zerolinecolor":"#E1E5ED"},"yaxis":{"gridcolor":"#E1E5ED","showgrid":true,"showticklabels":false,"tickfont":{"color":"#4D5663"},"title":{"font":{"color":"#4D5663"},"text":""},"zerolinecolor":"#E1E5ED"},"yaxis2":{"domain":[0.0,0.9],"gridcolor":"#E1E5ED","showgrid":true,"tickfont":{"color":"#4D5663"},"title":{"font":{"color":"#4D5663"},"text":""},"zerolinecolor":"#E1E5ED"}},                        {"showLink": true, "linkText": "Export to plot.ly", "plotlyServerURL": "https://plot.ly", "responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('a5dddcc7-d3d9-4356-811d-bb77cfd9ca46');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qf</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">QuantFig</span><span class="p">(</span><span class="n">AAPL</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Apple Candle Chart&#39;</span><span class="p">)</span>
+<span class="n">qf</span><span class="o">.</span><span class="n">add_volume</span><span class="p">()</span>  <span class="c1"># 出来高もプロット</span>
+<span class="n">qf</span><span class="o">.</span><span class="n">add_sma</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">50</span><span class="p">],</span><span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">])</span>  <span class="c1"># 移動平均線もプロット</span>
+<span class="n">qf</span><span class="o">.</span><span class="n">iplot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                            <div id="ebc223ed-d12d-4acf-98a1-9bf8b6df21f0" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};
+                    window.PLOTLYENV.BASE_URL='https://plot.ly';                                    if (document.getElementById("ebc223ed-d12d-4acf-98a1-9bf8b6df21f0")) {                    Plotly.newPlot(                        "ebc223ed-d12d-4acf-98a1-9bf8b6df21f0",                        [{"marker":{"color":["#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#808080","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF","#17BECF","#808080","#808080","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#808080","#808080","#808080","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#808080","#17BECF","#808080","#808080","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#808080","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF","#17BECF","#808080","#808080","#17BECF","#808080","#808080","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#808080","#808080","#17BECF","#808080","#808080","#808080","#808080","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#808080","#17BECF","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#808080","#808080","#17BECF","#808080","#808080","#808080","#808080","#17BECF","#17BECF","#808080","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#808080","#808080","#17BECF","#17BECF","#808080","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF","#808080","#17BECF","#808080","#808080","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#808080","#808080","#17BECF","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#808080","#17BECF","#17BECF","#17BECF","#17BECF","#808080","#808080","#17BECF","#808080","#808080","#808080","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#808080","#808080","#17BECF","#808080","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#808080","#17BECF","#808080","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF","#17BECF","#808080","#808080","#17BECF","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF"],"line":{"color":["#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#808080","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF","#17BECF","#808080","#808080","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#808080","#808080","#808080","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#808080","#17BECF","#808080","#808080","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#808080","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF","#17BECF","#808080","#808080","#17BECF","#808080","#808080","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#808080","#808080","#17BECF","#808080","#808080","#808080","#808080","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#808080","#17BECF","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#808080","#808080","#17BECF","#808080","#808080","#808080","#808080","#17BECF","#17BECF","#808080","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#808080","#808080","#17BECF","#17BECF","#808080","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF","#808080","#17BECF","#808080","#808080","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#808080","#808080","#17BECF","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#808080","#17BECF","#17BECF","#17BECF","#17BECF","#808080","#808080","#17BECF","#808080","#808080","#808080","#17BECF","#808080","#17BECF","#17BECF","#17BECF","#808080","#808080","#17BECF","#808080","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#808080","#17BECF","#808080","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF","#17BECF","#808080","#808080","#17BECF","#17BECF","#17BECF","#17BECF","#808080","#17BECF","#17BECF","#808080","#808080","#808080","#17BECF","#17BECF"],"width":1}},"name":"Volume","opacity":0.8,"orientation":"v","text":"","x":["2022-06-13","2022-06-14","2022-06-15","2022-06-16","2022-06-17","2022-06-21","2022-06-22","2022-06-23","2022-06-24","2022-06-27","2022-06-28","2022-06-29","2022-06-30","2022-07-01","2022-07-05","2022-07-06","2022-07-07","2022-07-08","2022-07-11","2022-07-12","2022-07-13","2022-07-14","2022-07-15","2022-07-18","2022-07-19","2022-07-20","2022-07-21","2022-07-22","2022-07-25","2022-07-26","2022-07-27","2022-07-28","2022-07-29","2022-08-01","2022-08-02","2022-08-03","2022-08-04","2022-08-05","2022-08-08","2022-08-09","2022-08-10","2022-08-11","2022-08-12","2022-08-15","2022-08-16","2022-08-17","2022-08-18","2022-08-19","2022-08-22","2022-08-23","2022-08-24","2022-08-25","2022-08-26","2022-08-29","2022-08-30","2022-08-31","2022-09-01","2022-09-02","2022-09-06","2022-09-07","2022-09-08","2022-09-09","2022-09-12","2022-09-13","2022-09-14","2022-09-15","2022-09-16","2022-09-19","2022-09-20","2022-09-21","2022-09-22","2022-09-23","2022-09-26","2022-09-27","2022-09-28","2022-09-29","2022-09-30","2022-10-03","2022-10-04","2022-10-05","2022-10-06","2022-10-07","2022-10-10","2022-10-11","2022-10-12","2022-10-13","2022-10-14","2022-10-17","2022-10-18","2022-10-19","2022-10-20","2022-10-21","2022-10-24","2022-10-25","2022-10-26","2022-10-27","2022-10-28","2022-10-31","2022-11-01","2022-11-02","2022-11-03","2022-11-04","2022-11-07","2022-11-08","2022-11-09","2022-11-10","2022-11-11","2022-11-14","2022-11-15","2022-11-16","2022-11-17","2022-11-18","2022-11-21","2022-11-22","2022-11-23","2022-11-25","2022-11-28","2022-11-29","2022-11-30","2022-12-01","2022-12-02","2022-12-05","2022-12-06","2022-12-07","2022-12-08","2022-12-09","2022-12-12","2022-12-13","2022-12-14","2022-12-15","2022-12-16","2022-12-19","2022-12-20","2022-12-21","2022-12-22","2022-12-23","2022-12-27","2022-12-28","2022-12-29","2022-12-30","2023-01-03","2023-01-04","2023-01-05","2023-01-06","2023-01-09","2023-01-10","2023-01-11","2023-01-12","2023-01-13","2023-01-17","2023-01-18","2023-01-19","2023-01-20","2023-01-23","2023-01-24","2023-01-25","2023-01-26","2023-01-27","2023-01-30","2023-01-31","2023-02-01","2023-02-02","2023-02-03","2023-02-06","2023-02-07","2023-02-08","2023-02-09","2023-02-10","2023-02-13","2023-02-14","2023-02-15","2023-02-16","2023-02-17","2023-02-21","2023-02-22","2023-02-23","2023-02-24","2023-02-27","2023-02-28","2023-03-01","2023-03-02","2023-03-03","2023-03-06","2023-03-07","2023-03-08","2023-03-09","2023-03-10","2023-03-13","2023-03-14","2023-03-15","2023-03-16","2023-03-17","2023-03-20","2023-03-21","2023-03-22","2023-03-23","2023-03-24","2023-03-27","2023-03-28","2023-03-29","2023-03-30","2023-03-31","2023-04-03","2023-04-04","2023-04-05","2023-04-06","2023-04-10","2023-04-11","2023-04-12","2023-04-13","2023-04-14","2023-04-17","2023-04-18","2023-04-19","2023-04-20","2023-04-21","2023-04-24","2023-04-25","2023-04-26","2023-04-27","2023-04-28","2023-05-01","2023-05-02","2023-05-03","2023-05-04","2023-05-05","2023-05-08","2023-05-09","2023-05-10","2023-05-11","2023-05-12","2023-05-15","2023-05-16","2023-05-17","2023-05-18","2023-05-19","2023-05-22","2023-05-23","2023-05-24","2023-05-25","2023-05-26","2023-05-30","2023-05-31","2023-06-01","2023-06-02","2023-06-05","2023-06-06","2023-06-07","2023-06-08","2023-06-09"],"y":[122207100,84784300,91533000,108123900,134520300,81000500,73409200,72433800,89116800,70207900,67083400,66242400,98964500,71051600,73353800,74064300,66253700,64547800,63141600,77588800,71185600,78140700,76259900,81420900,82982400,64823400,65086600,66675400,53623900,55138700,78620700,81378700,101786900,67829400,59907000,82507500,55474100,56697000,60276900,63135500,70170500,57149200,68039400,54091700,56377100,79542000,62290100,70346300,69026800,54147100,53841500,51218200,78961000,73314000,77906200,87991100,74229900,76957800,73714800,87449600,84923800,68028800,104956000,122656600,87965400,90481100,162278800,81474200,107689800,101696800,86652500,96029900,93339400,84442700,146691400,128138200,124925300,114311700,87830100,79471000,68402200,85925600,74899000,77033700,70433700,113224000,88598000,85250900,99136600,61758300,64522000,86548600,75981900,74732300,88194300,109180200,164762400,97943200,80379300,93604600,97918500,140814800,83374600,89908500,74917800,118854000,93979700,73374100,89868300,64218300,80389400,74829600,58724100,51804100,58301400,35195900,69246000,83763800,111380900,71250400,65447400,68826400,64727200,69721100,62128300,76097000,70462700,93886200,82291200,98931900,160156900,79592600,77432800,85928000,77852100,63814900,69007800,85438400,75703700,77034200,112117500,89113600,80962700,87754700,70790800,63896200,69458900,71379600,57809700,63646600,69672800,58280400,80223600,81760300,66435100,65799300,54105100,70555800,64015300,65874500,77663600,118339000,154357300,69858300,83322600,64120100,56007100,57450700,62199000,61707600,65573800,68167900,59144100,58867200,51011300,48394200,55469600,44998500,50547000,55479000,52238100,70732300,87558000,56182000,47204800,53833600,68572400,84457100,73695900,77167900,76161100,98944600,73641400,73938300,75701800,67622100,59196500,52390300,45992200,51305700,49501700,68749800,56976200,46278300,51511700,45390100,47716900,47644200,50133100,68445600,49386500,41516200,49923000,47720200,52456400,58337300,41949600,48714100,45498800,64902300,55209200,52472900,48425700,65136000,81235400,113316400,55962800,45326900,53724500,49514700,45497800,37266700,42110300,57951600,65496700,55772400,43570900,50747300,45143500,56058300,54835000,55964400,99625300,68901800,61945900,121946500,64848400,61944600,50214900,48870700],"yaxis":"y3","type":"bar"},{"line":{"color":"rgba(219, 64, 82, 1.0)","dash":"solid","shape":"linear","width":2},"mode":"lines","name":" SMA(10)","text":"","x":["2022-06-13","2022-06-14","2022-06-15","2022-06-16","2022-06-17","2022-06-21","2022-06-22","2022-06-23","2022-06-24","2022-06-27","2022-06-28","2022-06-29","2022-06-30","2022-07-01","2022-07-05","2022-07-06","2022-07-07","2022-07-08","2022-07-11","2022-07-12","2022-07-13","2022-07-14","2022-07-15","2022-07-18","2022-07-19","2022-07-20","2022-07-21","2022-07-22","2022-07-25","2022-07-26","2022-07-27","2022-07-28","2022-07-29","2022-08-01","2022-08-02","2022-08-03","2022-08-04","2022-08-05","2022-08-08","2022-08-09","2022-08-10","2022-08-11","2022-08-12","2022-08-15","2022-08-16","2022-08-17","2022-08-18","2022-08-19","2022-08-22","2022-08-23","2022-08-24","2022-08-25","2022-08-26","2022-08-29","2022-08-30","2022-08-31","2022-09-01","2022-09-02","2022-09-06","2022-09-07","2022-09-08","2022-09-09","2022-09-12","2022-09-13","2022-09-14","2022-09-15","2022-09-16","2022-09-19","2022-09-20","2022-09-21","2022-09-22","2022-09-23","2022-09-26","2022-09-27","2022-09-28","2022-09-29","2022-09-30","2022-10-03","2022-10-04","2022-10-05","2022-10-06","2022-10-07","2022-10-10","2022-10-11","2022-10-12","2022-10-13","2022-10-14","2022-10-17","2022-10-18","2022-10-19","2022-10-20","2022-10-21","2022-10-24","2022-10-25","2022-10-26","2022-10-27","2022-10-28","2022-10-31","2022-11-01","2022-11-02","2022-11-03","2022-11-04","2022-11-07","2022-11-08","2022-11-09","2022-11-10","2022-11-11","2022-11-14","2022-11-15","2022-11-16","2022-11-17","2022-11-18","2022-11-21","2022-11-22","2022-11-23","2022-11-25","2022-11-28","2022-11-29","2022-11-30","2022-12-01","2022-12-02","2022-12-05","2022-12-06","2022-12-07","2022-12-08","2022-12-09","2022-12-12","2022-12-13","2022-12-14","2022-12-15","2022-12-16","2022-12-19","2022-12-20","2022-12-21","2022-12-22","2022-12-23","2022-12-27","2022-12-28","2022-12-29","2022-12-30","2023-01-03","2023-01-04","2023-01-05","2023-01-06","2023-01-09","2023-01-10","2023-01-11","2023-01-12","2023-01-13","2023-01-17","2023-01-18","2023-01-19","2023-01-20","2023-01-23","2023-01-24","2023-01-25","2023-01-26","2023-01-27","2023-01-30","2023-01-31","2023-02-01","2023-02-02","2023-02-03","2023-02-06","2023-02-07","2023-02-08","2023-02-09","2023-02-10","2023-02-13","2023-02-14","2023-02-15","2023-02-16","2023-02-17","2023-02-21","2023-02-22","2023-02-23","2023-02-24","2023-02-27","2023-02-28","2023-03-01","2023-03-02","2023-03-03","2023-03-06","2023-03-07","2023-03-08","2023-03-09","2023-03-10","2023-03-13","2023-03-14","2023-03-15","2023-03-16","2023-03-17","2023-03-20","2023-03-21","2023-03-22","2023-03-23","2023-03-24","2023-03-27","2023-03-28","2023-03-29","2023-03-30","2023-03-31","2023-04-03","2023-04-04","2023-04-05","2023-04-06","2023-04-10","2023-04-11","2023-04-12","2023-04-13","2023-04-14","2023-04-17","2023-04-18","2023-04-19","2023-04-20","2023-04-21","2023-04-24","2023-04-25","2023-04-26","2023-04-27","2023-04-28","2023-05-01","2023-05-02","2023-05-03","2023-05-04","2023-05-05","2023-05-08","2023-05-09","2023-05-10","2023-05-11","2023-05-12","2023-05-15","2023-05-16","2023-05-17","2023-05-18","2023-05-19","2023-05-22","2023-05-23","2023-05-24","2023-05-25","2023-05-26","2023-05-30","2023-05-31","2023-06-01","2023-06-02","2023-06-05","2023-06-06","2023-06-07","2023-06-08","2023-06-09"],"y":["","","","","","","","","",135.45,136.00599975585936,136.6529998779297,136.78200073242186,137.66900024414062,138.66900024414062,139.3740005493164,140.4740005493164,141.3509994506836,141.6719985961914,142.0919982910156,142.8969985961914,143.8209991455078,145.16599884033204,145.9800003051758,146.92400054931642,147.93600006103514,148.83600006103515,149.54100036621094,150.3490005493164,150.92300109863282,152.0529998779297,152.94100036621094,154.175,155.6189987182617,156.5199981689453,157.8289993286133,158.8749984741211,160.0009994506836,161.19299926757813,162.5249984741211,163.7699996948242,164.88399963378907,165.84300079345704,167.01100158691406,168.31300201416016,169.15500183105468,169.98900146484374,170.6060012817383,170.8760025024414,171.10700225830078,170.93600158691407,171.09000091552736,170.24199981689452,169.06100006103514,167.6490005493164,165.91600036621094,164.29700164794923,162.7260009765625,161.4220001220703,160.2950012207031,158.98800201416014,157.7220016479492,157.7030014038086,156.9490005493164,156.58899993896483,156.10399932861327,155.37799835205078,155.2449981689453,155.48199768066405,155.25799713134765,155.08599700927735,154.39199676513672,153.1259979248047,152.91799774169922,152.3709976196289,151.38199768066406,150.13199768066406,148.9289978027344,147.8489990234375,147.11699829101562,146.38599700927733,145.35199737548828,144.3169967651367,143.03899688720702,141.88899688720704,141.93999786376952,141.95799865722657,141.9539993286133,141.71899871826173,141.46499938964843,141.26100006103516,141.9790008544922,142.8820007324219,144.21800079345704,145.31900177001953,145.5000015258789,147.23600158691406,148.3290008544922,149.0190002441406,149.13600006103516,148.68500061035155,147.7960006713867,146.74300079345704,145.45900115966796,144.01100006103516,144.21799926757814,143.61399841308594,143.10799865722657,143.0469985961914,143.422998046875,144.60699768066405,145.8979965209961,146.80699615478517,147.87499542236327,149.4949966430664,149.6189971923828,149.0709976196289,148.35999755859376,148.15899810791015,148.11099853515626,147.81999816894532,147.35399932861327,146.84400024414063,145.9200012207031,145.0779998779297,144.48300018310547,144.51000061035157,144.94000091552735,144.45800170898437,143.277001953125,141.9470016479492,140.52100067138673,139.46000061035156,138.91100006103517,137.86900024414064,136.83899993896483,135.39299926757812,133.44999923706055,132.089998626709,131.4329978942871,130.48899841308594,129.88799896240235,129.1599983215332,128.57699813842774,128.36899795532227,128.25599746704103,128.60199813842775,129.33899841308593,129.85399780273437,130.4549987792969,131.46899948120117,132.3599998474121,133.6449996948242,134.79400024414062,136.03200073242186,137.14500122070314,138.19200134277344,139.44400024414062,140.26800079345702,141.10299987792968,142.1249984741211,143.67999877929688,145.34299926757814,146.40499877929688,147.61699829101562,148.622998046875,149.31399688720703,149.8219970703125,150.90699768066406,151.797998046875,152.78799896240236,153.07699890136718,152.88199920654296,152.55699920654297,151.98300018310547,151.7309997558594,151.31500091552735,151.0060012817383,150.36200103759765,149.5730010986328,148.6310012817383,148.36300048828124,148.49100036621093,148.8030014038086,149.1990005493164,149.31800079345703,149.49700012207032,149.7520004272461,150.2699996948242,151.03800048828126,152.03200073242186,152.4290008544922,152.78600006103517,153.5539993286133,154.05,154.88399963378907,156.05899963378906,156.83999938964843,157.34599914550782,158.1239990234375,158.7749984741211,159.76499786376954,160.64199829101562,161.2769989013672,161.8699981689453,162.44299926757813,162.62099914550782,162.8729995727539,163.11800079345704,163.5970001220703,163.8820007324219,163.91500091552734,163.94500122070312,164.14500122070314,164.43400115966796,164.47000122070312,164.8000015258789,165.0970016479492,165.46300048828124,165.7480010986328,166.19499969482422,166.63099975585936,166.83799896240234,166.81999816894532,166.73399810791017,167.58899841308593,168.40599822998047,169.20599822998048,170.18599853515624,170.71999816894532,171.00899963378907,171.2570007324219,171.61000213623046,172.13400268554688,173.06000366210938,173.21900329589843,173.28900299072265,173.26800231933595,173.09600219726562,173.02000274658204,173.30600128173828,173.8290008544922,174.3470001220703,175.08699951171874,175.6769989013672,176.1189987182617,176.61999969482423,177.24600067138672,178.11900177001954,178.91600189208984],"yaxis":"y2","type":"scatter"},{"line":{"color":"rgba(0, 128, 0, 1.0)","dash":"solid","shape":"linear","width":2},"mode":"lines","name":" SMA(50)","text":"","x":["2022-06-13","2022-06-14","2022-06-15","2022-06-16","2022-06-17","2022-06-21","2022-06-22","2022-06-23","2022-06-24","2022-06-27","2022-06-28","2022-06-29","2022-06-30","2022-07-01","2022-07-05","2022-07-06","2022-07-07","2022-07-08","2022-07-11","2022-07-12","2022-07-13","2022-07-14","2022-07-15","2022-07-18","2022-07-19","2022-07-20","2022-07-21","2022-07-22","2022-07-25","2022-07-26","2022-07-27","2022-07-28","2022-07-29","2022-08-01","2022-08-02","2022-08-03","2022-08-04","2022-08-05","2022-08-08","2022-08-09","2022-08-10","2022-08-11","2022-08-12","2022-08-15","2022-08-16","2022-08-17","2022-08-18","2022-08-19","2022-08-22","2022-08-23","2022-08-24","2022-08-25","2022-08-26","2022-08-29","2022-08-30","2022-08-31","2022-09-01","2022-09-02","2022-09-06","2022-09-07","2022-09-08","2022-09-09","2022-09-12","2022-09-13","2022-09-14","2022-09-15","2022-09-16","2022-09-19","2022-09-20","2022-09-21","2022-09-22","2022-09-23","2022-09-26","2022-09-27","2022-09-28","2022-09-29","2022-09-30","2022-10-03","2022-10-04","2022-10-05","2022-10-06","2022-10-07","2022-10-10","2022-10-11","2022-10-12","2022-10-13","2022-10-14","2022-10-17","2022-10-18","2022-10-19","2022-10-20","2022-10-21","2022-10-24","2022-10-25","2022-10-26","2022-10-27","2022-10-28","2022-10-31","2022-11-01","2022-11-02","2022-11-03","2022-11-04","2022-11-07","2022-11-08","2022-11-09","2022-11-10","2022-11-11","2022-11-14","2022-11-15","2022-11-16","2022-11-17","2022-11-18","2022-11-21","2022-11-22","2022-11-23","2022-11-25","2022-11-28","2022-11-29","2022-11-30","2022-12-01","2022-12-02","2022-12-05","2022-12-06","2022-12-07","2022-12-08","2022-12-09","2022-12-12","2022-12-13","2022-12-14","2022-12-15","2022-12-16","2022-12-19","2022-12-20","2022-12-21","2022-12-22","2022-12-23","2022-12-27","2022-12-28","2022-12-29","2022-12-30","2023-01-03","2023-01-04","2023-01-05","2023-01-06","2023-01-09","2023-01-10","2023-01-11","2023-01-12","2023-01-13","2023-01-17","2023-01-18","2023-01-19","2023-01-20","2023-01-23","2023-01-24","2023-01-25","2023-01-26","2023-01-27","2023-01-30","2023-01-31","2023-02-01","2023-02-02","2023-02-03","2023-02-06","2023-02-07","2023-02-08","2023-02-09","2023-02-10","2023-02-13","2023-02-14","2023-02-15","2023-02-16","2023-02-17","2023-02-21","2023-02-22","2023-02-23","2023-02-24","2023-02-27","2023-02-28","2023-03-01","2023-03-02","2023-03-03","2023-03-06","2023-03-07","2023-03-08","2023-03-09","2023-03-10","2023-03-13","2023-03-14","2023-03-15","2023-03-16","2023-03-17","2023-03-20","2023-03-21","2023-03-22","2023-03-23","2023-03-24","2023-03-27","2023-03-28","2023-03-29","2023-03-30","2023-03-31","2023-04-03","2023-04-04","2023-04-05","2023-04-06","2023-04-10","2023-04-11","2023-04-12","2023-04-13","2023-04-14","2023-04-17","2023-04-18","2023-04-19","2023-04-20","2023-04-21","2023-04-24","2023-04-25","2023-04-26","2023-04-27","2023-04-28","2023-05-01","2023-05-02","2023-05-03","2023-05-04","2023-05-05","2023-05-08","2023-05-09","2023-05-10","2023-05-11","2023-05-12","2023-05-15","2023-05-16","2023-05-17","2023-05-18","2023-05-19","2023-05-22","2023-05-23","2023-05-24","2023-05-25","2023-05-26","2023-05-30","2023-05-31","2023-06-01","2023-06-02","2023-06-05","2023-06-06","2023-06-07","2023-06-08","2023-06-09"],"y":["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",152.41940002441407,153.13239990234376,153.87779998779297,154.44160003662108,155.06800018310548,155.61500030517578,156.04200042724608,156.49420043945312,156.84500030517577,157.10240020751954,157.38840026855468,157.7288003540039,158.09160034179686,158.62580017089843,158.92400024414061,159.19900024414062,159.38800018310548,159.475,159.62380004882812,159.86440002441407,160.0216000366211,160.1666000366211,160.20579986572267,160.21779998779297,160.3115997314453,160.28839965820313,160.07719970703124,159.73419952392578,159.50139953613282,159.3643997192383,159.26039947509764,159.03319946289062,158.68799926757814,158.2461993408203,157.79559936523438,157.36219940185546,156.8993994140625,156.35079956054688,155.89199951171875,155.469599609375,155.04839965820312,154.53139953613282,154.10699951171875,153.65399932861328,153.23699920654298,152.76339935302735,152.16839935302735,151.80019958496095,151.43659942626954,151.09819915771484,150.65419921875,150.08119934082032,149.4481994628906,148.95419952392578,148.51659942626952,148.0357992553711,147.82879913330078,147.66359893798827,147.51299896240235,147.42319885253906,147.2797985839844,147.20499847412108,147.0833984375,146.7749984741211,146.7017984008789,146.6169985961914,146.5317987060547,146.4021987915039,146.13599884033204,145.95859893798828,145.8503988647461,145.7517987060547,145.67579895019531,145.5185989379883,145.3021990966797,145.15839904785156,145.15199920654297,145.2777993774414,145.33819946289063,145.28039947509765,145.08239959716798,144.86399963378906,144.709599609375,144.54719970703124,144.4765997314453,144.35439971923827,144.13179962158202,143.9647994995117,143.63739944458007,143.3545994567871,143.0759992980957,142.70959930419923,142.29139923095704,141.80279922485352,141.34839920043945,140.96439895629882,140.68299880981445,140.23799880981446,139.83939895629882,139.52159896850586,139.33979904174805,139.26639907836915,139.20419906616212,139.18319900512697,139.215399017334,139.36859909057617,139.26839920043946,139.15359939575194,139.10659927368164,138.965799407959,138.875799407959,138.76999923706055,138.76059951782227,138.89039962768555,138.9213996887207,138.99299942016603,139.0691993713379,139.20219924926758,139.3989991760254,139.51539932250978,139.61319931030275,139.76359939575195,139.90519943237305,140.09799942016602,140.24879928588868,140.37399948120117,140.51879928588866,140.56319931030274,140.61219924926758,140.6961991882324,140.8723991394043,141.10039932250976,141.47359939575196,141.90419937133788,142.22719955444336,142.63999954223632,143.0145994567871,143.38399948120116,143.87259948730468,144.33219940185546,144.79339965820313,145.40899978637697,145.98179977416993,146.62939971923828,147.22259979248048,147.77619995117186,148.34019989013672,148.87539978027343,149.3727996826172,149.83059967041015,150.32719970703124,150.87019958496094,151.4627993774414,152.02879943847657,152.51919952392578,152.94379943847656,153.39979949951172,153.76119934082033,154.05859954833986,154.40059967041014,154.82599975585939,155.22160003662108,155.5097998046875,155.74919982910157,156.06720001220702,156.30720001220703,156.56920013427734,156.85840026855467,157.1136004638672,157.3118002319336,157.61600036621093,157.90300018310546,158.22059997558594,158.54039978027345,158.9197998046875,159.25739959716796,159.74079986572266,160.27659973144532,160.75359985351562,161.27659973144532,161.84539978027342,162.37859985351562,162.79940002441407,163.16420013427734,163.58600006103515,164.02960021972658,164.52100036621093,165.03500030517577,165.45680023193358,165.8418002319336,166.24180023193358,166.6333999633789,167.07940002441407,167.47640014648437,167.89260009765624,168.355,168.76800018310547,169.1472003173828,169.53800048828126,169.99640075683592,170.40020080566407],"yaxis":"y2","type":"scatter"},{"close":[131.8800048828125,132.75999450683594,135.42999267578125,130.05999755859375,131.55999755859375,135.8699951171875,135.35000610351562,138.27000427246094,141.66000366210938,141.66000366210938,137.44000244140625,139.22999572753906,136.72000122070312,138.92999267578125,141.55999755859375,142.9199981689453,146.35000610351562,147.0399932861328,144.8699951171875,145.86000061035156,145.49000549316406,148.47000122070312,150.1699981689453,147.07000732421875,151.0,153.0399932861328,155.35000610351562,154.08999633789062,152.9499969482422,151.60000610351562,156.7899932861328,157.35000610351562,162.50999450683594,161.50999450683594,160.00999450683594,166.1300048828125,165.80999755859375,165.35000610351562,164.8699951171875,164.9199981689453,169.24000549316406,168.49000549316406,172.10000610351562,173.19000244140625,173.02999877929688,174.5500030517578,174.14999389648438,171.52000427246094,167.57000732421875,167.22999572753906,167.52999877929688,170.02999877929688,163.6199951171875,161.3800048828125,158.91000366210938,157.22000122070312,157.9600067138672,155.80999755859375,154.52999877929688,155.9600067138672,154.4600067138672,157.3699951171875,163.42999267578125,153.83999633789062,155.30999755859375,152.3699951171875,150.6999969482422,154.47999572753906,156.89999389648438,153.72000122070312,152.74000549316406,150.42999267578125,150.77000427246094,151.75999450683594,149.83999633789062,142.47999572753906,138.1999969482422,142.4499969482422,146.10000610351562,146.39999389648438,145.42999267578125,140.08999633789062,140.4199981689453,138.97999572753906,138.33999633789062,142.99000549316406,138.3800048828125,142.41000366210938,143.75,143.86000061035156,143.38999938964844,147.27000427246094,149.4499969482422,152.33999633789062,149.35000610351562,144.8000030517578,155.74000549316406,153.33999633789062,150.64999389648438,145.02999877929688,138.8800048828125,138.3800048828125,138.9199981689453,139.5,134.8699951171875,146.8699951171875,149.6999969482422,148.27999877929688,150.0399932861328,148.7899932861328,150.72000122070312,151.2899932861328,148.00999450683594,150.17999267578125,151.07000732421875,148.11000061035156,144.22000122070312,141.1699981689453,148.02999877929688,148.30999755859375,147.80999755859375,146.6300048828125,142.91000366210938,140.94000244140625,142.64999389648438,142.16000366210938,144.49000549316406,145.47000122070312,143.2100067138672,136.5,134.50999450683594,132.3699951171875,132.3000030517578,135.4499969482422,132.22999572753906,131.86000061035156,130.02999877929688,126.04000091552734,129.61000061035156,129.92999267578125,125.06999969482422,126.36000061035156,125.0199966430664,129.6199951171875,130.14999389648438,130.72999572753906,133.49000549316406,133.41000366210938,134.75999450683594,135.94000244140625,135.2100067138672,135.27000427246094,137.8699951171875,141.11000061035156,142.52999877929688,141.86000061035156,143.9600067138672,145.92999267578125,143.0,144.2899932861328,145.42999267578125,150.82000732421875,154.5,151.72999572753906,154.64999389648438,151.9199981689453,150.8699951171875,151.00999450683594,153.85000610351562,153.1999969482422,155.3300018310547,153.7100067138672,152.5500030517578,148.47999572753906,148.91000366210938,149.39999389648438,146.7100067138672,147.9199981689453,147.41000366210938,145.30999755859375,145.91000366210938,151.02999877929688,153.8300018310547,151.60000610351562,152.8699951171875,150.58999633789062,148.5,150.47000122070312,152.58999633789062,152.99000549316406,155.85000610351562,155.0,157.39999389648438,159.27999877929688,157.8300018310547,158.92999267578125,160.25,158.27999877929688,157.64999389648438,160.77000427246094,162.36000061035156,164.89999389648438,166.1699981689453,165.6300048828125,163.75999450683594,164.66000366210938,162.02999877929688,160.8000030517578,160.10000610351562,165.55999755859375,165.2100067138672,165.22999572753906,166.47000122070312,167.6300048828125,166.64999389648438,165.02000427246094,165.3300018310547,163.77000427246094,163.75999450683594,168.41000366210938,169.67999267578125,169.58999633789062,168.5399932861328,167.4499969482422,165.7899932861328,173.57000732421875,173.5,171.77000427246094,173.55999755859375,173.75,172.57000732421875,172.07000732421875,172.07000732421875,172.69000244140625,175.0500030517578,175.16000366210938,174.1999969482422,171.55999755859375,171.83999633789062,172.99000549316406,175.42999267578125,177.3000030517578,177.25,180.08999633789062,180.9499969482422,179.5800018310547,179.2100067138672,177.82000732421875,180.57000732421875,180.9600067138672],"decreasing":{"line":{"color":"#808080"}},"high":[135.1999969482422,133.88999938964844,137.33999633789062,132.38999938964844,133.0800018310547,137.05999755859375,137.75999450683594,138.58999633789062,141.91000366210938,143.49000549316406,143.4199981689453,140.6699981689453,138.3699951171875,139.0399932861328,141.61000061035156,144.1199951171875,146.5500030517578,147.5500030517578,146.63999938964844,148.4499969482422,146.4499969482422,148.9499969482422,150.86000061035156,151.57000732421875,151.22999572753906,153.72000122070312,155.57000732421875,156.27999877929688,155.0399932861328,153.08999633789062,157.3300018310547,157.63999938964844,163.6300048828125,163.58999633789062,162.41000366210938,166.58999633789062,167.19000244140625,165.85000610351562,167.80999755859375,165.82000732421875,169.33999633789062,170.99000549316406,172.1699981689453,173.38999938964844,173.7100067138672,176.14999389648438,174.89999389648438,173.74000549316406,169.86000061035156,168.7100067138672,168.11000061035156,170.13999938964844,171.0500030517578,162.89999389648438,162.55999755859375,160.5800018310547,158.4199981689453,160.36000061035156,157.08999633789062,156.6699981689453,156.36000061035156,157.82000732421875,164.25999450683594,160.5399932861328,157.10000610351562,155.24000549316406,151.35000610351562,154.55999755859375,158.0800018310547,158.74000549316406,154.47000122070312,151.47000122070312,153.77000427246094,154.72000122070312,150.63999938964844,146.72000122070312,143.10000610351562,143.07000732421875,146.22000122070312,147.3800048828125,147.5399932861328,143.10000610351562,141.88999938964844,141.35000610351562,140.36000061035156,143.58999633789062,144.52000427246094,142.89999389648438,146.6999969482422,144.9499969482422,145.88999938964844,147.85000610351562,150.22999572753906,152.49000549316406,151.99000549316406,149.0500030517578,157.5,154.24000549316406,155.4499969482422,152.1699981689453,142.8000030517578,142.6699981689453,139.14999389648438,141.42999267578125,138.5500030517578,146.8699951171875,150.00999450683594,150.27999877929688,153.58999633789062,149.8699951171875,151.47999572753906,152.6999969482422,150.3699951171875,150.4199981689453,151.8300018310547,148.8800048828125,146.63999938964844,144.80999755859375,148.72000122070312,149.1300048828125,148.0,150.9199981689453,147.3000030517578,143.3699951171875,143.52000427246094,145.57000732421875,144.5,149.97000122070312,146.66000366210938,141.8000030517578,137.64999389648438,135.1999969482422,133.25,136.80999755859375,134.55999755859375,132.4199981689453,131.41000366210938,131.02999877929688,130.47999572753906,129.9499969482422,130.89999389648438,128.66000366210938,127.7699966430664,130.2899932861328,133.41000366210938,131.25999450683594,133.50999450683594,134.25999450683594,134.9199981689453,137.2899932861328,138.61000061035156,136.25,138.02000427246094,143.32000732421875,143.16000366210938,142.42999267578125,144.25,147.22999572753906,145.5500030517578,144.33999633789062,146.61000061035156,151.17999267578125,157.3800048828125,153.10000610351562,155.22999572753906,154.5800018310547,154.3300018310547,151.33999633789062,154.25999450683594,153.77000427246094,155.5,156.3300018310547,153.0,151.3000030517578,149.9499969482422,150.33999633789062,147.19000244140625,149.1699981689453,149.0800018310547,147.22999572753906,146.7100067138672,151.11000061035156,156.3000030517578,154.02999877929688,153.47000122070312,154.5399932861328,150.94000244140625,153.13999938964844,153.39999389648438,153.25,156.4600067138672,156.74000549316406,157.82000732421875,159.39999389648438,162.13999938964844,161.5500030517578,160.33999633789062,160.77000427246094,158.49000549316406,161.0500030517578,162.47000122070312,165.0,166.2899932861328,166.83999633789062,165.0500030517578,164.9600067138672,162.02999877929688,162.36000061035156,162.05999755859375,165.8000030517578,166.32000732421875,165.38999938964844,167.41000366210938,168.16000366210938,167.8699951171875,166.4499969482422,165.60000610351562,166.30999755859375,165.27999877929688,168.55999755859375,169.85000610351562,170.4499969482422,170.35000610351562,170.9199981689453,167.0399932861328,174.3000030517578,173.85000610351562,173.5399932861328,174.02999877929688,174.58999633789062,174.05999755859375,173.2100067138672,173.13999938964844,172.92999267578125,175.24000549316406,176.38999938964844,174.7100067138672,173.3800048828125,172.4199981689453,173.89999389648438,175.77000427246094,178.99000549316406,179.35000610351562,180.1199951171875,181.77999877929688,184.9499969482422,180.1199951171875,181.2100067138672,180.83999633789062,182.22999572753906],"increasing":{"line":{"color":"#17BECF"}},"low":[131.44000244140625,131.47999572753906,132.16000366210938,129.0399932861328,129.80999755859375,133.32000732421875,133.91000366210938,135.6300048828125,139.77000427246094,140.97000122070312,137.32000732421875,136.6699981689453,133.77000427246094,135.66000366210938,136.92999267578125,141.0800018310547,143.27999877929688,145.0,143.77999877929688,145.0500030517578,142.1199951171875,143.25,148.1999969482422,146.6999969482422,146.91000366210938,150.3699951171875,151.94000244140625,153.41000366210938,152.27999877929688,150.8000030517578,152.16000366210938,154.41000366210938,159.5,160.88999938964844,159.6300048828125,160.75,164.42999267578125,163.0,164.1999969482422,163.25,166.89999389648438,168.19000244140625,169.39999389648438,171.35000610351562,171.66000366210938,172.57000732421875,173.1199951171875,171.30999755859375,167.13999938964844,166.64999389648438,166.25,168.35000610351562,163.55999755859375,159.82000732421875,157.72000122070312,157.13999938964844,154.6699981689453,154.97000122070312,153.69000244140625,153.61000061035156,152.67999267578125,154.75,159.3000030517578,153.3699951171875,153.61000061035156,151.3800048828125,148.3699951171875,149.10000610351562,153.0800018310547,153.60000610351562,150.91000366210938,148.55999755859375,149.63999938964844,149.9499969482422,144.83999633789062,140.67999267578125,138.0,137.69000244140625,144.25999450683594,143.00999450683594,145.22000122070312,139.4499969482422,138.57000732421875,138.22000122070312,138.16000366210938,134.3699951171875,138.19000244140625,140.27000427246094,140.61000061035156,141.5,142.64999389648438,142.64999389648438,146.0,149.36000061035156,148.0399932861328,144.1300048828125,147.82000732421875,151.9199981689453,149.1300048828125,145.0,138.75,134.3800048828125,135.6699981689453,137.49000549316406,134.58999633789062,139.5,144.3699951171875,147.42999267578125,148.55999755859375,147.2899932861328,146.14999389648438,149.97000122070312,147.72000122070312,146.92999267578125,149.33999633789062,147.1199951171875,143.3800048828125,140.35000610351562,140.5500030517578,146.61000061035156,145.64999389648438,145.77000427246094,141.9199981689453,140.0,141.10000610351562,140.89999389648438,141.05999755859375,144.24000549316406,141.16000366210938,136.02999877929688,133.72999572753906,131.32000732421875,129.88999938964844,132.75,130.3000030517578,129.63999938964844,128.72000122070312,125.87000274658203,127.7300033569336,127.43000030517578,124.16999816894531,125.08000183105469,124.76000213623047,124.88999938964844,129.88999938964844,128.1199951171875,130.4600067138672,131.44000244140625,131.66000366210938,134.1300048828125,135.02999877929688,133.77000427246094,134.22000122070312,137.89999389648438,140.3000030517578,138.80999755859375,141.89999389648438,143.0800018310547,142.85000610351562,142.27999877929688,141.32000732421875,148.1699981689453,147.8300018310547,150.77999877929688,150.63999938964844,151.1699981689453,150.4199981689453,149.22000122070312,150.9199981689453,150.86000061035156,152.8800048828125,153.35000610351562,150.85000610351562,148.41000366210938,147.16000366210938,147.24000549316406,145.72000122070312,147.4499969482422,146.8300018310547,145.00999450683594,143.89999389648438,147.3300018310547,153.4600067138672,151.1300048828125,151.8300018310547,150.22999572753906,147.61000061035156,147.6999969482422,150.10000610351562,149.9199981689453,151.63999938964844,154.27999877929688,154.14999389648438,156.5399932861328,157.80999755859375,157.67999267578125,157.85000610351562,157.8699951171875,155.97999572753906,159.35000610351562,161.27000427246094,161.91000366210938,164.22000122070312,165.11000061035156,161.8000030517578,162.0,160.0800018310547,160.50999450683594,159.77999877929688,161.4199981689453,163.82000732421875,164.02999877929688,165.64999389648438,165.5399932861328,165.55999755859375,164.49000549316406,163.88999938964844,163.72999572753906,162.8000030517578,165.19000244140625,167.8800048828125,168.63999938964844,167.5399932861328,167.16000366210938,164.30999755859375,170.75999450683594,172.11000061035156,171.60000610351562,171.89999389648438,172.1699981689453,171.0,171.47000122070312,171.8000030517578,170.4199981689453,172.5800018310547,174.94000244140625,173.4499969482422,171.27999877929688,170.52000427246094,171.69000244140625,173.11000061035156,176.57000732421875,176.75999450683594,176.92999267578125,179.25999450683594,178.0399932861328,177.42999267578125,177.32000732421875,177.4600067138672,180.6300048828125],"name":"Trace 1","open":[132.8699951171875,133.1300048828125,134.2899932861328,132.0800018310547,130.07000732421875,133.4199981689453,134.7899932861328,136.82000732421875,139.89999389648438,142.6999969482422,142.1300048828125,137.4600067138672,137.25,136.0399932861328,137.77000427246094,141.35000610351562,143.2899932861328,145.25999450683594,145.6699981689453,145.75999450683594,142.99000549316406,144.0800018310547,149.77999877929688,150.74000549316406,147.9199981689453,151.1199951171875,154.5,155.38999938964844,154.00999450683594,152.25999450683594,152.5800018310547,156.97999572753906,161.24000549316406,161.00999450683594,160.10000610351562,160.83999633789062,166.00999450683594,163.2100067138672,166.3699951171875,164.02000427246094,167.67999267578125,170.05999755859375,169.82000732421875,171.52000427246094,172.77999877929688,172.77000427246094,173.75,173.02999877929688,169.69000244140625,167.0800018310547,167.32000732421875,168.77999877929688,170.57000732421875,161.14999389648438,162.1300048828125,160.30999755859375,156.63999938964844,159.75,156.47000122070312,154.82000732421875,154.63999938964844,155.47000122070312,159.58999633789062,159.89999389648438,154.7899932861328,154.64999389648438,151.2100067138672,149.30999755859375,153.39999389648438,157.33999633789062,152.3800048828125,151.19000244140625,149.66000366210938,152.74000549316406,147.63999938964844,146.10000610351562,141.27999877929688,138.2100067138672,145.02999877929688,144.07000732421875,145.80999755859375,142.5399932861328,140.4199981689453,139.89999389648438,139.1300048828125,134.99000549316406,144.30999755859375,141.07000732421875,145.49000549316406,141.69000244140625,143.02000427246094,142.8699951171875,147.19000244140625,150.08999633789062,150.9600067138672,148.07000732421875,148.1999969482422,153.16000366210938,155.0800018310547,148.9499969482422,142.05999755859375,142.08999633789062,137.11000061035156,140.41000366210938,138.5,141.24000549316406,145.82000732421875,148.97000122070312,152.22000122070312,149.1300048828125,146.42999267578125,152.30999755859375,150.16000366210938,148.1300048828125,149.4499969482422,148.30999755859375,145.13999938964844,144.2899932861328,141.39999389648438,148.2100067138672,145.9600067138672,147.77000427246094,147.07000732421875,142.19000244140625,142.36000061035156,142.33999633789062,142.6999969482422,149.5,145.35000610351562,141.11000061035156,136.69000244140625,135.11000061035156,131.38999938964844,132.97999572753906,134.35000610351562,130.9199981689453,131.3800048828125,129.6699981689453,127.98999786376953,128.41000366210938,130.27999877929688,126.88999938964844,127.12999725341797,126.01000213623047,130.47000122070312,130.25999450683594,131.25,133.8800048828125,132.02999877929688,134.8300018310547,136.82000732421875,134.0800018310547,135.27999877929688,138.1199951171875,140.30999755859375,140.88999938964844,143.1699981689453,143.16000366210938,144.9600067138672,142.6999969482422,143.97000122070312,148.89999389648438,148.02999877929688,152.57000732421875,150.63999938964844,153.8800048828125,153.77999877929688,149.4600067138672,150.9499969482422,152.1199951171875,153.11000061035156,153.50999450683594,152.35000610351562,150.1999969482422,148.8699951171875,150.08999633789062,147.11000061035156,147.7100067138672,147.0500030517578,146.8300018310547,144.3800048828125,148.0399932861328,153.7899932861328,153.6999969482422,152.80999755859375,153.55999755859375,150.2100067138672,147.80999755859375,151.27999877929688,151.19000244140625,152.16000366210938,156.0800018310547,155.07000732421875,157.32000732421875,159.3000030517578,158.8300018310547,158.86000061035156,159.94000244140625,157.97000122070312,159.3699951171875,161.52999877929688,162.44000244140625,164.27000427246094,166.60000610351562,164.74000549316406,162.42999267578125,161.4199981689453,162.35000610351562,161.22000122070312,161.6300048828125,164.58999633789062,165.08999633789062,166.10000610351562,165.8000030517578,166.08999633789062,165.0500030517578,165.0,165.19000244140625,163.05999755859375,165.19000244140625,168.49000549316406,169.27999877929688,170.08999633789062,169.5,164.88999938964844,170.97999572753906,172.47999572753906,173.0500030517578,173.02000427246094,173.85000610351562,173.6199951171875,173.16000366210938,171.99000549316406,171.7100067138672,173.0,176.38999938964844,173.97999572753906,173.1300048828125,171.08999633789062,172.41000366210938,173.32000732421875,176.9600067138672,177.3300018310547,177.6999969482422,181.02999877929688,182.6300048828125,179.97000122070312,178.44000244140625,177.89999389648438,181.5],"showlegend":true,"x":["2022-06-13","2022-06-14","2022-06-15","2022-06-16","2022-06-17","2022-06-21","2022-06-22","2022-06-23","2022-06-24","2022-06-27","2022-06-28","2022-06-29","2022-06-30","2022-07-01","2022-07-05","2022-07-06","2022-07-07","2022-07-08","2022-07-11","2022-07-12","2022-07-13","2022-07-14","2022-07-15","2022-07-18","2022-07-19","2022-07-20","2022-07-21","2022-07-22","2022-07-25","2022-07-26","2022-07-27","2022-07-28","2022-07-29","2022-08-01","2022-08-02","2022-08-03","2022-08-04","2022-08-05","2022-08-08","2022-08-09","2022-08-10","2022-08-11","2022-08-12","2022-08-15","2022-08-16","2022-08-17","2022-08-18","2022-08-19","2022-08-22","2022-08-23","2022-08-24","2022-08-25","2022-08-26","2022-08-29","2022-08-30","2022-08-31","2022-09-01","2022-09-02","2022-09-06","2022-09-07","2022-09-08","2022-09-09","2022-09-12","2022-09-13","2022-09-14","2022-09-15","2022-09-16","2022-09-19","2022-09-20","2022-09-21","2022-09-22","2022-09-23","2022-09-26","2022-09-27","2022-09-28","2022-09-29","2022-09-30","2022-10-03","2022-10-04","2022-10-05","2022-10-06","2022-10-07","2022-10-10","2022-10-11","2022-10-12","2022-10-13","2022-10-14","2022-10-17","2022-10-18","2022-10-19","2022-10-20","2022-10-21","2022-10-24","2022-10-25","2022-10-26","2022-10-27","2022-10-28","2022-10-31","2022-11-01","2022-11-02","2022-11-03","2022-11-04","2022-11-07","2022-11-08","2022-11-09","2022-11-10","2022-11-11","2022-11-14","2022-11-15","2022-11-16","2022-11-17","2022-11-18","2022-11-21","2022-11-22","2022-11-23","2022-11-25","2022-11-28","2022-11-29","2022-11-30","2022-12-01","2022-12-02","2022-12-05","2022-12-06","2022-12-07","2022-12-08","2022-12-09","2022-12-12","2022-12-13","2022-12-14","2022-12-15","2022-12-16","2022-12-19","2022-12-20","2022-12-21","2022-12-22","2022-12-23","2022-12-27","2022-12-28","2022-12-29","2022-12-30","2023-01-03","2023-01-04","2023-01-05","2023-01-06","2023-01-09","2023-01-10","2023-01-11","2023-01-12","2023-01-13","2023-01-17","2023-01-18","2023-01-19","2023-01-20","2023-01-23","2023-01-24","2023-01-25","2023-01-26","2023-01-27","2023-01-30","2023-01-31","2023-02-01","2023-02-02","2023-02-03","2023-02-06","2023-02-07","2023-02-08","2023-02-09","2023-02-10","2023-02-13","2023-02-14","2023-02-15","2023-02-16","2023-02-17","2023-02-21","2023-02-22","2023-02-23","2023-02-24","2023-02-27","2023-02-28","2023-03-01","2023-03-02","2023-03-03","2023-03-06","2023-03-07","2023-03-08","2023-03-09","2023-03-10","2023-03-13","2023-03-14","2023-03-15","2023-03-16","2023-03-17","2023-03-20","2023-03-21","2023-03-22","2023-03-23","2023-03-24","2023-03-27","2023-03-28","2023-03-29","2023-03-30","2023-03-31","2023-04-03","2023-04-04","2023-04-05","2023-04-06","2023-04-10","2023-04-11","2023-04-12","2023-04-13","2023-04-14","2023-04-17","2023-04-18","2023-04-19","2023-04-20","2023-04-21","2023-04-24","2023-04-25","2023-04-26","2023-04-27","2023-04-28","2023-05-01","2023-05-02","2023-05-03","2023-05-04","2023-05-05","2023-05-08","2023-05-09","2023-05-10","2023-05-11","2023-05-12","2023-05-15","2023-05-16","2023-05-17","2023-05-18","2023-05-19","2023-05-22","2023-05-23","2023-05-24","2023-05-25","2023-05-26","2023-05-30","2023-05-31","2023-06-01","2023-06-02","2023-06-05","2023-06-06","2023-06-07","2023-06-08","2023-06-09"],"yaxis":"y2","type":"candlestick"}],                        {"legend":{"bgcolor":"#F5F6F9","font":{"color":"#4D5663"},"orientation":"h","x":0.3,"y":0.95,"yanchor":"bottom"},"margin":{"b":30,"l":30,"r":30,"t":30},"paper_bgcolor":"#F5F6F9","plot_bgcolor":"#F5F6F9","showlegend":true,"template":{"data":{"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"title":{"font":{"color":"#4D5663"},"text":"Apple Candle Chart"},"xaxis":{"anchor":"y2","gridcolor":"#E1E5ED","rangeselector":{"bgcolor":"rgba(150, 200, 250, 1)","buttons":[{"count":1,"label":"1m","step":"month","stepmode":"backward"},{"count":1,"label":"1y","step":"year","stepmode":"backward"}],"font":{"size":13},"visible":false,"x":0,"y":0.9},"rangeslider":{"visible":false},"showgrid":true,"tickfont":{"color":"#4D5663"},"title":{"font":{"color":"#4D5663"},"text":""},"zerolinecolor":"#E1E5ED"},"yaxis":{"gridcolor":"#E1E5ED","showgrid":true,"showticklabels":false,"tickfont":{"color":"#4D5663"},"title":{"font":{"color":"#4D5663"},"text":""},"zerolinecolor":"#E1E5ED"},"yaxis3":{"domain":[0.0,0.15],"gridcolor":"#E1E5ED","showgrid":true,"tickfont":{"color":"#4D5663"},"title":{"font":{"color":"#4D5663"},"text":""},"zerolinecolor":"#E1E5ED"},"yaxis2":{"domain":[0.23,0.9],"gridcolor":"#E1E5ED","showgrid":true,"tickfont":{"color":"#4D5663"},"title":{"font":{"color":"#4D5663"},"text":""},"zerolinecolor":"#E1E5ED"}},                        {"showLink": true, "linkText": "Export to plot.ly", "plotlyServerURL": "https://plot.ly", "responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('ebc223ed-d12d-4acf-98a1-9bf8b6df21f0');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div></div></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/option"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="COVID19mobility.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">9.1. </span>COVID-19による人流の変化</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercise.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9.3. </span>課題</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-average">9.2.1. 移動平均（Moving Average）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">9.2.2. 参考: 株価の前日からのパーセント変化を求めます</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#googleapple">9.2.2.1. GoogleとApple</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.2.2.2. ヒストグラムと散布図を１つの図中に示す方法</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.2.2.2.1. 参考</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">9.2.2.3. 参考: ヒートマップで相関関係を示す</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">9.2.2.4. 参考：ロウソクチャートを描く</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
