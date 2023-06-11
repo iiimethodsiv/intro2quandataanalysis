@@ -35,7 +35,6 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -50,7 +49,6 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script src="../../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -526,7 +524,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_28592/3738925007.py:1: DtypeWarning: Columns (3,4,5) have mixed types. Specify dtype option on import or set low_memory=False.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_30665/3738925007.py:1: DtypeWarning: Columns (3,4,5) have mixed types. Specify dtype option on import or set low_memory=False.
   df = pd.read_csv(&#39;https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv&#39;)
 </pre></div>
 </div>
@@ -560,7 +558,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_28592/4147283073.py:1: DeprecationWarning: In a future version, `df.iloc[:, i] = newvals` will attempt to set the values inplace instead of always setting a new array. To retain the old behavior, use either `df[df.columns[i]] = newvals` or, if columns are non-unique, `df.isetitem(i, newvals)`
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_30665/4147283073.py:1: DeprecationWarning: In a future version, `df.iloc[:, i] = newvals` will attempt to set the values inplace instead of always setting a new array. To retain the old behavior, use either `df[df.columns[i]] = newvals` or, if columns are non-unique, `df.isetitem(i, newvals)`
   df.loc[:, &#39;date&#39;] = pd.to_datetime(df[&#39;date&#39;])
 </pre></div>
 </div>
@@ -573,7 +571,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_28592/801468514.py:1: FutureWarning: Treating datetime data as categorical rather than numeric in `.describe` is deprecated and will be removed in a future version of pandas. Specify `datetime_is_numeric=True` to silence this warning and adopt the future behavior now.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_30665/801468514.py:1: FutureWarning: Treating datetime data as categorical rather than numeric in `.describe` is deprecated and will be removed in a future version of pandas. Specify `datetime_is_numeric=True` to silence this warning and adopt the future behavior now.
   df[&#39;date&#39;].describe()
 </pre></div>
 </div>
@@ -939,49 +937,49 @@ Name: date, dtype: int64
   </thead>
   <tbody>
     <tr>
-      <th>Shizuoka</th>
-      <td>-8.000000</td>
-      <td>-0.766667</td>
-      <td>-11.766667</td>
-      <td>-29.566667</td>
-      <td>-9.166667</td>
-      <td>5.900000</td>
-    </tr>
-    <tr>
-      <th>Kumamoto</th>
-      <td>-9.433333</td>
-      <td>-0.233333</td>
+      <th>Osaka</th>
+      <td>-17.933333</td>
+      <td>-0.300000</td>
+      <td>-7.666667</td>
+      <td>-26.300000</td>
       <td>-12.666667</td>
-      <td>-22.133333</td>
-      <td>-8.800000</td>
-      <td>4.900000</td>
+      <td>6.633333</td>
     </tr>
     <tr>
-      <th>Nara</th>
-      <td>-8.866667</td>
+      <th>Shimane</th>
+      <td>-7.066667</td>
       <td>2.133333</td>
-      <td>-10.166667</td>
-      <td>-19.233333</td>
-      <td>-10.633333</td>
-      <td>5.466667</td>
+      <td>8.066667</td>
+      <td>-17.033333</td>
+      <td>-7.000000</td>
+      <td>4.000000</td>
     </tr>
     <tr>
-      <th>Nagasaki</th>
-      <td>-8.100000</td>
+      <th>Ehime</th>
+      <td>-7.533333</td>
+      <td>0.600000</td>
       <td>0.533333</td>
-      <td>-14.633333</td>
-      <td>-26.100000</td>
-      <td>-6.433333</td>
-      <td>4.033333</td>
+      <td>-23.333333</td>
+      <td>-6.666667</td>
+      <td>4.600000</td>
     </tr>
     <tr>
-      <th>Saga</th>
-      <td>-5.033333</td>
-      <td>-0.666667</td>
-      <td>-10.700000</td>
-      <td>-28.166667</td>
-      <td>-7.833333</td>
-      <td>4.700000</td>
+      <th>Saitama</th>
+      <td>-11.000000</td>
+      <td>0.233333</td>
+      <td>-4.933333</td>
+      <td>-26.666667</td>
+      <td>-15.300000</td>
+      <td>8.800000</td>
+    </tr>
+    <tr>
+      <th>Miyagi</th>
+      <td>-9.566667</td>
+      <td>1.233333</td>
+      <td>10.833333</td>
+      <td>-26.300000</td>
+      <td>-8.933333</td>
+      <td>5.033333</td>
     </tr>
   </tbody>
 </table>
@@ -1329,7 +1327,7 @@ DataFrame<code class="docutils literal notranslate"><span class="pre">June</span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_28592/2681535062.py:1: FutureWarning: The default value of numeric_only in DataFrameGroupBy.median is deprecated. In a future version, numeric_only will default to False. Either specify numeric_only or select only columns which should be valid for the function.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_30665/2681535062.py:1: FutureWarning: The default value of numeric_only in DataFrameGroupBy.median is deprecated. In a future version, numeric_only will default to False. Either specify numeric_only or select only columns which should be valid for the function.
   June = June.groupby([&#39;country_region&#39;]).median().reset_index()
 </pre></div>
 </div>
