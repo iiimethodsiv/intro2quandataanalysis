@@ -1,0 +1,16 @@
+*.DS_Store
+*.csv
+*.pkl
+*.pickle
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+docs/
+**assets/data/N03-20220101_GML/
+**docs/option/Geolife*Trajectories*1.3/
+**docs/option/data/
+**docs/sec05/data/
