@@ -6,14 +6,14 @@
 :::{grid-item}
 :columns: 12
 :class: sd-fs-7
-このWebサイトは2023年度Sセメスター社会情報学研究法IVで用いる補助教材です。
+このWebサイトはSセメスター社会情報学研究法IVで用いる補助教材です。
 
 :::
 
 :::{grid-item}
 :columns: 12
 :class: sd-fs-7
-This site is supplementary material for the 2023 class 社会情報学研究法IV at UTokyo (for the English version, please contact <a href="https://www.yuyashibuya.com">yuyashibuya</a>).
+This site is supplementary material for the class 社会情報学研究法IV at UTokyo (for the English version, please contact <a href="https://www.yuyashibuya.com">yuyashibuya</a>).
 
 :::
 
@@ -32,7 +32,7 @@ This site is supplementary material for the 2023 class 社会情報学研究法I
 :columns: 12
 :class: sd-fs-7
 
-このWeb補助教材はPythonプログラミング言語や統計・データ分析等にそれほど慣れていない人が使うことを前提にしています。Pythonやデータ分析を学ぶことに興味がある人にとって使いやすいようになることを目指しています。ただし、この教材はあくまで補助教材であり、授業内でのスライドや説明などがないまま自習することは想定していません。授業で用いるスライドや他の教材についてはITC-LMSで確認してください。
+このWeb補助教材はPythonプログラミング言語や統計・データ分析等にそれほど慣れていない人が使うことを前提に準備をしたものです。ただし、あくまで補助的な教材と位置付けていて、授業内でのスライドや説明などがないまま自習することは想定していません。授業や他の教材についてはITC-LMS等で確認してください。
 
 :::
 
