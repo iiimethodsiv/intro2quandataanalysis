@@ -4,7 +4,7 @@
 title: Intro to Data Analysis with Python 
 author:  <a href="https://www.yuyashibuya.com">yuyashibuya</a>
 logo: assets/img/logo.png
-copyright: "2023"
+copyright: "2023-2024"
 exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints"]
 only_build_toc_files: false
 
