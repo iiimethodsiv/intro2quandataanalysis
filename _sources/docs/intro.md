@@ -168,6 +168,21 @@ Twitter日本語テキスト
 
 :::
 
+:::{grid-item-card}
+:class-header: bg-light
+
+<a href="appendix/index.html"><strong>参考情報</strong></a>
+^^^
+
+データ収集や分析のためのツールボックス
+* {doc}`appendix/toolbox`
+
+博士課程進学希望者向けの教材リスト（要UTokyo ECSSアカウント）
+
+* {doc}`appendix/howtoresearch`
+<!-- * {doc}`appendix/howtoresearch` -->
+:::
+
 ::::
 
 :::::
