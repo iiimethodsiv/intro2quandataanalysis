@@ -1,0 +1,1200 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>mecab-ipadic-NEologd : Neologism dictionary for MeCab &#8212; Intro to Data Analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'mecab-ipadic-neologd/README.ja';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/mecab-ipadic-neologd/README.ja.html" />
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../docs/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Intro to Data Analysis with Python - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Intro to Data Analysis with Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../docs/intro.html">
+                    Introduction to Quantitative Data Analysis with Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">環境準備とPythonの基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/sec01/index.html">1. Python環境の準備</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec01/01_build_python_environment.html">1.1. Python環境の準備</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec01/02_howtopip.html">1.2. 必要なパッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec01/03_basic_notebook.html">1.3. Notebookの基本的な使い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec01/04_exercise.html">1.4. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/sec02/index.html">2. Pythonの基本的な使い方1</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec02/01_basic_python1.html">2.1. 変数・算術演算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec02/02_basic_python2.html">2.2. 複合データ型・for/while/if文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec02/03_basic_python3.html">2.3. 関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec02/04_list_comprehension.html">2.4. set型・リスト内包表記</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec02/05_string.html">2.5. 文字列を扱うときの注意点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec02/06_exercise.html">2.6. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/sec03/index.html">3. Pythonの基本的な使い方2</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec03/numpy.html">3.1. Pythonのライブラリ・パッケージ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec03/pandas1.html">3.2. pandas 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec03/pandas2.html">3.3. pandas 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec03/read_write.html">3.4. ファイルの読み書き</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec03/pandas_datetime.html">3.5. pandasを用いた日時データの扱い方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec03/matplotlib.html">3.6. matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec03/option_text_viz.html">3.7. 参考：日本語の取り扱いと正規表現</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec03/exercise.html">3.8. 課題</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">データ分析の基礎</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/sec04/index.html">4. データ分析の基礎</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec04/01_basic_stats1.html">4.1. 平均値・中央値・最頻値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec04/02_basic_stats2.html">4.2. 頻度分布・偏差・分散</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec04/03_basic_stats3.html">4.3. 基本統計量の確認方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec04/04_stats_test.html">4.4. 仮説検定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec04/05_exercise.html">4.5. 課題</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/sec05/index.html">5. 相関・回帰・重回帰分析</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec05/correlation.html">5.1. 相関・散布図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec05/regression.html">5.2. 回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec05/multiple_regression.html">5.3. 重回帰分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec05/regression_tips.html">5.4. 非線形・交差項・二乗項</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/sec06/index.html">6. 離散選択モデル</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec06/logit_provit.html">6.1. 離散選択モデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec06/ordered_loigt.html">6.2. 順序ロジットモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec06/multinomial_logit.html">6.3. 多項ロジットモデル</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/sec07/index.html">7. パネルデータ分析</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec07/paneldata.html">7.1. パネルデータ分析</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/sec08/index.html">8. 機械学習</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec08/supervised_learning.html">8.1. 機械学習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/sec08/unsupervised_learning.html">8.2. 教師なし学習</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">演習</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/option/index.html">9. 演習</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/option/COVID19mobility.html">9.1. COVID-19による人流の変化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/option/yfinance.html">9.2. Yahoo! FINANCEのデータを用いた可視化の演習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/option/exercise.html">9.3. 課題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/option/gps_clean_data.html">9.4. 演習・交通手段分類（データ準備）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/option/gps_feature_extraction.html">9.5. 演習・交通手段分類（データの特徴をつかむ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/option/gps_machine_learning.html">9.6. 演習・交通手段分類（機械学習）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docs/option/twitter.html">9.7. 演習・Twitterのテキスト分類問題</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iiimethodsiv/intro2quandataanalysis/issues/new?title=Issue%20on%20page%20%2Fmecab-ipadic-neologd/README.ja.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/mecab-ipadic-neologd/README.ja.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>mecab-ipadic-NEologd : Neologism dictionary for MeCab</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">詳細な情報</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mecab-ipadic-neologd">mecab-ipadic-NEologd とは</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">特徴</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">利点</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">欠点</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">使用開始</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">推奨空きメモリ領域</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">空きメモリ領域が足りない場合</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">対処法1. エントリを削減する</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">対処法2. スワップ領域の確保</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">動作に必要なもの</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">例: 動作に必要なライブラリのインストール</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">mecab-ipadic-NEologd をインストールする準備</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">mecab-ipadic-NEologd のインストールと更新</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1">Step.1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2">Step.2</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">全部入りな mecab-ipadic-NEologd を簡単にインストールする方法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">mecab-ipadic-NEologd の使用方法</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#centos">例 (CentOS 上でインストールした場合)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mecab">MeCabの実行結果の例</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">mecab-ipadic-NEologd をシステム辞書として使った場合</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">どこに効果が出ている?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ipadic-2-7-0">標準のシステム辞書(ipadic-2.7.0)を使った場合</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">研究結果の評価や再現などに使いたい場合</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">インストールで行き詰まった場合</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rhel-6-or-centos-6">RHEL 6 or CentOS 6</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">今後の発展</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibtex">Bibtex</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">よろしければアンケートにご回答ください</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#star-please">Star please !!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copyrights">Copyrights</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="mecab-ipadic-neologd-neologism-dictionary-for-mecab">
+<h1>mecab-ipadic-NEologd : Neologism dictionary for MeCab<a class="headerlink" href="#mecab-ipadic-neologd-neologism-dictionary-for-mecab" title="Link to this heading">#</a></h1>
+<img src="https://raw.githubusercontent.com/neologd/mecab-ipadic-neologd/images/neologd-logo-September2016.png" width="250">
+<p><a class="reference external" href="https://travis-ci.org/neologd/mecab-ipadic-neologd"><img alt="Build Status" src="https://travis-ci.org/neologd/mecab-ipadic-neologd.svg?branch=master" /></a></p>
+<section id="id1">
+<h2>詳細な情報<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>mecab-ipadic-NEologd に関する詳細な情報(サンプルコードなど)は以下の Wiki に書いてあります。</p>
+<ul class="simple">
+<li><p><a class="github reference external" href="https://github.com/neologd/mecab-ipadic-neologd/wiki/Home.ja">neologd/mecab-ipadic-neologd</a></p></li>
+</ul>
+</section>
+<section id="mecab-ipadic-neologd">
+<h2>mecab-ipadic-NEologd とは<a class="headerlink" href="#mecab-ipadic-neologd" title="Link to this heading">#</a></h2>
+<p>mecab-ipadic-NEologd は、多数のWeb上の言語資源から得た新語を追加することでカスタマイズした MeCab 用のシステム辞書です。</p>
+<p>Web上の文書の解析をする際には、この辞書と標準のシステム辞書(ipadic)を併用することをオススメします。</p>
+</section>
+<section id="id2">
+<h2>特徴<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>利点<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>MeCab の標準のシステム辞書では正しく分割できない固有表現などの語の表層(表記)とフリガナの組を約319万組(重複エントリを含む)採録しています</p></li>
+<li><p>この辞書の更新は開発サーバ上で自動的におこなわれます</p>
+<ul>
+<li><p>少なくとも毎週 2 回更新される予定です</p>
+<ul>
+<li><p>月曜日と木曜日</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Web上の言語資源を活用しているので、更新時に新しい固有表現を採録できます</p>
+<ul>
+<li><p>現在使用している資源は以下のとおりです</p>
+<ul>
+<li><p>はてなキーワードのダンプデータ</p></li>
+<li><p>郵便番号データダウンロード</p></li>
+<li><p>日本全国駅名一覧のコーナー</p></li>
+<li><p>人名(姓/名)エントリデータ</p></li>
+<li><p>IPA 辞書に採録されていない副詞をエントリ化したデータ</p></li>
+<li><p>IPA 辞書に採録されていない形容詞をエントリ化したデータ</p></li>
+<li><p>IPA 辞書に採録されていない形容動詞をエントリ化したデータ</p></li>
+<li><p>IPA 辞書に採録されていない感動詞エントリをエントリ化したデータ</p></li>
+<li><p>一般名詞/固有名詞の表記ゆれ文字列とその原型の組のリストをエントリ化したデータ</p></li>
+<li><p>サ変接続名詞の表記ゆれ文字列とその原型の組のリストをエントリ化したデータ</p></li>
+<li><p>SNS 上に現れやすい崩れ表記語と同様のパターンをもつ語をエントリ化したデータ</p></li>
+<li><p>Unicode 10.0/Emoji 5.0 以下の絵文字に手作業で読み仮名を付与したデータ</p></li>
+<li><p>初期状態の iOS デバイスまたは Android デバイスで入力できる顔文字に手作業で読み仮名を付与したデータ</p></li>
+<li><p>日本の山の名前を収集したリスト</p></li>
+<li><p>IPA 辞書に含まれるエントリの読み仮名に関する明らかなエラー(誤字・脱字など)を修正するパッチ</p></li>
+<li><p>IPA 辞書に含まれるエントリの形態素生起コストを修正するパッチ</p></li>
+<li><p>時間表現や数値表現をあらかじめ定義したパターンによって生成してエントリ化したデータ</p></li>
+<li><p>ニュース記事から抽出した新語や未知語をエントリ化したデータ</p></li>
+<li><p>ネット上で流行した単語や慣用句やハッシュタグをエントリ化したデータ</p></li>
+<li><p>Web からクロールした大量の文書データ</p></li>
+</ul>
+</li>
+<li><p>今後も他の新たな言語資源から抽出した固有表現などの語を採録する予定です</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h3>欠点<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>固有表現の分類が不十分です</p>
+<ul>
+<li><p>例えば一部の人名と製品名が同じ固有表現カテゴリに分類されています</p></li>
+</ul>
+</li>
+<li><p>固有表現では無い語も固有表現として登録されています</p></li>
+<li><p>固有表現の表記とフリガナの対応づけを間違っている場合があります</p>
+<ul>
+<li><p>すべての固有表現とフリガナの組に対する人手による検査を実施していないためです</p></li>
+</ul>
+</li>
+<li><p>追加した副詞の品詞情報が全て’副詞,一般,<em>,</em>,<em>,</em>’になっている</p></li>
+<li><p>対応している文字コードは UTF-8 のみです</p>
+<ul>
+<li><p>インストール済みの MeCab が使用している ipadic が UTF-8 版である必要があります</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id5">
+<h2>使用開始<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<section id="id6">
+<h3>推奨空きメモリ領域<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>標準インストール時(オプション未指定の場合)</p>
+<ul>
+<li><p>必須: 空き 2GByte</p></li>
+<li><p>推奨: 空き 6GByte</p>
+<ul>
+<li><p>標準インストール時のバイナリファイルのサイズは約910MByteです</p>
+<ul>
+<li><p>今後も段々大きくなります</p></li>
+</ul>
+</li>
+<li><p>仮想マシンに割り当てたメモリが少なくとも 2GB 以上でないと十分なメモリ領域を確保できずコンパイルに失敗します</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<section id="id7">
+<h4>空きメモリ領域が足りない場合<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+<section id="id8">
+<h5>対処法1. エントリを削減する<a class="headerlink" href="#id8" title="Link to this heading">#</a></h5>
+<p>メモリ領域の少ない仮想マシンにインストールする場合はエントリ数を減らすオプションを指定してください。</p>
+<p>下記の –ignore で始まるオプションを全て指定すると、インストールされる辞書のバイナリデータのサイズを 300MByte 程度削減できます。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./bin/install-mecab-ipadic-neologd -n -y\
+--ignore_adverb\
+--ignore_interject\
+--ignore_noun_ortho\
+--ignore_noun_sahen_conn_ortho\
+--ignore_adjective_std\
+--ignore_adjective_verb\
+--ignore_ill_formed_words
+</pre></div>
+</div>
+<p>上記のコマンドを実行すると、インストーラーは追加の副詞(–ignore_adverb)と追加の感動詞(–ignore_interject)と一般名詞/固有名詞の表記ゆれ(–ignore_noun_ortho)とサ変接続名詞の表記ゆれ(–ignore_noun_sahen_conn_ortho)と追加の形容詞(–ignore_adjective_std)と追加の形容動詞(–ignore_adjective_verb)とSNSなどで見かける崩れ表記語(–ignore_ill_formed_words)のための辞書エントリをインストールしません。</p>
+<p>–ignore で始まるオプションは特定の辞書をインストールしない時に使います。</p>
+<p>また下記の様に “–eliminate-redundant-entry” オプションを指定した場合は、正規化済みの日本語テキストを単語分割するための別称・異表記・表記揺れなどを一切考慮できない辞書を、512MByte 程度の空きメモリ領域があればインストールできます。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./bin/install-mecab-ipadic-neologd -n -y\
+--eliminate-redundant-entry\
+</pre></div>
+</div>
+<p>とはいえ、”–eliminate-redundant-entry” オプションは開発側としては一切オススメしません。
+その他のインストール時のオプションは下記のコマンドで確認できます。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./bin/install-mecab-ipadic-neologd --help
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h5>対処法2. スワップ領域の確保<a class="headerlink" href="#id9" title="Link to this heading">#</a></h5>
+<p>この対処は実行するコマンドの意味が分からない場合には実行しないで下さい。また自己責任で実行して下さい。</p>
+<p>適切なサイズのスワップ領域を確保することで、メモリ領域の少ない仮想マシンに全エントリをインストールできる可能性があります。
+以下は CentOS 7 上で 2048MByte のスワップ領域を確保した例です。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo dd if=/dev/zero of=/swapfile1 bs=1M count=2048
+sudo chmod 600 /swapfile1
+sudo mkswap /swapfile1
+sudo swapon /swapfile1
+</pre></div>
+</div>
+<p>その後、普通にインストールできる可能性があります。しかし結果について開発側は保証できませんのでご了承ください。</p>
+</section>
+</section>
+</section>
+<section id="id10">
+<h3>動作に必要なもの<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>インストール時に mecab-ipadic をベースにビルド処理をするために必要な環境やライブラリがあります。</p>
+<p>apt、yum や homebrew でインストールするか、自前でコンパイルしてインストールして下さい。</p>
+<ul>
+<li><p>C++ コンパイラ</p>
+<ul class="simple">
+<li><p>GCC-4.4.7 と Apple LLVM version 6.0 で動作を確認しています</p></li>
+</ul>
+</li>
+<li><p>iconv (libiconv)</p>
+<ul class="simple">
+<li><p>辞書のコード変換に使います</p></li>
+</ul>
+</li>
+<li><p>mecab</p>
+<ul class="simple">
+<li><p>MeCab 本体です</p></li>
+<li><p>bin/mecab と bin/mecab-config を使います</p></li>
+</ul>
+</li>
+<li><p>mecab-ipadic</p>
+<ul class="simple">
+<li><p>MeCab 用の辞書のひとつです</p>
+<ul>
+<li><p>インストール時のテストに使います</p></li>
+<li><p>ソースコードからインストールするときは以下の手順で文字コードを UTF-8 インストールして下さい</p></li>
+</ul>
+</li>
+</ul>
+<p>./configure –with-charset=utf8; make; sudo make install</p>
+</li>
+<li><p>xz</p>
+<ul class="simple">
+<li><p>mecab-ipadic-NEologd のシードの解凍に unxz を使います</p></li>
+</ul>
+</li>
+</ul>
+<p>他にも足りないものがあったら適時インストールして下さい。</p>
+<section id="id11">
+<h4>例: 動作に必要なライブラリのインストール<a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
+<ul>
+<li><p>CentOS の場合</p>
+<p>$ sudo rpm -ivh <a class="reference external" href="http://packages.groonga.org/centos/groonga-release-1.1.0-1.noarch.rpm">http://packages.groonga.org/centos/groonga-release-1.1.0-1.noarch.rpm</a></p>
+<p>$ sudo yum install mecab mecab-devel mecab-ipadic git make curl xz patch</p>
+</li>
+<li><p>Fedora の場合</p>
+<p>$ sudo yum install mecab mecab-devel mecab-ipadic git make curl xz</p>
+</li>
+<li><p>Ubuntu の場合</p>
+<p>$ sudo aptitude install mecab libmecab-dev mecab-ipadic-utf8 git make curl xz-utils file</p>
+</li>
+<li><p>macOS の場合</p>
+<p>$ brew install mecab mecab-ipadic git curl xz</p>
+</li>
+<li><p>Windows 10 バージョン 1607 以降の場合</p>
+<p>BoW(Bash on Ubuntu on Windows)をインストールすれば、BoW 環境内に MeCab と mecab-ipadic-NEologd をインストールできます。</p>
+<ul class="simple">
+<li><p>Bash on Ubuntu on Windows (beta) をインストールする</p>
+<ul>
+<li><p>公式ドキュメント:<a class="reference external" href="https://msdn.microsoft.com/ja-jp/commandline/wsl/install_guide">Bash on Ubuntu on Windows : Microsoft - Developer Network</a></p></li>
+</ul>
+</li>
+</ul>
+<p>BoW 環境で以下を実行します。</p>
+<p>$ sudo aptitude update</p>
+<p>$ sudo aptitude upgrade</p>
+<p>$ sudo aptitude install make automake autoconf autotools-dev m4 mecab libmecab-dev mecab-ipadic-utf8 git make curl xz-utils file</p>
+<p>$ sudo sed -i -e ‘s%/lib/mecab/dic%/share/mecab/dic%’ /usr/bin/mecab-config</p>
+<p>この後は Linux や macOS と同じです。</p>
+</li>
+</ul>
+</section>
+</section>
+<section id="id12">
+<h3>mecab-ipadic-NEologd をインストールする準備<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p>辞書の元になるデータの配布と更新は GitHub 経由で行います。</p>
+<p>初回は以下のコマンドでgit cloneしてください。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git
+</pre></div>
+</div>
+<p>または</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ git clone --depth 1 git@github.com:neologd/mecab-ipadic-neologd.git
+</pre></div>
+</div>
+<p>もしも、リポジトリの全変更履歴を入手したい方は「–depth 1」を消してcloneして下さい。</p>
+<p>全変更履歴のデータサイズは変動しますが、ピーク時は約 1GB となり、かなり大容量ですのでご注意下さい。</p>
+</section>
+<section id="id13">
+<h3>mecab-ipadic-NEologd のインストールと更新<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<section id="step-1">
+<h4>Step.1<a class="headerlink" href="#step-1" title="Link to this heading">#</a></h4>
+<p>上記の準備でcloneしたリポジトリに移動します。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cd mecab-ipadic-neologd
+</pre></div>
+</div>
+</section>
+<section id="step-2">
+<h4>Step.2<a class="headerlink" href="#step-2" title="Link to this heading">#</a></h4>
+<p>以下のコマンドを実行して結果を確認する画面で「yes」と入力すると、sudo 権限で最新版がインストール(初回実行時以降は更新)されます。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./bin/install-mecab-ipadic-neologd -n
+</pre></div>
+</div>
+<p>インストール先はオプション未指定の場合 mecab-config に従って決まります。</p>
+<p>以下のコマンドを実行すると確認できます。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ echo `mecab-config --dicdir`&quot;/mecab-ipadic-neologd&quot;
+</pre></div>
+</div>
+<p>複数の MeCab をインストールしている場合は、任意の mecab-config にパスを通して下さい。</p>
+<p>cron(説明は省略します)などで自動的に更新したい場合に便利なオプションは既にあります。</p>
+<p>例えば下記の様な 2 行を crontab などに書いた場合は、火・金曜日の午前 3 時に解析結果を確認せずに(-y)ユーザ権限(-u)で指定したディレクリトリに(-p [/path/to/user/directory])ある辞書ファイルが更新されます。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>00 03 * * 2 ./bin/install-mecab-ipadic-neologd -n -y -u -p /path/to/user/directory &gt; /path/to/log/file
+00 03 * * 5 ./bin/install-mecab-ipadic-neologd -n -y -u -p /path/to/user/directory &gt; /path/to/log/file
+</pre></div>
+</div>
+<p>その他のインストール時に指定できるオプションは以下で確認できます。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./bin/install-mecab-ipadic-neologd -h
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id14">
+<h3>全部入りな mecab-ipadic-NEologd を簡単にインストールする方法<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<p>標準インストールでは一部の辞書ファイルがインストールされません。</p>
+<p>オプションで個別に指定しても良いですが、-a オプションを指定すると全部入り状態でインストールできます。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./bin/install-mecab-ipadic-neologd -n -a
+</pre></div>
+</div>
+<p>全部入りな辞書を構築する際の最低メモリ使用量は2GByte弱です。</p>
+</section>
+<section id="id15">
+<h3>mecab-ipadic-NEologd の使用方法<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<p>mecab-ipadic-NEologd を使いたいときは、MeCab の -d オプションにカスタムシステム辞書のパス(例: */lib/mecab/dic/mecab-ipadic-neologd/)を指定してください。</p>
+<section id="centos">
+<h4>例 (CentOS 上でインストールした場合)<a class="headerlink" href="#centos" title="Link to this heading">#</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ mecab -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd/
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="mecab">
+<h2>MeCabの実行結果の例<a class="headerlink" href="#mecab" title="Link to this heading">#</a></h2>
+<section id="id16">
+<h3>mecab-ipadic-NEologd をシステム辞書として使った場合<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ echo &quot;8月3日に放送された「中居正広の金曜日のスマイルたちへ」(TBS系)で、1日たった5分でぽっこりおなかを解消するというダイエット方法を紹介。キンタロー。のダイエットにも密着。&quot; | mecab -d /usr/local/lib/mecab/dic/mecab
+8月3日	名詞,固有名詞,一般,*,*,*,8月3日,ハチガツミッカ,ハチガツミッカ
+に	助詞,格助詞,一般,*,*,*,に,ニ,ニ
+放送	名詞,サ変接続,*,*,*,*,放送,ホウソウ,ホーソー
+さ	動詞,自立,*,*,サ変・スル,未然レル接続,する,サ,サ
+れ	動詞,接尾,*,*,一段,連用形,れる,レ,レ
+た	助動詞,*,*,*,特殊・タ,基本形,た,タ,タ
+「	記号,括弧開,*,*,*,*,「,「,「
+中居正広の金曜日のスマイルたちへ	名詞,固有名詞,一般,*,*,*,中居正広の金曜日のスマイルたちへ,ナカイマサヒロノキンヨウビノスマイルタチヘ,ナカイマサヒロノキンヨービノスマイルタチヘ
+」(	記号,一般,*,*,*,*,*
+TBS	名詞,固有名詞,一般,*,*,*,TBS,ティービーエス,ティービーエス
+系	名詞,接尾,一般,*,*,*,系,ケイ,ケイ
+)	記号,一般,*,*,*,*,*
+で	助動詞,*,*,*,特殊・ダ,連用形,だ,デ,デ
+、	記号,読点,*,*,*,*,、,、,、
+1日	名詞,固有名詞,一般,*,*,*,1日,ツイタチ,ツイタチ
+たった	副詞,助詞類接続,*,*,*,*,たった,タッタ,タッタ
+5分	名詞,固有名詞,一般,*,*,*,5分,ゴフン,ゴフン
+で	助詞,格助詞,一般,*,*,*,で,デ,デ
+ぽっこり	副詞,一般,*,*,*,*,ぽっこり,ポッコリ,ポッコリ
+おなか	名詞,一般,*,*,*,*,おなか,オナカ,オナカ
+を	助詞,格助詞,一般,*,*,*,を,ヲ,ヲ
+解消	名詞,サ変接続,*,*,*,*,解消,カイショウ,カイショー
+する	動詞,自立,*,*,サ変・スル,基本形,する,スル,スル
+という	助詞,格助詞,連語,*,*,*,という,トイウ,トユウ
+ダイエット方法	名詞,固有名詞,一般,*,*,*,ダイエット方法,ダイエットホウホウ,ダイエットホウホー
+を	助詞,格助詞,一般,*,*,*,を,ヲ,ヲ
+紹介	名詞,サ変接続,*,*,*,*,紹介,ショウカイ,ショーカイ
+。	記号,句点,*,*,*,*,。,。,。
+キンタロー。	名詞,固有名詞,一般,*,*,*,キンタロー。,キンタロー,キンタロー
+に	助詞,格助詞,一般,*,*,*,に,ニ,ニ
+も	助詞,係助詞,*,*,*,*,も,モ,モ
+密着	名詞,サ変接続,*,*,*,*,密着,ミッチャク,ミッチャク
+。	記号,句点,*,*,*,*,。,。,。
+EOS
+</pre></div>
+</div>
+<section id="id17">
+<h4>どこに効果が出ている?<a class="headerlink" href="#id17" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Mecab は mecab-ipadic-NEologd に収録された語を正しく分割できました</p>
+<ul>
+<li><p>「中居正広の金曜日のスマイルたちへ」は2016年前半に生まれた新しい語です</p>
+<ul>
+<li><p>この語はWeb上の言語資源が更新されたので正しく分割できました</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>mecab-ipadic-NEologd に収録されているほとんどの語にフリガナが付いています</p></li>
+<li><p>「8月3日」と「1日」と「5分」が1語になっています</p>
+<ul>
+<li><p>頻出な時間表現や数量表現をあらかじめ収録しています</p>
+<ul>
+<li><p>読み仮名については間違うことも多いです</p></li>
+<li><p>ニュースに頻出ではない範囲の表現は未収録です</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>「ぽっこり」を副詞として検出している</p>
+<ul>
+<li><p>あらかじめ資源を作成して拡張してます</p></li>
+</ul>
+</li>
+<li><p>「ダイエット方法」が1語になっている</p>
+<ul>
+<li><p>ニュースやSNSで頻出する表現は1語にしていきます</p></li>
+</ul>
+</li>
+<li><p>「キンタロー。」が1語になっている</p>
+<ul>
+<li><p>有名な人名は積極的に固有名詞にします</p>
+<ul>
+<li><p>自動生成の都合で人名に分類されない場合もあります</p>
+<ul>
+<li><p>更新されるごとに、だんだん直っていきます</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>有名な「。が文末になる問題」を解決しています</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="ipadic-2-7-0">
+<h3>標準のシステム辞書(ipadic-2.7.0)を使った場合<a class="headerlink" href="#ipadic-2-7-0" title="Link to this heading">#</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ echo &quot;8月3日に放送された「中居正広の金曜日のスマイルたちへ」(TBS系)で、1日たった5分でぽっこりおなかを解消するというダイエット方法を紹介。キンタロー。にも密着。&quot; | mecab
+8	名詞,数,*,*,*,*,*
+月	名詞,一般,*,*,*,*,月,ツキ,ツキ
+3	名詞,数,*,*,*,*,*
+日	名詞,接尾,助数詞,*,*,*,日,ニチ,ニチ
+に	助詞,格助詞,一般,*,*,*,に,ニ,ニ
+放送	名詞,サ変接続,*,*,*,*,放送,ホウソウ,ホーソー
+さ	動詞,自立,*,*,サ変・スル,未然レル接続,する,サ,サ
+れ	動詞,接尾,*,*,一段,連用形,れる,レ,レ
+た	助動詞,*,*,*,特殊・タ,基本形,た,タ,タ
+「	記号,括弧開,*,*,*,*,「,「,「
+中居	名詞,固有名詞,人名,姓,*,*,中居,ナカイ,ナカイ
+正広	名詞,固有名詞,人名,名,*,*,正広,マサヒロ,マサヒロ
+の	助詞,連体化,*,*,*,*,の,ノ,ノ
+金曜日	名詞,副詞可能,*,*,*,*,金曜日,キンヨウビ,キンヨービ
+の	助詞,連体化,*,*,*,*,の,ノ,ノ
+スマイル	名詞,一般,*,*,*,*,スマイル,スマイル,スマイル
+たち	名詞,接尾,一般,*,*,*,たち,タチ,タチ
+へ	助詞,格助詞,一般,*,*,*,へ,ヘ,エ
+」(	名詞,サ変接続,*,*,*,*,*
+TBS	名詞,一般,*,*,*,*,*
+系	名詞,接尾,一般,*,*,*,系,ケイ,ケイ
+)	名詞,サ変接続,*,*,*,*,*
+で	助詞,格助詞,一般,*,*,*,で,デ,デ
+、	記号,読点,*,*,*,*,、,、,、
+1	名詞,数,*,*,*,*,*
+日	名詞,接尾,助数詞,*,*,*,日,ニチ,ニチ
+たっ	動詞,自立,*,*,五段・タ行,連用タ接続,たつ,タッ,タッ
+た	助動詞,*,*,*,特殊・タ,基本形,た,タ,タ
+5	名詞,数,*,*,*,*,*
+分	名詞,接尾,助数詞,*,*,*,分,フン,フン
+で	助動詞,*,*,*,特殊・ダ,連用形,だ,デ,デ
+ぽ	形容詞,接尾,*,*,形容詞・アウオ段,ガル接続,ぽい,ポ,ポ
+っ	動詞,非自立,*,*,五段・カ行促音便,連用タ接続,く,ッ,ッ
+こり	動詞,自立,*,*,一段,連用形,こりる,コリ,コリ
+おなか	名詞,一般,*,*,*,*,おなか,オナカ,オナカ
+を	助詞,格助詞,一般,*,*,*,を,ヲ,ヲ
+解消	名詞,サ変接続,*,*,*,*,解消,カイショウ,カイショー
+する	動詞,自立,*,*,サ変・スル,基本形,する,スル,スル
+という	助詞,格助詞,連語,*,*,*,という,トイウ,トユウ
+ダイエット	名詞,サ変接続,*,*,*,*,ダイエット,ダイエット,ダイエット
+方法	名詞,一般,*,*,*,*,方法,ホウホウ,ホーホー
+を	助詞,格助詞,一般,*,*,*,を,ヲ,ヲ
+紹介	名詞,サ変接続,*,*,*,*,紹介,ショウカイ,ショーカイ
+。	記号,句点,*,*,*,*,。,。,。
+キンタロー	名詞,一般,*,*,*,*,*
+。	記号,句点,*,*,*,*,。,。,。
+に	助詞,格助詞,一般,*,*,*,に,ニ,ニ
+も	助詞,係助詞,*,*,*,*,も,モ,モ
+密着	名詞,サ変接続,*,*,*,*,密着,ミッチャク,ミッチャク
+。	記号,句点,*,*,*,*,。,。,。
+EOS
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id18">
+<h2>研究結果の評価や再現などに使いたい場合<a class="headerlink" href="#id18" title="Link to this heading">#</a></h2>
+<p>以下に更新を止めた辞書をリリースしています。</p>
+<ul class="simple">
+<li><p><a class="github reference external" href="https://github.com/neologd/mecab-ipadic-neologd/releases/">neologd/mecab-ipadic-neologd</a></p></li>
+</ul>
+<p>以下の用途でご利用いただく場合は便利でしょう。</p>
+<ul class="simple">
+<li><p>研究結果の評価実験</p></li>
+<li><p>他人の研究結果の再現</p></li>
+<li><p>永遠に更新しない形態素解析結果の作成</p></li>
+</ul>
+<p>言語処理を始めたばかりの方や上記以外の多くの用途には master branch の最新版の使用を推奨します。</p>
+</section>
+<section id="id19">
+<h2>インストールで行き詰まった場合<a class="headerlink" href="#id19" title="Link to this heading">#</a></h2>
+<p>以下のコマンドを実行すると mecab-ipadic-NEologd の Yum リポジトリをシステムに登録し、さらに RPM ファイル(気まぐれ更新)をインストールできます。</p>
+<p>最新版をインストールしたい場合は利用しないで下さい。</p>
+<section id="rhel-6-or-centos-6">
+<h3>RHEL 6 or CentOS 6<a class="headerlink" href="#rhel-6-or-centos-6" title="Link to this heading">#</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>// インストール先は /usr/lib64/mecab/dic/mecab-ipadic-neologd/ 以下
+$ sudo rpm -ivh http://packages.groonga.org/centos/groonga-release-1.1.0-1.noarch.rpm
+$ sudo yum install mecab mecab-devel mecab-ipadic
+$ curl -L https://goo.gl/int4Th | sh
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id20">
+<h2>今後の発展<a class="headerlink" href="#id20" title="Link to this heading">#</a></h2>
+<p>継続して開発しますので、気になるところはどんどん改善されます。</p>
+<p>ユーザの8割が気になる部分を優先して改善します。</p>
+</section>
+<section id="bibtex">
+<h2>Bibtex<a class="headerlink" href="#bibtex" title="Link to this heading">#</a></h2>
+<p>もしも mecab-ipadic-NEologd を論文や書籍、アプリ、サービスから参照して下さる場合は、以下の bibtex をご利用ください。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@INPROCEEDINGS{sato2017mecabipadicneologdnlp2017,
+    author    = {佐藤敏紀, 橋本泰一, 奥村学},
+    title     = {単語分かち書き辞書 mecab-ipadic-NEologd の実装と情報検索における効果的な使用方法の検討},
+    booktitle = &quot;言語処理学会第23回年次大会(NLP2017)&quot;,
+    year      = &quot;2017&quot;,
+    pages     = &quot;NLP2017-B6-1&quot;,
+    publisher = &quot;言語処理学会&quot;,
+}
+@INPROCEEDINGS{sato2016neologdipsjnl229,
+    author    = {佐藤敏紀, 橋本泰一, 奥村学},
+    title     = {単語分かち書き用辞書生成システム NEologd の運用 — 文書分類を例にして —},
+    booktitle = &quot;自然言語処理研究会研究報告&quot;,
+    year      = &quot;2016&quot;,
+    pages     = &quot;NL-229-15&quot;,
+    publisher = &quot;情報処理学会&quot;,
+}
+@misc{sato2015mecabipadicneologd,
+    author = {Toshinori, Sato},
+    title  = {Neologism dictionary based on the language resources on the Web for Mecab},
+    url    = {https://github.com/neologd/mecab-ipadic-neologd},
+    year   = {2015}
+}
+</pre></div>
+</div>
+</section>
+<section id="id21">
+<h2>よろしければアンケートにご回答ください<a class="headerlink" href="#id21" title="Link to this heading">#</a></h2>
+<p>よろしければ<a class="reference external" href="https://goo.gl/dcRhsJ">mecab-ipadic-NEologdの利用状況アンケート</a>にご協力ください。</p>
+<p>何処でどの様に使われているかを知ることで、我々が高いモチベーションを維持できます。</p>
+<p>お礼と言うほどではありませんが、ご希望でしたら「ご協力頂いた方のIDの文字列とその読み仮名を辞書へ登録する」ことを試みます(登録できない場合もあります)。</p>
+</section>
+<section id="star-please">
+<h2>Star please !!<a class="headerlink" href="#star-please" title="Link to this heading">#</a></h2>
+<p>mecab-ipadic-NEologd 使ってみて良い結果が得られた時は、ぜひこのリポジトリの Star ボタンを押して下さい。</p>
+<p>とても大きな励みになります。</p>
+</section>
+<section id="copyrights">
+<h2>Copyrights<a class="headerlink" href="#copyrights" title="Link to this heading">#</a></h2>
+<p>Copyright (c) 2015-2019 Toshinori Sato (&#64;overlast) All rights reserved.</p>
+<p>ライセンスは Apache License, Version 2.0 です。下記をご参照下さい。</p>
+<ul class="simple">
+<li><p><a class="github reference external" href="https://github.com/neologd/mecab-ipadic-neologd/blob/master/COPYING">neologd/mecab-ipadic-neologd</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./mecab-ipadic-neologd"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">詳細な情報</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mecab-ipadic-neologd">mecab-ipadic-NEologd とは</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">特徴</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">利点</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">欠点</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">使用開始</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">推奨空きメモリ領域</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">空きメモリ領域が足りない場合</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">対処法1. エントリを削減する</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">対処法2. スワップ領域の確保</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">動作に必要なもの</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">例: 動作に必要なライブラリのインストール</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">mecab-ipadic-NEologd をインストールする準備</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">mecab-ipadic-NEologd のインストールと更新</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1">Step.1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2">Step.2</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">全部入りな mecab-ipadic-NEologd を簡単にインストールする方法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">mecab-ipadic-NEologd の使用方法</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#centos">例 (CentOS 上でインストールした場合)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mecab">MeCabの実行結果の例</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">mecab-ipadic-NEologd をシステム辞書として使った場合</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">どこに効果が出ている?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ipadic-2-7-0">標準のシステム辞書(ipadic-2.7.0)を使った場合</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">研究結果の評価や再現などに使いたい場合</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">インストールで行き詰まった場合</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rhel-6-or-centos-6">RHEL 6 or CentOS 6</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">今後の発展</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibtex">Bibtex</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">よろしければアンケートにご回答ください</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#star-please">Star please !!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copyrights">Copyrights</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023-2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

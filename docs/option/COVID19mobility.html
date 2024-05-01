@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>9.1. COVID-19による人流の変化 &#8212; Intro to Data Analysis with Python</title>
   
@@ -19,43 +18,41 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -63,15 +60,20 @@
                 gtag('js', new Date());
                 gtag('config', 'G-2XGK4LNMSB');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/option/COVID19mobility';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/docs/option/COVID19mobility.html" />
-    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="9.2. Yahoo! FINANCEのデータを用いた可視化の演習" href="yfinance.html" />
@@ -85,7 +87,15 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -120,11 +130,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -139,9 +152,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -151,12 +166,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Intro to Data Analysis with Python - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Intro to Data Analysis with Python - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -425,20 +451,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -485,10 +513,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="covid-19">
-<h1><span class="section-number">9.1. </span>COVID-19による人流の変化<a class="headerlink" href="#covid-19" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">9.1. </span>COVID-19による人流の変化<a class="headerlink" href="#covid-19" title="Link to this heading">#</a></h1>
 <p>Googleが公開しているコミュニティモビリティレポートのデータを用いてテーブルデータの基本的な統計情報を可視化してみましょう。</p>
 <p>Google LLC “Google COVID-19 Community Mobility Reports”.
 <a class="reference external" href="https://www.google.com/covid19/mobility/">https://www.google.com/covid19/mobility/</a> Accessed: July-19, 2020.</p>
@@ -524,8 +552,118 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_70949/3738925007.py:1: DtypeWarning: Columns (3,4,5) have mixed types. Specify dtype option on import or set low_memory=False.
-  df = pd.read_csv(&#39;https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv&#39;)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv&#39;</span><span class="p">)</span>
+
+<span class="nn">File /opt/anaconda3/lib/python3.11/site-packages/pandas/io/parsers/readers.py:948,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">    </span><span class="mi">935</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">936</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">937</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">944</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">945</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">946</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">948</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File /opt/anaconda3/lib/python3.11/site-packages/pandas/io/parsers/readers.py:611,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">608</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">610</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">611</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">613</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">614</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File /opt/anaconda3/lib/python3.11/site-packages/pandas/io/parsers/readers.py:1448,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1445</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1447</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1448</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File /opt/anaconda3/lib/python3.11/site-packages/pandas/io/parsers/readers.py:1705,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1703</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1704</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1705</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1706</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1707</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1708</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1709</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1710</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1711</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1712</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1713</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1714</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1715</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1716</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File /opt/anaconda3/lib/python3.11/site-packages/pandas/io/common.py:718,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">715</span>     <span class="n">codecs</span><span class="o">.</span><span class="n">lookup_error</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">717</span> <span class="c1"># open URLs</span>
+<span class="ne">--&gt; </span><span class="mi">718</span> <span class="n">ioargs</span> <span class="o">=</span> <span class="n">_get_filepath_or_buffer</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">719</span>     <span class="n">path_or_buf</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">720</span>     <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">721</span>     <span class="n">compression</span><span class="o">=</span><span class="n">compression</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">722</span>     <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">723</span>     <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">724</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">726</span> <span class="n">handle</span> <span class="o">=</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">filepath_or_buffer</span>
+<span class="g g-Whitespace">    </span><span class="mi">727</span> <span class="n">handles</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">BaseBuffer</span><span class="p">]</span>
+
+<span class="nn">File /opt/anaconda3/lib/python3.11/site-packages/pandas/io/common.py:377,</span> in <span class="ni">_get_filepath_or_buffer</span><span class="nt">(filepath_or_buffer, encoding, compression, mode, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">374</span>         <span class="k">if</span> <span class="n">content_encoding</span> <span class="o">==</span> <span class="s2">&quot;gzip&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">375</span>             <span class="c1"># Override compression based on Content-Encoding header</span>
+<span class="g g-Whitespace">    </span><span class="mi">376</span>             <span class="n">compression</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;gzip&quot;</span><span class="p">}</span>
+<span class="ne">--&gt; </span><span class="mi">377</span>         <span class="n">reader</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">378</span>     <span class="k">return</span> <span class="n">IOArgs</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">379</span>         <span class="n">filepath_or_buffer</span><span class="o">=</span><span class="n">reader</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">380</span>         <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">383</span>         <span class="n">mode</span><span class="o">=</span><span class="n">fsspec_mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">384</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">386</span> <span class="k">if</span> <span class="n">is_fsspec_url</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">):</span>
+
+<span class="nn">File /opt/anaconda3/lib/python3.11/http/client.py:489,</span> in <span class="ni">HTTPResponse.read</span><span class="nt">(self, amt)</span>
+<span class="g g-Whitespace">    </span><span class="mi">487</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">488</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">489</span>         <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_safe_read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">490</span>     <span class="k">except</span> <span class="n">IncompleteRead</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">491</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_close_conn</span><span class="p">()</span>
+
+<span class="nn">File /opt/anaconda3/lib/python3.11/http/client.py:638,</span> in <span class="ni">HTTPResponse._safe_read</span><span class="nt">(self, amt)</span>
+<span class="g g-Whitespace">    </span><span class="mi">631</span> <span class="k">def</span> <span class="nf">_safe_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amt</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">632</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Read the number of bytes requested.</span>
+<span class="g g-Whitespace">    </span><span class="mi">633</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">634</span><span class="sd">     This function should be used when &lt;amt&gt; bytes &quot;should&quot; be present for</span>
+<span class="g g-Whitespace">    </span><span class="mi">635</span><span class="sd">     reading. If the bytes are truly not available (due to EOF), then the</span>
+<span class="g g-Whitespace">    </span><span class="mi">636</span><span class="sd">     IncompleteRead exception can be used to detect the problem.</span>
+<span class="g g-Whitespace">    </span><span class="mi">637</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">638</span>     <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">639</span>     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">amt</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">640</span>         <span class="k">raise</span> <span class="n">IncompleteRead</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">amt</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+<span class="nn">File /opt/anaconda3/lib/python3.11/socket.py:706,</span> in <span class="ni">SocketIO.readinto</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span> <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">705</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">706</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">707</span>     <span class="k">except</span> <span class="n">timeout</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">708</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_timeout_occurred</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nn">File /opt/anaconda3/lib/python3.11/ssl.py:1315,</span> in <span class="ni">SSLSocket.recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1311</span>     <span class="k">if</span> <span class="n">flags</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1312</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1313</span>           <span class="s2">&quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+<span class="g g-Whitespace">   </span><span class="mi">1314</span>           <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1315</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nbytes</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1316</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1317</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">nbytes</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+
+<span class="nn">File /opt/anaconda3/lib/python3.11/ssl.py:1167,</span> in <span class="ni">SSLSocket.read</span><span class="nt">(self, len, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1165</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1166</span>     <span class="k">if</span> <span class="n">buffer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1167</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1168</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1169</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -557,37 +695,21 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_70949/4147283073.py:1: DeprecationWarning: In a future version, `df.iloc[:, i] = newvals` will attempt to set the values inplace instead of always setting a new array. To retain the old behavior, use either `df[df.columns[i]] = newvals` or, if columns are non-unique, `df.isetitem(i, newvals)`
-  df.loc[:, &#39;date&#39;] = pd.to_datetime(df[&#39;date&#39;])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_70949/801468514.py:1: FutureWarning: Treating datetime data as categorical rather than numeric in `.describe` is deprecated and will be removed in a future version of pandas. Specify `datetime_is_numeric=True` to silence this warning and adopt the future behavior now.
-  df[&#39;date&#39;].describe()
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count                11730025
-unique                    974
-top       2020-11-25 00:00:00
-freq                    13144
-first     2020-02-15 00:00:00
-last      2022-10-15 00:00:00
-Name: date, dtype: object
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Timestamp(&#39;2020-02-15 00:00:00&#39;), Timestamp(&#39;2022-10-15 00:00:00&#39;))
 </pre></div>
 </div>
 </div>
 </div>
 <section id="id1">
-<h2><span class="section-number">9.1.1. </span>2020年日本国内のモビリティトレンドの把握<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.1.1. </span>2020年日本国内のモビリティトレンドの把握<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>国内のデータのみを抽出して、新たなdataframe<code class="docutils literal notranslate"><span class="pre">JP</span></code>に格納します。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -826,22 +948,22 @@ Name: date, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/71f0bc6ab3d455c2e764a979fa0d154c8c880562e25d24cc43a6725a75d5f3e0.png" src="../../_images/71f0bc6ab3d455c2e764a979fa0d154c8c880562e25d24cc43a6725a75d5f3e0.png" />
+<img alt="../../_images/bdb0c86d8a9d522b270730be35bde7984dcd4063de041c5963ccef3d63ddf6bc.png" src="../../_images/bdb0c86d8a9d522b270730be35bde7984dcd4063de041c5963ccef3d63ddf6bc.png" />
 </div>
 </div>
 <section id="id2">
-<h3><span class="section-number">9.1.1.1. </span>全国のモビリティの経時変化をプロットしてみましょう<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">9.1.1.1. </span>全国のモビリティの経時変化をプロットしてみましょう<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_all_japan_mobility</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">JP</span><span class="p">):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
     <span class="c1"># plot only data from 2020-2-15 to 2021</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="s1">&#39;2021-01-01&#39;</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="n">x</span><span class="p">]),</span> <span class="n">column</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()]</span>
     <span class="c1"># plt.hlines(0, xmin=-1, xmax=df[&#39;date&#39;].nunique(), color = &#39;red&#39;)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> 
-                <span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">unique</span><span class="p">()),</span>
+                <span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()),</span>
                 <span class="n">showmeans</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">column</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;BoxPlot of </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">title</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
@@ -867,26 +989,26 @@ Name: date, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/09bdc457b0d3c55a31d73cd0812dd73027031e6aa9f22d48c135d08860d0e81b.png" src="../../_images/09bdc457b0d3c55a31d73cd0812dd73027031e6aa9f22d48c135d08860d0e81b.png" />
-<img alt="../../_images/26d8337e7ec94e34854a41f1eb9151f56c7bec3c53417f84f88114d5b398718f.png" src="../../_images/26d8337e7ec94e34854a41f1eb9151f56c7bec3c53417f84f88114d5b398718f.png" />
-<img alt="../../_images/4ec6854e417582652b9e1c078c98e4cb71aeebc6c5006068b29d35e4b0774698.png" src="../../_images/4ec6854e417582652b9e1c078c98e4cb71aeebc6c5006068b29d35e4b0774698.png" />
-<img alt="../../_images/b90db2ce09ab68679359f071f5b7a14dda5139032323e9cb1f11d617611a83b7.png" src="../../_images/b90db2ce09ab68679359f071f5b7a14dda5139032323e9cb1f11d617611a83b7.png" />
-<img alt="../../_images/cdc91f759dd824a0a8927e20bba7897c14389b53048964d5eda2d46db59ff5b3.png" src="../../_images/cdc91f759dd824a0a8927e20bba7897c14389b53048964d5eda2d46db59ff5b3.png" />
-<img alt="../../_images/95a0460e656ecfafb2e35d9720295942c3697a9ea89efde1092e10283141c793.png" src="../../_images/95a0460e656ecfafb2e35d9720295942c3697a9ea89efde1092e10283141c793.png" />
+<img alt="../../_images/0955702c7eaea20254f24e9b294ae1bf4549fe34a64d75b455addbbc038a5cc7.png" src="../../_images/0955702c7eaea20254f24e9b294ae1bf4549fe34a64d75b455addbbc038a5cc7.png" />
+<img alt="../../_images/ea9e5b840f3b971a1b5d4d5c5c476fb5103e3f54ada2839801f6395c7e85697d.png" src="../../_images/ea9e5b840f3b971a1b5d4d5c5c476fb5103e3f54ada2839801f6395c7e85697d.png" />
+<img alt="../../_images/73bf7998acab2f6fb6ffe72a5c4e52f2a854c8116177358bf0ea89cec267377f.png" src="../../_images/73bf7998acab2f6fb6ffe72a5c4e52f2a854c8116177358bf0ea89cec267377f.png" />
+<img alt="../../_images/207c8c09d7370621acab1d72512494b35e2d73048431f1c147718db4ee4caf24.png" src="../../_images/207c8c09d7370621acab1d72512494b35e2d73048431f1c147718db4ee4caf24.png" />
+<img alt="../../_images/0973d5c3c053f888917f183f2ec9041dd9638d4be0f036a26f3233bfd8283234.png" src="../../_images/0973d5c3c053f888917f183f2ec9041dd9638d4be0f036a26f3233bfd8283234.png" />
+<img alt="../../_images/45e70df981732d24aad5a93988b0b0c424500712e4709bbf61ff9956e770a4c4.png" src="../../_images/45e70df981732d24aad5a93988b0b0c424500712e4709bbf61ff9956e770a4c4.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="id3">
-<h2><span class="section-number">9.1.2. </span>地図上に落とし込んでみましょう<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.1.2. </span>地図上に落とし込んでみましょう<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <section id="id4">
-<h3><span class="section-number">9.1.2.1. </span>都道府県レベルでの1ヶ月の平均値モビリティトレンドをプロット<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">9.1.2.1. </span>都道府県レベルでの1ヶ月の平均値モビリティトレンドをプロット<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>日本国内の都道府県レベルでのモビリティトレンドを地図上に表示します。
 ここでは、2020年月6月のデータを用いて地図を作成します。
 まずは、2020年6月の日本のデータを抽出します。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">JPjune</span> <span class="o">=</span> <span class="n">JP</span><span class="p">[(</span><span class="n">JP</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">&gt;=</span><span class="s1">&#39;2020-06-01&#39;</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">JP</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="s1">&#39;2020-06-30&#39;</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">JPjune</span> <span class="o">=</span> <span class="n">JP</span><span class="p">[(</span><span class="n">JP</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">&gt;=</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">&amp;</span><span class="p">(</span><span class="n">JP</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">30</span><span class="p">))]</span>
 </pre></div>
 </div>
 </div>
@@ -937,49 +1059,49 @@ Name: date, dtype: int64
   </thead>
   <tbody>
     <tr>
-      <th>Okayama</th>
-      <td>-8.033333</td>
-      <td>0.733333</td>
-      <td>-0.300000</td>
-      <td>-22.566667</td>
-      <td>-7.766667</td>
-      <td>4.733333</td>
+      <th>Yamanashi</th>
+      <td>-11.766667</td>
+      <td>-1.700000</td>
+      <td>-11.200000</td>
+      <td>-25.866667</td>
+      <td>-8.833333</td>
+      <td>5.900000</td>
     </tr>
     <tr>
-      <th>Nara</th>
+      <th>Yamaguchi</th>
+      <td>-8.266667</td>
+      <td>1.866667</td>
+      <td>-4.266667</td>
+      <td>-20.933333</td>
+      <td>-7.433333</td>
+      <td>4.900000</td>
+    </tr>
+    <tr>
+      <th>Kochi</th>
+      <td>-7.266667</td>
+      <td>-2.833333</td>
+      <td>-7.533333</td>
+      <td>-19.500000</td>
+      <td>-6.633333</td>
+      <td>4.200000</td>
+    </tr>
+    <tr>
+      <th>Nagano</th>
       <td>-8.866667</td>
-      <td>2.133333</td>
-      <td>-10.166667</td>
-      <td>-19.233333</td>
-      <td>-10.633333</td>
-      <td>5.466667</td>
-    </tr>
-    <tr>
-      <th>Chiba</th>
-      <td>-15.233333</td>
+      <td>1.100000</td>
       <td>0.200000</td>
-      <td>0.100000</td>
-      <td>-28.633333</td>
-      <td>-15.233333</td>
-      <td>8.866667</td>
+      <td>-25.433333</td>
+      <td>-7.166667</td>
+      <td>4.833333</td>
     </tr>
     <tr>
-      <th>Kyoto</th>
-      <td>-15.266667</td>
-      <td>1.166667</td>
-      <td>-10.533333</td>
-      <td>-31.700000</td>
-      <td>-13.366667</td>
-      <td>6.500000</td>
-    </tr>
-    <tr>
-      <th>Shiga</th>
-      <td>-7.800000</td>
-      <td>4.233333</td>
-      <td>9.066667</td>
-      <td>-26.766667</td>
-      <td>-10.833333</td>
-      <td>5.800000</td>
+      <th>Fukui</th>
+      <td>-7.333333</td>
+      <td>3.066667</td>
+      <td>19.066667</td>
+      <td>-12.400000</td>
+      <td>-9.266667</td>
+      <td>4.800000</td>
     </tr>
   </tbody>
 </table>
@@ -987,7 +1109,7 @@ Name: date, dtype: int64
 </div>
 </section>
 <section id="id5">
-<h3><span class="section-number">9.1.2.2. </span>境界データのダウンロードと作成<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">9.1.2.2. </span>境界データのダウンロードと作成<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p>続いて、地図として表示するための準備として、都道府県の境界データをダウンロードします。</p>
 <p><strong>国土数値情報行政区域データ（全国, 世界測地系）を任意の場所へダウンロードして、解凍してください。</strong></p>
 <div class="cell docutils container">
@@ -1110,12 +1232,12 @@ Name: date, dtype: int64
 </section>
 </section>
 <section id="id6">
-<h2><span class="section-number">9.1.3. </span>東京都の日次モビリティトレンドのプロット<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.1.3. </span>東京都の日次モビリティトレンドのプロット<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 東京都の2020年のデータのみを抽出してDataFrameに格納</span>
 <span class="n">tokyo</span> <span class="o">=</span> <span class="n">JP</span><span class="p">[(</span><span class="n">JP</span><span class="p">[</span><span class="s1">&#39;sub_region_1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">]))</span><span class="o">&amp;</span>
-          <span class="p">(</span><span class="n">JP</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="s1">&#39;2021-01-01&#39;</span><span class="p">)]</span>
+          <span class="p">(</span><span class="n">JP</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))]</span>
 </pre></div>
 </div>
 </div>
@@ -1141,12 +1263,12 @@ Name: date, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/aede872c3100081e7873fa0ae18e27062f7f1c13178a697a5a1d8de7afee8c38.png" src="../../_images/aede872c3100081e7873fa0ae18e27062f7f1c13178a697a5a1d8de7afee8c38.png" />
+<img alt="../../_images/30923d664d03ef99eec329d63f458096e87f7773a60ef5ecc84926f8fc271acb.png" src="../../_images/30923d664d03ef99eec329d63f458096e87f7773a60ef5ecc84926f8fc271acb.png" />
 </div>
 </div>
 </section>
 <section id="mobility">
-<h2><span class="section-number">9.1.4. </span>2020年6月の世界のMobilityの変化率<a class="headerlink" href="#mobility" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.1.4. </span>2020年6月の世界のMobilityの変化率<a class="headerlink" href="#mobility" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of countries in df: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;country_region&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())))</span>
@@ -1162,7 +1284,7 @@ Name: date, dtype: int64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 6月のデータのみを抽出して新しいDataFrameに格納</span>
-<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">month</span>
 <span class="n">June</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">6</span><span class="p">])]</span>
 </pre></div>
 </div>
@@ -1179,6 +1301,10 @@ Name: date, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/z5/0lnyp_m54dqc1xkz22ncbj2h0000gn/T/ipykernel_36365/1728541891.py:3: FutureWarning: The geopandas.dataset module is deprecated and will be removed in GeoPandas 1.0. You can get the original &#39;naturalearth_lowres&#39; data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
+  gpd.datasets.get_path(&#39;naturalearth_lowres&#39;)
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1253,6 +1379,21 @@ DataFrame<code class="docutils literal notranslate"><span class="pre">June</span
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SubdivisionHierarchy(code=&#39;NL-AW&#39;, country_code=&#39;NL&#39;, name=&#39;Aruba&#39;, parent_code=None, type=&#39;Country&#39;)
+SubdivisionHierarchy(code=&#39;BZ-BZ&#39;, country_code=&#39;BZ&#39;, name=&#39;Belize&#39;, parent_code=None, type=&#39;District&#39;)
+SubdivisionHierarchy(code=&#39;US-GA&#39;, country_code=&#39;US&#39;, name=&#39;Georgia&#39;, parent_code=None, type=&#39;State&#39;)
+SubdivisionHierarchy(code=&#39;GT-GU&#39;, country_code=&#39;GT&#39;, name=&#39;Guatemala&#39;, parent_code=None, type=&#39;Department&#39;)
+SubdivisionHierarchy(code=&#39;BE-WLX&#39;, country_code=&#39;BE&#39;, name=&#39;Luxembourg&#39;, parent=&#39;WAL&#39;, parent_code=&#39;BE-WAL&#39;, type=&#39;Province&#39;)
+SubdivisionHierarchy(code=&#39;LU-LU&#39;, country_code=&#39;LU&#39;, name=&#39;Luxembourg&#39;, parent_code=None, type=&#39;Canton&#39;)
+SubdivisionHierarchy(code=&#39;GN-ML&#39;, country_code=&#39;GN&#39;, name=&#39;Mali&#39;, parent=&#39;L&#39;, parent_code=&#39;GN-L&#39;, type=&#39;Prefecture&#39;)
+SubdivisionHierarchy(code=&#39;MX-MEX&#39;, country_code=&#39;MX&#39;, name=&#39;México&#39;, parent_code=None, type=&#39;State&#39;)
+SubdivisionHierarchy(code=&#39;NG-NI&#39;, country_code=&#39;NG&#39;, name=&#39;Niger&#39;, parent_code=None, type=&#39;State&#39;)
+SubdivisionHierarchy(code=&#39;PA-8&#39;, country_code=&#39;PA&#39;, name=&#39;Panamá&#39;, parent_code=None, type=&#39;Province&#39;)
+SubdivisionHierarchy(code=&#39;US-PR&#39;, country_code=&#39;US&#39;, name=&#39;Puerto Rico&#39;, parent_code=None, type=&#39;Outlying area&#39;)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1262,7 +1403,7 @@ DataFrame<code class="docutils literal notranslate"><span class="pre">June</span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Cape Verde&#39;, &#39;Laos&#39;, &#39;Myanmar (Burma)&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Cape Verde&#39;, &#39;Myanmar (Burma)&#39;, &#39;Turkey&#39;]
 </pre></div>
 </div>
 </div>
@@ -1281,14 +1422,8 @@ DataFrame<code class="docutils literal notranslate"><span class="pre">June</span
 <p><code class="docutils literal notranslate"><span class="pre">map</span></code>を用いて、データフレーム<code class="docutils literal notranslate"><span class="pre">June</span></code>の<code class="docutils literal notranslate"><span class="pre">country_region</span></code>に上で作成した国名とコードが対応する辞書<code class="docutils literal notranslate"><span class="pre">country_code_dict</span></code>を適用させて、isoコードを格納する列<code class="docutils literal notranslate"><span class="pre">iso_a3</span></code>を作成します。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">June</span> <span class="o">=</span> <span class="n">June</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;country_region&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">June</span> <span class="o">=</span> <span class="n">June</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country_region&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">June</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;iso_a3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">June</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;country_region&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">country_code_dict</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_70949/2681535062.py:1: FutureWarning: The default value of numeric_only in DataFrameGroupBy.median is deprecated. In a future version, numeric_only will default to False. Either specify numeric_only or select only columns which should be valid for the function.
-  June = June.groupby([&#39;country_region&#39;]).median().reset_index()
 </pre></div>
 </div>
 </div>
@@ -1334,12 +1469,12 @@ DataFrame<code class="docutils literal notranslate"><span class="pre">June</span
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3a95d47056014b5b535072975539a6168b09b2b6fd011c03732e87f4f877d4ec.png" src="../../_images/3a95d47056014b5b535072975539a6168b09b2b6fd011c03732e87f4f877d4ec.png" />
-<img alt="../../_images/d4defbcd95b5c1ab603f59c383667c7743ebc002482c141a2e136d20a61a530c.png" src="../../_images/d4defbcd95b5c1ab603f59c383667c7743ebc002482c141a2e136d20a61a530c.png" />
-<img alt="../../_images/43937a9ed282fcaad78382d37b6fc46f4bec688e17aab306b12e7803f1551878.png" src="../../_images/43937a9ed282fcaad78382d37b6fc46f4bec688e17aab306b12e7803f1551878.png" />
-<img alt="../../_images/90e1728e347d7d60dfc2b4ecc22186394d69d16a1e516c4a8c83648c37139755.png" src="../../_images/90e1728e347d7d60dfc2b4ecc22186394d69d16a1e516c4a8c83648c37139755.png" />
-<img alt="../../_images/feec4d7dc74eba24e04a3831473cfab7b28527b0271b92dbf9f27c46da6e99d3.png" src="../../_images/feec4d7dc74eba24e04a3831473cfab7b28527b0271b92dbf9f27c46da6e99d3.png" />
-<img alt="../../_images/ddd45ac0295080743c800aa15a59c233858696ca4628833b93b047c99be9663d.png" src="../../_images/ddd45ac0295080743c800aa15a59c233858696ca4628833b93b047c99be9663d.png" />
+<img alt="../../_images/b4b2c9e78db941f0b75339bf8838c86576b6f4721e9c9d03f2a28597b66cd861.png" src="../../_images/b4b2c9e78db941f0b75339bf8838c86576b6f4721e9c9d03f2a28597b66cd861.png" />
+<img alt="../../_images/713d77366fecb975523205193f063f002d179a5f8dff41a83feacb8cf6216db1.png" src="../../_images/713d77366fecb975523205193f063f002d179a5f8dff41a83feacb8cf6216db1.png" />
+<img alt="../../_images/2dee297168d1a424273dc495039701e664ddb52cbd49e2314a58226febce795a.png" src="../../_images/2dee297168d1a424273dc495039701e664ddb52cbd49e2314a58226febce795a.png" />
+<img alt="../../_images/43dbd79a0047bd3fe087497ac29ebd17d09eb075e55a0c0e425b57116fd9705d.png" src="../../_images/43dbd79a0047bd3fe087497ac29ebd17d09eb075e55a0c0e425b57116fd9705d.png" />
+<img alt="../../_images/6a8fbef136efba2ae5408f60246f6e93edc517e35d41bc8b84c45e7bd4e6e970.png" src="../../_images/6a8fbef136efba2ae5408f60246f6e93edc517e35d41bc8b84c45e7bd4e6e970.png" />
+<img alt="../../_images/a8b378e1417b92d6d6c39f2bcdb8b4a9781f7e4766514dcc24c1162f5617d4ef.png" src="../../_images/a8b378e1417b92d6d6c39f2bcdb8b4a9781f7e4766514dcc24c1162f5617d4ef.png" />
 </div>
 </div>
 </section>
@@ -1370,11 +1505,10 @@ DataFrame<code class="docutils literal notranslate"><span class="pre">June</span
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="index.html"
@@ -1394,10 +1528,7 @@ DataFrame<code class="docutils literal notranslate"><span class="pre">June</span
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1405,6 +1536,7 @@ DataFrame<code class="docutils literal notranslate"><span class="pre">June</span
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1444,6 +1576,7 @@ By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2023-2024.
@@ -1470,8 +1603,8 @@ By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

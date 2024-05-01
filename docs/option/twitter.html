@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>9.7. 演習・Twitterのテキスト分類問題 &#8212; Intro to Data Analysis with Python</title>
   
@@ -19,43 +18,41 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -63,15 +60,20 @@
                 gtag('js', new Date());
                 gtag('config', 'G-2XGK4LNMSB');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/option/twitter';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/docs/option/twitter.html" />
-    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="prev" title="9.6. 演習・交通手段分類（機械学習）" href="gps_machine_learning.html" />
@@ -84,7 +86,15 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -119,11 +129,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -138,9 +151,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -150,12 +165,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Intro to Data Analysis with Python - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Intro to Data Analysis with Python - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -424,20 +450,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -471,7 +499,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.7.5. 日本語の正規化（表記ゆれの是正）と形態素解析を行う</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">9.7.5.1. 正規化</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">9.7.5.2. 形態素解析</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">9.7.5.3. 訓練データと検証データを生成する</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">9.7.5.3. 訓練データとテストデータをに分ける</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">9.7.5.3.1. Logistic Regression</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model">9.7.5.3.2. Modelの精度</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matirx">9.7.5.3.3. Confusion Matirx</a></li>
@@ -504,7 +532,6 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca">9.7.6. PCAによる次元圧縮</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">9.7.7. どのようなトピックがあるか単語共起ネットワークを描く</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netwulf">9.7.8. <code class="docutils literal notranslate"><span class="pre">netwulf</span></code>を用いた可視化</a></li>
 </ul>
             </nav>
         </div>
@@ -514,10 +541,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="twitter">
-<h1><span class="section-number">9.7. </span>演習・Twitterのテキスト分類問題<a class="headerlink" href="#twitter" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">9.7. </span>演習・Twitterのテキスト分類問題<a class="headerlink" href="#twitter" title="Link to this heading">#</a></h1>
 <p>実データを用いて機械学習を用いた分類問題を実践例として、Twitter投稿データの分類問題を考えます。</p>
 <p>（ここでは、2020年に収集したデータを用います）</p>
 <p>国内政治家アカウントのうち、データ収集時に最もフォロワー数がいる2人（橋下徹 &#64;hashimoto_lo
@@ -561,7 +588,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-Int64Index: 5284 entries, 0 to 2067
+Index: 5284 entries, 0 to 2067
 Data columns (total 29 columns):
  #   Column                     Non-Null Count  Dtype  
 ---  ------                     --------------  -----  
@@ -843,14 +870,13 @@ memory usage: 1.1+ MB
 </div>
 </div>
 <section id="id1">
-<h2><span class="section-number">9.7.1. </span>全期間におけるユーザー別ツイート数<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.7.1. </span>全期間におけるユーザー別ツイート数<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-<span class="n">N_tweets_users</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;user_screen_name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;user_screen_name&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">N_tweets_users</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">N_tweets_users</span><span class="p">[</span><span class="s1">&#39;user_screen_name&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">N_tweets_users</span><span class="p">[</span><span class="s1">&#39;user_screen_name&#39;</span><span class="p">]):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="o">+</span><span class="mi">30</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">ha</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">)</span>
+<span class="n">N_tweets_users</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;user_screen_name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;user_screen_name&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">N_tweets_users</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">N_tweets_users</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">bars</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Number of Tweets per user in the dataset&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;# of tweets&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -859,7 +885,7 @@ memory usage: 1.1+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ccfb0c32e248e7cc1c297fa34901583167578e8e5738af58249faf417baec50a.png" src="../../_images/ccfb0c32e248e7cc1c297fa34901583167578e8e5738af58249faf417baec50a.png" />
+<img alt="../../_images/b39ab51e20a369ea38fb5b950aace58bbe695030c7a14969549cff280439abf0.png" src="../../_images/b39ab51e20a369ea38fb5b950aace58bbe695030c7a14969549cff280439abf0.png" />
 </div>
 </div>
 <p>分析対象はRetweetでは無いオリジナルのTweetsのみとする</p>
@@ -885,10 +911,9 @@ memory usage: 1.1+ MB
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-<span class="n">N_tweets_users</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;user_screen_name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;user_screen_name&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">N_tweets_users</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">N_tweets_users</span><span class="p">[</span><span class="s1">&#39;user_screen_name&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">N_tweets_users</span><span class="p">[</span><span class="s1">&#39;user_screen_name&#39;</span><span class="p">]):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="o">+</span><span class="mi">30</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+<span class="n">N_tweets_users</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;user_screen_name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;user_screen_name&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">N_tweets_users</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">N_tweets_users</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">bars</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Number of Tweets per user in the dataset&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;# of tweets&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -897,18 +922,24 @@ memory usage: 1.1+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9fc4bac0b96e88dabb27f47a71d9efffdc71175b28ec2f333cc3e867b41eb2b1.png" src="../../_images/9fc4bac0b96e88dabb27f47a71d9efffdc71175b28ec2f333cc3e867b41eb2b1.png" />
+<img alt="../../_images/443471c78cd6b96c0ec994e72ca0593b56ccd448133f6ce2d645d76c3f4ed89a.png" src="../../_images/443471c78cd6b96c0ec994e72ca0593b56ccd448133f6ce2d645d76c3f4ed89a.png" />
 </div>
 </div>
 </section>
 <section id="id2">
-<h2><span class="section-number">9.7.2. </span>年別のツイート数<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.7.2. </span>年別のツイート数<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">])</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">time</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/z5/0lnyp_m54dqc1xkz22ncbj2h0000gn/T/ipykernel_60168/1336334527.py:1: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  df[&#39;created_at&#39;] = pd.to_datetime(df[&#39;created_at&#39;])
 </pre></div>
 </div>
 </div>
@@ -1104,12 +1135,12 @@ memory usage: 1.1+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/36323bf05966e60c2a5a1c4f7638b4c1e6e6b38128ec5e01b665918e3e2dc3c8.png" src="../../_images/36323bf05966e60c2a5a1c4f7638b4c1e6e6b38128ec5e01b665918e3e2dc3c8.png" />
+<img alt="../../_images/5badd53a43b2bf3f712e45babbf52d0f2b8dc0ce03b63632a00218f555e0f7e7.png" src="../../_images/5badd53a43b2bf3f712e45babbf52d0f2b8dc0ce03b63632a00218f555e0f7e7.png" />
 </div>
 </div>
 </section>
 <section id="likes">
-<h2><span class="section-number">9.7.3. </span>ユーザー別のLikesのヒストグラム<a class="headerlink" href="#likes" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.7.3. </span>ユーザー別のLikesのヒストグラム<a class="headerlink" href="#likes" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -1128,7 +1159,7 @@ memory usage: 1.1+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d403ceed0b70bf36cc76175a4331b6e1452662b88cf6f3bccd761264906869ee.png" src="../../_images/d403ceed0b70bf36cc76175a4331b6e1452662b88cf6f3bccd761264906869ee.png" />
+<img alt="../../_images/7f8813336f011e1a1e66002a1cf949303b5c1971856ad3704f1272061407019b.png" src="../../_images/7f8813336f011e1a1e66002a1cf949303b5c1971856ad3704f1272061407019b.png" />
 </div>
 </div>
 <p>上の図では少しわかりにくいので、対数変換値をプロット</p>
@@ -1136,7 +1167,7 @@ memory usage: 1.1+ MB
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">arr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;user_screen_name&#39;</span><span class="p">])[</span><span class="s1">&#39;favorite_count&#39;</span><span class="p">]):</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="p">)),</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> 
+    <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> 
             <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;skyblue&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.7</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histgram of likes per user (log-scaled)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
@@ -1147,12 +1178,12 @@ memory usage: 1.1+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9178903f7d7f39288252c7eec1280a69a7c475c55c1c5f94ec28ddaa009d7198.png" src="../../_images/9178903f7d7f39288252c7eec1280a69a7c475c55c1c5f94ec28ddaa009d7198.png" />
+<img alt="../../_images/e0642da8eaad93d31535b78d1dab9e8dbcf3bed54aced5185081d3fab8573ad3.png" src="../../_images/e0642da8eaad93d31535b78d1dab9e8dbcf3bed54aced5185081d3fab8573ad3.png" />
 </div>
 </div>
 </section>
 <section id="retweet">
-<h2><span class="section-number">9.7.4. </span>ユーザー別のRetweetされた数のヒストグラム<a class="headerlink" href="#retweet" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.7.4. </span>ユーザー別のRetweetされた数のヒストグラム<a class="headerlink" href="#retweet" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
@@ -1169,7 +1200,7 @@ memory usage: 1.1+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/63cc38d368ed485ba84b20218f48061f59276c1bffed89cc9f669b5453507cfc.png" src="../../_images/63cc38d368ed485ba84b20218f48061f59276c1bffed89cc9f669b5453507cfc.png" />
+<img alt="../../_images/9621cb8b177529a82cfb4a3a53c0cec634f797ae546e903547932544bedd0b08.png" src="../../_images/9621cb8b177529a82cfb4a3a53c0cec634f797ae546e903547932544bedd0b08.png" />
 </div>
 </div>
 <p>上の図では少しわかりにくいので、対数変換値をプロット</p>
@@ -1188,14 +1219,14 @@ memory usage: 1.1+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6e4b0f8c6c88170fa0358ec4089682eca3d91614421789da251c9258bb351548.png" src="../../_images/6e4b0f8c6c88170fa0358ec4089682eca3d91614421789da251c9258bb351548.png" />
+<img alt="../../_images/6da9bdee8cf6cbe703c5fe8dd225e64e8bfa36047b2de7d4c15f6f180bd0befa.png" src="../../_images/6da9bdee8cf6cbe703c5fe8dd225e64e8bfa36047b2de7d4c15f6f180bd0befa.png" />
 </div>
 </div>
 </section>
 <section id="id3">
-<h2><span class="section-number">9.7.5. </span>日本語の正規化（表記ゆれの是正）と形態素解析を行う<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.7.5. </span>日本語の正規化（表記ゆれの是正）と形態素解析を行う<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <section id="id4">
-<h3><span class="section-number">9.7.5.1. </span>正規化<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">9.7.5.1. </span>正規化<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>正規化を自動で実施してくれるパッケージをインストール。Terminal or Anaconda Prompt で　<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">neologdn</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">nelogdn</span></code> <code class="docutils literal notranslate"><span class="pre">neologdn.normalize()</span></code> で正規化</p></li>
@@ -1203,21 +1234,15 @@ memory usage: 1.1+ MB
 </ol>
 </section>
 <section id="id5">
-<h3><span class="section-number">9.7.5.2. </span>形態素解析<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
-<p>mac の場合</p>
+<h3><span class="section-number">9.7.5.2. </span>形態素解析<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Homebrewをインストール Terminal で <code class="docutils literal notranslate"><span class="pre">/bin/bash</span> <span class="pre">-c</span> <span class="pre">&quot;$(curl</span> <span class="pre">-fsSL</span> <span class="pre">https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&quot;</span></code>とうつ</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">mecab</span></code> <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">mecab-ipadic</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">--depth</span> <span class="pre">1</span> <span class="pre">https://github.com/neologd/mecab-ipadic-neologd.git</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">./mecab-ipadic-neologd</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">./bin/install-mecab-ipadic-neologd</span> <span class="pre">-n</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">mecab-python3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">janome</span></code></p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">neologdn</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">janome.tokenizer</span> <span class="kn">import</span> <span class="n">Tokenizer</span>
+<span class="kn">import</span> <span class="nn">neologdn</span>
 <span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">MeCab</span>
 <span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
 <span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -1255,53 +1280,57 @@ memory usage: 1.1+ MB
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">neologd_tagger</span> <span class="o">=</span> <span class="n">MeCab</span><span class="o">.</span><span class="n">Tagger</span><span class="p">(</span><span class="s1">&#39;-Ochasen -d /opt/homebrew/lib/mecab/dic/mecab-ipadic-neologd&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">neologd_tagger</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;庭には二羽鶏がいる&#39;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># neologd_tagger = MeCab.Tagger(&#39;-Ochasen -d /opt/homebrew/lib/mecab/dic/mecab-ipadic-neologd&#39;)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="s1">&#39;庭には二羽鶏がいる&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>庭	ニワ	庭	名詞-一般		
-に	ニ	に	助詞-格助詞-一般		
-は	ハ	は	助詞-係助詞		
-二羽	ニワ	二羽	名詞-固有名詞-人名-姓		
-鶏	ニワトリ	鶏	名詞-一般		
-が	ガ	が	助詞-格助詞-一般		
-いる	イル	いる	動詞-自立	一段	基本形
-EOS
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>庭	名詞,一般,*,*,*,*,庭,ニワ,ニワ
+に	助詞,格助詞,一般,*,*,*,に,ニ,ニ
+は	助詞,係助詞,*,*,*,*,は,ハ,ワ
+二	名詞,数,*,*,*,*,二,ニ,ニ
+羽	名詞,接尾,助数詞,*,*,*,羽,ワ,ワ
+鶏	名詞,一般,*,*,*,*,鶏,ニワトリ,ニワトリ
+が	助詞,格助詞,一般,*,*,*,が,ガ,ガ
+いる	動詞,自立,*,*,一段,基本形,いる,イル,イル
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_words_list</span><span class="p">(</span><span class="n">cell</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">re</span>
-    <span class="n">pat</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;━|\-|\.|\,|[━!-)+,-\./:-@[-`{-~]|^[0-9０-９]+$|^\*$|http|www|html|jp|com|^[a-zA-Z]+$|する|こと|いる|ます&#39;</span><span class="p">)</span>
-
-    <span class="n">a</span> <span class="o">=</span> <span class="n">cell</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">cell</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-
-    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="k">pass</span>
-
-    <span class="k">elif</span> <span class="n">b</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;名詞&#39;</span><span class="p">,</span><span class="s1">&#39;形容詞&#39;</span><span class="p">):</span> <span class="c1">#&#39;動詞&#39;,,&#39;感動詞&#39;</span>
-        <span class="k">if</span> <span class="n">pat</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">!=</span><span class="kc">None</span><span class="p">:</span> <span class="k">pass</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">a</span>
-
-    <span class="k">else</span><span class="p">:</span><span class="k">pass</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pat</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;━|\-|\.|\,|[━!-)+,-\./:-@[-`{-~]|^[0-9０-９]+$|^\*$|http|www|html|jp|com|^[a-zA-Z]+$|する|こと|いる|ます&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="n">cell</span><span class="p">):</span>
     <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">neologd_tagger</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>  
-    <span class="n">node</span> <span class="o">=</span> <span class="n">neologd_tagger</span><span class="o">.</span><span class="n">parseToNode</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cell</span><span class="p">))</span>
-    <span class="k">while</span> <span class="n">node</span><span class="p">:</span>
-        <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">node</span><span class="o">.</span><span class="n">surface</span><span class="p">,</span> <span class="o">*</span><span class="n">node</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)])</span>
-        <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">()</span>
+    <span class="n">tokenized</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cell</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">tokenized</span><span class="p">:</span>
+        <span class="n">node_element</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="n">node_element</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">part</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">))</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">part</span> <span class="o">=</span>  <span class="n">node_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">part</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;名詞&#39;</span><span class="p">,</span><span class="s1">&#39;形容詞&#39;</span><span class="p">):</span> <span class="c1">#&#39;動詞&#39;,,&#39;感動詞&#39;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pat</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
+                <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
 
-    <span class="n">list_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">make_words_list</span><span class="p">,</span> <span class="n">tokens</span><span class="p">))</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="n">list_words</span>
+    <span class="k">return</span> <span class="n">tokens</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokenize</span><span class="p">(</span><span class="s1">&#39;これはサンプルテキストです。&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;これ&#39;, &#39;サンプル&#39;, &#39;テキスト&#39;]
 </pre></div>
 </div>
 </div>
@@ -1323,7 +1352,7 @@ EOS
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((4244, 555), (4244, 1))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((4244, 690), (4244, 1))
 </pre></div>
 </div>
 </div>
@@ -1356,18 +1385,16 @@ EOS
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>12時</th>
-      <th>30分</th>
-      <th>G20</th>
-      <th>Yahoo!ニュース</th>
+      <th>➡</th>
+      <th>》#</th>
       <th>あと</th>
       <th>いい</th>
+      <th>いっぱい</th>
       <th>うち</th>
       <th>おかしい</th>
       <th>お昼</th>
       <th>お知らせ</th>
       <th>お祈り</th>
-      <th>お見舞い</th>
       <th>お金</th>
       <th>お願い</th>
       <th>ここ</th>
@@ -1379,18 +1406,19 @@ EOS
       <th>すべて</th>
       <th>そう</th>
       <th>そこ</th>
-      <th>そのため</th>
       <th>その後</th>
       <th>それ</th>
       <th>たくさん</th>
       <th>たち</th>
       <th>ため</th>
+      <th>づくり</th>
       <th>とき</th>
       <th>ところ</th>
       <th>ない</th>
       <th>の</th>
       <th>はじめ</th>
       <th>はず</th>
+      <th>ぶり</th>
       <th>まま</th>
       <th>みなさま</th>
       <th>もと</th>
@@ -1398,65 +1426,66 @@ EOS
       <th>やり方</th>
       <th>よい</th>
       <th>よう</th>
+      <th>ら</th>
       <th>わけ</th>
       <th>ん</th>
+      <th>アジア</th>
       <th>アップ</th>
       <th>イベント</th>
       <th>インタビュー</th>
       <th>インテリ</th>
-      <th>インフルエンザ</th>
-      <th>ウィル</th>
+      <th>インド</th>
       <th>...</th>
-      <th>訪問</th>
-      <th>評価</th>
-      <th>話</th>
-      <th>認識</th>
-      <th>説明</th>
-      <th>誰</th>
-      <th>課題</th>
-      <th>調査</th>
-      <th>論</th>
-      <th>警察</th>
-      <th>議員</th>
-      <th>議論</th>
       <th>負担</th>
+      <th>財政</th>
       <th>責任</th>
       <th>貴殿</th>
       <th>費</th>
       <th>賛成</th>
       <th>軽症</th>
+      <th>通常</th>
       <th>連中</th>
       <th>連携</th>
+      <th>週間</th>
+      <th>道</th>
       <th>違い</th>
+      <th>選</th>
       <th>選択</th>
       <th>選挙</th>
       <th>避難</th>
       <th>邦人</th>
+      <th>部</th>
       <th>都</th>
       <th>重症</th>
       <th>重要</th>
       <th>野党</th>
       <th>金</th>
+      <th>長</th>
       <th>開催</th>
       <th>間</th>
       <th>間違い</th>
       <th>関係</th>
       <th>関西</th>
       <th>関西テレビ</th>
+      <th>閣僚</th>
+      <th>防止</th>
+      <th>防衛</th>
       <th>限り</th>
       <th>陛下</th>
       <th>際</th>
-      <th>雇用調整助成金</th>
+      <th>雇用</th>
       <th>雑誌</th>
       <th>靖国</th>
       <th>非常</th>
+      <th>韓</th>
       <th>韓国</th>
       <th>頃</th>
       <th>首相</th>
-      <th>首相官邸</th>
       <th>首脳</th>
-      <th>首脳会談</th>
+      <th>駅</th>
+      <th>駅前</th>
       <th>高い</th>
+      <th>高齢</th>
     </tr>
     <tr>
       <th>user_screen_name</th>
@@ -1565,11 +1594,7 @@ EOS
   </thead>
   <tbody>
     <tr>
-      <th>hashimoto_lo</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <th>AbeShinzo</th>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1592,6 +1617,10 @@ EOS
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1669,7 +1698,7 @@ EOS
       <td>0</td>
     </tr>
     <tr>
-      <th>AbeShinzo</th>
+      <th>hashimoto_lo</th>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1695,7 +1724,7 @@ EOS
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1740,7 +1769,7 @@ EOS
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1774,7 +1803,7 @@ EOS
     </tr>
   </tbody>
 </table>
-<p>2 rows × 555 columns</p>
+<p>2 rows × 690 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
@@ -1802,7 +1831,7 @@ EOS
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((4244, 555), (4244, 35))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((4244, 690), (4244, 35))
 </pre></div>
 </div>
 </div>
@@ -1850,18 +1879,16 @@ EOS
       <th>text</th>
       <th>standarized_text</th>
       <th>extended_entities</th>
-      <th>12時</th>
-      <th>30分</th>
-      <th>G20</th>
-      <th>Yahoo!ニュース</th>
+      <th>➡</th>
+      <th>》#</th>
       <th>あと</th>
       <th>いい</th>
+      <th>いっぱい</th>
       <th>うち</th>
       <th>おかしい</th>
       <th>お昼</th>
       <th>お知らせ</th>
       <th>お祈り</th>
-      <th>お見舞い</th>
       <th>お金</th>
       <th>お願い</th>
       <th>ここ</th>
@@ -1873,75 +1900,77 @@ EOS
       <th>すべて</th>
       <th>そう</th>
       <th>そこ</th>
-      <th>そのため</th>
       <th>その後</th>
       <th>それ</th>
       <th>たくさん</th>
       <th>たち</th>
       <th>ため</th>
+      <th>づくり</th>
       <th>とき</th>
       <th>ところ</th>
       <th>ない</th>
       <th>の</th>
       <th>はじめ</th>
       <th>はず</th>
+      <th>ぶり</th>
       <th>まま</th>
       <th>みなさま</th>
       <th>もと</th>
       <th>もの</th>
       <th>やり方</th>
       <th>よい</th>
+      <th>よう</th>
       <th>...</th>
-      <th>訪問</th>
-      <th>評価</th>
-      <th>話</th>
-      <th>認識</th>
-      <th>説明</th>
-      <th>誰</th>
-      <th>課題</th>
-      <th>調査</th>
-      <th>論</th>
-      <th>警察</th>
-      <th>議員</th>
-      <th>議論</th>
       <th>負担</th>
+      <th>財政</th>
       <th>責任</th>
       <th>貴殿</th>
       <th>費</th>
       <th>賛成</th>
       <th>軽症</th>
+      <th>通常</th>
       <th>連中</th>
       <th>連携</th>
+      <th>週間</th>
+      <th>道</th>
       <th>違い</th>
+      <th>選</th>
       <th>選択</th>
       <th>選挙</th>
       <th>避難</th>
       <th>邦人</th>
+      <th>部</th>
       <th>都</th>
       <th>重症</th>
       <th>重要</th>
       <th>野党</th>
       <th>金</th>
+      <th>長</th>
       <th>開催</th>
       <th>間</th>
       <th>間違い</th>
       <th>関係</th>
       <th>関西</th>
       <th>関西テレビ</th>
+      <th>閣僚</th>
+      <th>防止</th>
+      <th>防衛</th>
       <th>限り</th>
       <th>陛下</th>
       <th>際</th>
-      <th>雇用調整助成金</th>
+      <th>雇用</th>
       <th>雑誌</th>
       <th>靖国</th>
       <th>非常</th>
+      <th>韓</th>
       <th>韓国</th>
       <th>頃</th>
       <th>首相</th>
-      <th>首相官邸</th>
       <th>首脳</th>
-      <th>首脳会談</th>
+      <th>駅</th>
+      <th>駅前</th>
       <th>高い</th>
+      <th>高齢</th>
     </tr>
   </thead>
   <tbody>
@@ -1964,7 +1993,6 @@ EOS
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -1972,8 +2000,9 @@ EOS
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -2155,12 +2184,12 @@ EOS
     </tr>
   </tbody>
 </table>
-<p>2 rows × 564 columns</p>
+<p>2 rows × 699 columns</p>
 </div></div></div>
 </div>
 </section>
 <section id="id6">
-<h3><span class="section-number">9.7.5.3. </span>訓練データと検証データを生成する<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">9.7.5.3. </span>訓練データとテストデータをに分ける<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split our data</span>
@@ -2170,7 +2199,7 @@ EOS
 </div>
 </div>
 <section id="logistic-regression">
-<h4><span class="section-number">9.7.5.3.1. </span>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">9.7.5.3.1. </span>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -2181,7 +2210,7 @@ EOS
 </div>
 </section>
 <section id="model">
-<h4><span class="section-number">9.7.5.3.2. </span>Modelの精度<a class="headerlink" href="#model" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">9.7.5.3.2. </span>Modelの精度<a class="headerlink" href="#model" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">))</span>
@@ -2191,19 +2220,19 @@ EOS
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-   AbeShinzo       0.90      0.98      0.94       486
-hashimoto_lo       0.98      0.91      0.94       575
+   AbeShinzo       0.92      0.98      0.95       486
+hashimoto_lo       0.98      0.93      0.95       575
 
-    accuracy                           0.94      1061
-   macro avg       0.94      0.94      0.94      1061
-weighted avg       0.94      0.94      0.94      1061
+    accuracy                           0.95      1061
+   macro avg       0.95      0.95      0.95      1061
+weighted avg       0.95      0.95      0.95      1061
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="confusion-matirx">
-<h4><span class="section-number">9.7.5.3.3. </span>Confusion Matirx<a class="headerlink" href="#confusion-matirx" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">9.7.5.3.3. </span>Confusion Matirx<a class="headerlink" href="#confusion-matirx" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
@@ -2211,8 +2240,8 @@ weighted avg       0.94      0.94      0.94      1061
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[474  12]
- [ 51 524]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[475  11]
+ [ 41 534]]
 </pre></div>
 </div>
 </div>
@@ -2250,13 +2279,13 @@ weighted avg       0.94      0.94      0.94      1061
   <tbody>
     <tr>
       <th>AbeShinzo</th>
-      <td>474</td>
-      <td>12</td>
+      <td>475</td>
+      <td>11</td>
     </tr>
     <tr>
       <th>hashimoto_lo</th>
-      <td>51</td>
-      <td>524</td>
+      <td>41</td>
+      <td>534</td>
     </tr>
   </tbody>
 </table>
@@ -2264,7 +2293,7 @@ weighted avg       0.94      0.94      0.94      1061
 </div>
 </section>
 <section id="roc-curve">
-<h4><span class="section-number">9.7.5.3.4. </span>ROC Curve<a class="headerlink" href="#roc-curve" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">9.7.5.3.4. </span>ROC Curve<a class="headerlink" href="#roc-curve" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span>
@@ -2285,13 +2314,13 @@ weighted avg       0.94      0.94      0.94      1061
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/68f9a981713a4b1be3c01593c5decb72fd27d898609f9235af3a39c7ab115044.png" src="../../_images/68f9a981713a4b1be3c01593c5decb72fd27d898609f9235af3a39c7ab115044.png" />
+<img alt="../../_images/6361514ec7e02a3f5d5ea0b27ec9d8db03afb90d6829d6ab5e77c55059b36719.png" src="../../_images/6361514ec7e02a3f5d5ea0b27ec9d8db03afb90d6829d6ab5e77c55059b36719.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="naive-bayse-support-vector-machines">
-<h3><span class="section-number">9.7.5.4. </span>2. Naive Bayse (Support Vector Machines)<a class="headerlink" href="#naive-bayse-support-vector-machines" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">9.7.5.4. </span>2. Naive Bayse (Support Vector Machines)<a class="headerlink" href="#naive-bayse-support-vector-machines" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">BernoulliNB</span>
@@ -2302,368 +2331,11 @@ weighted avg       0.94      0.94      0.94      1061
 </div>
 </div>
 <section id="id7">
-<h4><span class="section-number">9.7.5.4.1. </span>Modelの精度<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">9.7.5.4.1. </span>Modelの精度<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
-
-   AbeShinzo       0.90      0.97      0.94       486
-hashimoto_lo       0.97      0.91      0.94       575
-
-    accuracy                           0.94      1061
-   macro avg       0.94      0.94      0.94      1061
-weighted avg       0.94      0.94      0.94      1061
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id8">
-<h4><span class="section-number">9.7.5.4.2. </span>Confusion Matirx<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[472  14]
- [ 50 525]]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">,</span>
-             <span class="n">index</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AbeShinzo</th>
-      <th>hashimoto_lo</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>AbeShinzo</th>
-      <td>472</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>hashimoto_lo</th>
-      <td>50</td>
-      <td>525</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-</section>
-<section id="id9">
-<h4><span class="section-number">9.7.5.4.3. </span>ROC Curve<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit_roc_auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Support Vector Machines (area = </span><span class="si">%0.4f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">logit_roc_auc</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Receiver operating characteristic&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/51ba11ffee967ebcb58a7fad162ddf162cfe4ca385b8c1703a2800f54a0a7858.png" src="../../_images/51ba11ffee967ebcb58a7fad162ddf162cfe4ca385b8c1703a2800f54a0a7858.png" />
-</div>
-</div>
-</section>
-</section>
-<section id="svm-support-vector-machines">
-<h3><span class="section-number">9.7.5.5. </span>3. SVM (Support Vector Machines)<a class="headerlink" href="#svm-support-vector-machines" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">svm</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="id10">
-<h4><span class="section-number">9.7.5.5.1. </span>Modelの精度<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
-
-   AbeShinzo       0.90      0.96      0.93       486
-hashimoto_lo       0.96      0.91      0.93       575
-
-    accuracy                           0.93      1061
-   macro avg       0.93      0.93      0.93      1061
-weighted avg       0.93      0.93      0.93      1061
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id11">
-<h4><span class="section-number">9.7.5.5.2. </span>Confusion Matirx<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[465  21]
- [ 53 522]]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">,</span>
-             <span class="n">index</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AbeShinzo</th>
-      <th>hashimoto_lo</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>AbeShinzo</th>
-      <td>465</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>hashimoto_lo</th>
-      <td>53</td>
-      <td>522</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-</section>
-<section id="id12">
-<h4><span class="section-number">9.7.5.5.3. </span>ROC Curve<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit_roc_auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Support Vector Machines (area = </span><span class="si">%0.4f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">logit_roc_auc</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Receiver operating characteristic&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/6fa809081013281e39c1dbc5afde34c914095cfacadea2112ef0d6884ede6e0f.png" src="../../_images/6fa809081013281e39c1dbc5afde34c914095cfacadea2112ef0d6884ede6e0f.png" />
-</div>
-</div>
-</section>
-</section>
-<section id="random-forest">
-<h3><span class="section-number">9.7.5.6. </span>4. Random Forest<a class="headerlink" href="#random-forest" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="id13">
-<h4><span class="section-number">9.7.5.6.1. </span>Modelの精度<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
-
-   AbeShinzo       0.92      0.93      0.92       486
-hashimoto_lo       0.94      0.93      0.94       575
-
-    accuracy                           0.93      1061
-   macro avg       0.93      0.93      0.93      1061
-weighted avg       0.93      0.93      0.93      1061
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id14">
-<h4><span class="section-number">9.7.5.6.2. </span>Confusion Matirx<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[453  33]
- [ 41 534]]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">,</span>
-             <span class="n">index</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AbeShinzo</th>
-      <th>hashimoto_lo</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>AbeShinzo</th>
-      <td>453</td>
-      <td>33</td>
-    </tr>
-    <tr>
-      <th>hashimoto_lo</th>
-      <td>41</td>
-      <td>534</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-</section>
-<section id="id15">
-<h4><span class="section-number">9.7.5.6.3. </span>ROC Curve<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit_roc_auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Random Forest (area = </span><span class="si">%0.4f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">logit_roc_auc</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Receiver operating characteristic&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/4c87588f13101713cdc70d74bcc0dc87abbd76262ed9bc3aa677fe66416796c6.png" src="../../_images/4c87588f13101713cdc70d74bcc0dc87abbd76262ed9bc3aa677fe66416796c6.png" />
-</div>
-</div>
-</section>
-<section id="neural-netowrk">
-<h4><span class="section-number">9.7.5.6.4. </span>5. Neural Netowrk<a class="headerlink" href="#neural-netowrk" title="Permalink to this heading">#</a></h4>
-<p>一般的にはsklearnではなくて、TensorflowやKerasを用いて実装することが多いのですが、ここではsklearnで実行します。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nn</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">hidden_layer_sizes</span><span class="o">=</span> <span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id16">
-<h4><span class="section-number">9.7.5.6.5. </span>Modelの精度<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -2681,8 +2353,126 @@ weighted avg       0.95      0.94      0.94      1061
 </div>
 </div>
 </section>
-<section id="id17">
-<h4><span class="section-number">9.7.5.6.6. </span>Confusion Matirx<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h4>
+<section id="id8">
+<h4><span class="section-number">9.7.5.4.2. </span>Confusion Matirx<a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[467  19]
+ [ 40 535]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">,</span>
+             <span class="n">index</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AbeShinzo</th>
+      <th>hashimoto_lo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>AbeShinzo</th>
+      <td>467</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>hashimoto_lo</th>
+      <td>40</td>
+      <td>535</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id9">
+<h4><span class="section-number">9.7.5.4.3. </span>ROC Curve<a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit_roc_auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Support Vector Machines (area = </span><span class="si">%0.4f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">logit_roc_auc</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Receiver operating characteristic&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f1c4735eab89fb71e8b5bfa033360e6ce80a1d9d37b16aa6c71dae2dce8c798d.png" src="../../_images/f1c4735eab89fb71e8b5bfa033360e6ce80a1d9d37b16aa6c71dae2dce8c798d.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="svm-support-vector-machines">
+<h3><span class="section-number">9.7.5.5. </span>3. SVM (Support Vector Machines)<a class="headerlink" href="#svm-support-vector-machines" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">svm</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id10">
+<h4><span class="section-number">9.7.5.5.1. </span>Modelの精度<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+   AbeShinzo       0.91      0.96      0.94       486
+hashimoto_lo       0.97      0.92      0.94       575
+
+    accuracy                           0.94      1061
+   macro avg       0.94      0.94      0.94      1061
+weighted avg       0.94      0.94      0.94      1061
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id11">
+<h4><span class="section-number">9.7.5.5.2. </span>Confusion Matirx<a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
@@ -2691,7 +2481,7 @@ weighted avg       0.95      0.94      0.94      1061
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[468  18]
- [ 41 534]]
+ [ 44 531]]
 </pre></div>
 </div>
 </div>
@@ -2734,8 +2524,247 @@ weighted avg       0.95      0.94      0.94      1061
     </tr>
     <tr>
       <th>hashimoto_lo</th>
-      <td>41</td>
-      <td>534</td>
+      <td>44</td>
+      <td>531</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id12">
+<h4><span class="section-number">9.7.5.5.3. </span>ROC Curve<a class="headerlink" href="#id12" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit_roc_auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Support Vector Machines (area = </span><span class="si">%0.4f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">logit_roc_auc</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Receiver operating characteristic&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3a8bc9bee1a1bbd18f6c687fc3321fb426d43bd0ae1718c6cda49700215ab7da.png" src="../../_images/3a8bc9bee1a1bbd18f6c687fc3321fb426d43bd0ae1718c6cda49700215ab7da.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="random-forest">
+<h3><span class="section-number">9.7.5.6. </span>4. Random Forest<a class="headerlink" href="#random-forest" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id13">
+<h4><span class="section-number">9.7.5.6.1. </span>Modelの精度<a class="headerlink" href="#id13" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+   AbeShinzo       0.93      0.94      0.93       486
+hashimoto_lo       0.95      0.94      0.94       575
+
+    accuracy                           0.94      1061
+   macro avg       0.94      0.94      0.94      1061
+weighted avg       0.94      0.94      0.94      1061
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id14">
+<h4><span class="section-number">9.7.5.6.2. </span>Confusion Matirx<a class="headerlink" href="#id14" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[455  31]
+ [ 35 540]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">,</span>
+             <span class="n">index</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AbeShinzo</th>
+      <th>hashimoto_lo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>AbeShinzo</th>
+      <td>455</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>hashimoto_lo</th>
+      <td>35</td>
+      <td>540</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id15">
+<h4><span class="section-number">9.7.5.6.3. </span>ROC Curve<a class="headerlink" href="#id15" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit_roc_auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Random Forest (area = </span><span class="si">%0.4f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">logit_roc_auc</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Receiver operating characteristic&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7fb9092add63d4e94bf7cee7c35b728389d448745797f54d0c13a51e8d59605f.png" src="../../_images/7fb9092add63d4e94bf7cee7c35b728389d448745797f54d0c13a51e8d59605f.png" />
+</div>
+</div>
+</section>
+<section id="neural-netowrk">
+<h4><span class="section-number">9.7.5.6.4. </span>5. Neural Netowrk<a class="headerlink" href="#neural-netowrk" title="Link to this heading">#</a></h4>
+<p>一般的にはsklearnではなくて、TensorflowやKerasを用いて実装することが多いのですが、ここではsklearnで実行します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nn</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">hidden_layer_sizes</span><span class="o">=</span> <span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id16">
+<h4><span class="section-number">9.7.5.6.5. </span>Modelの精度<a class="headerlink" href="#id16" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+   AbeShinzo       0.94      0.98      0.96       486
+hashimoto_lo       0.98      0.95      0.96       575
+
+    accuracy                           0.96      1061
+   macro avg       0.96      0.96      0.96      1061
+weighted avg       0.96      0.96      0.96      1061
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id17">
+<h4><span class="section-number">9.7.5.6.6. </span>Confusion Matirx<a class="headerlink" href="#id17" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[474  12]
+ [ 30 545]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">,</span>
+             <span class="n">index</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AbeShinzo</th>
+      <th>hashimoto_lo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>AbeShinzo</th>
+      <td>474</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>hashimoto_lo</th>
+      <td>30</td>
+      <td>545</td>
     </tr>
   </tbody>
 </table>
@@ -2743,7 +2772,7 @@ weighted avg       0.95      0.94      0.94      1061
 </div>
 </section>
 <section id="id18">
-<h4><span class="section-number">9.7.5.6.7. </span>ROC Curve<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">9.7.5.6.7. </span>ROC Curve<a class="headerlink" href="#id18" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit_roc_auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
@@ -2762,14 +2791,14 @@ weighted avg       0.95      0.94      0.94      1061
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4c9212b643e8aa593752f87dd73e23cc94eb71a1d948b21ff553033998bb59b0.png" src="../../_images/4c9212b643e8aa593752f87dd73e23cc94eb71a1d948b21ff553033998bb59b0.png" />
+<img alt="../../_images/17a321e5aa0f60441f5532ee1d709f9928fab76b3d3d6eacfa53479a71852390.png" src="../../_images/17a321e5aa0f60441f5532ee1d709f9928fab76b3d3d6eacfa53479a71852390.png" />
 </div>
 </div>
 </section>
 </section>
 </section>
 <section id="pca">
-<h2><span class="section-number">9.7.6. </span>PCAによる次元圧縮<a class="headerlink" href="#pca" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.7.6. </span>PCAによる次元圧縮<a class="headerlink" href="#pca" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -2784,7 +2813,7 @@ weighted avg       0.95      0.94      0.94      1061
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3183, 555)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3183, 690)
 </pre></div>
 </div>
 </div>
@@ -2813,9 +2842,9 @@ weighted avg       0.95      0.94      0.94      1061
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/yuyashibu/anaconda3/envs/iiimethodsiv/lib/python3.8/site-packages/sklearn/base.py:439: UserWarning: X does not have valid feature names, but PCA was fitted with feature names
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/anaconda3/lib/python3.11/site-packages/sklearn/base.py:439: UserWarning: X does not have valid feature names, but PCA was fitted with feature names
   warnings.warn(
-/Users/yuyashibu/anaconda3/envs/iiimethodsiv/lib/python3.8/site-packages/sklearn/base.py:439: UserWarning: X does not have valid feature names, but PCA was fitted with feature names
+/opt/anaconda3/lib/python3.11/site-packages/sklearn/base.py:439: UserWarning: X does not have valid feature names, but PCA was fitted with feature names
   warnings.warn(
 </pre></div>
 </div>
@@ -2836,7 +2865,7 @@ weighted avg       0.95      0.94      0.94      1061
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3d8f67fbe12dc8748f55b7425d0a665cfb1683959105edc3e8e727a985bb5fe7.png" src="../../_images/3d8f67fbe12dc8748f55b7425d0a665cfb1683959105edc3e8e727a985bb5fe7.png" />
+<img alt="../../_images/3bb9a0d6d2595ebeb50bdcc74e624b5fae133de25391794755c25b82fdabf4d3.png" src="../../_images/3bb9a0d6d2595ebeb50bdcc74e624b5fae133de25391794755c25b82fdabf4d3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2857,11 +2886,11 @@ weighted avg       0.95      0.94      0.94      1061
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x2/7ss5kcb12n1gtlpc8p2mtjtw0000gn/T/ipykernel_71137/2017848199.py:8: MatplotlibDeprecationWarning: The get_cmap function was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use ``matplotlib.colormaps[name]`` or ``matplotlib.colormaps.get_cmap(obj)`` instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/z5/0lnyp_m54dqc1xkz22ncbj2h0000gn/T/ipykernel_60168/2017848199.py:8: MatplotlibDeprecationWarning: The get_cmap function was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use ``matplotlib.colormaps[name]`` or ``matplotlib.colormaps.get_cmap(obj)`` instead.
   cmap=plt.cm.get_cmap(&#39;PiYG&#39;, 2))
 </pre></div>
 </div>
-<img alt="../../_images/4affc307db12afb0e2069fa8368a7a2cfdd72556be1e69c4ff183844f06af6e6.png" src="../../_images/4affc307db12afb0e2069fa8368a7a2cfdd72556be1e69c4ff183844f06af6e6.png" />
+<img alt="../../_images/f22c666541b14702461202a38115988a39513a7ed4f4bff13338f94a9a7c4e69.png" src="../../_images/f22c666541b14702461202a38115988a39513a7ed4f4bff13338f94a9a7c4e69.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2892,10 +2921,10 @@ weighted avg       0.95      0.94      0.94      1061
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9340245051837889
-0.7351555136663525
-0.9236569274269557
-0.9387370405278039
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.939679547596607
+0.7511781338360037
+0.9264844486333648
+0.94062205466541
 </pre></div>
 </div>
 </div>
@@ -2920,12 +2949,12 @@ weighted avg       0.95      0.94      0.94      1061
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7737068b675c3a4cc819a3f01e2342f5391f078b7d1694599c73e9baaa40c26b.png" src="../../_images/7737068b675c3a4cc819a3f01e2342f5391f078b7d1694599c73e9baaa40c26b.png" />
+<img alt="../../_images/7b12c05a26f3455447c4beda4894897df9fb6d67ed854cd3016d7643f78a0433.png" src="../../_images/7b12c05a26f3455447c4beda4894897df9fb6d67ed854cd3016d7643f78a0433.png" />
 </div>
 </div>
 </section>
 <section id="id19">
-<h2><span class="section-number">9.7.7. </span>どのようなトピックがあるか単語共起ネットワークを描く<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.7.7. </span>どのようなトピックがあるか単語共起ネットワークを描く<a class="headerlink" href="#id19" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
@@ -2955,7 +2984,7 @@ weighted avg       0.95      0.94      0.94      1061
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(43, 43)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(74, 74)
 </pre></div>
 </div>
 </div>
@@ -2975,7 +3004,7 @@ weighted avg       0.95      0.94      0.94      1061
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(42, 42)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(69, 69)
 </pre></div>
 </div>
 </div>
@@ -3011,7 +3040,11 @@ weighted avg       0.95      0.94      0.94      1061
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d4c6553b07acb20851d5164de31871d43da499543d44067a535a754b2e951146.png" src="../../_images/d4c6553b07acb20851d5164de31871d43da499543d44067a535a754b2e951146.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/anaconda3/lib/python3.11/site-packages/IPython/core/pylabtools.py:152: UserWarning: Glyph 10145 (\N{BLACK RIGHTWARDS ARROW}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<img alt="../../_images/ea876ebbd341d2a8d037c368e9dddbc8bd6c954cb2c469a2957125a9f9ddf82d.png" src="../../_images/ea876ebbd341d2a8d037c368e9dddbc8bd6c954cb2c469a2957125a9f9ddf82d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -3041,29 +3074,13 @@ weighted avg       0.95      0.94      0.94      1061
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Abe
 </pre></div>
 </div>
-<img alt="../../_images/c02ce48964e7f082e0a95e2f97bb6bdc40e9f431ece5e0465e827418e81b6a73.png" src="../../_images/c02ce48964e7f082e0a95e2f97bb6bdc40e9f431ece5e0465e827418e81b6a73.png" />
+<img alt="../../_images/9b7e80c2dc76848ff7276c804f9162a77525480a8a751902e23b4e05e38d080d.png" src="../../_images/9b7e80c2dc76848ff7276c804f9162a77525480a8a751902e23b4e05e38d080d.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hashimoto
 </pre></div>
 </div>
-<img alt="../../_images/580697d1faad30b0318f95e5635a086662b9980723f5252d9049575ccf4315f2.png" src="../../_images/580697d1faad30b0318f95e5635a086662b9980723f5252d9049575ccf4315f2.png" />
+<img alt="../../_images/6fb4e4b401816b3479745c0d5e0a46b2fe3290ffa313bb1770f122ba46155150.png" src="../../_images/6fb4e4b401816b3479745c0d5e0a46b2fe3290ffa313bb1770f122ba46155150.png" />
 </div>
 </div>
-</section>
-<section id="netwulf">
-<h2><span class="section-number">9.7.8. </span><code class="docutils literal notranslate"><span class="pre">netwulf</span></code>を用いた可視化<a class="headerlink" href="#netwulf" title="Permalink to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">netwulf</span></code>で<code class="docutils literal notranslate"><span class="pre">netwulf</span></code>パッケージをインストールをしてください。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 次の２ラインのコメントアウトを外して実行すると、新しいブラウザのタブが開き、さまざまなパラメーターを変更できます</span>
-<span class="c1"># from netwulf import visualize</span>
-<span class="c1"># stylized_network, config = visualize(G_a)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>作図例</p>
-<!-- <img src="./network_abe.png" width =600px > -->
-<p><img alt="network_abe" src="../../_images/network_abe.png" /></p>
 </section>
 </section>
 
@@ -3092,11 +3109,10 @@ weighted avg       0.95      0.94      0.94      1061
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="gps_machine_learning.html"
@@ -3107,10 +3123,7 @@ weighted avg       0.95      0.94      0.94      1061
         <p class="prev-next-title"><span class="section-number">9.6. </span>演習・交通手段分類（機械学習）</p>
       </div>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -3118,6 +3131,7 @@ weighted avg       0.95      0.94      0.94      1061
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -3132,7 +3146,7 @@ weighted avg       0.95      0.94      0.94      1061
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.7.5. 日本語の正規化（表記ゆれの是正）と形態素解析を行う</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">9.7.5.1. 正規化</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">9.7.5.2. 形態素解析</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">9.7.5.3. 訓練データと検証データを生成する</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">9.7.5.3. 訓練データとテストデータをに分ける</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">9.7.5.3.1. Logistic Regression</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model">9.7.5.3.2. Modelの精度</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matirx">9.7.5.3.3. Confusion Matirx</a></li>
@@ -3165,7 +3179,6 @@ weighted avg       0.95      0.94      0.94      1061
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca">9.7.6. PCAによる次元圧縮</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">9.7.7. どのようなトピックがあるか単語共起ネットワークを描く</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netwulf">9.7.8. <code class="docutils literal notranslate"><span class="pre">netwulf</span></code>を用いた可視化</a></li>
 </ul>
   </nav></div>
 
@@ -3187,6 +3200,7 @@ By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2023-2024.
@@ -3213,8 +3227,8 @@ By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

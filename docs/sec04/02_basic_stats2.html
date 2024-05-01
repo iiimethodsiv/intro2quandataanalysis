@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>4.2. 頻度分布・偏差・分散 &#8212; Intro to Data Analysis with Python</title>
   
@@ -19,43 +18,41 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -63,17 +60,22 @@
                 gtag('js', new Date());
                 gtag('config', 'G-2XGK4LNMSB');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/sec04/02_basic_stats2';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/docs/sec04/02_basic_stats2.html" />
-    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="4.3. 基本統計量の確認方法" href="03_basic_stats3.html" />
@@ -87,7 +89,15 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -122,11 +132,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -141,9 +154,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -153,12 +168,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Intro to Data Analysis with Python - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Intro to Data Analysis with Python - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -427,20 +453,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -485,10 +513,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">4.2. </span>頻度分布・偏差・分散<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">4.2. </span>頻度分布・偏差・分散<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <p>全体の様子、ばらつきの広がり具合など全体をながめわたすための考え方です。</p>
 <p>ここからはつぎのcellでつくる <code class="docutils literal notranslate"><span class="pre">df_new</span></code> を使って、頻度分布、四方位範囲、分散、標準偏差についてPythonで確認します。</p>
 <div class="cell docutils container">
@@ -535,19 +563,19 @@ document.write(`
   </thead>
   <tbody>
     <tr>
-      <th>59</th>
-      <td>87.963268</td>
-      <td>oil</td>
-    </tr>
-    <tr>
-      <th>95</th>
-      <td>79.994128</td>
-      <td>juice</td>
-    </tr>
-    <tr>
-      <th>87</th>
-      <td>101.608570</td>
+      <th>22</th>
+      <td>114.210144</td>
       <td>wine</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>104.948723</td>
+      <td>wine</td>
+    </tr>
+    <tr>
+      <th>84</th>
+      <td>84.140002</td>
+      <td>milk</td>
     </tr>
   </tbody>
 </table>
@@ -582,14 +610,14 @@ Data columns (total 2 columns):
  0   cc      200 non-null    float64
  1   item    200 non-null    object 
 dtypes: float64(1), object(1)
-memory usage: 3.2+ KB
+memory usage: 3.3+ KB
 </pre></div>
 </div>
 </div>
 </div>
 <p><a id = 'histogram'></a></p>
 <section id="histogram">
-<h2><span class="section-number">4.2.1. </span>頻度分布（histogram）<a class="headerlink" href="#histogram" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.2.1. </span>頻度分布（histogram）<a class="headerlink" href="#histogram" title="Link to this heading">#</a></h2>
 <p>それぞれの値の起こる頻度（回数）を数えたものです。</p>
 <p><code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code>を使って頻度分布（Histogram）を描写します。<a class="reference external" href="https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.pyplot.hist.html">ドキュメント</a></p>
 <div class="cell docutils container">
@@ -603,12 +631,12 @@ memory usage: 3.2+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/982e47cf5960ac2e545ec466da0e46794be50b0b7127b4c89dbb40da93ef48ca.png" src="../../_images/982e47cf5960ac2e545ec466da0e46794be50b0b7127b4c89dbb40da93ef48ca.png" />
+<img alt="../../_images/4425347354d9118f3435378edca27695e0722dee65541321dc8829e460eae44a.png" src="../../_images/4425347354d9118f3435378edca27695e0722dee65541321dc8829e460eae44a.png" />
 </div>
 </div>
 </section>
 <section id="id2">
-<h2><span class="section-number">4.2.2. </span>四分位範囲<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.2.2. </span>四分位範囲<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>データの散らばり方を直感的、視覚的に表そうとするもの。データ全体を大きさの順に並べて四等分してみせます。<br>
 大きさの順で小さい方から1/4のところの値を第一四分位数、2/4のところの値を第二四分位数、3/4のところを第三四分位数と呼びます。第二四分位数はちょうど中央値に一致します。<br>
 箱ひげ図を用いて描くことが多いです。</p>
@@ -625,7 +653,7 @@ memory usage: 3.2+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a08ce92831e5b595bb3dbedf64b2f17275dbb1270c5231c0be85edd8bffb2af5.png" src="../../_images/a08ce92831e5b595bb3dbedf64b2f17275dbb1270c5231c0be85edd8bffb2af5.png" />
+<img alt="../../_images/912aeafa90c2c0cc775702ad1c2fc6174de7607866f540b4a308f1e0b3b6fa86.png" src="../../_images/912aeafa90c2c0cc775702ad1c2fc6174de7607866f540b4a308f1e0b3b6fa86.png" />
 </div>
 </div>
 <p>小さい方から、箱の下辺が第一四分位数、オレンジの水平線が第二四分位数、箱の上辺が第三四分位数を示しています。<br>
@@ -661,12 +689,12 @@ memory usage: 3.2+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/70b31af8580e527a71bdfeddf90fcb757cd5a0815b39254cf43edc41e7bc6480.png" src="../../_images/70b31af8580e527a71bdfeddf90fcb757cd5a0815b39254cf43edc41e7bc6480.png" />
+<img alt="../../_images/0c1269746ca596cf916b884a83a220b7a33062e269f599f0f30c910a17e8d430.png" src="../../_images/0c1269746ca596cf916b884a83a220b7a33062e269f599f0f30c910a17e8d430.png" />
 </div>
 </div>
 </section>
 <section id="stripplot">
-<h2><span class="section-number">4.2.3. </span>参考 Stripplot<a class="headerlink" href="#stripplot" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.2.3. </span>参考 Stripplot<a class="headerlink" href="#stripplot" title="Link to this heading">#</a></h2>
 <p>上の例のように箱ひげ図はデータの散らばり方を直感的に捉え上で有用です。<br>
 しかし、それぞれのデータがどのような値を持っているかを把握することができないのが難点です。<br>
 seabornのstripplotを使って簡単に確認する方法があるので、紹介します。</p>
@@ -689,21 +717,27 @@ seabornのstripplotを使って簡単に確認する方法があるので、紹�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7dcba27eb24373ef6ca4404d501e628c2ad1f710812156c54ec4aa0790344f20.png" src="../../_images/7dcba27eb24373ef6ca4404d501e628c2ad1f710812156c54ec4aa0790344f20.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/anaconda3/lib/python3.11/site-packages/seaborn/_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+/opt/anaconda3/lib/python3.11/site-packages/seaborn/_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+</pre></div>
+</div>
+<img alt="../../_images/2872a294b19203a2a5270085ccb4912d8bee3effcc09d21fc8417fff903da2de.png" src="../../_images/2872a294b19203a2a5270085ccb4912d8bee3effcc09d21fc8417fff903da2de.png" />
 </div>
 </div>
 </section>
 <section id="id3">
-<h2><span class="section-number">4.2.4. </span>分散・標準偏差<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.2.4. </span>分散・標準偏差<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <section id="variance">
-<h3><span class="section-number">4.2.4.1. </span>分散（variance）<a class="headerlink" href="#variance" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.2.4.1. </span>分散（variance）<a class="headerlink" href="#variance" title="Link to this heading">#</a></h3>
 <p>データの散らばり具合を示す指標の１つ。１つ１つのデータ<span class="math notranslate nohighlight">\(x_i\)</span>と平均<span class="math notranslate nohighlight">\(\bar{X}\)</span> の差をの二乗の和をデータの個数で割った値です。
 個々のデータが平均値からどれだけ離れているのかの距離<span class="math notranslate nohighlight">\((x_i-\bar{X})^2\)</span>を二乗して合計し、データの個数で割ることで標準化した値です。</p>
 <div class="math notranslate nohighlight">
 \[ s^2 = \frac{\sum_i(x_i-\bar{X})^2}{n} \]</div>
 </section>
 <section id="standard-deviation">
-<h3><span class="section-number">4.2.4.2. </span>標準偏差 （standard deviation）<a class="headerlink" href="#standard-deviation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.2.4.2. </span>標準偏差 （standard deviation）<a class="headerlink" href="#standard-deviation" title="Link to this heading">#</a></h3>
 <p>分散の平方根です</p>
 <div class="math notranslate nohighlight">
 \[ \sigma = \sqrt{\frac{\sum_i(x_i-\bar{X})^2}{n}} \]</div>
@@ -719,7 +753,7 @@ seabornのstripplotを使って簡単に確認する方法があるので、紹�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>644.7097036288359
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>595.99388701608
 </pre></div>
 </div>
 </div>
@@ -733,7 +767,7 @@ seabornのstripplotを使って簡単に確認する方法があるので、紹�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>641.4861551106917
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>593.0139175809995
 </pre></div>
 </div>
 </div>
@@ -746,7 +780,7 @@ seabornのstripplotを使って簡単に確認する方法があるので、紹�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.391134350966595
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24.41298603235745
 </pre></div>
 </div>
 </div>
@@ -759,7 +793,7 @@ seabornのstripplotを使って簡単に確認する方法があるので、紹�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.327576968804017
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24.35187708537064
 </pre></div>
 </div>
 </div>
@@ -767,7 +801,7 @@ seabornのstripplotを使って簡単に確認する方法があるので、紹�
 </section>
 </section>
 <section id="id4">
-<h2><span class="section-number">4.2.5. </span>まとめ<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.2.5. </span>まとめ<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>ここでは、与えられたデータがどのようなものであるのかを概観するためのいくつかの方法について紹介しました。<br>
 <code class="docutils literal notranslate"><span class="pre">pandas</span></code>では<code class="docutils literal notranslate"><span class="pre">describe()</span></code>を使って基本的な統計量を一変に得ることができます。<br>
 なお、学術論文においては、標本数（<code class="docutils literal notranslate"><span class="pre">n</span></code>）、平均（<code class="docutils literal notranslate"><span class="pre">mean</span></code>）、標準偏差（<code class="docutils literal notranslate"><span class="pre">std</span></code>）、最小値（<code class="docutils literal notranslate"><span class="pre">min</span></code>）、最大値（<code class="docutils literal notranslate"><span class="pre">max</span></code>）を最低限の記述統計量として掲載することが基本となっています。</p>
@@ -828,58 +862,58 @@ seabornのstripplotを使って簡単に確認する方法があるので、紹�
   <tbody>
     <tr>
       <th>juice</th>
-      <td>47.0</td>
-      <td>104.165225</td>
-      <td>23.051211</td>
-      <td>49.403577</td>
-      <td>91.288924</td>
-      <td>101.417043</td>
-      <td>117.941724</td>
-      <td>165.022281</td>
+      <td>30.0</td>
+      <td>97.984499</td>
+      <td>23.794761</td>
+      <td>59.383899</td>
+      <td>80.539050</td>
+      <td>94.978643</td>
+      <td>116.728961</td>
+      <td>151.627721</td>
     </tr>
     <tr>
       <th>milk</th>
-      <td>38.0</td>
-      <td>98.549853</td>
-      <td>24.860693</td>
-      <td>18.406282</td>
-      <td>87.253549</td>
-      <td>102.253169</td>
-      <td>116.399928</td>
-      <td>147.135831</td>
+      <td>43.0</td>
+      <td>93.777420</td>
+      <td>26.561551</td>
+      <td>44.114433</td>
+      <td>69.480897</td>
+      <td>92.382927</td>
+      <td>110.236986</td>
+      <td>169.089135</td>
     </tr>
     <tr>
       <th>oil</th>
-      <td>31.0</td>
-      <td>94.181402</td>
-      <td>27.292497</td>
-      <td>48.045848</td>
-      <td>72.213546</td>
-      <td>87.963268</td>
-      <td>113.421241</td>
-      <td>140.813637</td>
+      <td>39.0</td>
+      <td>97.533920</td>
+      <td>25.765376</td>
+      <td>54.658421</td>
+      <td>76.575591</td>
+      <td>90.030901</td>
+      <td>114.942189</td>
+      <td>155.678558</td>
     </tr>
     <tr>
       <th>water</th>
-      <td>42.0</td>
-      <td>94.810874</td>
-      <td>25.954084</td>
-      <td>46.007460</td>
-      <td>72.429265</td>
-      <td>100.257149</td>
-      <td>114.883162</td>
-      <td>142.454829</td>
+      <td>43.0</td>
+      <td>94.680531</td>
+      <td>21.140548</td>
+      <td>54.214132</td>
+      <td>79.290085</td>
+      <td>94.815475</td>
+      <td>110.580154</td>
+      <td>136.792142</td>
     </tr>
     <tr>
       <th>wine</th>
-      <td>42.0</td>
-      <td>104.764140</td>
-      <td>25.666550</td>
-      <td>49.462886</td>
-      <td>86.768846</td>
-      <td>107.558632</td>
-      <td>123.908671</td>
-      <td>157.084802</td>
+      <td>45.0</td>
+      <td>105.246238</td>
+      <td>23.809819</td>
+      <td>47.922487</td>
+      <td>91.256705</td>
+      <td>103.151165</td>
+      <td>123.733509</td>
+      <td>150.975629</td>
     </tr>
   </tbody>
 </table>
@@ -920,31 +954,31 @@ seabornのstripplotを使って簡単に確認する方法があるので、紹�
     </tr>
     <tr>
       <th>mean</th>
-      <td>99.712170</td>
+      <td>97.915652</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>25.391134</td>
+      <td>24.412986</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>18.406282</td>
+      <td>44.114433</td>
     </tr>
     <tr>
       <th>25%</th>
-      <td>82.673968</td>
+      <td>81.258102</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>100.413275</td>
+      <td>96.242255</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>118.782296</td>
+      <td>115.024939</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>165.022281</td>
+      <td>169.089135</td>
     </tr>
   </tbody>
 </table>
@@ -978,11 +1012,10 @@ seabornのstripplotを使って簡単に確認する方法があるので、紹�
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="01_basic_stats1.html"
@@ -1002,10 +1035,7 @@ seabornのstripplotを使って簡単に確認する方法があるので、紹�
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1013,6 +1043,7 @@ seabornのstripplotを使って簡単に確認する方法があるので、紹�
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1050,6 +1081,7 @@ By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2023-2024.
@@ -1076,8 +1108,8 @@ By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

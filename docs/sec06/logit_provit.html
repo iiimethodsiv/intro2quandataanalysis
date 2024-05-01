@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>6.1. 離散選択モデル &#8212; Intro to Data Analysis with Python</title>
   
@@ -19,43 +18,41 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2XGK4LNMSB"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -63,17 +60,22 @@
                 gtag('js', new Date());
                 gtag('config', 'G-2XGK4LNMSB');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-2XGK4LNMSB');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/sec06/logit_provit';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="canonical" href="https://github.com/iiimethodsiv/intro2quandataanalysis/docs/sec06/logit_provit.html" />
-    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="6.2. 順序ロジットモデル" href="ordered_loigt.html" />
@@ -87,7 +89,15 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -122,11 +132,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -141,9 +154,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -153,12 +168,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Intro to Data Analysis with Python - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Intro to Data Analysis with Python - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -427,20 +453,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -484,10 +512,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">6.1. </span>離散選択モデル<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">6.1. </span>離散選択モデル<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <p>ここまでの推定モデルでは連続変数が被説明変数になっていました。
 しかし、データの種類でみたように、離散変数や質的変数を被説明変数としたい場合もあると思います。
 例えば次のような例です。</p>
@@ -534,7 +562,7 @@ document.write(`
 限界効果は<span class="math notranslate nohighlight">\(x\)</span>に依存するので、特定の<span class="math notranslate nohighlight">\(x\)</span>の値（一般的には平均値）での限界効果を推定します。
 係数と限界効果は同じ符号となります。</p>
 <section id="id2">
-<h2><span class="section-number">6.1.1. </span>限界効果の推定<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.1.1. </span>限界効果の推定<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>平均値における限界効果(Marginal effects at the mean)</p>
 <ul>
@@ -558,7 +586,7 @@ document.write(`
 </ul>
 </section>
 <section id="odds-ratio">
-<h2><span class="section-number">6.1.2. </span>ロジットモデルにおけるオッズ比（Odds ratio）<a class="headerlink" href="#odds-ratio" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.1.2. </span>ロジットモデルにおけるオッズ比（Odds ratio）<a class="headerlink" href="#odds-ratio" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>オッズ比（odds ratio/relative risk）は、<span class="math notranslate nohighlight">\(p/(1-p)\)</span>で<span class="math notranslate nohighlight">\(y=0\)</span>となる確率に対する<span class="math notranslate nohighlight">\(y=1\)</span>となる確率を測定します</p></li>
 </ul>
@@ -586,7 +614,7 @@ document.write(`
 </div>
 </section>
 <section id="logit">
-<h2><span class="section-number">6.1.3. </span>Logitモデル<a class="headerlink" href="#logit" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.1.3. </span>Logitモデル<a class="headerlink" href="#logit" title="Link to this heading">#</a></h2>
 <p>Logit modelはシグモイド関数</p>
 <div class="math notranslate nohighlight">
 \[P_i=\frac{1}{1+e^{-(\beta_1+\beta_2 X_i)}}\]</div>
@@ -606,7 +634,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/df8b020a5ab1ccb52f1cd28ae23333b273f3034aa7fe1c1f698dc7850a86e36d.png" src="../../_images/df8b020a5ab1ccb52f1cd28ae23333b273f3034aa7fe1c1f698dc7850a86e36d.png" />
+<img alt="../../_images/568be067c94108790c4c644fac82397b3119a8eef318b8e8b38102bf5280e7bd.png" src="../../_images/568be067c94108790c4c644fac82397b3119a8eef318b8e8b38102bf5280e7bd.png" />
 </div>
 </div>
 <p>上の図で確認できるように<span class="math notranslate nohighlight">\(P_i\)</span>の値は0から1となり確率を扱いたい場合に便利です。</p>
@@ -912,7 +940,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>management       969
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>job
+management       969
 blue-collar      946
 technician       768
 admin.           478
@@ -924,7 +953,7 @@ unemployed       128
 housemaid        112
 student           84
 unknown           38
-Name: job, dtype: int64
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -947,8 +976,8 @@ Model:                            GLM   Df Residuals:                     4505
 Model Family:                Binomial   Df Model:                           15
 Link Function:                  Logit   Scale:                          1.0000
 Method:                          IRLS   Log-Likelihood:                -1278.6
-Date:                Sun, 07 Jan 2024   Deviance:                       2557.2
-Time:                        17:03:45   Pearson chi2:                 5.97e+03
+Date:                Thu, 25 Apr 2024   Deviance:                       2557.2
+Time:                        10:08:35   Pearson chi2:                 5.97e+03
 No. Iterations:                     6   Pseudo R-squ. (CS):             0.1385
 Covariance Type:            nonrobust                                         
 ===========================================================================================
@@ -977,7 +1006,7 @@ pdays                       0.0029      0.000      6.631      0.000       0.002 
 </div>
 <p>結果を確認すると<code class="docutils literal notranslate"><span class="pre">C(job)</span></code>のうち、<code class="docutils literal notranslate"><span class="pre">admin.</span></code>が自動的にベースとして、式から外れていることがわかります。</p>
 <section id="average-partial-effects">
-<h3><span class="section-number">6.1.3.1. </span>平均限界効果（Average Partial Effects）<a class="headerlink" href="#average-partial-effects" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.1.3.1. </span>平均限界効果（Average Partial Effects）<a class="headerlink" href="#average-partial-effects" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>では<code class="docutils literal notranslate"><span class="pre">get_margeff()</span></code>を使うことで平均限界効果求めることができます</p>
 <p>引数として<code class="docutils literal notranslate"><span class="pre">at='overall'</span></code>(default)を指定すると平均限界効果が、<code class="docutils literal notranslate"><span class="pre">at='mean'</span></code>を指定すると平均での限界効果を算出できます。
 デフォルトが<code class="docutils literal notranslate"><span class="pre">at='overall'</span></code>なので何も指定しないと平均限界効果になります。</p>
@@ -1024,7 +1053,7 @@ pdays                       0.0002   3.46e-05      6.649      0.000       0.000 
 </div>
 </section>
 <section id="id3">
-<h3><span class="section-number">6.1.3.2. </span>オッズ比（Odds Ratio）<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.1.3.2. </span>オッズ比（Odds Ratio）<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>続いてオッズ比も求めましょう。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1074,13 +1103,13 @@ pdays                    1.002018  1.003715    1.002866
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/961828cd358372615c62ec06462347d090f0a73b50e747cfaf719f0b564eb4f9.png" src="../../_images/961828cd358372615c62ec06462347d090f0a73b50e747cfaf719f0b564eb4f9.png" />
+<img alt="../../_images/1c972450d462d68f9b0f2880b4908968c73725a00a885b1f85589e63b6f78c9c.png" src="../../_images/1c972450d462d68f9b0f2880b4908968c73725a00a885b1f85589e63b6f78c9c.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="probit-model">
-<h2><span class="section-number">6.1.4. </span>プロビットモデル（Probit model）<a class="headerlink" href="#probit-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.1.4. </span>プロビットモデル（Probit model）<a class="headerlink" href="#probit-model" title="Link to this heading">#</a></h2>
 <p>プロビットモデルはロジットモデルとよく似ています。Pythonではロジットモデルと同様に<code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>などで求めることができます。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1095,13 +1124,15 @@ pdays                    1.002018  1.003715    1.002866
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
          Current function value: 0.281002
          Iterations 7
-                          Probit Regression Results                           
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                          Probit Regression Results                           
 ==============================================================================
 Dep. Variable:                      y   No. Observations:                 4521
 Model:                         Probit   Df Residuals:                     4505
 Method:                           MLE   Df Model:                           15
-Date:                Sun, 07 Jan 2024   Pseudo R-squ.:                  0.2136
-Time:                        17:03:45   Log-Likelihood:                -1270.4
+Date:                Thu, 25 Apr 2024   Pseudo R-squ.:                  0.2136
+Time:                        10:08:36   Log-Likelihood:                -1270.4
 converged:                       True   LL-Null:                       -1615.5
 Covariance Type:            nonrobust   LLR p-value:                2.300e-137
 ===========================================================================================
@@ -1194,11 +1225,10 @@ pdays                       0.0002   3.58e-05      6.627      0.000       0.000 
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="index.html"
@@ -1218,10 +1248,7 @@ pdays                       0.0002   3.58e-05      6.627      0.000       0.000 
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1229,6 +1256,7 @@ pdays                       0.0002   3.58e-05      6.627      0.000       0.000 
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1265,6 +1293,7 @@ By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2023-2024.
@@ -1291,8 +1320,8 @@ By <a href="https://www.yuyashibuya.com">yuyashibuya</a>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>
