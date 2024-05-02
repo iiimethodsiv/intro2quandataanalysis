@@ -15,7 +15,7 @@
 * JoRAS (東京大学空間情報科学研究センター) (https://joras.csis.u-tokyo.ac.jp/)
 * AEA (American Economic Association) Data and Code Repository (https://www.openicpsr.org/openicpsr/search/studies)
 * Stanford Large Network Dataset Collection (https://snap.stanford.edu/data/)
-* Sources of Data：練習などで使いやすい様々なデータが分野ごとの一覧になったリスト
+* Sources of Data：練習などで使いやすい様々なデータが分野ごとの一覧になったリスト (https://stat2labs.sites.grinnell.edu/DataResources.html)
 * Google Dataset Search (https://datasetsearch.research.google.com/)
 
 
