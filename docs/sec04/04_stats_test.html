@@ -548,10 +548,10 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
-<span class="kn">import</span> <span class="nn">scipy</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
@@ -560,7 +560,7 @@ document.write(`
 <section id="id3">
 <h3><span class="section-number">4.4.1.1. </span>燃費はオートマ車とマニュアル車で差があるのか？<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>2つのグループ間の差異を検定します。
-例えば、あるツールを使っているグループの方が使っていないグループよりも作業効率が良いかどうか、ある医療行為を受けた患者グループは対象グループよりも良い結果が得られたかどうかなどを確認することができます。</p>
+例えば、あるツールを使っているグループの方が使っていないグループよりも作業効率が良いかどうか、ある医療行為を受けた患者グループは受けていないグループよりも良い結果が得られたかどうかなどを確認することができます。</p>
 <p>ここでは自動車のデザインや性能に関連して燃費がどのように異なるかを、1974年に発行されたMotor Trend誌に基づくデータセット<code class="docutils literal notranslate"><span class="pre">mtcars</span></code>を用いて見ていきます。</p>
 <p>データの詳細は<a class="reference external" href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars">こちら</a>のドキュメントを参照してください</p>
 <p>燃費<code class="docutils literal notranslate"><span class="pre">mpg</span></code>(Miles/(US) gallon)がオートマ車とマニュアル車（<code class="docutils literal notranslate"><span class="pre">am</span></code>列、0 = オートマ車, 1 = マニュアル車）でどのように異なるかを見ましょう。</p>
@@ -821,7 +821,7 @@ document.write(`
 </div>
 <p>上図x軸の0,1はそれぞれ列<code class="docutils literal notranslate"><span class="pre">am</span></code>でもつ値を示しています。0の場合はオートマ車、1の場合はマニュアル車です。
 y軸はマイル/ガロンで燃費を示します。</p>
-<p>この図から、マニュアル車の方がオートマ車よりも１ガロンあたりの走行距離が長く燃費がが全体としては燃費が良いという仮説を立てることができます。</p>
+<p>この図から、マニュアル車の方がオートマ車よりも１ガロンあたりの走行距離が長く燃費が全体としては燃費が良いという仮説を立てることができます。</p>
 <p>しかし、このような違いは偶然おきた可能性もあります。例えば、たまたま燃費の悪いオートマ車と燃費の良いオートマ車のグループを選んでしまった可能性もあるかもしれません。そこで、この差がたまたま起きたものなのかどうかを確認するために統計的検定を行うことができます。つまり、得られた標本データから母集団においても差があるのかを確認します。</p>
 <p>2グループの平均値を単純に比べることもできますが、標本のばらつきを考えると、少なくとも平均値の差のカットオフ値を決める必要があります。平均値の差が小さければ、サンプリングによるランダム性で説明できます。つまり、2グループの差は、2グループの平均値の差がサンプリングによるものだけであった場合に得られる典型的な値と比較する必要があります。</p>
 </section>
