@@ -270,6 +270,14 @@
 </ul>
 </li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">参考情報</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix/index.html">10. 参考情報</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../appendix/toolbox.html">10.1. データ収集や分析のためのツールボックス</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix/howtoresearch.html">10.2. 博士課程進学希望者むけ教材リスト</a></li>
+</ul>
+</li>
+</ul>
 
     </div>
 </nav></div>
@@ -616,7 +624,7 @@ document.write(`
 </table>
 </div></div></div>
 </div>
-<p>乳幼児の健康を測る指標の一つである出生体重(<code class="docutils literal notranslate"><span class="pre">bwght</span></code>)と、出生体重に影響を与える可能性のある妊娠中の喫煙（<code class="docutils literal notranslate"><span class="pre">ciga</span></code>）やそれ以外の要因に関する変数があります。例えば、一般的に父親の所得（<code class="docutils literal notranslate"><span class="pre">faminc</span></code>）が高いと、より良い出産前ケアにアクセスでき、母親の栄養状態も良くなります。</p>
+<p>乳幼児の健康を測る指標の一つである出生体重(<code class="docutils literal notranslate"><span class="pre">bwght</span></code>)と、出生体重に影響を与える可能性のある妊娠中の喫煙（<code class="docutils literal notranslate"><span class="pre">cigs</span></code>）やそれ以外の要因に関する変数があります。例えば、一般的に父親の学歴（<code class="docutils literal notranslate"><span class="pre">fatheduc</span></code>）が高いと、より良い出産前ケアにアクセスでき、母親の栄養状態も良くなります。</p>
 <p>このことを確認するために、次の重回帰分析を行います。</p>
 <div class="math notranslate nohighlight">
 \[bwght=\beta_0+\beta_1 cigs + \beta_2 faminc + u\]</div>
@@ -794,8 +802,8 @@ document.write(`
 Dep. Variable:                  bwght   R-squared:                       0.030
 Model:                            OLS   Adj. R-squared:                  0.028
 Method:                 Least Squares   F-statistic:                     18.45
-Date:                Fri, 10 May 2024   Prob (F-statistic):           1.29e-08
-Time:                        10:27:52   Log-Likelihood:                -5251.7
+Date:                Sat, 18 May 2024   Prob (F-statistic):           1.29e-08
+Time:                        02:19:40   Log-Likelihood:                -5251.7
 No. Observations:                1192   AIC:                         1.051e+04
 Df Residuals:                    1189   BIC:                         1.052e+04
 Df Model:                           2                                         
@@ -847,8 +855,8 @@ Notes:
 Dep. Variable:                  bwght   R-squared:                       0.030
 Model:                            OLS   Adj. R-squared:                  0.028
 Method:                 Least Squares   F-statistic:                     18.45
-Date:                Fri, 10 May 2024   Prob (F-statistic):           1.29e-08
-Time:                        10:27:52   Log-Likelihood:                -5251.7
+Date:                Sat, 18 May 2024   Prob (F-statistic):           1.29e-08
+Time:                        02:19:40   Log-Likelihood:                -5251.7
 No. Observations:                1192   AIC:                         1.051e+04
 Df Residuals:                    1189   BIC:                         1.052e+04
 Df Model:                           2                                         
@@ -1023,7 +1031,7 @@ Notes:
 <p>よって、帰無仮説を棄却することはできず、回帰モデルに不均一分散が存在すると言える十分な証拠はないと判断します。</p>
 <section id="id3">
 <h3><span class="section-number">5.3.3.1. </span>分散が不均一な場合<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
-<p>不均一分散の場合は、必要な変数が欠けていないかなどそもそもの関数形の見直しや、対数変換など変数の変換、一般か線形モデルなどを使用することで対応することもできます。
+<p>不均一分散の場合は、必要な変数が欠けていないかなどそもそもの関数形の見直しや、対数変換など変数の変換、一般化線形モデルなどを使用することで対応することもできます。
 また、statsmodelsのオプションとして<code class="docutils literal notranslate"><span class="pre">cov_type='HC0'</span></code>を用いると、ホワイトの分散不均一のための推定を行います。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1038,8 +1046,8 @@ Notes:
 Dep. Variable:                  bwght   R-squared:                       0.030
 Model:                            OLS   Adj. R-squared:                  0.028
 Method:                 Least Squares   F-statistic:                     20.87
-Date:                Fri, 10 May 2024   Prob (F-statistic):           1.23e-09
-Time:                        10:27:52   Log-Likelihood:                -5251.7
+Date:                Sat, 18 May 2024   Prob (F-statistic):           1.23e-09
+Time:                        02:19:40   Log-Likelihood:                -5251.7
 No. Observations:                1192   AIC:                         1.051e+04
 Df Residuals:                    1189   BIC:                         1.052e+04
 Df Model:                           2                                         
